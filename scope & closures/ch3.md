@@ -151,27 +151,26 @@ It should be observed that these tools do not possess "magic" functionality that
 
 As such, you can code defensively and achieve the same results as the dependency managers do without actually needing to use them, if you so choose. See the Chapter 5 for more information about the module pattern.
 
-## Functions As Scopes
+## Function như là Scope 
 
-We've seen that we can take any snippet of code and wrap a function around it, and that effectively "hides" any enclosed variable or function declarations from the outside scope inside that function's inner scope.
+Chúng ta đã thấy rằng có thể lấy bất kỳ đoạn code và bao nó bằng một function, điều này tạo ra hiệu quả "giấu" bất kỳ biến hoặc function đã khai báo với phía bên ngoài scope hoặc function khác nằm bên trong scope.
 
-For example:
+Ví dụ:
 
 ```js
 var a = 2;
 
-function foo() { // <-- insert this
-
+function foo() { // <-- chèn
 	var a = 3;
 	console.log( a ); // 3
 
-} // <-- and this
-foo(); // <-- and this
+} // <-- 
+foo(); // <-- và 
 
 console.log( a ); // 2
 ```
 
-While this technique "works", it is not necessarily very ideal. There are a few problems it introduces. The first is that we have to declare a named-function `foo()`, which means that the identifier name `foo` itself "pollutes" the enclosing scope (global, in this case). We also have to explicitly call the function by name (`foo()`) so that the wrapped code actually executes.
+Khi kỹ thuật này "hoạt động", không nhất thiết nó phải rất lý tưởng. Có vài vấn đề xảy ra. Đầu tiên là chúng ta phải khai báo một tên fungtion `foo()`, which means that the identifier name `foo` itself "pollutes" the enclosing scope (global, in this case). We also have to explicitly call the function by name (`foo()`) so that the wrapped code actually executes.
 
 It would be more ideal if the function didn't need a name (or, rather, the name didn't pollute the enclosing scope), and if the function could automatically be executed.
 
