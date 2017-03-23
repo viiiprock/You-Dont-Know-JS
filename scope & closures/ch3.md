@@ -28,7 +28,8 @@ function foo(a) {
 }
 ```
 
-In this snippet, the scope bubble for `foo(..)` includes identifiers `a`, `b`, `c` and `bar`. **It doesn't matter** *where* in the scope a declaration appears, the variable or function belongs to the containing scope bubble, regardless. We'll explore how exactly *that* works in the next chapter.
+
+Trong đoạn trích này, bong bóng scope của `foo(..)` bao gồm nhận dạng `a`, `b`, `c` và `bar`. **Nó không quan trọng** một  khai báo xuất hiện *ở đâu* trong scope, bất kể biến hoặc function bong bóng scope chứa nó. Chúng ta sẽ khám phá các hoạt động đó trong chương kế tiếp. 
 
 `bar(..)` has its own scope bubble. So does the global scope, which has just one identifier attached to it: `foo`.
 
