@@ -1,15 +1,16 @@
 # You Don't Know JS: Scope & Closures
 # Chương 3: Function vs. Block Scope
 Như chúng ta đã khám phá trong chương 2, scope bao gồm một tập hợp các "bong bóng", mỗi scope hoạt động như vật chứa trong đó xác định các định danh (biến, function). Các bong bóng tổ hợp (nesting) gọn gàng bên trong bong bóng khác, và tổ hợp này được xác định tại author-time. 
+
 Nhưng chính xác là cái gì tạo ra bong bóng mới? Có phải chỉ có function? Có cấu trúc nào khác tạo ra các bong bóng trong scope JavaScript? 
 
-## Scope From Functions
+## Scope từ các Function
+Câu trả lời phổ biến nhất cho các câu hỏi trên là JavaScript có scope nền function (function-based scope). Nghĩa là, mỗi function bạn khai báo sẽ tự tạo bong bóng, và không có bất kỳ cấu trúc nào khác tự tạo bong bóng. Nếu chúng ta để ý một chút thì điều này không hoàn toàn đúng.
 
-The most common answer to those questions is that JavaScript has function-based scope. That is, each function you declare creates a bubble for itself, but no other structures create their own scope bubbles. As we'll see in just a little bit, this is not quite true.
 
-But first, let's explore function scope and its implications.
+Nhưng trước tiên, hãy khám phá function scope & các hàm ý của nó.
 
-Consider this code:
+Xem đoạn code sau đây:
 
 ```js
 function foo(a) {
