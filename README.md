@@ -1,6 +1,8 @@
+Dịch để học và hiểu sâu 
+
 # You Don't Know JS (book series)
 
-This is a series of books diving deep into the core mechanisms of the JavaScript language. The first edition of the series is now complete.
+Ai thích sách giấy của tác giả thì mua tại link này.
 
 <a href="http://shop.oreilly.com/product/0636920039303.do"><img src="up %26 going/cover.jpg" width="75"></a>&nbsp;
 <a href="http://shop.oreilly.com/product/0636920026327.do"><img src="scope %26 closures/cover.jpg" width="75"></a>&nbsp;
@@ -15,12 +17,12 @@ Please feel free to contribute to the quality of this content by submitting PR's
 
 ## Titles
 
-* Read online (free!): ["Up & Going"](https://github.com/viiiprock/You-Dont-Know-JS/tree/master/up%20%26%20going), Published: [Buy Now](http://shop.oreilly.com/product/0636920039303.do) in print, but the ebook format is free!
-* Read online (free!): ["Scope & Closures"](scope & closures/README.md#you-dont-know-js-scope--closures), Published: [Buy Now](http://shop.oreilly.com/product/0636920026327.do)
-* Read online (free!): ["this & Object Prototypes"](this & object prototypes/README.md#you-dont-know-js-this--object-prototypes), Published: [Buy Now](http://shop.oreilly.com/product/0636920033738.do)
-* Read online (free!): ["Types & Grammar"](types & grammar/README.md#you-dont-know-js-types--grammar), Published: [Buy Now](http://shop.oreilly.com/product/0636920033745.do)
-* Read online (free!): ["Async & Performance"](async & performance/README.md#you-dont-know-js-async--performance), Published: [Buy Now](http://shop.oreilly.com/product/0636920033752.do)
-* Read online (free!): ["ES6 & Beyond"](es6 & beyond/README.md#you-dont-know-js-es6--beyond), Published: [Buy Now](http://shop.oreilly.com/product/0636920033769.do)
+* Xem online (miễn phí!): ["Up & Going"](https://github.com/viiiprock/You-Dont-Know-JS/tree/master/up%20%26%20going), Published: [Buy Now](http://shop.oreilly.com/product/0636920039303.do) in print, but the ebook format is free!
+* Xem online (miễn phí!): ["Scope & Closures"](https://github.com/viiiprock/You-Dont-Know-JS/tree/master/scope%20%26%20closures), Published: [Buy Now](http://shop.oreilly.com/product/0636920026327.do)
+* Xem online (miễn phí!): ["this & Object Prototypes"](this & object prototypes/README.md#you-dont-know-js-this--object-prototypes), Published: [Buy Now](http://shop.oreilly.com/product/0636920033738.do)
+* Xem online (miễn phí!): ["Types & Grammar"](types & grammar/README.md#you-dont-know-js-types--grammar), Published: [Buy Now](http://shop.oreilly.com/product/0636920033745.do)
+* Xem online (miễn phí!): ["Async & Performance"](async & performance/README.md#you-dont-know-js-async--performance), Published: [Buy Now](http://shop.oreilly.com/product/0636920033752.do)
+* Xem online (miễn phí!): ["ES6 & Beyond"](es6 & beyond/README.md#you-dont-know-js-es6--beyond), Published: [Buy Now](http://shop.oreilly.com/product/0636920033769.do)
 
 ## Publishing
 
