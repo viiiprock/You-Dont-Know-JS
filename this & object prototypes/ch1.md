@@ -1,8 +1,7 @@
 # You Don't Know JS: *this* & Object Prototypes
-# Chapter 1: `this` Or That?
+# Chương 1: `this` hay  That?
 
-One of the most confused mechanisms in JavaScript is the `this` keyword. It's a special identifier keyword that's automatically defined in the scope of every function, but what exactly it refers to bedevils even seasoned JavaScript developers.
-
+Một trong những cơ chế hãi hùng nhất của JavaScript là từ khoá `this`. Nó là một từ khoá nhận dạng đặc biệt tự động xác định trong scope của mọi function, nhưng những gì chính xác nó đề cập đến còn  làm điêu đứng ngay cả JavaScript dev dày dạn.
 > Any sufficiently *advanced* technology is indistinguishable from magic. -- Arthur C. Clarke
 
 JavaScript's `this` mechanism isn't actually *that* advanced, but developers often paraphrase that quote in their own mind by inserting "complex" or "confusing", and there's no question that without lack of clear understanding, `this` can seem downright magical in *your* confusion.
