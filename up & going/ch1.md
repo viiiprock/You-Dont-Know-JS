@@ -1,8 +1,8 @@
-# You Don't Know JS: Up & Going
+# You Don't Know JS: Khởi 
 # Chương 1: Hiểu  lập trình
 
 Chào mừng bạn đến với seri You Don't Know JS (YDKJS).
-Up & Going là lời giới thiệu một số  khái niệm cơ bản của lập trình (dĩ nhiên là chúng ta đặc biệt hướng về phía JavaScript --viết tắt là JS--) và cách để tiếp và hiểu các nội dung trong seri này. Đặc biệt là nếu chúng ta tìm hiểu sâu lập trình và JavaScript, cuốn sách này sẽ khám phá tóm lược những gì bạn cần để up & going. 
+Khởi động là lời giới thiệu một số  khái niệm cơ bản của lập trình (dĩ nhiên là chúng ta đặc biệt hướng về phía JavaScript --viết tắt là JS--) và cách để tiếp và hiểu các nội dung trong seri này. Đặc biệt là nếu chúng ta tìm hiểu sâu lập trình và JavaScript, cuốn sách này sẽ khám phá tóm lược những gì bạn cần để up & going. 
 Cuốn sách này bắt đầu ở mức bớt giải thích những nguyên tắc cơ bản của lập trình ở mức độ rất cao. Nó hầu như dự định dành cho người đọc với kiến thức, kinh nghiệm lập trình ít, đang tìm kiếm sách để học và tìm con đường để hiểu lập trình thông qua lăng kính JavaScript.
 Chương 1 được tiếp cần như một cái nhìn tổng quát vào những gì bạn sẽ học và thực hành để hiểu sâu hơn về lập trình. Ngoài ra còn có nhiều nguồn tài nguyên giới thiệu lập trình tuyệt vời khác có thể giúp bạn thâm nhập vào các chủ đề này hơn nữa, và tôi khuyến khích bạn để học hỏi từ họ bên cạnh chương này.
 Một khi bạn cảm thấy thoải mái với những vấn đề lập trình cơ bản, Chương 2 sẽ hướng dẫn bạn làm quen với hương vị lập trình JavaScript. Chương 2 giới thiệu JavaScript là gì, nhưng một lần nữa, nó cũng không phải là hướng dẫn toàn diện -- phần còn lại của bộ sách sẽ làm chuyện đó.
@@ -24,31 +24,31 @@ Trong ngôn ngữ máy tính, một nhóm từ, số, cách thức thực thi t�
 a = b * 2;
 ```
 
-The characters `a` and `b` are called *variables* (see "Variables"), which are like simple boxes you can store any of your stuff in. In programs, variables hold values (like the number `42`) to be used by the program. Think of them as symbolic placeholders for the values themselves.
+Ký tự `a` và `b` là những *biến(variable)* (xem "Các biến"), giống như những cái hộp đơn giản, bạn có thể lưu trữ đồ vật trong đó. Trong lập trình, biến giữ giá trị (ví dụ số `42`) được sử dụng bởi chương trình. Hãy nghĩ nó như chỗ giữ biểu tượng cho chính nó.
 
-By contrast, the `2` is just a value itself, called a *literal value*, because it stands alone without being stored in a variable.
+Về mặt tương phản, số `2` bản thân nó chỉ là một giá trị, được gọi là giá trị ký tự (literal value), vì nó độc lập và không lưu trữ trong một biến nào cả.
 
-The `=` and `*` characters are *operators* (see "Operators") -- they perform actions with the values and variables such as assignment and mathematic multiplication.
+Dấu `=` và `*` là *toán tử (operators)* (xem "Toản tử") -- nó thực thi các hành động với giá trị và biến như sự phân công và phép toán nhân.
 
-Most statements in JavaScript conclude with a semicolon (`;`) at the end.
+Hầu hết câu lệnh trong JS kết thúc bằng dấu chấm phẩy (`;`) ở cuối câu 
 
-The statement `a = b * 2;` tells the computer, roughly, to get the current value stored in the variable `b`, multiply that value by `2`, then store the result back into another variable we call `a`.
+Lệnh `a = b * 2;` báo cho máy tính giá trị được lưu trữ trong biến `b`, nhân giá trị đó với 2, sau đó lưu kết quả lại vào một biến khác gọi là `a`.
 
-Programs are just collections of many such statements, which together describe all the steps that it takes to perform your program's purpose.
+Lập trình tương tự như bộ sưu tập của nhiều câu lệnh cùng nhau mô tả tất cả các bước để thực thi mục đích lập trình của bạn.
 
-### Expressions
+### Biểu thức (Expressions)
 
-Statements are made up of one or more *expressions*. An expression is any reference to a variable or value, or a set of variable(s) and value(s) combined with operators.
+Các câu lệnh được tạo thành từ một hay nhiều *biểu thức*. Một biểu thức là bất kỳ tham chiếu trên một biến hoặc một giá trị, hoặc tập hợp các giá trị và các biến kết hợp thành toán tử. 
 
-For example:
+Ví dụ: 
 
 ```js
 a = b * 2;
 ```
 
-This statement has four expressions in it:
+Câu lệnh này có 4 biểu thức bên trong nó: 
 
-* `2` is a *literal value expression*
+* `2` là *giá trị biểu thức trực kiện*
 * `b` is a *variable expression*, which means to retrieve its current value
 * `b * 2` is an *arithmetic expression*, which means to do the multiplication
 * `a = b * 2` is an *assignment expression*, which means to assign the result of the `b * 2` expression to the variable `a` (more on assignments later)
