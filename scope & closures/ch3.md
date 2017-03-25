@@ -31,9 +31,9 @@ function foo(a) {
 
 Trong đoạn trích này, bong bóng scope của `foo(..)` bao gồm nhận dạng `a`, `b`, `c` và `bar`. **Nó không quan trọng** một  khai báo xuất hiện *ở đâu* trong scope, bất kể biến hoặc function bong bóng scope chứa nó. Chúng ta sẽ khám phá các hoạt động đó trong chương kế tiếp. 
 
-`bar(..)` có bong bóng của riêng nó. Global scope cũng chỉ có một định danh gắn liền: `foo`
+`bar(..)` có bong bóng của riêng nó. Scope toàn cũng chỉ có một định danh gắn liền: `foo`
 
-Because `a`, `b`, `c`, and `bar` all belong to the scope bubble of `foo(..)`, they are not accessible outside of `foo(..)`. That is, the following code would all result in `ReferenceError` errors, as the identifiers are not available to the global scope:
+Bởi vì `a`, `b`, `c`, và `bar` đều thuộc về bong bóng scope của `foo(..)`, nó sẽ không thể tiếp cận bên ngoài `foo(..)`. Bởi vì, dòng code dưới đây đều có kết quả lỗi `ReferenceError` , khi các định danh đều không có sẵn tại scope toàn cục:
 
 ```js
 bar(); // fails
@@ -41,7 +41,7 @@ bar(); // fails
 console.log( a, b, c ); // all 3 fail
 ```
 
-However, all these identifiers (`a`, `b`, `c`, `foo`, and `bar`) are accessible *inside* of `foo(..)`, and indeed also available inside of `bar(..)` (assuming there are no shadow identifier declarations inside `bar(..)`).
+Tuy nhiên, tất cả các định danh (`a`, `b`, `c`, `foo`, and `bar`) are accessible *inside* of `foo(..)`, and indeed also available inside of `bar(..)` (assuming there are no shadow identifier declarations inside `bar(..)`).
 
 Function scope encourages the idea that all variables belong to the function, and can be used and reused throughout the entirety of the function (and indeed, accessible even to nested scopes). This design approach can be quite useful, and certainly can make full use of the "dynamic" nature of JavaScript variables to take on values of different types as needed.
 
