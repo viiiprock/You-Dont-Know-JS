@@ -31,7 +31,7 @@ function foo(a) {
 
 Trong đoạn trích này, bong bóng scope của `foo(..)` bao gồm nhận dạng `a`, `b`, `c` và `bar`. **Nó không quan trọng** một  khai báo xuất hiện *ở đâu* trong scope, bất kể biến hoặc function bong bóng scope chứa nó. Chúng ta sẽ khám phá các hoạt động đó trong chương kế tiếp. 
 
-`bar(..)` has its own scope bubble. So does the global scope, which has just one identifier attached to it: `foo`.
+`bar(..)` có bong bóng của riêng nó. Global scope cũng chỉ có một định danh gắn liền: `foo`
 
 Because `a`, `b`, `c`, and `bar` all belong to the scope bubble of `foo(..)`, they are not accessible outside of `foo(..)`. That is, the following code would all result in `ReferenceError` errors, as the identifiers are not available to the global scope:
 
