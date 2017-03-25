@@ -15,8 +15,6 @@ Nếu bạn đã khá thoải mái với JavaScript rồi thì hãy bắt đầu
 
 ## Code
 
-Chương 3 và nhảy tiếp! 
-
 Hãy bắt đầu từ đầu.
 
 Một chương trình, thường được gọi là *source code* hoặc *code*, là một tập hợp các hướng dẫn để yêu cầu máy tính cần xử lý nhiệm vụ gì. Thông thường, code được lưu dưới dạng file văn bản, với js bạn có thể gõ code trực tiếp lên console của trình duyệt, chúng tôi sẽ nói chuyện này sau. 
