@@ -6,14 +6,14 @@ Một trong những cơ chế hãi hùng nhất của JavaScript là từ khoá 
 
 Cơ chế của `this` không hẳn ghê gớm như vậy, nhưng các lập trình viên thường diễn giải trong tâm trí bằng cách thêm từ "phức tạp" hoặc "mơ hồ", và không có câu hỏi nào ngoài việc hiểu rõ ràng, `this` có thể xem là sự huyền diệu trong sự hoang  của bạn. 
 
-**Ghi chú** Từ `this` là một đại từ trong đàm luận chung. Vì vậy, nó có thể rất khó, đặc biệt là bằng lời nói, để xác định chúng  ta sử dụng `this` là một từ đặc biệt, hay "this" 
+**Ghi chú** Từ `this` là một đại từ trong đàm luận chung. Vì vậy, nó có thể rất khó, đặc biệt là bằng lời nói, để xác định chúng ta sử dụng `this` như một đại từ hoặc sử dụng nó để diễn đạt đến từ khoá xác định. Để rõ ràng, tôi sẽ sử dụng `this` như là một từ khoá đặc biệt, và "this" hay *this* hoặc nếu không thì this. 
 
-**Note:** The word "this" is a terribly common pronoun in general discourse. So, it can be very difficult, especially verbally, to determine whether we are using "this" as a pronoun or using it to refer to the actual keyword identifier. For clarity, I will always use `this` to refer to the special keyword, and "this" or *this* or this otherwise.
-## Why `this`?
 
-If the `this` mechanism is so confusing, even to seasoned JavaScript developers, one may wonder why it's even useful? Is it more trouble than it's worth? Before we jump into the *how*, we should examine the *why*.
+## Tại sao lại là `this`?
 
-Let's try to illustrate the motivation and utility of `this`:
+Nếu cơ chế `this` quá hoang mang, ngay cả đối với lập trình viên JavaScript dày dạn, người ta có thể thắc mắc tại sao nó lại hữu dụng? Nó có rắc rối hơn hay chính đáng? Trước khi tìm hiểu *như thế nào*, chúng ta nên xác định *vì sao*  
+
+Hãy thử minh hoạ động lực và tiện ích của `this`:
 
 ```js
 function identify() {
@@ -40,11 +40,11 @@ speak.call( me ); // Hello, I'm KYLE
 speak.call( you ); // Hello, I'm READER
 ```
 
-If the *how* of this snippet confuses you, don't worry! We'll get to that shortly. Just set those questions aside briefly so we can look into the *why* more clearly.
+Nếu *như thế nào* của đoạn code này vẫn còn làm bạn hoang mang, đừng lo! Chúng ta sẽ đi qua nó ngay. Chỉ cần đặt câu hỏi này qua một bên, như vậy chúng ta có thẻ nhìn rõ *tại sao* hơn.
 
-This code snippet allows the `identify()` and `speak()` functions to be re-used against multiple *context* (`me` and `you`) objects, rather than needing a separate version of the function for each object.
+Đoạn trích này cho phép function `identify()` và `speak()` được tái sử dụng cho object nhiều *ngữ cảnh* (`me` và `you`) thay vì sử dụng nhiều phiên bản function khác nhau cho mỗi object.
 
-Instead of relying on `this`, you could have explicitly passed in a context object to both `identify()` and `speak()`.
+Thay vì sử dụng `this`, bạn có thể thông qua một cách rõ ràng trong một object ngữ cảnh cho cả `identify()` và `speak()`.
 
 ```js
 function identify(context) {
@@ -59,8 +59,9 @@ function speak(context) {
 identify( you ); // READER
 speak( me ); // Hello, I'm KYLE
 ```
+Tuy nhiên, cơ chế `this` cung cấp phương thức tao nhã hơn theo kiểu hàm ý "vượt qua" một object liên quan, hướng tới thiết kế API rõ ràng hơn và dễ sử dụng hơn. 
 
-However, the `this` mechanism provides a more elegant way of implicitly "passing along" an object reference, leading to cleaner API design and easier re-use.
+Pattern bạn sử dụng càng phức tạp, việc rõ rang  
 
 The more complex your usage pattern is, the more clearly you'll see that passing context around as an explicit parameter is often messier than passing around a `this` context. When we explore objects and prototypes, you will see the helpfulness of a collection of functions being able to automatically reference the proper context object.
 
