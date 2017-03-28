@@ -215,12 +215,15 @@ Sau đây là một số biểu thức trong JavaScript:
 
    Các biểu thức này được sử dụng để diễn tả các điều kiện phức tạp (xem "Điều kiện"), ví như cả `a` *hoặc* `b` đều đúng.
    
-**Note:** For much more detail, and coverage of operators not mentioned here, see the Mozilla Developer Network (MDN)'s "Expressions and Operators" (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators).
 
-## Values & Types
+**Ghi chú:** Để biết chi tiết nhiều hơn, phạm vi của các biểu thức không đề cập ở đây, bạn có thể xem thêm Mozilla Developer Network (MDN)'s "Expressions and Operators" (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators).
 
-If you ask an employee at a phone store how much a certain phone costs, and they say "ninety-nine, ninety-nine" (i.e., $99.99), they're giving you an actual numeric dollar figure that represents what you'll need to pay (plus taxes) to buy it. If you want to buy two of those phones, you can easily do the mental math to double that value to get $199.98 for your base cost.
+## Giá trị & loại
 
+Nếu bạn hỏi nhân viên tại một cửa hàng điện thoại giá của một cái điện thoại gì đó, và họ trả lời "chín chín, chín chín"
+(ví dụ $99.99), tức họ đã cho bạn một hình dung giá trị tiền mà  bạn cần phải trả (bao gồm thuế) để mua nó. Nếu bạn muốn mua 2 cái điện  thoại, bạn có thể dễ dàng làm phép toán để gấp đôi giá trị thành $199.98 từ giá gốc.
+
+Nếu người nhân viên đó lấy hai cái điện thoại tương tự và nói "miễn phí" 
 If that same employee picks up another similar phone but says it's "free" (perhaps with air quotes), they're not giving you a number, but instead another kind of representation of your expected cost ($0.00) -- the word "free."
 
 When you later ask if the phone includes a charger, that answer could only have been either "yes" or "no."
