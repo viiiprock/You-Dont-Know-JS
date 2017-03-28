@@ -231,13 +231,13 @@ Bằng cách tương tự, khi bạn diễn tả những giá trị trong một 
 
 Những kiểu đại diện khác nhau cho ác giá trị được gọi là *types* trong thuật ngữ lập trình. JavaScript có sẵn các type được gọi là giá trị *nguyên thuỷ* :
 
-* When you need to do math, you want a `number`.
-* When you need to print a value on the screen, you need a `string` (one or more characters, words, sentences).
-* When you need to make a decision in your program, you need a `boolean` (`true` or `false`).
+* Khi bạn muốn làm toán, bạn muốn `number`.
+* Khi bạn muốn in gái trị trên màn hình, bạn cần `string` (một hay nhiều ký tự, từ, câu).
+* Khi bạn muốn tạo một guyết định trên chương trình, bạn cần `boolean` (`true` hoặc `false`).
 
-Values that are included directly in the source code are called *literals*. `string` literals are surrounded by double quotes `"..."` or single quotes (`'...'`) -- the only difference is stylistic preference. `number` and `boolean` literals are just presented as is (i.e., `42`, `true`, etc.).
+Các giá trị được thêm trực tiếp vào trong source code được gọi là *literals*. `string` literals được bao bằng dấu ngoặc kép  `"..."` hoặc dấu ngoặc đơn (`'...'`) -- chỉ là phong cách khác nhau. `number` và `boolean` literals được đại diện như là ví dụ ( `42`, `true`, etc.).
 
-Consider:
+Hãy xem:
 
 ```js
 "I am a string";
@@ -249,13 +249,13 @@ true;
 false;
 ```
 
-Beyond `string`/`number`/`boolean` value types, it's common for programming languages to provide *arrays*, *objects*, *functions*, and more. We'll cover much more about values and types throughout this chapter and the next.
+Ngoài kiểu  giá trị `string`/`number`/`boolean`, các ngôn ngữ lập trình còn thường cung cấp kiểu *arrays*, *objects*, *functions*, và hơn nữa. Chúng ta sẽ tìm hiểu thêm về giá trị và kiểu suốt chương này và chương kế tiếp.
 
-### Converting Between Types
+### Chuyển đổi giữa các kiểu
 
-If you have a `number` but need to print it on the screen, you need to convert the value to a `string`, and in JavaScript this conversion is called "coercion." Similarly, if someone enters a series of numeric characters into a form on an ecommerce page, that's a `string`, but if you need to then use that value to do math operations, you need to *coerce* it to a `number`.
+Nếu bạn có một `number` nhưng muốn hiển thị trên màn hình, bạn cần chuyển giá trị thành `string`, và trong JavaScript gọi việc chuyển đổi này là "cưỡng bức". Tương tự, nếu ai đó cho một loạt ký tự số vào trong form của trang thương mại điện tử, đó là `string`, nhưng nếu bạn muốn sử dụng giá trị để thực hiện phép toán, bạn cần *ép* nó thành `number`
 
-JavaScript provides several different facilities for forcibly coercing between *types*. For example:
+JavaScript cung cấp một vài cơ sở khác nhau để ép buộc chuyển đổi các *kiểu*. Ví dụ:    
 
 ```js
 var a = "42";
