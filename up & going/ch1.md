@@ -218,19 +218,18 @@ Sau đây là một số biểu thức trong JavaScript:
 
 **Ghi chú:** Để biết chi tiết nhiều hơn, phạm vi của các biểu thức không đề cập ở đây, bạn có thể xem thêm Mozilla Developer Network (MDN)'s "Expressions and Operators" (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators).
 
-## Giá trị & loại
+## Giá trị (Values) & loại (types)
 
 Nếu bạn hỏi nhân viên tại một cửa hàng điện thoại giá của một cái điện thoại gì đó, và họ trả lời "chín chín, chín chín"
 (ví dụ $99.99), tức họ đã cho bạn một hình dung giá trị tiền mà  bạn cần phải trả (bao gồm thuế) để mua nó. Nếu bạn muốn mua 2 cái điện  thoại, bạn có thể dễ dàng làm phép toán để gấp đôi giá trị thành $199.98 từ giá gốc.
 
-Nếu người nhân viên đó lấy hai cái điện thoại tương tự và nói "miễn phí" 
-If that same employee picks up another similar phone but says it's "free" (perhaps with air quotes), they're not giving you a number, but instead another kind of representation of your expected cost ($0.00) -- the word "free."
+Nếu người nhân viên đó lấy hai cái điện thoại tương tự và nói "miễn phí", tức là họ không cho bạn một con số nào, nhưng nó cũng là một dạng đại diện cho mức giá ($0.00) -- cho từ "miễn phí".
 
-When you later ask if the phone includes a charger, that answer could only have been either "yes" or "no."
+Sau đó bạn lại hỏi điện thoại có đồ sạc hay không, câu trả lời có thể là "có" hoặc "không".
 
-In very similar ways, when you express values in a program, you choose different representations for those values based on what you plan to do with them.
+Bằng cách tương tự, khi bạn diễn tả những giá trị trong một chương trình, bạn chon các kiểu đại diện khác nhau cho các giá trị đó dựa trên những gì bạn kế hoạch với chúng.
 
-These different representations for values are called *types* in programming terminology. JavaScript has built-in types for each of these so called *primitive* values:
+Những kiểu đại diện khác nhau cho ác giá trị được gọi là *types* trong thuật ngữ lập trình. JavaScript có sẵn các type được gọi là giá trị *nguyên thuỷ* :
 
 * When you need to do math, you want a `number`.
 * When you need to print a value on the screen, you need a `string` (one or more characters, words, sentences).
