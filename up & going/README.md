@@ -1,17 +1,17 @@
-# You Don't Know JS: Up & Going
+# You Don't Know JS: Khởi động 
 
 <img src="cover.jpg" width="300">
 
 -----
 
-**[Purchase digital/print copy from O'Reilly](http://shop.oreilly.com/product/0636920039303.do)**
+**[Mua sách O'Reilly](http://shop.oreilly.com/product/0636920039303.do)**
 
 -----
 
 [Table of Contents](toc.md)
 
-* [Foreword](foreword.md) (by [Jenn Lukas](http://jennlukas.com))
-* [Preface](../preface.md)
+* [Lời tựa](foreword.md) (by [Jenn Lukas](http://jennlukas.com))
+* [Lời nói ](../preface.md)
 * [Chương 1: Hiểu về lập trình](ch1.md)
 * [Chương  2: Hiểu  JavaScript](ch2.md)
 * [Chương 3: Về YDKJS](ch3.md)
