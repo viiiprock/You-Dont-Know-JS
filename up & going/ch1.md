@@ -170,20 +170,21 @@ Toán tử `*` để  thực hiện phép toán nhân. Dễ heng.
 
 Dấu `=` được sử  dụng để *gán* -- đầu tiên là ta tính toán giá trị ở *phí bên phải* (giá trị nguồn) dấu `=` và sau nó đặt nó vào biến(variable) mà chúng ta xác định ở *phía bên trái* (variable mục tiêu).
 
-**Warning:** This may seem like a strange reverse order to specify assignment. Instead of `a = 42`, some might prefer to flip the order so the source value is on the left and the target variable is on the right, like `42 -> a` (this is not valid JavaScript!). Unfortunately, the `a = 42` ordered form, and similar variations, is quite prevalent in modern programming languages. If it feels unnatural, just spend some time rehearsing that ordering in your mind to get accustomed to it.
 
-Consider:
+**Chú ý:** Có thể cảm giác hơi bị ngược bằng cách đảo trình tự gán. Thay vì `a = 42`, một số thích lật ngược trình tự giá trị nguồn ở bên trái và biến mục tiêu ở bên phải, kiểu  như `42 -> a` (nó không phải JavaScript!). Không may,`a = 42` là định  dạng được sắp xếp, và tương tự các biến, nó khá phổ  biến trong các ngôn ngữ lập trình hiện đại. Nếu có cảm giác không tự nhiên, hãy  bỏ chút thời gian để làm quen và tâm trí bạn sẽ tự sắp xếp nó. 
+
+Hãy xem:
 
 ```js
 a = 2;
 b = a + 1;
 ```
 
-Here, we assign the `2` value to the `a` variable. Then, we get the value of the `a` variable (still `2`), add `1` to it resulting in the value `3`, then store that value in the `b` variable.
+Tại đây, chúng ta gán giá trị`2` cho biến `a`. Sau đó chúng ta có giá trị của biến `a` (vẫn là  `2`), thêm `1` vào nó sẽ có kết quả giá trị `3`, sau đó lưu giá trị đó vào biến `b`.
 
-While not technically an operator, you'll need the keyword `var` in every program, as it's the primary way you *declare* (aka *create*) *var*iables (see "Variables").
+Trong khi biểu thức kỹ thuật,  bạn cũng cần từ khoá `var` trong mọi thể loại lập trình, như cách đầu tiên bạn *khai báo* (aka *khởi tạo*) *các biến* (Xem "Variables")
 
-You should always declare the variable by name before you use it. But you only need to declare a variable once for each *scope* (see "Scope"); it can be used as many times after that as needed. For example:
+Bạn có  thể luôn khai báo biến bằng tên trước khi sử dụng nó. Nhưng bạn cũng chỉ khai báo một biến một lần trong mỗi *scope* (xem "Scope"): nó có thể được sử dụng nhiều lần khi cần. Ví dụ: 
 
 ```js
 var a = 20;
@@ -194,7 +195,7 @@ a = a * 2;
 console.log( a );	// 42
 ```
 
-Here are some of the most common operators in JavaScript:
+Sau đây là một số biểu thức trong JavaScript:
 
 * Assignment: `=` as in `a = 2`.
 * Math: `+` (addition), `-` (subtraction), `*` (multiplication), and `/` (division), as in `a * 3`.
