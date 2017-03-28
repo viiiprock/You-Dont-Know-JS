@@ -11,9 +11,9 @@ Ai thích sách giấy của tác giả thì mua tại link này.
 <a href="http://shop.oreilly.com/product/0636920033752.do"><img src="async %26 performance/cover.jpg" width="75"></a>&nbsp;
 <a href="http://shop.oreilly.com/product/0636920033769.do"><img src="es6 %26 beyond/cover.jpg" width="75"></a>
 
-Please feel free to contribute to the quality of this content by submitting PR's for improvements to code snippets, explanations, etc. While typo fixes are welcomed, they will likely be caught through normal editing processes, and are thus not necessarily as important for this repository.
+Bạn có thể chỉnh sửa bản dịch của mình hoặc góp ý.
 
-**To read more about the motivations and perspective behind this book series, check out the [Preface](preface.md).**
+** Để biết động lực của tác giả thì xem  [Preface](preface.md).**
 
 ## Titles
 
@@ -23,38 +23,6 @@ Please feel free to contribute to the quality of this content by submitting PR's
 * Xem online (miễn phí!): ["Types & Grammar"](types & grammar/README.md#you-dont-know-js-types--grammar), Published: [Buy Now](http://shop.oreilly.com/product/0636920033745.do)
 * Xem online (miễn phí!): ["Async & Performance"](async & performance/README.md#you-dont-know-js-async--performance), Published: [Buy Now](http://shop.oreilly.com/product/0636920033752.do)
 * Xem online (miễn phí!): ["ES6 & Beyond"](es6 & beyond/README.md#you-dont-know-js-es6--beyond), Published: [Buy Now](http://shop.oreilly.com/product/0636920033769.do)
-
-## Publishing
-
-These books are being released here as drafts, free to read, but are also being edited, produced, and published through O'Reilly.
-
-If you like the content you find here, and want to support more content like it, please purchase the books once they are available for sale, through your normal book sources. :)
-
-If you'd like to contribute financially towards the effort (or any of my other OSS work) aside from purchasing the books, I do have a [patreon](https://www.patreon.com/getify) that I would always appreciate your generosity towards.
-
-<a href="https://www.patreon.com/getify"><img src="http://blog.getify.com/wp-content/uploads/patreon.png"></a>
-
-## In-person Training
-
-The content for these books derives heavily from a series of training materials I teach professionally (in both public and private-corporate workshop format), called "Advanced JS: The 'What You Need To Know' Parts".
-
-If you like this content and would like to contact me regarding conducting training on these, or other various JS/HTML5/node.js topics, please reach out to me through any of these channels listed here:
-
-[http://getify.me](http://getify.me)
-
-## Online Video Training
-
-I also have some JS training material available in on-demand video format. I teach courses through [Frontend Masters](https://FrontendMasters.com), like my [Advanced JS](https://frontendmasters.com/courses/advanced-javascript/) workshop (more courses coming soon!).
-
-That same course is also [available through Pluralsight](http://www.pluralsight.com/courses/advanced-javascript).
-
-## Content Contributions
-
-Any contributions you make to this effort **are of course greatly appreciated**.
-
-However, if you choose to contribute content (not just typo corrections) to this repo, you agree that you're giving me a non-exclusive license to use that content for the book series, as I (and O'Reilly) deem appropriate. You probably guessed that already, but we just have to make the lawyers happy by explicitly stating it.
-
-So: blah, blah, blah... :)
 
 ## License & Copyright
 
