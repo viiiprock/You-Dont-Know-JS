@@ -283,11 +283,11 @@ Tuy nhiên, cưỡng bức ngầm là một cơ chế *có thể học được*
 
 ## Bình luận Code
 
-The phone store employee might jot down some notes on the features of a newly released phone or on the new plans her company offers. These notes are only for the employee -- they're not for customers to read. Nevertheless, these notes help the employee do her job better by documenting the hows and whys of what she should tell customers.
+Nhân viên cửa hàng điện thoại có thể liệt kê vài tính năng của loại điện thoại mới hoặc một số kế hoạch của công ty cô ta đưa ra. Những ghi chú đó chỉ dành cho nhân vân -- nó không phải dành cho khách hàng coi. Tuy nhiên, những ghi chú đó đó giúp cô ta làm việc tốt hơn bằng cách tài liệu hoá những gì cô có thể nói với khách hàng.
 
-One of the most important lessons you can learn about writing code is that it's not just for the computer. Code is every bit as much, if not more, for the developer as it is for the compiler.
+Một trong những bài học quan trọng là bạn có thể học bằng cách viết code không chỉ cho máy tính. Code is every bit as much, if not more, for the developer as it is for the compiler.
 
-Your computer only cares about machine code, a series of binary 0s and 1s, that comes from *compilation*. There's a nearly infinite number of programs you could write that yield the same series of 0s and 1s. The choices you make about how to write your program matter -- not only to you, but to your other team members and even to your future self.
+Máy tính của bạn chỉ quan tâm đến mã máy, một chuỗi nhị phân 0s và 1s đến *biên dịch*. There's a nearly infinite number of programs you could write that yield the same series of 0s and 1s. The choices you make about how to write your program matter -- not only to you, but to your other team members and even to your future self.
 
 You should strive not just to write programs that work correctly, but programs that make sense when examined. You can go a long way in that effort by choosing good names for your variables (see "Variables") and functions (see "Functions").
 
