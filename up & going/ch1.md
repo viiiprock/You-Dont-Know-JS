@@ -281,57 +281,57 @@ Tuy nhiên, cưỡng bức ngầm là một cơ chế *có thể học được*
 
 **Ghi chú:** Để biết thêm về sự cưỡng bức, xem Chương 2 của tiêu đề này và Chương 4 của "Kiểu & Ngữ pháp". 
 
-## Bình luận Code
+## Code comment
 
 Nhân viên cửa hàng điện thoại có thể liệt kê vài tính năng của loại điện thoại mới hoặc một số kế hoạch của công ty cô ta đưa ra. Những ghi chú đó chỉ dành cho nhân vân -- nó không phải dành cho khách hàng coi. Tuy nhiên, những ghi chú đó đó giúp cô ta làm việc tốt hơn bằng cách tài liệu hoá những gì cô có thể nói với khách hàng.
 
 Một trong những bài học quan trọng là bạn có thể học bằng cách viết code không chỉ cho máy tính. Code is every bit as much, if not more, for the developer as it is for the compiler.
 
-Máy tính của bạn chỉ quan tâm đến mã máy, một chuỗi nhị phân 0s và 1s đến *biên dịch*. There's a nearly infinite number of programs you could write that yield the same series of 0s and 1s. The choices you make about how to write your program matter -- not only to you, but to your other team members and even to your future self.
+Máy tính của bạn chỉ quan tâm đến mã máy, một chuỗi nhị phân 0s và 1s đến *biên dịch*. Có vô số chương trình mà bạn có thể viết và mang lại kết quả tương tự với chuỗi 0 - 1. Sự lựa chọn là bạn viết chương trình tế nào -- không chỉ riêng bạn, mà còn là thành viên khác trong nhóm và kể cả tương lai của chính bạn.  
 
-You should strive not just to write programs that work correctly, but programs that make sense when examined. You can go a long way in that effort by choosing good names for your variables (see "Variables") and functions (see "Functions").
+Bạn có thể phấn đâu không chỉ viết chương trình cho nó chạy đúng, mà còn dễ dàng kiểm định. Bạn có thể mất nhiều thời gian cho việc chọn một cái tên tốt cho biến, cho function. 
 
-But another important part is code comments. These are bits of text in your program that are inserted purely to explain things to a human. The interpreter/compiler will always ignore these comments.
+Nhưng phần quan trọng khác là code comment. Có một số văn bản trong chương trình của bạn được đưa vào thuần tuý là để giải thích cho người. Trình thông dịch/ biên dịch sẽ bỏ qua những comment đó.
 
-There are lots of opinions on what makes well-commented code; we can't really define absolute universal rules. But some observations and guidelines are quite useful:
+Có rất nhiều quan điểm về việc điều gì làm nên một comment tốt; chúng ta thực sự không thể xác định một quy tắc bao trùm. Nhưng có một số nhận xét và hướng dẫn có ích:
 
-* Code without comments is suboptimal.
-* Too many comments (one per line, for example) is probably a sign of poorly written code.
-* Comments should explain *why*, not *what*. They can optionally explain *how* if that's particularly confusing.
+* Code không có comment là chưa đủ tối ưu. 
+* Quá nhiều comment là dấu hiệu của code tồi.
+* Comment nên giải thích *vì sao* thay vì *cái gì*. Nó có thể giải thích *vì sao* nếu có chút phức tạp.
 
-In JavaScript, there are two types of comments possible: a single-line comment and a multiline comment.
+Trong JavaScript, có hai kiểu comment khả dụng: là comment dòng đơn và comment đa dòng.
 
-Consider:
+Nhận biết:
 
 ```js
-// This is a single-line comment
+// Đây là comment dòng đơn
 
-/* But this is
-       a multiline
-             comment.
+/* Đây là
+      comment
+             đa dòng
                       */
 ```
 
-The `//` single-line comment is appropriate if you're going to put a comment right above a single statement, or even at the end of a line. Everything on the line after the `//` is treated as the comment (and thus ignored by the compiler), all the way to the end of the line. There's no restriction to what can appear inside a single-line comment.
+`//` Comment dòng đơn thích hợp với việc bạn đặt comment ngay trên một biểu thức hoặc cuối dòng. Những gì trên dòng có dấu `//` đều được coi như là comment (được bỏ qua bởi biên dịch) từ đầu cho đến cuối dòng đó. Không có bất kỳ cá biệt nào có thể xuất hiện trên comment dòn đơn. 
 
-Consider:
+Xem:
 
 ```js
-var a = 42;		// 42 is the meaning of life
+var a = 42;		// 42 là ý nghĩa cuộc đời
 ```
 
-The `/* .. */` multiline comment is appropriate if you have several lines worth of explanation to make in your comment.
+`/* .. */` Comment đa dòng thích hợp với việc nếu bạn có một vài dòng cần giải thích.
 
-Here's a common usage of multiline comments:
+Đây là cách sử dụng comment đa dòng thông thường:
 
 ```js
-/* The following value is used because
-   it has been shown that it answers
-   every question in the universe. */
+/* Giá trị sau đây được sử dụng bởi vì 
+	nó đã thể hiện rằng nó chính là câu
+	trả lời mọi câu hỏi trong vũ trụ  */
 var a = 42;
 ```
+Nó có thể xuất hiện trong một dòng, thậm chí giữa dòng, bởi vì có `*/` là kết thúc. Ví dụ: 
 
-It can also appear anywhere on a line, even in the middle of a line, because the `*/` ends it. For example:
 
 ```js
 var a = /* arbitrary value */ 42;
@@ -339,7 +339,7 @@ var a = /* arbitrary value */ 42;
 console.log( a );	// 42
 ```
 
-The only thing that cannot appear inside a multiline comment is a `*/`, because that would be interpreted to end the comment.
+Thứ duy nhất không thể xuất hiện trong comment đa dòng là `*/`, bởi vì nó có thể tạo ra kết comment.
 
 You will definitely want to begin your learning of programming by starting off with the habit of commenting code. Throughout the rest of this chapter, you'll see I use comments to explain things, so do the same in your own practice. Trust me, everyone who reads your code will thank you!
 
