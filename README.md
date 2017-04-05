@@ -17,9 +17,9 @@ Bạn có thể chỉnh sửa bản dịch của mình hoặc góp ý.
 
 ## Titles
 
-* Xem online (miễn phí!): ["Khởi động"](https://github.com/viiiprock/You-Dont-Know-JS/tree/master/up%20%26%20going), Published: [Buy Now](http://shop.oreilly.com/product/0636920039303.do) in print, but the ebook format is free!
-* Xem online (miễn phí!): ["Scope & Closures"](https://github.com/viiiprock/You-Dont-Know-JS/tree/master/scope%20%26%20closures), Published: [Buy Now](http://shop.oreilly.com/product/0636920026327.do)
-* Xem online (miễn phí!): ["this & Object Prototypes"](https://github.com/viiiprock/You-Dont-Know-JS/tree/master/this%20%26%20object%20prototypes), Published: [Buy Now](http://shop.oreilly.com/product/0636920033738.do)
+* Xem online (miễn phí!): ["Khởi động"](/tree/master/up%20%26%20going), Published: [Buy Now](http://shop.oreilly.com/product/0636920039303.do) in print, but the ebook format is free!
+* Xem online (miễn phí!): ["Scope & Closures"](/tree/master/scope%20%26%20closures), Published: [Buy Now](http://shop.oreilly.com/product/0636920026327.do)
+* Xem online (miễn phí!): ["this & Object Prototypes"](/tree/master/this%20%26%20object%20prototypes), Published: [Buy Now](http://shop.oreilly.com/product/0636920033738.do)
 * Xem online (miễn phí!): ["Types & Ngữ pháp"](types & grammar/README.md#you-dont-know-js-types--grammar), Published: [Buy Now](http://shop.oreilly.com/product/0636920033745.do)
 * Xem online (miễn phí!): ["Async & Hiệu suất"](async & performance/README.md#you-dont-know-js-async--performance), Published: [Buy Now](http://shop.oreilly.com/product/0636920033752.do)
 * Xem online (miễn phí!): ["ES6 & Trên nữa"](es6 & beyond/README.md#you-dont-know-js-es6--beyond), Published: [Buy Now](http://shop.oreilly.com/product/0636920033769.do)
