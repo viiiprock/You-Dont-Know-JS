@@ -4,9 +4,9 @@
 Một trong những cơ chế hãi hùng nhất của JavaScript là từ khoá `this`. Nó là một từ khoá nhận dạng đặc biệt tự động xác định trong scope của mọi function, nhưng những gì chính xác nó đề cập đến còn  làm điêu đứng ngay cả JavaScript dev dày dạn.
 > Any sufficiently *advanced* technology is indistinguishable from magic. -- Arthur C. Clarke
 
-Cơ chế của `this` không hẳn ghê gớm như vậy, nhưng các lập trình viên thường diễn giải trong tâm trí bằng cách thêm từ "phức tạp" hoặc "mơ hồ", và không có câu hỏi nào ngoài việc hiểu rõ ràng, `this` có thể xem là sự huyền diệu trong sự hoang  của bạn. 
+Cơ chế của `this` không hẳn ghê gớm như vậy, nhưng các lập trình viên thường diễn giải trong tâm trí bằng cách thêm từ "phức tạp" hoặc "mơ hồ", và không có câu hỏi nào ngoài việc hiểu rõ ràng, `this` có thể xem là sự huyền diệu trong sự hoang của bạn. 
 
-**Ghi chú** Từ `this` là một đại từ trong đàm luận chung. Vì vậy, nó có thể rất khó, đặc biệt là bằng lời nói, để xác định chúng ta sử dụng `this` như một đại từ hoặc sử dụng nó để diễn đạt đến từ khoá xác định. Để rõ ràng, tôi sẽ sử dụng `this` như là một từ khoá đặc biệt, và "this" hay *this* hoặc nếu không thì this. 
+**Ghi chú** Từ `this` là một đại từ trong đàm luận chung. Vì vậy, nó có thể rất khó, đặc biệt là bằng lời nói, để xác định chúng ta sử dụng `this` như một đại từ hoặc sử dụng nó để diễn đạt đến từ khoá xác định. Để rõ ràng, tôi sẽ sử dụng `this` như là một từ khoá đặc biệt "this" hay *this* hoặc nếu không thì this. 
 
 
 ## Tại sao lại là `this`?
@@ -40,7 +40,7 @@ speak.call( me ); // Hello, I'm KYLE
 speak.call( you ); // Hello, I'm READER
 ```
 
-Nếu *như thế nào* của đoạn code này vẫn còn làm bạn hoang mang, đừng lo! Chúng ta sẽ đi qua nó ngay. Chỉ cần đặt câu hỏi này qua một bên, như vậy chúng ta có thẻ nhìn rõ *tại sao* hơn.
+Nếu *như thế nào* của đoạn code này vẫn còn làm bạn hoang mang, đừng lo! Chúng ta sẽ tìm hiểu nó cụ thể ngay. Chỉ cần đặt câu hỏi này qua một bên, như vậy chúng ta có thể nhìn rõ *tại sao* hơn.
 
 Đoạn trích này cho phép function `identify()` và `speak()` được tái sử dụng cho object nhiều *ngữ cảnh* (`me` và `you`) thay vì sử dụng nhiều phiên bản function khác nhau cho mỗi object.
 
@@ -61,34 +61,31 @@ speak( me ); // Hello, I'm KYLE
 ```
 Tuy nhiên, cơ chế `this` cung cấp phương thức tao nhã hơn theo kiểu hàm ý "vượt qua" một object liên quan, hướng tới thiết kế API rõ ràng hơn và dễ sử dụng hơn. 
 
-Pattern bạn sử dụng càng phức tạp, việc rõ rang  
+Mô hình bạn sử dụng càng phức tạp, bạn sẽ càng thấy rõ việc dùng một tham số cụ thể tên tuổi thường rối rắm hơn dùng `this`. Khi bạn khám phá object & prototype, bạn sẽ thấy sự hữu dụng của một mớ function có thể tự động tham chiếu với object thích hợp.
 
-The more complex your usage pattern is, the more clearly you'll see that passing context around as an explicit parameter is often messier than passing around a `this` context. When we explore objects and prototypes, you will see the helpfulness of a collection of functions being able to automatically reference the proper context object.
+## Các nhầm lẫn 
 
-## Confusions
+Chúng ta sẽ sớm giải thích `this` *thực sự* hoạt động ra sao, nhưng trước tiên chúng ta phải xoá tan những hiểu nhầm về những gì nó không thực sự đúng. 
 
-We'll soon begin to explain how `this` *actually* works, but first we must  dispel some misconceptions about how it *doesn't* actually work.
+Cái tên "this" tạo ra một số nhầm lẫn khi các lập trình viên cố gắng nghĩ về nó theo nghĩa đen quá. Có hai ý nghĩa thường đưa ra nhưng cả hai đều sai.
 
-The name "this" creates confusion when developers try to think about it too literally. There are two meanings often assumed, but both are incorrect.
+### Chính nó
 
-### Itself
+Cám dỗ phổ biến đầu tiên là giả định bản thân `this` như một function. Ít nhất, đó là một suy luận có lý về mặt ngữ pháp.
 
-The first common temptation is to assume `this` refers to the function itself. That's a reasonable grammatical inference, at least.
+Tại sao bạn muốn tham chiếu một function bên trong chính nó? Một số lý do phổ biến là thứ gì đó như kiểu đệ quy (gọi function từ bên trong nó) hoặc có một event handler mà có thể tự huỷ trong lần gọi đầu tiên.
 
-Why would you want to refer to a function from inside itself? The most common reasons would be things like recursion (calling a function from inside itself) or having an event handler that can unbind itself when it's first called.
+Các lập trình viên mới làm quen với cơ chế của JS thường tham chiếu function như một object (tất cả các function trong JS đều là object!) cho phép bạn lưu trữ *state* (giá trị bên trong thuộc tính) khi gọi function. Mặc dù đeiu62 này có thể là chắc chắn và có một số hạn chế sử dụng, phần còn lại của cuốn sách sẽ mô tả trên nhiều mô hình khác cho *vị trí* tốt hơn để lưu trữ state bên cạnh function object.
 
-Developers new to JS's mechanisms often think that referencing the function as an object (all functions in JavaScript are objects!) lets you store *state* (values in properties) between function calls. While this is certainly possible and has some limited uses, the rest of the book will expound on many other patterns for *better* places to store state besides the function object.
+Nhưng chúng ta tìm hiểu nó một chút ở đây, để minh hoạ `this` không cho một function tham chiếu lên chính nó như chúng ta thường giả định như thế nào.
 
-But for just a moment, we'll explore that pattern, to illustrate how `this` doesn't let a function get a reference to itself like we might have assumed.
-
-Consider the following code, where we attempt to track how many times a function (`foo`) was called:
+Xem đoạn code dưới đây, chúng ta thử theo dõi bao nhiêu lần function `foo` được gọi:
 
 ```js
 function foo(num) {
 	console.log( "foo: " + num );
 
-	// keep track of how many times `foo` is called
-	this.count++;
+	// theo dõi bao nhiêu lần `foo` được gọi trong this.count++;
 }
 
 foo.count = 0;
@@ -105,7 +102,7 @@ for (i=0; i<10; i++) {
 // foo: 8
 // foo: 9
 
-// how many times was `foo` called?
+// bao nhiêu lần `foo` được gọi?
 console.log( foo.count ); // 0 -- WTF?
 ```
 
