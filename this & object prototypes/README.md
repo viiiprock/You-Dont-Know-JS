@@ -12,7 +12,7 @@
 
 * [Foreword](foreword.md) (by [Nick Berardi](https://github.com/nberardi))
 * [Preface](../preface.md)
-* [Chapter 1: *this* Or That?](ch1.md)
+* [Chapter 1: *this* hay là That?](ch1.md)
 * [Chapter 2: *this* All Makes Sense Now!](ch2.md)
 * [Chapter 3: Objects](ch3.md)
 * [Chapter 4: Mixing (Up) "Class" Objects](ch4.md)

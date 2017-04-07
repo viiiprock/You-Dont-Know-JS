@@ -341,12 +341,13 @@ console.log( a );	// 42
 
 Thứ duy nhất không thể xuất hiện trong comment đa dòng là `*/`, bởi vì nó có thể tạo ra kết comment.
 
-You will definitely want to begin your learning of programming by starting off with the habit of commenting code. Throughout the rest of this chapter, you'll see I use comments to explain things, so do the same in your own practice. Trust me, everyone who reads your code will thank you!
+Bạn sẽ muốn bắt đầu học lập trình bằng cách bắt đầu bằng thói quen comment code. Trong suốt phần còn lại của chương này, bạn sẽ thấy bạn muốn dùng comment để giải thích các thứ, hãy làm tương tự với sự luyện tập của bạn. Tin tôi đi, mọi người đọc code của bạn sẽ cảm ơn bạn!
 
-## Variables
+## Biến
 
-Most useful programs need to track a value as it changes over the course of the program, undergoing different operations as called for by your program's intended tasks.
+Hầu hết chương trình hữu ích đều muốn theo dõi một giá trị và sự thay đổi của chúng suốt chương trình, trải qua những biểu thức được gọi theo dự tính của chương trình.
 
+Cách đơn giản nhất để 
 The easiest way to go about that in your program is to assign a value to a symbolic container, called a *variable* -- so called because the value in this container can *vary* over time as needed.
 
 In some programming languages, you declare a variable (container) to hold a specific type of value, such as `number` or `string`. *Static typing*, otherwise known as *type enforcement*, is typically cited as a benefit for program correctness by preventing unintended value conversions.

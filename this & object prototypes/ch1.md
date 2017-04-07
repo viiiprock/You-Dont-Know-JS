@@ -106,8 +106,9 @@ for (i=0; i<10; i++) {
 console.log( foo.count ); // 0 -- WTF?
 ```
 
-`foo.count` is *still* `0`, even though the four `console.log` statements clearly indicate `foo(..)` was in fact called four times. The frustration stems from a *too literal* interpretation of what `this` (in `this.count++`) means.
+`foo.count` vẫn là `0`, mặc dù qua bốn lần `console.log` đã chỉ ra rõ ràng `foo(..)` là sự kiện được gọi bố lần. Sự thất vọng bắt nguồn từ sự diễn dịch ý nghĩa *quá rõ ràng* của `this` (`this.count++`).
 
+Khi `foo.count = 0` được thực thi, thực chất là nó thêm một thuộc tính `count` vào function object `foo`. Nhưng với `this.count` tham chiếu trong function, `this` không phải là sự kiện trỏ đến toàn bộ function object,
 When the code executes `foo.count = 0`, indeed it's adding a property `count` to the function object `foo`. But for the `this.count` reference inside of the function, `this` is not in fact pointing *at all* to that function object, and so even though the property names are the same, the root objects are different, and confusion ensues.
 
 **Note:** A responsible developer *should* ask at this point, "If I was incrementing a `count` property but it wasn't the one I expected, which `count` *was* I incrementing?" In fact, were she to dig deeper, she would find that she had accidentally created a global variable `count` (see Chapter 2 for *how* that happened!), and it currently has the value `NaN`. Of course, once she identifies this peculiar outcome, she then has a whole other set of questions: "How was it global, and why did it end up `NaN` instead of some proper count value?" (see Chapter 2).
