@@ -347,16 +347,16 @@ Bạn sẽ muốn bắt đầu học lập trình bằng cách bắt đầu bằ
 
 Hầu hết chương trình hữu ích đều muốn theo dõi một giá trị và sự thay đổi của chúng suốt chương trình, trải qua những biểu thức được gọi theo dự tính của chương trình.
 
-Cách đơn giản nhất để 
-The easiest way to go about that in your program is to assign a value to a symbolic container, called a *variable* -- so called because the value in this container can *vary* over time as needed.
+Cách đơn giản nhất để thực hiện điều này là gán một giá trị cho một biểu tượng chứa nó, nó gọi là *biến* -- bởi vì giá trị trong vật chứa này có thể *biến đổi* trong suốt quá trình như mong muốn.
 
-In some programming languages, you declare a variable (container) to hold a specific type of value, such as `number` or `string`. *Static typing*, otherwise known as *type enforcement*, is typically cited as a benefit for program correctness by preventing unintended value conversions.
+Vài ngôn ngữ lập trình, bạn khai báo một biến để chứa một giá trị có kiểu riêng biệt, ví dụ `number` hoặc `string`. `Static typing` hay còn gọi là *kiểu thực thi* thường được dẫn chứng là một lợi ích cho sự chính xác của chương trình bằng cách bảo vệ nó khỏi sự chuyển đổi giá trị không mong muốn.
 
-Other languages emphasize types for values instead of variables. *Weak typing*, otherwise known as *dynamic typing*, allows a variable to hold any type of value at any time. It's typically cited as a benefit for program flexibility by allowing a single variable to represent a value no matter what type form that value may take at any given moment in the program's logic flow.
 
-JavaScript uses the latter approach, *dynamic typing*, meaning variables can hold values of any *type* without any *type* enforcement.
+Một số ngôn ngữ khác nhấn mạnh kiểu cho giá trị thay bì biến. *Weak typing*, hay còn gọi là *dynamic typing*, cho phép một biến có thể giữ bất kỳ kiểu giá trị tại bất kỳ thời điểm nào. Nó thường được dẫn chứng về lợi ích linh động của chương trình bằng cách cho phép một biến đại diện cho một giá trị cho dù nó là kiểu giá trị gì tại bất kỳ thời điểm nào theo chu trình logic của chương trình.
 
-As mentioned earlier, we declare a variable using the `var` statement -- notice there's no other *type* information in the declaration. Consider this simple program:
+JavaScript sử dụng cách tiếp cận thứ hai, *dynamic typing*, nghĩa là biến có thể giữ bất kỳ giá trị của bất kỳ *kiểu* nào mà không bắt buộc kiểu thực thi. 
+
+Như đã giới thiệu, chúng ta khai báo một biến sử dụng biểu thức `var` -- chú ý rằng không có thông tin *kiểu* trong khai báo. Xem một chương trình đơn giản sau:
 
 ```js
 var amount = 99.99;
@@ -365,16 +365,16 @@ amount = amount * 2;
 
 console.log( amount );		// 199.98
 
-// convert `amount` to a string, and
-// add "$" on the beginning
+// chuyển `amount` sang một string, và thêm "$"
+// ở đầu.
 amount = "$" + String( amount );
 
 console.log( amount );		// "$199.98"
 ```
 
-The `amount` variable starts out holding the number `99.99`, and then holds the `number` result of `amount * 2`, which is `199.98`.
+Biến  `amount` ban đầu giữ một number `99.99`, và sau đó giữ kết quả `number` kết quả của `amount * 2` tức là `199.98`.
 
-The first `console.log(..)` command has to *implicitly* coerce that `number` value to a `string` to print it out.
+Lệnh `console.log(..)`  đầu tiên command has to *implicitly* coerce that `number` value to a `string` to print it out.
 
 Then the statement `amount = "$" + String(amount)` *explicitly* coerces the `199.98` value to a `string` and adds a `"$"` character to the beginning. At this point, `amount` now holds the `string` value `"$199.98"`, so the second `console.log(..)` statement doesn't need to do any coercion to print it out.
 

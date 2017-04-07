@@ -75,7 +75,7 @@ Cám dỗ phổ biến đầu tiên là giả định bản thân `this` như m�
 
 Tại sao bạn muốn tham chiếu một function bên trong chính nó? Một số lý do phổ biến là thứ gì đó như kiểu đệ quy (gọi function từ bên trong nó) hoặc có một event handler mà có thể tự huỷ trong lần gọi đầu tiên.
 
-Các lập trình viên mới làm quen với cơ chế của JS thường tham chiếu function như một object (tất cả các function trong JS đều là object!) cho phép bạn lưu trữ *state* (giá trị bên trong thuộc tính) khi gọi function. Mặc dù đeiu62 này có thể là chắc chắn và có một số hạn chế sử dụng, phần còn lại của cuốn sách sẽ mô tả trên nhiều mô hình khác cho *vị trí* tốt hơn để lưu trữ state bên cạnh function object.
+Các lập trình viên mới làm quen với cơ chế của JS thường tham chiếu function như một object (tất cả các function trong JS đều là object!) cho phép bạn lưu trữ *state* (giá trị bên trong thuộc tính) khi gọi function. Mặc dù điều này là chắc chắn và có một số hạn chế sử dụng, phần còn lại của cuốn sách sẽ mô tả trên nhiều mô hình khác cho *vị trí* tốt hơn để lưu trữ state bên cạnh function object.
 
 Nhưng chúng ta tìm hiểu nó một chút ở đây, để minh hoạ `this` không cho một function tham chiếu lên chính nó như chúng ta thường giả định như thế nào.
 
@@ -106,20 +106,20 @@ for (i=0; i<10; i++) {
 console.log( foo.count ); // 0 -- WTF?
 ```
 
-`foo.count` vẫn là `0`, mặc dù qua bốn lần `console.log` đã chỉ ra rõ ràng `foo(..)` là sự kiện được gọi bố lần. Sự thất vọng bắt nguồn từ sự diễn dịch ý nghĩa *quá rõ ràng* của `this` (`this.count++`).
+`foo.count` vẫn là `0`, mặc dù qua bốn lần `console.log` đã chỉ ra rõ ràng `foo(..)` là sự kiện được gọi bốn lần. Sự thất vọng bắt nguồn từ sự diễn dịch ý nghĩa *quá rõ ràng* của `this` (`this.count++`).
 
-Khi `foo.count = 0` được thực thi, thực chất là nó thêm một thuộc tính `count` vào function object `foo`. Nhưng với `this.count` tham chiếu trong function, `this` không phải là sự kiện trỏ đến toàn bộ function object,
-When the code executes `foo.count = 0`, indeed it's adding a property `count` to the function object `foo`. But for the `this.count` reference inside of the function, `this` is not in fact pointing *at all* to that function object, and so even though the property names are the same, the root objects are different, and confusion ensues.
+Khi `foo.count = 0` được thực thi, thực chất là nó thêm một thuộc tính `count` vào function object `foo`. Nhưng với `this.count` tham chiếu trong function, `this` không trỏ đến function object chút nào, và mặc dù tên thuộc tính giống nhau, object gốc lại khác nhau, và sự nhầm lẫn xảy ra.
 
-**Note:** A responsible developer *should* ask at this point, "If I was incrementing a `count` property but it wasn't the one I expected, which `count` *was* I incrementing?" In fact, were she to dig deeper, she would find that she had accidentally created a global variable `count` (see Chapter 2 for *how* that happened!), and it currently has the value `NaN`. Of course, once she identifies this peculiar outcome, she then has a whole other set of questions: "How was it global, and why did it end up `NaN` instead of some proper count value?" (see Chapter 2).
+**Ghi chú:** Một lập trình viên có trách nhiệm sẽ *phải* hỏi ở chỗ này "nếu tôi đã thêm một thuộc tính `count` nhưng nó lại không phải cái tôi mong muốn, vậy `count` mà tôi đã thêm là cái nào?" Thực tế, nếu cô ấy đào sâu thêm, cô sẽ thấy rằng vô tình cô đã tạo một biến toàn cục `count` (xem Chương 2 để biết nó đã xảy ra *như thế nào*), và hiện tại nó có giá trị `NaN`. Tất nhiên, một khi cô ta đã nhận thấy kết quả đặc biệt này, câu ta sẽ có một câu hỏi tổng quan hơn: "Nó toàn cục như thế nào? và tại sao nó lại kết thúc bằng `NaN` thay cho một giá trị đếm được?" (Xem Chương 2)
 
-Instead of stopping at this point and digging into why the `this` reference doesn't seem to be behaving as *expected*, and answering those tough but important questions, many developers simply avoid the issue altogether, and hack toward some other solution, such as creating another object to hold the `count` property:
+Thay vì dừng tại điểm này và đào sâu vào lý do tại sao tham chiếu `this` có vẻ không thoả *kỳ vọng*, và trả lời của những câu hỏi khó nhưng quan trọng này, nhiều lập trình viên đơn giản tránh lỗi này, và khám phá giải pháp khác, như là tạo một object để giữ giá trị `count`:  
 
 ```js
 function foo(num) {
 	console.log( "foo: " + num );
 
-	// keep track of how many times `foo` is called
+	// theo dõi `foo` được gọi bao nhiêu lần
+	
 	data.count++;
 }
 
@@ -139,7 +139,7 @@ for (i=0; i<10; i++) {
 // foo: 8
 // foo: 9
 
-// how many times was `foo` called?
+// bao nhiêu lần `foo` được gọi?
 console.log( data.count ); // 4
 ```
 
