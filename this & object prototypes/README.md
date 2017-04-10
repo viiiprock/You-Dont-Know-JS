@@ -1,4 +1,4 @@
-# You Don't Know JS: *this* & Object Prototypes
+# You Don't Know JS: *this* & Các nguyên mẫu đối tượng (object proptotypes)
 
 <img src="cover.jpg" width="300">
 

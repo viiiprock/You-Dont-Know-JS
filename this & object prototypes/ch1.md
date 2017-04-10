@@ -1,4 +1,4 @@
-# You Don't Know JS: *this* & Object Prototypes
+# You Don't Know JS: *this* & Các nguyên mẫu đối tượng (object proptotypes)
 # Chương 1: `this` hay  That?
 
 Một trong những cơ chế hãi hùng nhất của JavaScript là từ khoá `this`. Nó là một từ khoá nhận dạng đặc biệt tự động xác định trong scope của mọi function, nhưng những gì chính xác nó đề cập đến còn  làm điêu đứng ngay cả JavaScript dev dày dạn.
@@ -85,7 +85,8 @@ Xem đoạn code dưới đây, chúng ta thử theo dõi bao nhiêu lần funct
 function foo(num) {
 	console.log( "foo: " + num );
 
-	// theo dõi bao nhiêu lần `foo` được gọi trong this.count++;
+	// theo dõi bao nhiêu lần `foo` được gọi 
+	this.count++;
 }
 
 foo.count = 0;
@@ -145,36 +146,35 @@ console.log( data.count ); // 4
 
 Trong khi rõ ràng cách tiếp cận này "giải quyết" vấn đề, không may nó lại bỏ qua một vấn đề thực sự -- thiếu hiểu biết ý nghĩa của `this` và cách nó làm việc -- thay vào đó là rút lui vào vùng dễ chịu dưới một cơ chế gần gũi hơn: lexical scope  
 
-**Chú ý:** Lexical scope là một cơ chế tốt và hững dụng; Tôi không coi thường việc sử dụng nó ở  I am not belittling the use of it, by any means (see *"Scope & Closures"* title of this book series). But constantly *guessing* at how to use `this`, and usually being *wrong*, is not a good reason to retreat back to lexical scope and never learn *why* `this` eludes you.
+**Chú ý:** Lexical scope là một cơ chế tốt và hững dụng; Trên mọi phương diện thì tôi không coi thường việc sử dụng nó (Xem *"Scope & Closures"*). Nhưng lúc nào cũng *đoán* sử dụng `this` như thế nào, hoặc thường xuyên hiểu *sai* thì đây không phải là lý do tốt để chuyển qua sử dụng lexical scope và không bao giờ học *vì sao* `this` lẩn tránh bạn.
 
-To reference a function object from inside itself, `this` by itself will typically be insufficient. You generally need a reference to the function object via a lexical identifier (variable) that points at it.
+Để tham chiếu một function object bên trong nó, bản thân `this` không đầy đủ, bạn cần có một tham chiếu đến function object thông qua một định danh gốc (biến) để trỏ vào nó. 
 
-Consider these two functions:
+Xem 2 function dưới đây:
 
 ```js
 function foo() {
-	foo.count = 4; // `foo` refers to itself
+	foo.count = 4; // `foo` tham chiếu đến chính nó
 }
 
 setTimeout( function(){
-	// anonymous function (no name), cannot
-	// refer to itself
+	// function vô danh (không tên), không thể tham chiếu đến chính nó.
 }, 10 );
 ```
 
-In the first function, called a "named function", `foo` is a reference that can be used to refer to the function from inside itself.
+Trong function thứ nhất, gọi là "function có tên", `foo` là một tham chiếu có thể sử dụng để tham chiếu đến function bên trong nó.
 
-But in the second example, the function callback passed to `setTimeout(..)` has no name identifier (so called an "anonymous function"), so there's no proper way to refer to the function object itself.
+Nhưng trong ví dụ thứ 2, function callback qua `setTimeout(..)` không có nhận dạng tên (còn gọi là "function vô danh"), do đó không có cách nào tham chiếu đến function object bởi chính nó.
 
-**Note:** The old-school but now deprecated and frowned-upon `arguments.callee` reference inside a function *also* points to the function object of the currently executing function. This reference is typically the only way to access an anonymous function's object from inside itself. The best approach, however, is to avoid the use of anonymous functions altogether, at least for those which require a self-reference, and instead use a named function (expression). `arguments.callee` is deprecated and should not be used.
+**Ghi chú:** Có một phương thức cũ bị bãi bỏ là `arguments.callee` tham chiếu bên trong một function *cũng* trỏ về function object của function đang được thực thi. Các tham chiếu này thường là cách duy nhất để tiếp cận một function object vô danh bên trong nó. Tuy nhiên, cách tiếp cận tốt nhất là tránh sử dụng chức năng ẩn danh hoàn toàn, ít nhất là đối với các function cần một tham chiếu chính nó, thay vào đó là tạo function có tên (biểu thức). `arguments.callee` không được sử dụng nữa và cũng không nên sử dụng.
 
-So another solution to our running example would have been to use the `foo` identifier as a function object reference in each place, and not use `this` at all, which *works*:
+Do đó một giải pháp khác cho ví dụ của chúng ta là sử dụng nhận diện `foo` như một tham chiếu function object tại mỗi vị trí, và không sử dụng `this` nữa, nó sẽ hoạt động.
 
 ```js
 function foo(num) {
 	console.log( "foo: " + num );
 
-	// keep track of how many times `foo` is called
+	// Kiểm tra bao nhiêu lần `foo` được gọi 
 	foo.count++;
 }
 
@@ -192,21 +192,22 @@ for (i=0; i<10; i++) {
 // foo: 8
 // foo: 9
 
-// how many times was `foo` called?
+// Bao nhiêu lần `foo` được gọi?
 console.log( foo.count ); // 4
 ```
 
-However, that approach similarly side-steps *actual* understanding of `this` and relies entirely on the lexical scoping of variable `foo`.
+Tuy nhiên, cách tiếp cận này các bước tương tự *thực sự* hiểu `this` và dựa hoàn toàn vào lexical scope của biến `foo`.
 
-Yet another way of approaching the issue is to force `this` to actually point at the `foo` function object:
+Cách khác để tiếp cận vấn đề là buộc `this` thực sự trỏ vào `foo` function object:
+
 
 ```js
 function foo(num) {
 	console.log( "foo: " + num );
 
-	// keep track of how many times `foo` is called
-	// Note: `this` IS actually `foo` now, based on
-	// how `foo` is called (see below)
+	// theo dõi bao nhiêu lần `foo` được gọi
+	// Ghi chú: giờ `this` thực sự là `foo`, dựa vào
+	// `foo` được gọi như thế nào (xem bên dưới)
 	this.count++;
 }
 
@@ -216,8 +217,8 @@ var i;
 
 for (i=0; i<10; i++) {
 	if (i > 5) {
-		// using `call(..)`, we ensure the `this`
-		// points at the function object (`foo`) itself
+		// sử dụng `call(..)`, chúng ta chắc chắn `this`
+		// tự nó trỏ vào function object (`foo`)
 		foo.call( foo, i );
 	}
 }
@@ -226,19 +227,19 @@ for (i=0; i<10; i++) {
 // foo: 8
 // foo: 9
 
-// how many times was `foo` called?
+// bao nhiêu lần `foo` được gọi?
 console.log( foo.count ); // 4
 ```
 
-**Instead of avoiding `this`, we embrace it.** We'll explain in a little bit *how* such techniques work much more completely, so don't worry if you're still a bit confused!
+**Thay vì tránh né `this`, chúng ta bao lấy nó.** Chúng ta sẽ giải thích các kỹ thuật này hoạt động tốt hơn như thế nào, vì vậy đừng lo lắng nếu bạn vẫn còn một chút lo lắng!
 
-### Its Scope
+### Phạm vi (Scope) của nó
 
-The next most common misconception about the meaning of `this` is that it somehow refers to the function's scope. It's a tricky question, because in one sense there is some truth, but in the other sense, it's quite misguided.
+Quan niệm sai lầm phổ biến tiếp theo là ý nghĩa của `this` là nó bằng cách nào đó tham chiếu đến function scope. Đây là một câu hỏi khéo, vì xét về mặt nào đó nó là đúng, nhưng ở khía cạnh khác nó là sai.
 
-To be clear, `this` does not, in any way, refer to a function's **lexical scope**. It is true that internally, scope is kind of like an object with properties for each of the available identifiers. But the scope "object" is not accessible to JavaScript code. It's an inner part of the *Engine*'s implementation.
+Một cách rõ ràng thì `this` không tham chiếu đến một **lexical scope** của function. Đúng là xét về nội bộ, scope là một dạng giống như object có thuộc tính cho mỗi đối tượng định danh sẵn có. Nhưng scope "object" không truy cập vào code JavaScript. Nó là một phần bên trong của sự thực thi của *Engine*. 
 
-Consider code which attempts (and fails!) to cross over the boundary and use `this` to implicitly refer to a function's lexical scope:
+Xem đoạn code đã cố (và thất bại!) vượt qua ranh giới và sử dụng `this` để ngầm tham chiếu vào lexical scope của function: 
 
 ```js
 function foo() {
@@ -253,7 +254,9 @@ function bar() {
 foo(); //undefined
 ```
 
-There's more than one mistake in this snippet. While it may seem contrived, the code you see is a distillation of actual real-world code that has been exchanged in public community help forums. It's a wonderful (if not sad) illustration of just how misguided `this` assumptions can be.
+Có nhiều sai sót trong đoạn code này. Trong khi có vẻ như nó được ngoại lệ, đoạn code bạn thấy là sự trích tách từ một đoạn code thực tế được trao đổi trong các diễn đàn. Nó là một minh hoạ tuyệt vời (nếu không buồn) cho việc hiểu sai `this` cho giả định được đặt ra.
+
+Đầu tiên, một sự cố gắng được tạo ra để tham chiếu `bar()` function thông qua `this.bar()`. Hầu như chắc chắn rằng *vô tình* nó hoạt động, nhưng chúng ta sẽ giải thích ngắn gọn *vì sao*. Cách tự nhiên nhất là `bar()` được gọi đã bỏ qua sự dẫn dắt của `this` và đã tạo ra một tham chiếu đến  
 
 Firstly, an attempt is made to reference the `bar()` function via `this.bar()`. It is almost certainly an *accident* that it works, but we'll explain the *how* of that shortly. The most natural way to have invoked `bar()` would have been to omit the leading `this.` and just make a lexical reference to the identifier.
 
