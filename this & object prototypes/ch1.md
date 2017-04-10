@@ -2,9 +2,9 @@
 # Chương 1: `this` hay  That?
 
 Một trong những cơ chế hãi hùng nhất của JavaScript là từ khoá `this`. Nó là một từ khoá nhận dạng đặc biệt tự động xác định trong scope của mọi function, nhưng những gì chính xác nó đề cập đến còn  làm điêu đứng ngay cả JavaScript dev dày dạn.
-> Any sufficiently *advanced* technology is indistinguishable from magic. -- Arthur C. Clarke
+> Không phân biệt được công nghệ *tiên tiến* với ma thuật. -- Arthur C. Clarke
 
-Cơ chế của `this` không hẳn ghê gớm như vậy, nhưng các lập trình viên thường diễn giải trong tâm trí bằng cách thêm từ "phức tạp" hoặc "mơ hồ", và không có câu hỏi nào ngoài việc hiểu rõ ràng, `this` có thể xem là sự huyền diệu trong sự hoang của bạn. 
+Cơ chế của `this` không hẳn ghê gớm như vậy, nhưng các lập trình viên thường diễn giải trong tâm trí bằng cách thêm từ "phức tạp" hoặc "mơ hồ", và không có câu hỏi nào ngoài việc hiểu rõ ràng, `this` có thể xem là sự huyền diệu trong sự hoang mang của bạn. 
 
 **Ghi chú** Từ `this` là một đại từ trong đàm luận chung. Vì vậy, nó có thể rất khó, đặc biệt là bằng lời nói, để xác định chúng ta sử dụng `this` như một đại từ hoặc sử dụng nó để diễn đạt đến từ khoá xác định. Để rõ ràng, tôi sẽ sử dụng `this` như là một từ khoá đặc biệt "this" hay *this* hoặc nếu không thì this. 
 
@@ -77,7 +77,7 @@ Tại sao bạn muốn tham chiếu một function bên trong chính nó? Một 
 
 Các lập trình viên mới làm quen với cơ chế của JS thường tham chiếu function như một object (tất cả các function trong JS đều là object!) cho phép bạn lưu trữ *state* (giá trị bên trong thuộc tính) khi gọi function. Mặc dù điều này là chắc chắn và có một số hạn chế sử dụng, phần còn lại của cuốn sách sẽ mô tả trên nhiều mô hình khác cho *vị trí* tốt hơn để lưu trữ state bên cạnh function object.
 
-Nhưng chúng ta tìm hiểu nó một chút ở đây, để minh hoạ `this` không cho một function tham chiếu lên chính nó như chúng ta thường giả định như thế nào.
+Ở đây chúng ta tìm hiểu vấn đề này một chút, để minh hoạ `this` không cho một function tham chiếu lên chính nó như chúng ta thường giả định như thế nào.
 
 Xem đoạn code dưới đây, chúng ta thử theo dõi bao nhiêu lần function `foo` được gọi:
 
@@ -256,18 +256,17 @@ foo(); //undefined
 
 Có nhiều sai sót trong đoạn code này. Trong khi có vẻ như nó được ngoại lệ, đoạn code bạn thấy là sự trích tách từ một đoạn code thực tế được trao đổi trong các diễn đàn. Nó là một minh hoạ tuyệt vời (nếu không buồn) cho việc hiểu sai `this` cho giả định được đặt ra.
 
-Đầu tiên, một sự cố gắng được tạo ra để tham chiếu `bar()` function thông qua `this.bar()`. Hầu như chắc chắn rằng *vô tình* nó hoạt động, nhưng chúng ta sẽ giải thích ngắn gọn *vì sao*. Cách tự nhiên nhất là `bar()` được gọi đã bỏ qua sự dẫn dắt của `this` và đã tạo ra một tham chiếu đến  
+Đầu tiên, một sự cố gắng được tạo ra để tham chiếu `bar()` function thông qua `this.bar()`. Hầu như chắc chắn rằng *vô tình* nó hoạt động, nhưng chúng ta sẽ giải thích ngắn gọn *vì sao*. Cách tự nhiên nhất là `bar()` được gọi đã bỏ qua sự dẫn dắt của `this` và đã tạo ra một lexical tham chiếu sự nhận diện 
 
-Firstly, an attempt is made to reference the `bar()` function via `this.bar()`. It is almost certainly an *accident* that it works, but we'll explain the *how* of that shortly. The most natural way to have invoked `bar()` would have been to omit the leading `this.` and just make a lexical reference to the identifier.
+Tuy nhiên, lập trình viên nào đã viết đoạn code đang cố gắng sử dụng `this` để tạo ra một cái cầu giữa các lexical scope của `foo()` và `bar()`, từ đó `bar()` có thể tiếp cận biến `a` trong scope của `foo()`. **Chẳng có cái cầu xảy ra** Bạn không thể sử dụng `this` để tham chiếu và tìm một thứ gì đó trong lexical scope. Hoàn toàn không thể. 
 
-However, the developer who writes such code is attempting to use `this` to create a bridge between the lexical scopes of `foo()` and `bar()`, so that `bar()` has access to the variable `a` in the inner scope of `foo()`. **No such bridge is possible.** You cannot use a `this` reference to look something up in a lexical scope. It is not possible.
+Mỗi khi bạn cảm thấy mình muốn pha trộn việc tìm kiếm với `this`, luôn nhớ rằng: *không có cầu nào hết*
 
-Every time you feel yourself trying to mix lexical scope look-ups with `this`, remind yourself: *there is no bridge*.
+## `this` là gì?
 
-## What's `this`?
+Với các giả định sai sót khác nhau, giờ chúng ta chuyển qua việc chú ý cơ chế hoạt động thực sự của `this`. 
 
-Having set aside various incorrect assumptions, let us now turn our attention to how the `this` mechanism really works.
-
+Chúng ta đã từng nói `this` không phải là một author-time binding mà là một runtime binding. 
 We said earlier that `this` is not an author-time binding but a runtime binding. It is contextual based on the conditions of the function's invocation. `this` binding has nothing to do with where a function is declared, but has instead everything to do with the manner in which the function is called.
 
 When a function is invoked, an activation record, otherwise known as an execution context, is created. This record contains information about where the function was called from (the call-stack), *how* the function was invoked, what parameters were passed, etc. One of the properties of this record is the `this` reference which will be used for the duration of that function's execution.
