@@ -1,4 +1,4 @@
-# You Don't Know JS: Async & Performance
+# You Don't Know JS: Bất đồng bộ & hiệu suất
 
 <img src="cover.jpg" width="300">
 
@@ -12,12 +12,12 @@
 
 * [Foreword](foreword.md) (by [Jake Archibald](http://jakearchibald.com))
 * [Preface](../preface.md)
-* [Chapter 1: Asynchrony: Now & Later](ch1.md)
-* [Chapter 2: Callbacks](ch2.md)
-* [Chapter 3: Promises](ch3.md)
-* [Chapter 4: Generators](ch4.md)
-* [Chapter 5: Program Performance](ch5.md)
-* [Chapter 6: Benchmarking & Tuning](ch6.md)
+* [Chương 1: Bất đồng bộ: Bây giờ & sau đó](ch1.md)
+* [Chương 2: Callbacks](ch2.md)
+* [Chương 3: Promises](ch3.md)
+* [Chương 4: Generators](ch4.md)
+* [Chương 5: Hiệu suất chương trình](ch5.md)
+* [Chương 6: Chuẩn & chỉnh](ch6.md)
 * [Appendix A: Library: asynquence](apA.md)
 * [Appendix B: Advanced Async Patterns](apB.md)
 * [Appendix C: Thank You's!](apC.md)
