@@ -1,17 +1,17 @@
 # You Don't Know JS: Bất đồng bộ & hiệu suất
 # Chương 1: Bất đồng bộ: Bây giờ & sau đó
 
-Một trong những sai lầm quan trong và thường xuyên nhất trong lập trình với một ngôn ngữ như JavaScript là làm thế nào để diễn đạt và vận dụng xử lý của chương trình trải dài suốt quá trình. 
+Một trong những sai lầm quan trọng và thường xuyên nhất trong lập trình với một ngôn ngữ như JavaScript là: làm thế nào để diễn đạt và vận dụng xử lý của chương trình trải dài suốt quá trình. 
 
-Nó không chỉ xảy ra khi bắt đầu của vòng lặp `for` hay kết thúc vòng lặp `for`, cái mà sẽ chiếm một khoảng thời gian để hoàn thành (micro giây hay mili giây). Nó là những gì xảy ra khi chương trình của bạn chạy ngay *bây giờ*, một số phần của chương trình sẽ chạy *sau đó* -- khoảng trống giữa *bây giờ* và *sau đó* là nơi chương trình của bạn không chủ động thực thi.
+Nó không chỉ xảy ra khi bắt đầu của vòng lặp `for` hay kết thúc vòng lặp `for`, cái mà sẽ chiếm một khoảng thời gian (micro giây hay mili giây) để hoàn thành. Mà nó còn là những gì xảy ra khi chương trình của bạn chạy ngay *bây giờ*, tiếp đó một số phần của chương trình sẽ chạy *sau đó* -- khoảng trống giữa *bây giờ* và *sau đó* là nơi chương trình của bạn không chủ động thực thi.
 
 Trên thực tế thì không có chương trình nào (đặc biệt là JS) được viết để quản lý khoảng trống này, nó có thể là chờ dữ liệu đầu vào của người dùng, gọi dữ liệu từ database hoặc là file hệ thống, gửi dữ liệu qua lại mạng và chờ phản hồi, hoặc xử lý một nhiệm vụ lặp lại trong một thời gian tăng dần đều cố định (chẳng hạn như animation). Trong vài hương như vậy, chương trình của bạn phải quản lý state xuyên suốt khoảng trống của thời gian thực hiện. Như một câu nói phổ biến trong ga điện ngầm: "chú ý khoảng trống"
 
 Mối quan hệ giữa *bây giờ* và *sau đó* trong chương trình của bạn là trái tim của chương trình xử lý bất đồng bộ. 
 
-Asynchronous programming has been around since the beginning of JS, for sure. But most JS developers have never really carefully considered exactly how and why it crops up in their programs, or explored various *other* ways to handle it. The *good enough* approach has always been the humble callback function. Many to this day will insist that callbacks are more than sufficient.
+Xử lý bất động bộ đã xuất hiện từ thuở khai sinh ra JS. Nhưng hầu hết các lập trình viên JS chưa bao giờ thực sự thận trọng trong việc xác định chính xác như thế nào và tại sao nó được cắt xén, hoặc khám phá vài cách khác nhau để xử lý nó trong chương trình của họ. Việc tiếp cận *đủ tốt* luôn chỉ là một hàm callback khiêm tốn. Ngày nay, vẫn còn nhiều người cho rằng callback là quá đủ rồi. 
 
-But as JS continues to grow in both scope and complexity, to meet the ever-widening demands of a first-class programming language that runs in browsers and servers and every conceivable device in between, the pains by which we manage asynchrony are becoming increasingly crippling, and they cry out for approaches that are both more capable and more reason-able.
+Nhưng khi JS tiếp tục phát triển cả trong phạm vi của nó và sự phức hợp, sự đáp ứng nhu cầu ngày càng mở rộng của ngôn ngữ lập trình hạng nhất chạy trên browser và server và tất cả thiết bị nằm giữa có thể tưởng tượng ra khiến nỗi đau khi chúng ta quản lý bất đồng bộ cũng tăng lên ngày càng lớn, do đó cần có một cách tiếp cận hợp lý hơn. 
 
 While this all may seem rather abstract right now, I assure you we'll tackle it more completely and concretely as we go on through this book. We'll explore a variety of emerging techniques for async JavaScript programming over the next several chapters.
 
