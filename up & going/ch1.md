@@ -374,9 +374,10 @@ console.log( amount );		// "$199.98"
 
 Biến  `amount` ban đầu giữ một number `99.99`, và sau đó giữ kết quả `number` kết quả của `amount * 2` tức là `199.98`.
 
-Lệnh `console.log(..)`  đầu tiên command has to *implicitly* coerce that `number` value to a `string` to print it out.
+Lệnh `console.log(..)` đầu tiên *ngầm* buộc giá trị `number` thành `string` để in ra.
 
-Then the statement `amount = "$" + String(amount)` *explicitly* coerces the `199.98` value to a `string` and adds a `"$"` character to the beginning. At this point, `amount` now holds the `string` value `"$199.98"`, so the second `console.log(..)` statement doesn't need to do any coercion to print it out.
+Tiếp đó biểu thức `amount = "$" + String(amount)` *rõ ràng* ép giá trị `199.98` thành một `string` và thêm ký tự `"$"` đằng trước. Tại đây, `amount` giờ giữ 
+character to the beginning. At this point, `amount` now holds the `string` value `"$199.98"`, so the second `console.log(..)` statement doesn't need to do any coercion to print it out.
 
 JavaScript developers will note the flexibility of using the `amount` variable for each of the `99.99`, `199.98`, and the `"$199.98"` values. Static-typing enthusiasts would prefer a separate variable like `amountStr` to hold the final `"$199.98"` representation of the value, because it's a different type.
 

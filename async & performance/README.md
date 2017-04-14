@@ -12,7 +12,7 @@
 
 * [Foreword](foreword.md) (by [Jake Archibald](http://jakearchibald.com))
 * [Preface](../preface.md)
-* [Chương 1: Bất đồng bộ: Bây giờ & sau đó](ch1.md)
+* [Chương 1: Bất đồng bộ: Now & later](ch1.md)
 * [Chương 2: Callbacks](ch2.md)
 * [Chương 3: Promises](ch3.md)
 * [Chương 4: Generators](ch4.md)

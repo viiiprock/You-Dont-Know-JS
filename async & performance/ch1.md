@@ -1,13 +1,13 @@
 # You Don't Know JS: Bất đồng bộ & hiệu suất
-# Chương 1: Bất đồng bộ: Bây giờ & sau đó
+# Chương 1: Bất đồng bộ: Now & later
 
 Một trong những sai lầm quan trọng và thường xuyên nhất trong lập trình với một ngôn ngữ như JavaScript là: làm thế nào để diễn đạt và vận dụng xử lý của chương trình trải dài suốt quá trình. 
 
-Nó không chỉ xảy ra khi bắt đầu của vòng lặp `for` hay kết thúc vòng lặp `for`, cái mà sẽ chiếm một khoảng thời gian (micro giây hay mili giây) để hoàn thành. Mà nó còn là những gì xảy ra khi chương trình của bạn chạy ngay *bây giờ*, tiếp đó một số phần của chương trình sẽ chạy *sau đó* -- khoảng trống giữa *bây giờ* và *sau đó* là nơi chương trình của bạn không chủ động thực thi.
+Nó không chỉ xảy ra khi bắt đầu của vòng lặp `for` hay kết thúc vòng lặp `for`, cái mà sẽ chiếm một khoảng thời gian (micro giây hay mili giây) để hoàn thành. Mà nó còn là những gì xảy ra khi chương trình của bạn chạy ngay *now*, tiếp đó một số phần của chương trình sẽ chạy *later* -- khoảng trống giữa *now* và *later* là nơi chương trình của bạn không chủ động thực thi.
 
 Trên thực tế thì không có chương trình nào (đặc biệt là JS) được viết để quản lý khoảng trống này, nó có thể là chờ dữ liệu đầu vào của người dùng, gọi dữ liệu từ database hoặc là file hệ thống, gửi dữ liệu qua lại mạng và chờ phản hồi, hoặc xử lý một nhiệm vụ lặp lại trong một thời gian tăng dần đều cố định (chẳng hạn như animation). Trong vài hương như vậy, chương trình của bạn phải quản lý state xuyên suốt khoảng trống của thời gian thực hiện. Như một câu nói phổ biến trong ga điện ngầm: "chú ý khoảng trống"
 
-Mối quan hệ giữa *bây giờ* và *sau đó* trong chương trình của bạn là trái tim của chương trình xử lý bất đồng bộ. 
+Mối quan hệ giữa *now* và *later* trong chương trình của bạn là trái tim của chương trình xử lý bất đồng bộ. 
 
 Xử lý bất động bộ đã xuất hiện từ thuở khai sinh ra JS. Nhưng hầu hết các lập trình viên JS chưa bao giờ thực sự thận trọng trong việc xác định chính xác như thế nào và tại sao nó được cắt xén, hoặc khám phá vài cách khác nhau để xử lý nó trong chương trình của họ. Việc tiếp cận *đủ tốt* luôn chỉ là một hàm callback khiêm tốn. Ngày nay, vẫn còn nhiều người cho rằng callback là quá đủ rồi. 
 
@@ -19,9 +19,9 @@ Nhưng trước khi chúng ta đến đó, chúng ta cần hiểu sâu hơn bấ
 
 ## Một chương trình phân thành nhiều đoạn
 
-Bạn có thể viết chương trình JS trong một file *.js*, nhưng chương trình của bạn hầu như chắc chắn là gồm nhiều phần, chỉ có một trong số đó sẽ xử lý *hiện tại* và phần còn lại sẽ xử lý *sau đó*. Đơn vị thông thường của một phần là `function`.
+Bạn có thể viết chương trình JS trong một file *.js*, nhưng chương trình của bạn hầu như chắc chắn là gồm nhiều phần, chỉ có một trong số đó sẽ xử lý *now* và phần còn lại sẽ xử lý *later*. Đơn vị thông thường của một phần là `function`.
 
-Vấn đề mà hầu hết các lập trình viên mới làm quen với JS có vẻ thường gặp là cái *sau đó* không diễn ra nghiêm ngặt và lập tức sau *hiện tại*. Nói cách khác, theo định nghĩa thì các phần sẽ không thể hoàn thành *hiện tại* mà sẽ hoàn thành không đồng bộ, và chúng ta không thể chặn hành vi của nó như mong muốn.
+Vấn đề mà hầu hết các lập trình viên mới làm quen với JS có vẻ thường gặp là cái *later* không diễn ra nghiêm ngặt và lập tức sau *now*. Nói cách khác, theo định nghĩa thì các phần sẽ không thể hoàn thành *now* mà sẽ hoàn thành không đồng bộ, và chúng ta không thể chặn hành vi của nó như mong muốn.
 
 Xem:
 
@@ -35,9 +35,9 @@ console.log( data );
 
 Bạn để ý rằng Ajax request không hoàn thành đồng bộ, có nghĩa là `ajax(...)` chưa có giá trị nào trả về để gán vào biến `data`. Nếu `ajax(...)` có thể khoá cho đến khi có response, và sau đó việc gán `data = ...` có thể làm việc tốt.
 
-Như đó không phải cách chúng ta làm với Ajax. Chúng ta thực hiện một Ajax request *hiện tại*, và chúng ta sẽ không có kết quả trả về cho đến *sau đó*.
+Như đó không phải cách chúng ta làm với Ajax. Chúng ta thực hiện một Ajax request *now*, và chúng ta sẽ không có kết quả trả về cho đến *later*.
 
-Cách "đợi" đơn giản nhất (nhưng không phải duy nhất, hoặc không phải tốt nhất! ) từ *hiện tại* đến *sau đó* là sử dụng một function, thường gọi là callback function:
+Cách "đợi" đơn giản nhất (nhưng không phải duy nhất, hoặc không phải tốt nhất! ) từ *now* đến *later* là sử dụng một function, thường gọi là callback function:
 
 
 
@@ -70,7 +70,7 @@ var answer = now();
 setTimeout( later, 1000 ); // Meaning of life: 42
 ```
 
-There are two chunks to this program: the stuff that will run *now*, and the stuff that will run *later*. It should be fairly obvious what those two chunks are, but let's be super explicit:
+Có 2 phần trong chương trình này: đoạn chạy *now*, và đoạn sẽ chạy *later*. Nó rõ ràng là 2 khối rồi nhưng rõ ràng hơn nữa thì: 
 
 Now:
 ```js
@@ -91,7 +91,7 @@ answer = answer * 2;
 console.log( "Meaning of life:", answer );
 ```
 
-The *now* chunk runs right away, as soon as you execute your program. But `setTimeout(..)` also sets up an event (a timeout) to happen *later*, so the contents of the `later()` function will be executed at a later time (1,000 milliseconds from now).
+Khối *now* chạy ngay lập tức, ngay khi bạn thực thi chương trình. Nhưng `setTimeout(..)` cũng tạo ra một sự kiện (timeout) để nó xảy ra *later*, do đó nội dung của `later()` function sẽ thực thi ở thời điểm chậm hơn (1000 mili giây từ now)
 
 Any time you wrap a portion of code into a `function` and specify that it should be executed in response to some event (timer, mouse click, Ajax response, etc.), you are creating a *later* chunk of your code, and thus introducing asynchrony to your program.
 
