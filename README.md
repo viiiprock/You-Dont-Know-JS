@@ -1,8 +1,9 @@
-Dịch để học và hiểu sâu 
+Dịch để học và hiểu sâu.
+Một số từ ngữ tôi không dịch vì để nguyên giúp ý nghĩa của nó có hàm ý tốt hơn.
 
 # You Don't Know JS (book series)
 
-Ai thích sách giấy của tác giả thì mua tại link này.
+Ai thích sách giấy của tác giả thì mua tại link này. 
 
 <a href="http://shop.oreilly.com/product/0636920039303.do"><img src="up %26 going/cover.jpg" width="75"></a>&nbsp;
 <a href="http://shop.oreilly.com/product/0636920026327.do"><img src="scope %26 closures/cover.jpg" width="75"></a>&nbsp;

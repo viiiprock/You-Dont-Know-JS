@@ -13,46 +13,47 @@ Xử lý bất động bộ đã xuất hiện từ thuở khai sinh ra JS. Như
 
 Nhưng khi JS tiếp tục phát triển cả trong phạm vi của nó và sự phức hợp, sự đáp ứng nhu cầu ngày càng mở rộng của ngôn ngữ lập trình hạng nhất chạy trên browser và server và tất cả thiết bị nằm giữa có thể tưởng tượng ra khiến nỗi đau khi chúng ta quản lý bất đồng bộ cũng tăng lên ngày càng lớn, do đó cần có một cách tiếp cận hợp lý hơn. 
 
-While this all may seem rather abstract right now, I assure you we'll tackle it more completely and concretely as we go on through this book. We'll explore a variety of emerging techniques for async JavaScript programming over the next several chapters.
+Giờ đây khi tất những điều này xem chừng có vẻ trừu tượng, tôi chắc chắn với bạn chúng ta sẽ giải quyết nó hoàn toàn và cụ thể thông qua cuốn sách này. Chúng ta sẽ khám phá nhiều kỹ thuật trong lập trình bất đồng bộ JavaScript trong các chương tiếp theo. 
 
-But before we can get there, we're going to have to understand much more deeply what asynchrony is and how it operates in JS.
+Nhưng trước khi chúng ta đến đó, chúng ta cần hiểu sâu hơn bất đồng bộ là gì và cách nó hoạt động trong JS.
 
-## A Program in Chunks
+## Một chương trình phân thành nhiều đoạn
 
-You may write your JS program in one *.js* file, but your program is almost certainly comprised of several chunks, only one of which is going to execute *now*, and the rest of which will execute *later*. The most common unit of *chunk* is the `function`.
+Bạn có thể viết chương trình JS trong một file *.js*, nhưng chương trình của bạn hầu như chắc chắn là gồm nhiều phần, chỉ có một trong số đó sẽ xử lý *hiện tại* và phần còn lại sẽ xử lý *sau đó*. Đơn vị thông thường của một phần là `function`.
 
-The problem most developers new to JS seem to have is that *later* doesn't happen strictly and immediately after *now*. In other words, tasks that cannot complete *now* are, by definition, going to complete asynchronously, and thus we will not have blocking behavior as you might intuitively expect or want.
+Vấn đề mà hầu hết các lập trình viên mới làm quen với JS có vẻ thường gặp là cái *sau đó* không diễn ra nghiêm ngặt và lập tức sau *hiện tại*. Nói cách khác, theo định nghĩa thì các phần sẽ không thể hoàn thành *hiện tại* mà sẽ hoàn thành không đồng bộ, và chúng ta không thể chặn hành vi của nó như mong muốn.
 
-Consider:
+Xem:
 
 ```js
-// ajax(..) is some arbitrary Ajax function given by a library
+// ajax(..) là một số hàm Ajax tuỳ ý được cung cấp bởi thư viện
 var data = ajax( "http://some.url.1" );
 
 console.log( data );
-// Oops! `data` generally won't have the Ajax results
+// Oops! `data` không có kết quả Ajax
 ```
 
-You're probably aware that standard Ajax requests don't complete synchronously, which means the `ajax(..)` function does not yet have any value to return back to be assigned to `data` variable. If `ajax(..)` *could* block until the response came back, then the `data = ..` assignment would work fine.
+Bạn để ý rằng Ajax request không hoàn thành đồng bộ, có nghĩa là `ajax(...)` chưa có giá trị nào trả về để gán vào biến `data`. Nếu `ajax(...)` có thể khoá cho đến khi có response, và sau đó việc gán `data = ...` có thể làm việc tốt.
 
-But that's not how we do Ajax. We make an asynchronous Ajax request *now*, and we won't get the results back until *later*.
+Như đó không phải cách chúng ta làm với Ajax. Chúng ta thực hiện một Ajax request *hiện tại*, và chúng ta sẽ không có kết quả trả về cho đến *sau đó*.
 
-The simplest (but definitely not only, or necessarily even best!) way of "waiting" from *now* until *later* is to use a function, commonly called a callback function:
+Cách "đợi" đơn giản nhất (nhưng không phải duy nhất, hoặc không phải tốt nhất! ) từ *hiện tại* đến *sau đó* là sử dụng một function, thường gọi là callback function:
+
+
 
 ```js
-// ajax(..) is some arbitrary Ajax function given by a library
 ajax( "http://some.url.1", function myCallbackFunction(data){
 
-	console.log( data ); // Yay, I gots me some `data`!
+	console.log( data ); // Yay, chúng ta có `data`!
 
 } );
 ```
 
-**Warning:** You may have heard that it's possible to make synchronous Ajax requests. While that's technically true, you should never, ever do it, under any circumstances, because it locks the browser UI (buttons, menus, scrolling, etc.) and prevents any user interaction whatsoever. This is a terrible idea, and should always be avoided.
+**Chú ý:** Bạn có thể tử nghe rằng có cách để thực hiện đồng bộ Ajax request. Mặc dù là kỹ thuật đó có, bạn cũng không bao giờ, đừng bao giờ làm chuyện đó trong mọi hoàn cảnh, bởi vì nó khoá UI trình duyệt (buttons, menus, scrolling,...) và chặn mọi tương tác người dùng. Đó là một ý tưởng tệ lậu vô cũng, và luôn phải tránh. 
 
-Before you protest in disagreement, no, your desire to avoid the mess of callbacks is *not* justification for blocking, synchronous Ajax.
+Trước khi bạn phản đối không đồng ý, à không, bạn mong muốn né tránh cái đống callback không biện minh cho việc chặn Ajax đồng bộ.
 
-For example, consider this code:
+Ví dụ đoạn code sau:
 
 ```js
 function now() {
