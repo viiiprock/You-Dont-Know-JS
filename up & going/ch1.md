@@ -710,22 +710,22 @@ function calculateFinalPurchaseAmount(amt) {
 }
 ```
 
-The `TAX_RATE` constant (variable) is accessible from inside the `calculateFinalPurchaseAmount(..)` function, even though we didn't pass it in, because of lexical scope.
+Hằng (biến) `TAX_RATE` có thể truy cập từ bên trong function `calculateFinalPurchaseAmount(..)`, vì là lexical scope ta không cần gán nó vào trong.
 
-**Note:** For more information about lexical scope, see the first three chapters of the *Scope & Closures* title of this series.
+**Ghi chú:** Nội dung về lexical scope, xem 3 chương đầu của *Scope & Closures*.
 
-## Practice
+## Luyện tập
 
-There is absolutely no substitute for practice in learning programming. No amount of articulate writing on my part is alone going to make you a programmer.
+Không có sự thay thế nào bằng việc thực hành trong lập trình. Cũng không có nội dung rõ ràng nào trong bài viết của tôi biến bạn trở thành lập trình viên.
 
-With that in mind, let's try practicing some of the concepts we learned here in this chapter. I'll give the "requirements," and you try it first. Then consult the code listing below to see how I approached it.
+Bạn hãy ghi nhớ, hãy luyên tập các nguyên lý mà chúng ta đã học trong chương này. Tôi sẽ cho bạn vài "yêu cầu" và bạn thử trước. Sau đó tìm hiểu danh sách code dưới đây để biết cách mà tôi đã tiếp cận chúng.
 
-* Write a program to calculate the total price of your phone purchase. You will keep purchasing phones (hint: loop!) until you run out of money in your bank account. You'll also buy accessories for each phone as long as your purchase amount is below your mental spending threshold.
-* After you've calculated your purchase amount, add in the tax, then print out the calculated purchase amount, properly formatted.
-* Finally, check the amount against your bank account balance to see if you can afford it or not.
-* You should set up some constants for the "tax rate," "phone price," "accessory price," and "spending threshold," as well as a variable for your "bank account balance.""
-* You should define functions for calculating the tax and for formatting the price with a "$" and rounding to two decimal places.
-* **Bonus Challenge:** Try to incorporate input into this program, perhaps with the `prompt(..)` covered in "Input" earlier. You may prompt the user for their bank account balance, for example. Have fun and be creative!
+* Viết một chương trình để tính toán tổng giá điện thoại bạn đã mua. Bạn sẽ tiếp tục mua điện thoại (gợi ý: vòng lặp!) cho đến khi bạn hết tiền trong tài khoản. Bạn đồng thời cũng sẽ mua phụ kiện cho mỗi cái điện thoại miễn là số tiền dưới ngưỡng chi tiêu.
+* Sau khi bạn tính toán tổng tiền, thêm thuế, sau đó in ra tổng cuối cùng với định dạng hoàn chỉnh.
+* Cuối cùng, kiểm tra số tiền đối với số dư trong tài khoản ngân hàng để xem bạn có đủ khả năng hay không.
+* Bạn nên lập một vài hằng số cho "tax rate," "phone price," "accessory price," and "spending threshold," cũng như biến cho "bank account balance.""
+* Bạn nên xác định các hàm cho việc tính toán thuế và định dạng giá tiền hoàn chỉnh với "$" và làm trong thành hai số thập phân.
+* **Thách thức tăng cường:** Thử kết hợp đầu vào chương trình, có thể là `prompt(..)` được đề cập trong "Input" ở trên. Bạn có thể nhắc người dùng về số dư trong tài khoản, ví dụ vậy. Chúc vui và sáng tạo.
 
 OK, go ahead. Try it. Don't peek at my code listing until you've given it a shot yourself!
 
