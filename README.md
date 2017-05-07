@@ -1,9 +1,9 @@
-Dịch để học và hiểu sâu.
-Một số từ ngữ tôi không dịch vì để nguyên giúp ý nghĩa của nó có hàm ý tốt hơn.
+Với sở thích và đam mê, tôi sẽ cố gắng dịch một cách tốt nhất cho các bạn, đây là một cuốn sách hay không thể bỏ qua cho bất kỳ bạn nào quan tâm đến JavaScript.
+Trong bản dịch, một số từ ngữ tôi không dịch vì để nguyên giúp ý nghĩa của nó có hàm ý tốt hơn.
 
 # You Don't Know JS (book series)
 
-Ai thích sách giấy của tác giả thì mua tại link này. 
+Ai thích sách giấy của tác giả thì mua tại link này.
 
 <a href="http://shop.oreilly.com/product/0636920039303.do"><img src="up %26 going/cover.jpg" width="75"></a>&nbsp;
 <a href="http://shop.oreilly.com/product/0636920026327.do"><img src="scope %26 closures/cover.jpg" width="75"></a>&nbsp;
@@ -18,7 +18,7 @@ Bạn có thể chỉnh sửa bản dịch của mình hoặc góp ý.
 
 ## Titles
 
-* Xem online (miễn phí!): ["Khởi động"](https://github.com/viiiprock/You-Dont-Know-JS/tree/master/up%20%26%20going), Published: [Buy Now](http://shop.oreilly.com/product/0636920039303.do) in print, but the ebook format is free!
+* Xem online (miễn phí!): ["Khởi đầu và phát triển"](https://github.com/viiiprock/You-Dont-Know-JS/tree/master/up%20%26%20going), Published: [Buy Now](http://shop.oreilly.com/product/0636920039303.do) in print, but the ebook format is free!
 * Xem online (miễn phí!): ["Scope & Closures"](https://github.com/viiiprock/You-Dont-Know-JS/tree/master/scope%20%26%20closures), Published: [Buy Now](http://shop.oreilly.com/product/0636920026327.do)
 * Xem online (miễn phí!): ["*this* & Các nguyên mẫu đối tượng (object proptotypes)"](https://github.com/viiiprock/You-Dont-Know-JS/tree/master/this%20%26%20object%20prototypes), Published: [Buy Now](http://shop.oreilly.com/product/0636920033738.do)
 * Xem online (miễn phí!): ["Kiểu & Ngữ pháp"](https://github.com/viiiprock/You-Dont-Know-JS/tree/master/types%20%26%20grammar), Published: [Buy Now](http://shop.oreilly.com/product/0636920033745.do)

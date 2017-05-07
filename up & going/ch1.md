@@ -1,9 +1,9 @@
-# You Don't Know JS: Khởi động
+# You Don't Know JS: Khởi đầu và phát triển
 # Chương 1: Hiểu về lập trình
 
 Chào mừng bạn đến với seri You Don't Know JS (YDKJS).
 
-Khởi động là lời giới thiệu một số  khái niệm cơ bản của lập trình (dĩ nhiên là chúng ta đặc biệt hướng về phía JavaScript --viết tắt là JS--) và cách để tiếp và hiểu các nội dung trong seri này. Đặc biệt là nếu chúng ta tìm hiểu sâu lập trình và JavaScript, cuốn sách này sẽ khám phá tóm lược những gì bạn cần để up & going.
+Khởi động là lời giới thiệu một số  khái niệm cơ bản của lập trình (dĩ nhiên là chúng ta đặc biệt hướng về phía JavaScript --viết tắt là JS--) và cách để tiếp và hiểu các nội dung trong seri này. Đặc biệt là nếu chúng ta tìm hiểu sâu lập trình và JavaScript, cuốn sách này sẽ khám phá tóm lược những gì bạn cần để khởi đầu và phát triển.
 
 Cuốn sách này bắt đầu ở mức bớt giải thích những nguyên tắc cơ bản của lập trình ở mức độ rất cao. Nó hầu như dự định dành cho người đọc với kiến thức, kinh nghiệm lập trình ít, đang tìm kiếm sách để học và tìm con đường để hiểu lập trình thông qua lăng kính JavaScript.
 
@@ -533,17 +533,17 @@ do {
 
 Sự khác biệt thực tế duy nhất giữa các vòng lặp này là liệu điều kiện được kiểm tra trước lần lặp đầu tiên (`while`) hay sau lần lặp đầu tiên (`do..while`).
 
-In either form, if the conditional tests as `false`, the next iteration will not run. That means if the condition is initially `false`, a `while` loop will never run, but a `do..while` loop will run just the first time.
+Ở một trong hai dạng, nếu điều kiện kiểm tra là `false`, lần lặp kế tiếp sẽ không chạy. Có nghĩa là điều kiện khởi tạo là `false`, vòng lặp `while` sẽ không bao giờ chạy, nhưng một vòng lặp `do..while` sẽ chạy lần đầu.
 
-Sometimes you are looping for the intended purpose of counting a certain set of numbers, like from `0` to `9` (ten numbers). You can do that by setting a loop iteration variable like `i` at value `0` and incrementing it by `1` each iteration.
+Đôi lúc bạn thực hiện lặp với mục đính là đếp một nhóm số, như là từ `0` đến `9` (mười số). Bạn có thể thực hiện bằng cách thiết lập một biến lặp `i` ở giá trị `0` và tăng lên `1` ở mỗi lần lặp.
 
-**Warning:** For a variety of historical reasons, programming languages almost always count things in a zero-based fashion, meaning starting with `0` instead of `1`. If you're not familiar with that mode of thinking, it can be quite confusing at first. Take some time to practice counting starting with `0` to become more comfortable with it!
+**Cảnh báo:**  Với vài lý do lịch sử, ngôn ngữ lập trình hầu hết luôn đếm mọi thứ từ không có gì, tức là `0` thay vì `1`. Nếu bạn chưa quen với cách tư duy đó, nó có thể hơi khó chịu lúc ban đầu. Dành thời gian để luyện việc đếm từ `0` cho đến khi cảm thấy thoải mái với nó.
 
-The conditional is tested on each iteration, much as if there is an implied `if` statement inside the loop.
+Điều kiện được kiểm tra cho mỗi lần lặp, giống như nó có lệnh `if` bên trong vòng lặp.
 
-We can use JavaScript's `break` statement to stop a loop. Also, we can observe that it's awfully easy to create a loop that would otherwise run forever without a `break`ing mechanism.
+Chúng ta có thể sử dụng lệnh `break` của JS để ngừng một vòng lặp. Đồng thời, chúng ta có thể thấy rằng thật dễ dàng một cách kinh khủng để tạo ra một vòng lặp chạy liên tục mà không có cơ chế `break`.
 
-Let's illustrate:
+Hãy hình dung:
 
 ```js
 var i = 0;
@@ -561,9 +561,10 @@ while (true) {
 // 0 1 2 3 4 5 6 7 8 9
 ```
 
-**Warning:** This is not necessarily a practical form you'd want to use for your loops. It's presented here for illustration purposes only.
+**Cảnh báo:** Đây không phải là hình thức thực tế mà bạn muốn sử dụng vòng lặp của mình. Nó chỉ được giới thiệu với mục đích minh họa mà thôi.
 
-While a `while` (or `do..while`) can accomplish the task manually, there's another syntactic form called a `for` loop for just that purpose:
+Trong khi `while` (hay `do..while`) có thể hoàn thành nhiệm vụ thủ công, có một dạng cú pháp khác được gọi là vòng lặp `for`
+cho dành mục đích đó.
 
 ```js
 for (var i = 0; i <= 9; i = i + 1) {
@@ -571,14 +572,13 @@ for (var i = 0; i <= 9; i = i + 1) {
 }
 // 0 1 2 3 4 5 6 7 8 9
 ```
+Như bạn thấy, trong cả hai trường hợp điều kiện `i <= 9` là `true` trong 10 lần lặp đầu tiên của một dạng vòng lặp (các giá trị `i` từ `0` đến `9`) trở thành `false` khi `i` đạt giá trị `10`.
 
-As you can see, in both cases the conditional `i <= 9` is `true` for the first 10 iterations (`i` of values `0` through `9`) of either loop form, but becomes `false` once `i` is value `10`.
+Vòng lặp `for` có ba mệnh đề: mệnh đề khởi tạo (`var i=0`), mệnh đề kiểm tra điều kiện (`i <= 9`), và mệnh đề cập nhật (`i = i + 1`). Vì vậy nếu bạn định đếm với vòng lặp lặp đi lặp lại, `for` là hỉnh thức gọn gàng và dễ hiểu hơn để hiểu và viết.
 
-The `for` loop has three clauses: the initialization clause (`var i=0`), the conditional test clause (`i <= 9`), and the update clause (`i = i + 1`). So if you're going to do counting with your loop iterations, `for` is a more compact and often easier form to understand and write.
+Có một dạng vòng lặp đặc biệt khác nhằm mục đích lặp các giá trị cụ thể, chẳng hạn như các thuộc tính của một đối tượng (xem Chương 2) trong đó kiểm tra điều kiện nghĩa là tất cả các thuộc tính đã được xử lý. Nguyên lý "lặp cho đến khi điều kiện sai" giữ nguyên bất kể dạng lặp nào.
 
-There are other specialized loop forms that are intended to iterate over specific values, such as the properties of an object (see Chapter 2) where the implied conditional test is just whether all the properties have been processed. The "loop until a condition fails" concept holds no matter what the form of the loop.
-
-## Functions
+## Hàm
 
 The phone store employee probably doesn't carry around a calculator to figure out the taxes and final purchase amount. That's a task she needs to define once and reuse over and over again. Odds are, the company has a checkout register (computer, tablet, etc.) with those "functions" built in.
 
