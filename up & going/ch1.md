@@ -1,9 +1,9 @@
-# You Don't Know JS: Khởi động 
+# You Don't Know JS: Khởi động
 # Chương 1: Hiểu về lập trình
 
 Chào mừng bạn đến với seri You Don't Know JS (YDKJS).
 
-Khởi động là lời giới thiệu một số  khái niệm cơ bản của lập trình (dĩ nhiên là chúng ta đặc biệt hướng về phía JavaScript --viết tắt là JS--) và cách để tiếp và hiểu các nội dung trong seri này. Đặc biệt là nếu chúng ta tìm hiểu sâu lập trình và JavaScript, cuốn sách này sẽ khám phá tóm lược những gì bạn cần để up & going. 
+Khởi động là lời giới thiệu một số  khái niệm cơ bản của lập trình (dĩ nhiên là chúng ta đặc biệt hướng về phía JavaScript --viết tắt là JS--) và cách để tiếp và hiểu các nội dung trong seri này. Đặc biệt là nếu chúng ta tìm hiểu sâu lập trình và JavaScript, cuốn sách này sẽ khám phá tóm lược những gì bạn cần để up & going.
 
 Cuốn sách này bắt đầu ở mức bớt giải thích những nguyên tắc cơ bản của lập trình ở mức độ rất cao. Nó hầu như dự định dành cho người đọc với kiến thức, kinh nghiệm lập trình ít, đang tìm kiếm sách để học và tìm con đường để hiểu lập trình thông qua lăng kính JavaScript.
 
@@ -11,13 +11,13 @@ Chương 1 được tiếp cần như một cái nhìn tổng quát vào những
 
 Một khi bạn cảm thấy thoải mái với những vấn đề lập trình cơ bản, Chương 2 sẽ hướng dẫn bạn làm quen với hương vị lập trình JavaScript. Chương 2 giới thiệu JavaScript là gì, nhưng một lần nữa, nó cũng không phải là hướng dẫn toàn diện -- phần còn lại của bộ sách sẽ làm chuyện đó.
 
-Nếu bạn đã khá thoải mái với JavaScript rồi thì hãy bắt đầu từ việc nhìn thoáng qua Chương 3 và nhảy tiếp! 
+Nếu bạn đã khá thoải mái với JavaScript rồi thì hãy bắt đầu từ việc nhìn thoáng qua Chương 3 và nhảy tiếp!
 
 ## Code
 
 Hãy bắt đầu từ đầu.
 
-Một chương trình, thường được gọi là *source code* hoặc *code*, là một tập hợp các hướng dẫn để yêu cầu máy tính cần xử lý nhiệm vụ gì. Thông thường, code được lưu dưới dạng file văn bản, với js bạn có thể gõ code trực tiếp lên console của trình duyệt, chúng tôi sẽ nói chuyện này sau. 
+Một chương trình, thường được gọi là *source code* hoặc *code*, là một tập hợp các hướng dẫn để yêu cầu máy tính cần xử lý nhiệm vụ gì. Thông thường, code được lưu dưới dạng file văn bản, với js bạn có thể gõ code trực tiếp lên console của trình duyệt, chúng tôi sẽ nói chuyện này sau.
 
 Các nguyên tắc của một định dạng hợp lệ cùng sự kết hợp của các hướng dẫn đó được gọi là ngôn ngữ máy tính, đôi khi còn được gọi là cú pháp, tương tự như ngôn ngữ giao tiếp chỉ cho bạn cách đọc từ và các tạo ra câu đúng bằng cách sử dụng từ và dấu câu.
 
@@ -35,7 +35,7 @@ Về mặt tương phản, số `2` bản thân nó chỉ là một giá trị, 
 
 Dấu `=` và `*` là *toán tử (operators)* (xem "Toản tử") -- nó thực thi các hành động với giá trị và biến như sự phân công và phép toán nhân.
 
-Hầu hết câu lệnh trong JS kết thúc bằng dấu chấm phẩy (`;`) ở cuối câu 
+Hầu hết câu lệnh trong JS kết thúc bằng dấu chấm phẩy (`;`) ở cuối câu
 
 Lệnh `a = b * 2;` báo cho máy tính giá trị được lưu trữ trong biến `b`, nhân giá trị đó với 2, sau đó lưu kết quả lại vào một biến khác gọi là `a`.
 
@@ -43,28 +43,28 @@ Lập trình tương tự như bộ sưu tập của nhiều câu lệnh cùng n
 
 ### Biểu thức (Expressions)
 
-Các câu lệnh được tạo thành từ một hay nhiều *biểu thức*. Một biểu thức là bất kỳ tham chiếu trên một biến hoặc một giá trị, hoặc tập hợp các giá trị và các biến kết hợp thành toán tử. 
+Các câu lệnh được tạo thành từ một hay nhiều *biểu thức*. Một biểu thức là bất kỳ tham chiếu trên một biến hoặc một giá trị, hoặc tập hợp các giá trị và các biến kết hợp thành toán tử.
 
-Ví dụ: 
+Ví dụ:
 
 ```js
 a = b * 2;
 ```
 
-Câu lệnh này có 4 biểu thức bên trong nó: 
+Câu lệnh này có 4 biểu thức bên trong nó:
 
 * `2` là *giá trị biểu thức trực kiện*
 * `b` là *giá trị biểu thức*, có nghĩa là sẽ lấy giá trị hiện tại của nó
 * `b * 2` là *biểu thức toán học*, nghĩa là sẽ làm phép nhân
-* `a = b * 2` là một *biểu thức gán*, nghĩa là sẽ gán kết quả của biểu thức `b * 2` cho biến `a` (còn tìm hiểu thêm sau) 
+* `a = b * 2` là một *biểu thức gán*, nghĩa là sẽ gán kết quả của biểu thức `b * 2` cho biến `a` (còn tìm hiểu thêm sau)
 
-Một biểu thức chung đứng một mình còn được gọi là *lệnh biểu thức* (expression statement), như ví dụ sau: 
+Một biểu thức chung đứng một mình còn được gọi là *lệnh biểu thức* (expression statement), như ví dụ sau:
 
 ```js
 b * 2;
 ```
 
-Kiểu biểu thức này thường không hữu dụng, bởi nó chẳng có tác dụng nào đối với chương trình đang chạy -- nó sẽ lấy giá trị của `b` và nhân nó với `2`, nhưng sau đó không làm gì với kết quả đó. 
+Kiểu biểu thức này thường không hữu dụng, bởi nó chẳng có tác dụng nào đối với chương trình đang chạy -- nó sẽ lấy giá trị của `b` và nhân nó với `2`, nhưng sau đó không làm gì với kết quả đó.
 
 Một loại câu lệnh biểu thức nữa là *biểu thức lệnh gọi* (call expression) (Xem "Functions"), khi toàn câu lệnh là một hàm tự gọi biểu thức:
 
@@ -87,17 +87,17 @@ JavaScript thường được khẳng định nó là ngôn ngữ được *thô
 **Ghi chú:** thông tin thêm về biên dịch JavaScript, xem 2 chương đầu của Scope & Closures trong seri này.
 
 
-## Tự bạn thử 
+## Tự bạn thử
 
 Chương này sẽ giới thiệu mỗi khái niệm lập trình với những mẫu code đơn giản, tất cả đều viết bằng JavaScript (đương nhiên!!!)
 
-Khi bạn đi qua chương này thì cũng không phải là đủ -- và bạn cũng có thể bỏ thời gian xem nó vài lần -- bạn cần luyện tập mỗi khái niệm bằng cách tự gõ code. Các dễ nhất là mở developer tool console trên trình duyệt. 
+Khi bạn đi qua chương này thì cũng không phải là đủ -- và bạn cũng có thể bỏ thời gian xem nó vài lần -- bạn cần luyện tập mỗi khái niệm bằng cách tự gõ code. Các dễ nhất là mở developer tool console trên trình duyệt.
 
 **Mẹo:** Thường thì bạn có thể mở developer console với phím tắt hoặc từ menu. Thông tin chi tiết về việc mở và sử dụng console trong trình duyệt ưa thích của bạn, xem ["Mastering The Developer Tools Console"](http://blog.teamtreehouse.com/mastering-developer-tools-console). Để gõ nhiều dòng trên console cùng lúc, sử dụng `<shift> + <enter>` để chuyển sang dòng mới. Khi  bạn nhấn `<enter>`, console sẽ chạy tất cả những gì bạn vừa viết.
 
 Hãy làm quen với việc chạy code trên console. Trước tiên, tôi đề nghị bạn mở 1 tab trống trên trình duyệt. Tôi thích làm cách này bằng việc gõ `about:blank` trên thanh địa chỉ. Sau đó chỉ cần chắc chắn developer console được mở như chúng ta đã đề cập.
 
-Và giờ hãy gõ code này và xem chúng chạy: 
+Và giờ hãy gõ code này và xem chúng chạy:
 
 ```js
 a = 21;
@@ -130,7 +130,7 @@ Cách khác để tạo ra output để bạn có thể nhìn nó chạy là `al
 alert( b );
 ```
 
-Nếu bạn  chạy nó, bạn sẽ thấy rằng thay vì print output lên console, nó sẽ hiển thị một popup "OK" với nội dung của biến `b`. Tuy nhiên, sử dụng `console.log(..)` giúp cho việc học của bạn thuận tiện hơn nhiều so với `alert(..)`, bởi vì bạn có thể output nhiều giá trị cùng lúc mà không bị phiền hà bởi trình duyệt. 
+Nếu bạn  chạy nó, bạn sẽ thấy rằng thay vì print output lên console, nó sẽ hiển thị một popup "OK" với nội dung của biến `b`. Tuy nhiên, sử dụng `console.log(..)` giúp cho việc học của bạn thuận tiện hơn nhiều so với `alert(..)`, bởi vì bạn có thể output nhiều giá trị cùng lúc mà không bị phiền hà bởi trình duyệt.
 
 Với sách này thì chúng ta sẽ dùng `console.log(..)`
 
@@ -138,7 +138,7 @@ Với sách này thì chúng ta sẽ dùng `console.log(..)`
 
 Khi chúng ta thảo luận về output, bạn cũng sẽ thắc mắc về *input* (ví dụ như nhận thông tin từ user)
 
-Cách thông thường nhất là trang HTML hiển thị form cho user có thể gõ vào, sau đó sử dụng js để đọc các giá trị vào các biến của chương trình. 
+Cách thông thường nhất là trang HTML hiển thị form cho user có thể gõ vào, sau đó sử dụng js để đọc các giá trị vào các biến của chương trình.
 
 Nhưng có một cách đơn giản để lấy input để học và trình bày như bạn học theo sách này, đó là sử dụng function `prompt(...)`
 
@@ -151,7 +151,7 @@ console.log( age );
 
 Như bạn có thể đoán, mẩu tin bạn đưa vào `prompt(..)` -- trong trường hợp này, `"Please tell me your age:"` -- được in lên popup.
 
-Điều này cũng tương tự 
+Điều này cũng tương tự
 
 <img src="fig2.png" width="500">
 
@@ -159,19 +159,19 @@ Khi bạn nhập input text bằng cách nhấp "OK", bạn sẽ tuân theo giá
 
 <img src="fig3.png" width="500">
 
-Để giữ cho mọi thứ đơn giản trong quá trình chúng ta học lý thuyết lập trình cơ bản, các ví dụ trong sách này sẽ không cần input. Nhưng giờ bạn đã biết cách sử dụng `prompt(..)`, nếu bạn muốn thử thách bản thân, bạn có thể thử sử dụng input qua khám phá các ví dụ. 
+Để giữ cho mọi thứ đơn giản trong quá trình chúng ta học lý thuyết lập trình cơ bản, các ví dụ trong sách này sẽ không cần input. Nhưng giờ bạn đã biết cách sử dụng `prompt(..)`, nếu bạn muốn thử thách bản thân, bạn có thể thử sử dụng input qua khám phá các ví dụ.
 
 
 ## Các biểu thức  
 
 Toán tử là những gì chúng ta thực thi hành động trên các biến và các giá trị. Chúng ta đã thấy hai kiểu toán tử của JavaScript là `=` và `*`
 
-Toán tử `*` để  thực hiện phép toán nhân. Dễ heng. 
+Toán tử `*` để  thực hiện phép toán nhân. Dễ heng.
 
 Dấu `=` được sử  dụng để *gán* -- đầu tiên là ta tính toán giá trị ở *phí bên phải* (giá trị nguồn) dấu `=` và sau nó đặt nó vào biến(variable) mà chúng ta xác định ở *phía bên trái* (variable mục tiêu).
 
 
-**Chú ý:** Có thể cảm giác hơi bị ngược bằng cách đảo trình tự gán. Thay vì `a = 42`, một số thích lật ngược trình tự giá trị nguồn ở bên trái và biến mục tiêu ở bên phải, kiểu  như `42 -> a` (nó không phải JavaScript!). Không may,`a = 42` là định  dạng được sắp xếp, và tương tự các biến, nó khá phổ  biến trong các ngôn ngữ lập trình hiện đại. Nếu có cảm giác không tự nhiên, hãy  bỏ chút thời gian để làm quen và tâm trí bạn sẽ tự sắp xếp nó. 
+**Chú ý:** Có thể cảm giác hơi bị ngược bằng cách đảo trình tự gán. Thay vì `a = 42`, một số thích lật ngược trình tự giá trị nguồn ở bên trái và biến mục tiêu ở bên phải, kiểu  như `42 -> a` (nó không phải JavaScript!). Không may,`a = 42` là định  dạng được sắp xếp, và tương tự các biến, nó khá phổ  biến trong các ngôn ngữ lập trình hiện đại. Nếu có cảm giác không tự nhiên, hãy  bỏ chút thời gian để làm quen và tâm trí bạn sẽ tự sắp xếp nó.
 
 Hãy xem:
 
@@ -184,7 +184,7 @@ Tại đây, chúng ta gán giá trị`2` cho biến `a`. Sau đó chúng ta c�
 
 Trong khi biểu thức kỹ thuật,  bạn cũng cần từ khoá `var` trong mọi thể loại lập trình, như cách đầu tiên bạn *khai báo* (aka *khởi tạo*) *các biến* (Xem "Variables")
 
-Bạn có  thể luôn khai báo biến bằng tên trước khi sử dụng nó. Nhưng bạn cũng chỉ khai báo một biến một lần trong mỗi *scope* (xem "Scope"): nó có thể được sử dụng nhiều lần khi cần. Ví dụ: 
+Bạn có  thể luôn khai báo biến bằng tên trước khi sử dụng nó. Nhưng bạn cũng chỉ khai báo một biến một lần trong mỗi *scope* (xem "Scope"): nó có thể được sử dụng nhiều lần khi cần. Ví dụ:
 
 ```js
 var a = 20;
@@ -203,18 +203,18 @@ Sau đây là một số biểu thức trong JavaScript:
 * Tăng/Giảm: `++` (tăng), `--` (giảm), như `a++` (tương tự  `a = a + 1`).
 * Tiếp cận object: `.` như `console.log()`.
   
-  Object là các giá trị chứa các giá trị khác tại các vị trí có tên cụ thể gọi là thuộc tính. `obj.a` nghĩa là một giá trị object gọi `obj` với một đặc tính có tên `a`. Các thuộc tính có thể chuyển đổi cách tiếp cận ví dụ `obj["a"]`. Xem chương 2. 
-  
+  Object là các giá trị chứa các giá trị khác tại các vị trí có tên cụ thể gọi là thuộc tính. `obj.a` nghĩa là một giá trị object gọi `obj` với một đặc tính có tên `a`. Các thuộc tính có thể chuyển đổi cách tiếp cận ví dụ `obj["a"]`. Xem chương 2.
+
 * Tương đương: `==` (bằng tương đối), `===` (bằng tuyệt đối), `!=` (khác tương đối), `!==` (khác tuyệt đối), ví dụ `a == b`.
    See "Values & Types" and Chapter 2.
-   
+
 * So sánh: `<` (nhỏ hơn), `>` (lớn hơn), `<=` (nhỏ hơn hoặc bằng tương đối), `>=` (lớn hơn hoặc bằng tương đối), như `a <= b`.
 
   Xem "Values & Types" ở  2.
 * Tính logic: `&&` (và), `||` (hoặc), ví dụ `a || b` chọn  luôn `a` *hoặc* `b`.
 
    Các biểu thức này được sử dụng để diễn tả các điều kiện phức tạp (xem "Điều kiện"), ví như cả `a` *hoặc* `b` đều đúng.
-   
+
 
 **Ghi chú:** Để biết chi tiết nhiều hơn, phạm vi của các biểu thức không đề cập ở đây, bạn có thể xem thêm Mozilla Developer Network (MDN)'s "Expressions and Operators" (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators).
 
@@ -255,7 +255,7 @@ Ngoài kiểu  giá trị `string`/`number`/`boolean`, các ngôn ngữ lập t
 
 Nếu bạn có một `number` nhưng muốn hiển thị trên màn hình, bạn cần chuyển giá trị thành `string`, và trong JavaScript gọi việc chuyển đổi này là "cưỡng bức". Tương tự, nếu ai đó cho một loạt ký tự số vào trong form của trang thương mại điện tử, đó là `string`, nhưng nếu bạn muốn sử dụng giá trị để thực hiện phép toán, bạn cần *ép* nó thành `number`
 
-JavaScript cung cấp một vài cơ sở khác nhau để ép buộc chuyển đổi các *kiểu*. Ví dụ:    
+JavaScript cung cấp một vài cơ sở khác nhau để ép buộc chuyển đổi các *kiểu*. Ví dụ:
 
 ```js
 var a = "42";
@@ -269,9 +269,9 @@ Sử dụng `Number(..)` (một function có sẵn) như đã thấy là một s
 
 Nhưng có một chủ đề gây tranh cãi rằng những gì xảy ra khi bạn muốn so sánh hai giá trị của cùng một kiểu, nó cần một cưỡng bức *ngầm*.
 
-Khi so sánh chuỗi `"99.99"` với số `99.99`, hầu hết mọi người đồng ý rằng nó bằng nhau. Nhưng nó không chính xác, đúng không? Nó có chung giá trị trong hai kiểu đại diện khác nhau, hai *kiểu* khác nhau. Bạn có thể nói là "bằng tương đối", đúng không? 
+Khi so sánh chuỗi `"99.99"` với số `99.99`, hầu hết mọi người đồng ý rằng nó bằng nhau. Nhưng nó không chính xác, đúng không? Nó có chung giá trị trong hai kiểu đại diện khác nhau, hai *kiểu* khác nhau. Bạn có thể nói là "bằng tương đối", đúng không?
 
-Để giúp bạn thoát khỏi hoàn cảnh như vậy, JavaScript đôi khi đưa vào một sự cưỡng bức giá  trị *ngầm* đến kiểu phù hợp. 
+Để giúp bạn thoát khỏi hoàn cảnh như vậy, JavaScript đôi khi đưa vào một sự cưỡng bức giá  trị *ngầm* đến kiểu phù hợp.
 
 Vì vậy nếu bạn sử dụng dấu bằng tương đối `==` để so sánh `"99.99" == 99.99`, JavaScript sẽ chuyển phía bên trái `"99.99"` thành `number` tương đương `99.99`. Sự so sánh trở thành `99.99 == 99.99`, nghĩa là đương nhiên `true`.
 
@@ -279,7 +279,7 @@ Khi được thiết kế để giúp bạn, cưỡng bức ngầm có thể man
 
 Tuy nhiên, cưỡng bức ngầm là một cơ chế *có thể học được*, và hơn thế nữa là *cần được học* bởi bất kỳ ai muốn học lập trình JavaScript một cách nghiêm túc. Nó không chỉ làm bạn hết hoang mang khi bạn học luật này, nó còn làm cho bạn lập trình tốt hơn. Hiệu quả xứng đáng.
 
-**Ghi chú:** Để biết thêm về sự cưỡng bức, xem Chương 2 của tiêu đề này và Chương 4 của "Kiểu & Ngữ pháp". 
+**Ghi chú:** Để biết thêm về sự cưỡng bức, xem Chương 2 của tiêu đề này và Chương 4 của "Kiểu & Ngữ pháp".
 
 ## Code comment
 
@@ -287,15 +287,15 @@ Nhân viên cửa hàng điện thoại có thể liệt kê vài tính năng c�
 
 Một trong những bài học quan trọng là bạn có thể học bằng cách viết code không chỉ cho máy tính. Code is every bit as much, if not more, for the developer as it is for the compiler.
 
-Máy tính của bạn chỉ quan tâm đến mã máy, một chuỗi nhị phân 0s và 1s đến *biên dịch*. Có vô số chương trình mà bạn có thể viết và mang lại kết quả tương tự với chuỗi 0 - 1. Sự lựa chọn là bạn viết chương trình tế nào -- không chỉ riêng bạn, mà còn là thành viên khác trong nhóm và kể cả tương lai của chính bạn.  
+Máy tính của bạn chỉ quan tâm đến mã máy, một chuỗi nhị phân 0s và 1s đến *biên dịch*. Có vô số chương trình mà bạn có thể viết và mang lại kết quả tương tự với chuỗi 0 - 1. Sự lựa chọn là bạn viết chương trình tế nào -- không chỉ riêng bạn, mà còn là thành viên khác trong nhóm và kể cả tương lai của chính bạn.
 
-Bạn có thể phấn đâu không chỉ viết chương trình cho nó chạy đúng, mà còn dễ dàng kiểm định. Bạn có thể mất nhiều thời gian cho việc chọn một cái tên tốt cho biến, cho function. 
+Bạn có thể phấn đâu không chỉ viết chương trình cho nó chạy đúng, mà còn dễ dàng kiểm định. Bạn có thể mất nhiều thời gian cho việc chọn một cái tên tốt cho biến, cho function.
 
 Nhưng phần quan trọng khác là code comment. Có một số văn bản trong chương trình của bạn được đưa vào thuần tuý là để giải thích cho người. Trình thông dịch/ biên dịch sẽ bỏ qua những comment đó.
 
 Có rất nhiều quan điểm về việc điều gì làm nên một comment tốt; chúng ta thực sự không thể xác định một quy tắc bao trùm. Nhưng có một số nhận xét và hướng dẫn có ích:
 
-* Code không có comment là chưa đủ tối ưu. 
+* Code không có comment là chưa đủ tối ưu.
 * Quá nhiều comment là dấu hiệu của code tồi.
 * Comment nên giải thích *vì sao* thay vì *cái gì*. Nó có thể giải thích *vì sao* nếu có chút phức tạp.
 
@@ -312,7 +312,7 @@ Nhận biết:
                       */
 ```
 
-`//` Comment dòng đơn thích hợp với việc bạn đặt comment ngay trên một biểu thức hoặc cuối dòng. Những gì trên dòng có dấu `//` đều được coi như là comment (được bỏ qua bởi biên dịch) từ đầu cho đến cuối dòng đó. Không có bất kỳ cá biệt nào có thể xuất hiện trên comment dòn đơn. 
+`//` Comment dòng đơn thích hợp với việc bạn đặt comment ngay trên một biểu thức hoặc cuối dòng. Những gì trên dòng có dấu `//` đều được coi như là comment (được bỏ qua bởi biên dịch) từ đầu cho đến cuối dòng đó. Không có bất kỳ cá biệt nào có thể xuất hiện trên comment dòn đơn.
 
 Xem:
 
@@ -325,12 +325,12 @@ var a = 42;		// 42 là ý nghĩa cuộc đời
 Đây là cách sử dụng comment đa dòng thông thường:
 
 ```js
-/* Giá trị sau đây được sử dụng bởi vì 
+/* Giá trị sau đây được sử dụng bởi vì
 	nó đã thể hiện rằng nó chính là câu
 	trả lời mọi câu hỏi trong vũ trụ  */
 var a = 42;
 ```
-Nó có thể xuất hiện trong một dòng, thậm chí giữa dòng, bởi vì có `*/` là kết thúc. Ví dụ: 
+Nó có thể xuất hiện trong một dòng, thậm chí giữa dòng, bởi vì có `*/` là kết thúc. Ví dụ:
 
 
 ```js
@@ -354,7 +354,7 @@ Vài ngôn ngữ lập trình, bạn khai báo một biến để chứa một g
 
 Một số ngôn ngữ khác nhấn mạnh kiểu cho giá trị thay bì biến. *Weak typing*, hay còn gọi là *dynamic typing*, cho phép một biến có thể giữ bất kỳ kiểu giá trị tại bất kỳ thời điểm nào. Nó thường được dẫn chứng về lợi ích linh động của chương trình bằng cách cho phép một biến đại diện cho một giá trị cho dù nó là kiểu giá trị gì tại bất kỳ thời điểm nào theo chu trình logic của chương trình.
 
-JavaScript sử dụng cách tiếp cận thứ hai, *dynamic typing*, nghĩa là biến có thể giữ bất kỳ giá trị của bất kỳ *kiểu* nào mà không bắt buộc kiểu thực thi. 
+JavaScript sử dụng cách tiếp cận thứ hai, *dynamic typing*, nghĩa là biến có thể giữ bất kỳ giá trị của bất kỳ *kiểu* nào mà không bắt buộc kiểu thực thi.
 
 Như đã giới thiệu, chúng ta khai báo một biến sử dụng biểu thức `var` -- chú ý rằng không có thông tin *kiểu* trong khai báo. Xem một chương trình đơn giản sau:
 
@@ -376,20 +376,19 @@ Biến  `amount` ban đầu giữ một number `99.99`, và sau đó giữ kết
 
 Lệnh `console.log(..)` đầu tiên *ngầm* buộc giá trị `number` thành `string` để in ra.
 
-Tiếp đó biểu thức `amount = "$" + String(amount)` *rõ ràng* ép giá trị `199.98` thành một `string` và thêm ký tự `"$"` đằng trước. Tại đây, `amount` giờ giữ 
-character to the beginning. At this point, `amount` now holds the `string` value `"$199.98"`, so the second `console.log(..)` statement doesn't need to do any coercion to print it out.
+Tiếp đó lệnh `amount = "$" + String(amount)` *rõ ràng* ép giá trị `199.98` thành một `string` và thêm ký tự `"$"` đằng trước. Tại đây, `amount` có `string` giá trị `"$199.98"`, vì thế `console.log(..)` thứ hai không cần phải cưỡng ép gì cả để in nó ra.
 
-JavaScript developers will note the flexibility of using the `amount` variable for each of the `99.99`, `199.98`, and the `"$199.98"` values. Static-typing enthusiasts would prefer a separate variable like `amountStr` to hold the final `"$199.98"` representation of the value, because it's a different type.
+Lập trình viên JavaScript sẽ lưu ý tính linh hoạt của việc sử dụng biến `amount` cho các giá trị `99.99`. `199.98`, và `"$199.98"`. Những người thích static-typing sẽ thích tách biến kiểu như `amountStr` để giữ gía trị `"$199.98"` cuối cùng, bởi vì nó là một kiểu khác.
 
-Either way, you'll note that `amount` holds a running value that changes over the course of the program, illustrating the primary purpose of variables: managing program *state*.
+Dù thế nào, bạn cũng để ý rằng `amount` giữ một giá trị đang chạy mà thay đổi trong quá trình hoạt động của chương trình, minh họa cho mục đích chính của các biến là: quản lý *state* của chương trình.
 
-In other words, *state* is tracking the changes to values as your program runs.
+Nói theo cách khác, *state* là theo dõi các thay đổi của giá trị khi chương trình hoạt động.
 
-Another common usage of variables is for centralizing value setting. This is more typically called *constants*, when you declare a variable with a value and intend for that value to *not change* throughout the program.
+Một cách sử dụng phổ biến khác của các biến là tập trung hóa thiết lập giá trị. Thường được gọi là *constants*, khi bạn khai báo một biết với một giá trị xác định *không thay đổi* suốt chương trình.
 
-You declare these *constants*, often at the top of a program, so that it's convenient for you to have one place to go to alter a value if you need to. By convention, JavaScript variables as constants are usually capitalized, with underscores `_` between multiple words.
+Bạn khai báo *constants*, thường là ở đầu chương trình, tiện để bạn có một chỗ để thay đổi giá trịnh khi cần. Theo quy ước, các biến JS hằng số thường được viết hoa, hay có gạch dưới `_` giữa các liên từ.
 
-Here's a silly example:
+Dưới đây là ví dụ:
 
 ```js
 var TAX_RATE = 0.08;	// 8% sales tax
@@ -404,11 +403,11 @@ console.log( amount );				// 215.9784
 console.log( amount.toFixed( 2 ) );	// "215.98"
 ```
 
-**Note:** Similar to how `console.log(..)` is a function `log(..)` accessed as an object property on the `console` value, `toFixed(..)` here is a function that can be accessed on `number` values. JavaScript `number`s aren't automatically formatted for dollars -- the engine doesn't know what your intent is and there's no type for currency. `toFixed(..)` lets us specify how many decimal places we'd like the `number` rounded to, and it produces the `string` as necessary.
+**Chú ý:** Tương tự như làm thế nào`console.log(..)` là một function `log(..)` truy cập như một thuộc tính object trong giá trị `console`, `toFixed(..)` ở đây là một function có thể truy cập các giá trị `number`. Các `number` JavaScript không tự động định dạng cho dollars -- cơ chế không thể biết được ý định của bạn và không có kiểu tiền tệ. `toFixed(..)` cho phép chúng ta chỉ định làm tròn số thập phân `number` như mong muốn, và nó tạo ra `string` như ý.
 
-The `TAX_RATE` variable is only *constant* by convention -- there's nothing special in this program that prevents it from being changed. But if the city raises the sales tax rate to 9%, we can still easily update our program by setting the `TAX_RATE` assigned value to `0.09` in one place, instead of finding many occurrences of the value `0.08` strewn throughout the program and updating all of them.
+Biến `TAX_RATE` là một *constant* theo quy ước -- không có gì đặc biệt trong chương trình ngăn cho nó không thay đổi. nhưng nếu thành phố tăng thuế bán lên 9%, chúng ta có thể dễ dàng cập nhật chương trình bằng cách cấu hình lại `TAX_RATE` bằng giá trị `0.09` cùng một nơi, thay vì phải tìm nhiều nhiều giá trị `0.08` rải rác khắp chương trình và cập nhật tất cả.
 
-The newest version of JavaScript at the time of this writing (commonly called "ES6") includes a new way to declare *constants*, by using `const` instead of `var`:
+Phiên bản mới nhất của JS tại thời điểm biết bài này (thường gọi là "ES6") đã có cách mới để khai báo *constants*, bằng cách sửa dụng `const` thay cho `var`:
 
 ```js
 // as of ES6:
@@ -418,18 +417,17 @@ var amount = 99.99;
 
 // ..
 ```
+Const rất hữu dụng giống như var với giá trị không đổi, khác biệt là nó ngăn ngừa sự thay đổi giá trị vô tình xảy ra ở đâu đó sau giá trị khởi tạo. Nếu bạn thử gán giá trị khác cho `TAX_RATE` sau lần khai báo đầu tiên, chương trình của bạn sẽ từ chối thay đổi (trong strict mode, sẽ thất bại với lỗi -- xem "Strict Mode" trong Chương 2).
 
-Constants are useful just like variables with unchanged values, except that constants also prevent accidentally changing value somewhere else after the initial setting. If you tried to assign any different value to `TAX_RATE` after that first declaration, your program would reject the change (and in strict mode, fail with an error -- see "Strict Mode" in Chapter 2).
+Tuy nhiên, cách "bảo vệ" khỏi các sai sót này cũng tương tự như các ngôn ngữ static-typing, nên bạn có thể thấy tại sao static types trong ngôn ngữ khác hấp dẫn.
 
-By the way, that kind of "protection" against mistakes is similar to the static-typing type enforcement, so you can see why static types in other languages can be attractive!
-
-**Note:** For more information about how different values in variables can be used in your programs, see the *Types & Grammar* title of this series.
+**Lưu ý:** Để có thêm thông tin về sự khác biệt của các biến có thể sử dụng trong chương trình, xem  *Kiểu & Ngữ pháp* trong serie này.
 
 ## Blocks
 
-The phone store employee must go through a series of steps to complete the checkout as you buy your new phone.
+Nhân viên cửa hàng điện thoại phải đi qua tất cả các khâu để hoàn tất việc thanh toán khi bạn mua điện thoại.
 
-Similarly, in code we often need to group a series of statements together, which we often call a *block*. In JavaScript, a block is defined by wrapping one or more statements inside a curly-brace pair `{ .. }`. Consider:
+Tương tự, trong code chúng ta thường nhóm các biểu thức với nhau, thường được gọi l2 *block*. Trong JavaScript, một block được xác định bằng các bao một hoặc nhiều lệnh trong dấu ngoặc `{...}`. Ví dụ:
 
 ```js
 var amount = 99.99;
@@ -440,8 +438,7 @@ var amount = 99.99;
 	console.log( amount );	// 199.98
 }
 ```
-
-This kind of standalone `{ .. }` general block is valid, but isn't as commonly seen in JS programs. Typically, blocks are attached to some other control statement, such as an `if` statement (see "Conditionals") or a loop (see "Loops"). For example:
+Kiểu block `{...}` chung này hợp lệ, nhưng không thường thấy trong các chương trình JS. Thông thường, block được gắn liền với một lệnh điều khiển, chẳng hạn như biểu thức `if` (xem "Điều kiện") hoặc một vòng lặp (xem "Vòng lặp"). Ví dụ:
 
 ```js
 var amount = 99.99;
@@ -452,18 +449,17 @@ if (amount > 10) {			// <-- block attached to `if`
 	console.log( amount );	// 199.98
 }
 ```
+Chúng ta sẽ giải thích `if` trong phần tiếp theo, nhưng như bạn thấy, `{...}` block có 2 câu lệnh được gắn với `if (amount > 10)`; câu lệnh bên trong block sẽ chỉ thực hiện khi điều kiện đáp ứng.
 
-We'll explain `if` statements in the next section, but as you can see, the `{ .. }` block with its two statements is attached to `if (amount > 10)`; the statements inside the block will only be processed if the conditional passes.
+**Chú ý:** Không giống hầu hết các lệnh khác như `console.log(amount);`, một block lệnh không cần dấu chấm phẩy (`;`) để kết thúc.
 
-**Note:** Unlike most other statements like `console.log(amount);`, a block statement does not need a semicolon (`;`) to conclude it.
+## Điều kiện
 
-## Conditionals
+"Bạn có muốn thêm bảo vệ màn hình với chỉ $9.99 không?" Nhân viên hỗ trợ cửa hàng điện thoại đã tạo một quyết định cho bạn. Nhưng rõ ràng, đây chỉ là một câu hỏi "yes hoặc no".
 
-"Do you want to add on the extra screen protectors to your purchase, for $9.99?" The helpful phone store employee has asked you to make a decision. And you may need to first consult the current *state* of your wallet or bank account to answer that question. But obviously, this is just a simple "yes or no" question.
+Có nhiều cách để bạn diễn đạt *điều kiện* trong chương trình.
 
-There are quite a few ways we can express *conditionals* (aka decisions) in our programs.
-
-The most common one is the `if` statement. Essentially, you're saying, "*If* this condition is true, do the following...". For example:
+Loại thường thấy là lệnh `if`. Về cơ bản, khi bạn nói "*Nếu* điều kiện này đúng, hãy làm theo...". Ví dụ:
 
 ```js
 var bank_balance = 302.13;
@@ -473,10 +469,9 @@ if (amount < bank_balance) {
 	console.log( "I want to buy this phone!" );
 }
 ```
+Lệnh `if` cần một diễn đạt trong dấu ngoặc đơn `()` được thể hiện như `true` hoặc `false`. Trong ví dụ, chúng ta có biểu thức `amount < bank_balance`, nó sẽ xác định `true` hoặc `false` tùy thuộc vào giá trị của biến `bank_balance`.
 
-The `if` statement requires an expression in between the parentheses `( )` that can be treated as either `true` or `false`. In this program, we provided the expression `amount < bank_balance`, which indeed will either evaluate to `true` or `false` depending on the amount in the `bank_balance` variable.
-
-You can even provide an alternative if the condition isn't true, called an `else` clause. Consider:
+Bạn cũng có thể cung cấp một sự thay thế điều kiện nếu nó không thỏa, gọi mệnh đề `else`:
 
 ```js
 const ACCESSORY_PRICE = 9.99;
@@ -496,26 +491,25 @@ else {
 	console.log( "No, thanks." );
 }
 ```
+Tại đây, nếu `amount < bank_balance` là `true`, chúng ta sẽ in ra `"I'll take the accessory!"` và thêm `9.99` vào biến `amount`. Nếu không, mệnh đề `else` nói ra chúng ta sẽ trả lời lịch sự `"No, thanks."` và `amount` không thay đổi.
 
-Here, if `amount < bank_balance` is `true`, we'll print out `"I'll take the accessory!"` and add the `9.99` to our `amount` variable. Otherwise, the `else` clause says we'll just politely respond with `"No, thanks."` and leave `amount` unchanged.
+Như chúng ta đã thảo luận trong "Giá trị & Loại" ở trên, các giá trị không chuẩn bị sẵn cho kiểu mong muốn mà thường bị ép theo kiểu đó, lệnh `if` muốn kiểu `boolean`, nhưng nếu bạn chèn nó gì đó không phải `boolean`, sự cưỡng ép sẽ xảy ra.
 
-As we discussed in "Values & Types" earlier, values that aren't already of an expected type are often coerced to that type. The `if` statement expects a `boolean`, but if you pass it something that's not already `boolean`, coercion will occur.
+JavaScript xác định một danh sách các giá trị đặc trưng được coi là "falsy" bởi vì khi bị ép là `boolean`, nó sẽ trở thành `false` -- nó bao gồm các giá trị như `0` và `""`. Bất kỳ giá trị nào không trong danh sách "falsy", sẽ tự động "truthy" -- khi bị ép sang `boolean` nó sẽ trở thành `true`. Các giá trị truthy bao gồm kiểu như `99.99` và `"free"`. Xem "Truthy & Falsy" trong Chương 2.
 
-JavaScript defines a list of specific values that are considered "falsy" because when coerced to a `boolean`, they become `false` -- these include values like `0` and `""`. Any other value not on the "falsy" list is automatically "truthy" -- when coerced to a `boolean` they become `true`. Truthy values include things like `99.99` and `"free"`. See "Truthy & Falsy" in Chapter 2 for more information.
+Các *Điều kiện* hiện hữu trong các dạng khác ngoài `if`. Ví dụ, lệnh `switch` có thể được sử dụng như như là viết tắt của một loạt lệnh `if..else` (xem Chương 2). Vòng lặp sử một *điều kiện* để diễn đạt nếu vòng lặp diễn ra tiếp hay dừng lại.
 
-*Conditionals* exist in other forms besides the `if`. For example, the `switch` statement can be used as a shorthand for a series of `if..else` statements (see Chapter 2). Loops (see "Loops") use a *conditional* to determine if the loop should keep going or stop.
+**Chú ý:** Thông tin sâu hơn về sự ép buộc có thể xảy ra ngầm trong các biểu thức kiểm tra của các *điều kiện*, xem Chương 4 đề mục *Kiểu & Ngữ pháp* của serie này.
 
-**Note:** For deeper information about the coercions that can occur implicitly in the test expressions of *conditionals*, see Chapter 4 of the *Types & Grammar* title of this series.
+## Vòng lặp
 
-## Loops
+Trong suốt quá trình bận rộn, có một danh sách khách hàng cần nói chuyện với nhân viên cửa hàng. Trong khi vẫn còn người trong danh sách đó, cô ta chỉ cần tiếp tục phục vụ khách hàng tiếp theo.
 
-During busy times, there's a waiting list for customers who need to speak to the phone store employee. While there's still people on that list, she just needs to keep serving the next customer.
+Lập lại một tập hợp hành động cho đến khi có một điều kiện nhất định thất bại -- nói cách khác, chỉ lặp lại khi điều kiện thỏa mãn -- là công việc của vòng lặp chương trình; vòng lặp có thể có nhiều hình thức khác nhau, nhưng tất cả đều đáp ứng hành vi cơ bản này.
 
-Repeating a set of actions until a certain condition fails -- in other words, repeating only while the condition holds -- is the job of programming loops; loops can take different forms, but they all satisfy this basic behavior.
+Một vòng lặp bao gồm điều kiện kiểm tra cũng như một block (thường là `{ .. }`). Mỗi lần block vòng lặp được thực hiện, nó được gọi là *sự lặp lại*.
 
-A loop includes the test condition as well as a block (typically as `{ .. }`). Each time the loop block executes, that's called an *iteration*.
-
-For example, the `while` loop and the `do..while` loop forms illustrate the concept of repeating a block of statements until a condition no longer evaluates to `true`:
+Ví dụ, vòng lặp  `while` và dạng `do..while` minh họa khái niệm lặp lại một block câu lệnh cho đến khi điều kiện không còn được đánh giá là `true`:
 
 ```js
 while (numOfCustomers > 0) {
@@ -537,7 +531,7 @@ do {
 } while (numOfCustomers > 0);
 ```
 
-The only practical difference between these loops is whether the conditional is tested before the first iteration (`while`) or after the first iteration (`do..while`).
+Sự khác biệt thực tế duy nhất giữa các vòng lặp này là liệu điều kiện được kiểm tra trước lần lặp đầu tiên (`while`) hay sau lần lặp đầu tiên (`do..while`).
 
 In either form, if the conditional tests as `false`, the next iteration will not run. That means if the condition is initially `false`, a `while` loop will never run, but a `do..while` loop will run just the first time.
 
