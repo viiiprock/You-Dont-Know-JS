@@ -578,13 +578,13 @@ Vòng lặp `for` có ba mệnh đề: mệnh đề khởi tạo (`var i=0`), m�
 
 Có một dạng vòng lặp đặc biệt khác nhằm mục đích lặp các giá trị cụ thể, chẳng hạn như các thuộc tính của một đối tượng (xem Chương 2) trong đó kiểm tra điều kiện nghĩa là tất cả các thuộc tính đã được xử lý. Nguyên lý "lặp cho đến khi điều kiện sai" giữ nguyên bất kể dạng lặp nào.
 
-## Hàm
+## Hàm (function)
 
-The phone store employee probably doesn't carry around a calculator to figure out the taxes and final purchase amount. That's a task she needs to define once and reuse over and over again. Odds are, the company has a checkout register (computer, tablet, etc.) with those "functions" built in.
+Nhân viên cửa hàng điện thoại có thể không mang theo bàn tính để tính ra số thuế và số lượng mua cuối cùng. Đó là hạng mục cô ta cần xác định một lần và sử dụng nhiều lần. Ngược lại, công ty có phương tiện tính toán thanh toán (máy tính, tablet,...) với các chức năng có sẵn.
 
-Similarly, your program will almost certainly want to break up the code's tasks into reusable pieces, instead of repeatedly repeating yourself repetitiously (pun intended!). The way to do this is to define a `function`.
+Tương tự, chương trình của bạn hầu hết cần tách code thành nhiều phần để sử dụng lại, thay vì lặp đi lặp lại bản thân. Cách làm điều này là xác định một `function`.
 
-A function is generally a named section of code that can be "called" by name, and the code inside it will be run each time. Consider:
+Một hàm thường là một phần code được đặt tên và có thể được gọi bằng tên, code bên trong nó sẽ chạy cho mỗi lần gọi.
 
 ```js
 function printAmount() {
@@ -599,8 +599,7 @@ amount = amount * 2;
 
 printAmount(); // "199.98"
 ```
-
-Functions can optionally take arguments (aka parameters) -- values you pass in. And they can also optionally return a value back.
+Các hàm có thể tùy ý lấy đối số (aka tham số) -- giá trị mà bạn truyền vào. Và chúng có thể tùy ý trả lại giá trị.
 
 ```js
 function printAmount(amt) {
@@ -618,12 +617,11 @@ printAmount( amount * 2 );		// "199.98"
 amount = formatAmount();
 console.log( amount );			// "$99.99"
 ```
+Hàm `printAmount(..)` lấy một tham số gọi là `amt`. Hàm `formatAmount()` trả một giá trị. Dĩ nhiên, bạn có thể kết hợp hai kỹ thuật đó trong một hàm.
 
-The function `printAmount(..)` takes a parameter that we call `amt`. The function `formatAmount()` returns a value. Of course, you can also combine those two techniques in the same function.
+Các hàm thường được sử dụng với mục đích gọi ra nhiều lần, nhưng nó cũng có thể hữu ích trong việc tổ chức code, kể cả khi bạn chỉ gọi nó một lần.
 
-Functions are often used for code that you plan to call multiple times, but they can also be useful just to organize related bits of code into named collections, even if you only plan to call them once.
-
-Consider:
+Ví dụ:
 
 ```js
 const TAX_RATE = 0.08;
@@ -643,15 +641,15 @@ amount = calculateFinalPurchaseAmount( amount );
 console.log( amount.toFixed( 2 ) );		// "107.99"
 ```
 
-Although `calculateFinalPurchaseAmount(..)` is only called once, organizing its behavior into a separate named function makes the code that uses its logic (the `amount = calculateFinal...` statement) cleaner. If the function had more statements in it, the benefits would be even more pronounced.
+Mặc dù `calculateFinalPurchaseAmount(..)` chỉ được gọi một lần, tổ chức hành vi của nó thành những function tách biệt làm cho code trở nên logic rõ ràng hơn (lệnh  `amount = calculateFinal...`). Nếu function có nhiều lệnh bên trong nó, lợi ích thậm chí còn rõ ràng hơn.
 
 ### Scope
 
-If you ask the phone store employee for a phone model that her store doesn't carry, she will not be able to sell you the phone you want. She only has access to the phones in her store's inventory. You'll have to try another store to see if you can find the phone you're looking for.
+Nếu bạn hỏi nhân viên cửa hàng về một mẫu điện thoại mà cô ấy không có, cô ta sẽ không thể bán chiếc điện thoại bạn muốn. Cô ta chỉ có thể bán những chiếc điện thoại có trong kho. Bạn sẽ phải thử ở cửa hiệu khác để tìm chiếc điện thoại bạn muốn.
 
-Programming has a term for this concept: *scope* (technically called *lexical scope*). In JavaScript, each function gets its own scope. Scope is basically a collection of variables as well as the rules for how those variables are accessed by name. Only code inside that function can access that function's *scoped* variables.
+Lập trình có một thuật ngữ cho khái niệm này: *scope* ( kỹ thuật gọi là *lexical scope*). Trong JS, mỗi hàm đều có scope của nó. Scope cơ bản là một bộ tập hợp của các biến cũng như quy tắc cho các biến đó được gọi theo tên. Chỉ có code trong hàm mới có thể tiếp cận được với các biến trong *scope* của hàm đó.
 
-A variable name has to be unique within the same scope -- there can't be two different `a` variables sitting right next to each other. But the same variable name `a` could appear in different scopes.
+Tên biến bên trong cùng scope phải là duy nhất -- nó không thể có hai biến `a` khác nhau tồn tại kế bên. Nhưng biến `a` trùng nhau có thể tồn tại trong các scope khác nhau.
 
 ```js
 function one() {
@@ -670,9 +668,9 @@ one();		// 1
 two();		// 2
 ```
 
-Also, a scope can be nested inside another scope, just like if a clown at a birthday party blows up one balloon inside another balloon. If one scope is nested inside another, code inside the innermost scope can access variables from either scope.
+Ngoài ra, một scope có thể lồng bên trong scope khác, giống như chú hề trong tiệc sinh nhật thổi quả bóng lồng trong quả bóng khác. Nếu một scope được lồng trong scope khác, code bên trong scope sâu nhất có thể tiếp cận với mọi biến ở các phạm vi.
 
-Consider:
+Xem:
 
 ```js
 function outer() {
@@ -694,11 +692,11 @@ function outer() {
 outer();
 ```
 
-Lexical scope rules say that code in one scope can access variables of either that scope or any scope outside of it.
+Các nguyên tắc của lexical scope cho phép code có thể truy cập các biến của phạm vi bên trong hay bên ngoài scope.
 
-So, code inside the `inner()` function has access to both variables `a` and `b`, but code in `outer()` has access only to `a` -- it cannot access `b` because that variable is only inside `inner()`.
+Do đó, code bên trong hàm `inner()` có thể truy cập cả hai biến `a` và `b`, nhưng code trong `outer()` chỉ có thể truy cập `a` -- nó không thể truy cập `b` bởi vì biến đó bên trong `inner()`
 
-Recall this code snippet from earlier:
+Nhắc lại đoạn mã trên:
 
 ```js
 const TAX_RATE = 0.08;
