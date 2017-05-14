@@ -1,19 +1,19 @@
 # You Don't Know JS: Up & Going
-# Chapter 2: Hiểu về JavaScript
+# Chương 2: Hiểu về JavaScript
 
-In the previous chapter, I introduced the basic building blocks of programming, such as variables, loops, conditionals, and functions. Of course, all the code shown has been in JavaScript. But in this chapter, we want to focus specifically on things you need to know about JavaScript to get up and going as a JS developer.
+Trong chương trước, tôi giới thiệu những cụm căn bản của lập trình như là biến, vòng lặp, điều kiện, hàm. Tất nhiên, tất cả các code đều trình diễn theo ngôn ngữ JS. Nhưng trong chương này, tôi muốn tập trung đặc biệt vào những điều cần biết về JS để bạn khởi đầu trở thành một lập trình viên JS.
 
-We will introduce quite a few concepts in this chapter that will not be fully explored until subsequent *YDKJS* books. You can think of this chapter as an overview of the topics covered in detail throughout the rest of this series.
+Chúng ta sẽ giới thiệu một vài nguyên lý trong chương này một cách không đầy đủ cho đến những phần tiếp theo bộ sách *YDKJS*. Bạn có thể nghĩ chương này là một mục khái quát các chuyên đề trong series.
 
-Especially if you're new to JavaScript, you should expect to spend quite a bit of time reviewing the concepts and code examples here multiple times. Any good foundation is laid brick by brick, so don't expect that you'll immediately understand it all the first pass through.
+Đặc biệt nếu JS còn mới mẻ đối với bạn, bạn cần bỏ ít thời gian để xem lại các lý thuyết và ví dụ nhiều lần. Bất kỳ một nền tảng tốt nào cũng phải đặt từng viên gạch một, cho nên đừng hy vọng bạn ngay lập tức hiểu liền trong lần đầu.
 
-Your journey to deeply learn JavaScript starts here.
+Cuộc phiêu lưu của bạn để học sâu về JS bắt đầu từ đây.
 
-**Note:** As I said in Chapter 1, you should definitely try all this code yourself as you read and work through this chapter. Be aware that some of the code here assumes capabilities introduced in the newest version of JavaScript at the time of this writing (commonly referred to as "ES6" for the 6th edition of ECMAScript -- the official name of the JS specification). If you happen to be using an older, pre-ES6 browser, the code may not work. A recent update of a modern browser (like Chrome, Firefox, or IE) should be used.
+**Ghi chú:** Như tôi đề cập ở Chương 1, bạn phải tự mình thử tất cả các code khi bạn học trong suốt chương này. Chú ý rằng một vài chỗ phù hợp với phiên bản mới nhất của JS tại thời điểm viết bài này (thường gọi là "ES6" cho phiên bản 6 của ECMAScript -- tên chính thức của JS). Nếu bạn định sử dụng phiên bản trình duyệt cũ hơn trước thời ES6, code có thể không hoạt động. Bạn cần nâng cấp trình duyệt.
 
-## Values & Types
+## Giá trị & Kiểu
 
-As we asserted in Chapter 1, JavaScript has typed values, not typed variables. The following built-in types are available:
+Như chúng ta đã khẳng định trong Chương 1, JS có kiểu của giá trị, không có kiểu của biến. Các kiểu có sẵn là:
 
 * `string`
 * `number`
@@ -22,7 +22,7 @@ As we asserted in Chapter 1, JavaScript has typed values, not typed variables. T
 * `object`
 * `symbol` (new to ES6)
 
-JavaScript provides a `typeof` operator that can examine a value and tell you what type it is:
+JavaScript có một biểu thức `typeof` có thể kiểm tra giá trị và cho bạn biết kiểu của nó là gì.
 
 ```js
 var a;
@@ -47,15 +47,15 @@ a = { b: "c" };
 typeof a;				// "object"
 ```
 
-The return value from the `typeof` operator is always one of six (seven as of ES6! - the "symbol" type) string values. That is, `typeof "abc"` returns `"string"`, not `string`.
+Giá trị trả lại từ biểu thức `typeof` luôn là một trong sáu kiểu ở dạng giá trị string( 7 đối với ES6 -- kiểu "symbol"). Đó là, `typeof "abc"` trả lại `"string"`, không phải `string`.
 
-Notice how in this snippet the `a` variable holds every different type of value, and that despite appearances, `typeof a` is not asking for the "type of `a`", but rather for the "type of the value currently in `a`." Only values have types in JavaScript; variables are just simple containers for those values.
+Chú ý rằng đoạn code này, biến `a` giữ mọi kiểu của giá trị, và mặc dù là có bề ngoài, `typeof a` sẽ không hỏi "kiểu của `a`", mà là "kiểu của giá trị hiện tại trong `a`." Trong JS chỉ có giá trị mới có kiểu; biến chỉ đơn giản là vật chứa các giá trị đó.
 
-`typeof null` is an interesting case, because it errantly returns `"object"`, when you'd expect it to return `"null"`.
+`typeof null` là một trường hợp thú vị, bởi vì nó trả sai thành `"object"`, trong khi bạn mong muốn nó trả `"null"`.
 
-**Warning:** This is a long-standing bug in JS, but one that is likely never going to be fixed. Too much code on the Web relies on the bug and thus fixing it would cause a lot more bugs!
+**Cảnh báo:** Đây là một lỗi trường kỳ của JS và dường như sẽ không bao giờ được sửa. Quá nhiều code trên web liên quan đến lỗi mà cố sửa nó thì nó sẽ tạo ra nhiều lỗi hơn.
 
-Also, note `a = undefined`. We're explicitly setting `a` to the `undefined` value, but that is behaviorally no different from a variable that has no value set yet, like with the `var a;` line at the top of the snippet. A variable can get to this "undefined" value state in several different ways, including functions that return no values and usage of the `void` operator.
+Đồng thời, chú ý `a = undefined`. Chúng ta thiết lập rõ ràng `a` là giá trị `undefined`, nhưng nó cũng có hành vi không khác với biến chưa có giá trị, ví dụ như `var a;` ở đoạn code bên trên. Một biến có thể nhận trạng thái "undefined" này bằng nhiều cách khác nhau, bao gồm hàm trả lại không có giá trị và các sử dụng `void`.
 
 ### Objects
 
