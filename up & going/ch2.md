@@ -83,9 +83,9 @@ Thật hữu ích khi xem giá trị của `obj` một cách trực quan:
 
 Thuộc tính có thể truy cập bằng *dấu chấm* (vd: `obj.a`) hay *dấu ngoặc* (vd: `obj["a"]`). Dấu chấm ngắn hơn và dễ đọc hơn, vì vậy nó được ưa thích hơn.
 
-Bracket notation is useful if you have a property name that has special characters in it, like `obj["hello world!"]` -- such properties are often referred to as *keys* when accessed via bracket notation. The `[ ]` notation requires either a variable (explained next) or a `string` *literal* (which needs to be wrapped in `" .. "` or `' .. '`).
+Dấu ngoặc hữu dụng nếu bạn có một tên thuộc tính có ký tự đặc biệt trong nó, `obj["hello world!"]` -- các thuộc tính như vậy thường được là *chìa khóa* khi truy cập thông qua dấu ngoặc. Dấu ngoặc `[ ]` đòi hỏi phải có một biến (giải thích sau) hoặc một `string` *nguyên bản* ( được bao bởi `" .. "` hoặc `' .. '`).
 
-Of course, bracket notation is also useful if you want to access a property/key but the name is stored in another variable, such as:
+Đương nhiên, dấu ngoặc cũng hữu dụng nếu bạn muốn tiếp cận một thuộc tính/chìa khóa nhưng tên được lưu trữ ở biến khác, như là:
 
 ```js
 var obj = {
@@ -99,9 +99,9 @@ obj[b];			// "hello world"
 obj["b"];		// 42
 ```
 
-**Note:** For more information on JavaScript `object`s, see the *this & Object Prototypes* title of this series, specifically Chapter 3.
+**Ghi chú:** Xem thêm tập *this & Object Prototypes* đặc biệt ở Chương 3 để biết thêm về `object`.
 
-There are a couple of other value types that you will commonly interact with in JavaScript programs: *array* and *function*. But rather than being proper built-in types, these should be thought of more like subtypes -- specialized versions of the `object` type.
+Có một vài kiểu giá trị mà bạn có thể tương tác với chương trình JS: *array* và *function*. Nhưng thay vì là các kiểu dựng sẵn phù hợp, nó phải được coi như là các kiểu thứ cấp -- phiên bản đặc biệt của kiểu `object`.
 
 #### Arrays
 
