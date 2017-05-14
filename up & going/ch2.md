@@ -59,7 +59,7 @@ Chú ý rằng đoạn code này, biến `a` giữ mọi kiểu của giá trị
 
 ### Objects
 
-The `object` type refers to a compound value where you can set properties (named locations) that each hold their own values of any type. This is perhaps one of the most useful value types in all of JavaScript.
+Kiểu `object` đề cập đến một phức hợp giá trị mà bạn có thể lập các thuộc tính (vị trí được đặt tên) mà mỗi cái đều có thể có giá trị của riên chúng với bất kỳ kiểu nào. Đây có lẽ là một trong nhưng kiểu hữu dụng nhất trong JS.
 
 ```js
 var obj = {
@@ -77,11 +77,11 @@ obj["b"];	// 42
 obj["c"];	// true
 ```
 
-It may be helpful to think of this `obj` value visually:
+Thật hữu ích khi xem giá trị của `obj` một cách trực quan:
 
 <img src="fig4.png">
 
-Properties can either be accessed with *dot notation* (i.e., `obj.a`) or *bracket notation* (i.e., `obj["a"]`). Dot notation is shorter and generally easier to read, and is thus preferred when possible.
+Thuộc tính có thể truy cập bằng *dấu chấm* (vd: `obj.a`) hay *dấu ngoặc* (vd: `obj["a"]`). Dấu chấm ngắn hơn và dễ đọc hơn, vì vậy nó được ưa thích hơn.
 
 Bracket notation is useful if you have a property name that has special characters in it, like `obj["hello world!"]` -- such properties are often referred to as *keys* when accessed via bracket notation. The `[ ]` notation requires either a variable (explained next) or a `string` *literal* (which needs to be wrapped in `" .. "` or `' .. '`).
 
