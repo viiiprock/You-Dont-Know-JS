@@ -103,9 +103,9 @@ obj["b"];		// 42
 
 Có một vài kiểu giá trị mà bạn có thể tương tác với chương trình JS: *array* và *function*. Nhưng thay vì là các kiểu dựng sẵn phù hợp, nó phải được coi như là các kiểu thứ cấp -- phiên bản đặc biệt của kiểu `object`.
 
-#### Arrays
+#### Mảng (array)
 
-An array is an `object` that holds values (of any type) not particularly in named properties/keys, but rather in numerically indexed positions. For example:
+Trong mảng là `object` giữ các giá trị (của bất kỳ kiểu nào) có vị trí theo chỉ số, chứ không phải theo trong một khóa/ thuộc tính được đặt tên. Ví dụ:
 
 ```js
 var arr = [
@@ -122,21 +122,21 @@ arr.length;		// 3
 typeof arr;		// "object"
 ```
 
-**Note:** Languages that start counting at zero, like JS does, use `0` as the index of the first element in the array.
+**Ghi chú:** Các ngôn ngữ thường được đếm từ 0, JS cũng dùng `0` như là chỉ mục của giá trị đầu tiên trong mảng.
 
-It may be helpful to think of `arr` visually:
+Để dễ hình dung về `arr` hãy xem hình dưới:
 
 <img src="fig5.png">
 
-Because arrays are special objects (as `typeof` implies), they can also have properties, including the automatically updated `length` property.
+Bởi vì mảng là một object đặc biệt (như `typeof` đã ngụ ý), nó có thể có thuộc tính, bao gồm thuộc tính `length` cũng được tự động cập nhật.
 
-You theoretically could use an array as a normal object with your own named properties, or you could use an `object` but only give it numeric properties (`0`, `1`, etc.) similar to an array. However, this would generally be considered improper usage of the respective types.
+Về mặt lý thuyết, bạn có thể sử dụng mảng như một object bình thường với tên thuộc tính tự bạn đặt, hoặc bạn có thể sử dụng một `object` nhưng chỉ cho các thuộc tính số (`0`, `1`, ...) tương tự như một mảng (wtf). Tuy nhiên, điều này thường được coi là sử dụng không đúng loại tương ứng.
 
-The best and most natural approach is to use arrays for numerically positioned values and use `object`s for named properties.
+Cách tự nhiên và tốt nhất là sử dụng mảng cho các giá trị được xác định vị trí theo số và sử dụng `object` cho các thuộc tính có tên.
 
-#### Functions
+#### Hàm
 
-The other `object` subtype you'll use all over your JS programs is a function:
+Một kiểu `object` con khác mà bạn sẽ sử dụng trong suốt chương trình JS là hàm:
 
 ```js
 function foo() {
@@ -150,11 +150,11 @@ typeof foo();		// "number"
 typeof foo.bar;		// "string"
 ```
 
-Again, functions are a subtype of `objects` -- `typeof` returns `"function"`, which implies that a `function` is a main type -- and can thus have properties, but you typically will only use function object properties (like `foo.bar`) in limited cases.
+Một lần nữa, hàm là kiểu con của `objects` -- `typeof` trả kết quả `"function"` để hàm ý rằng `function` là một kiểu chính -- và có thể có các thuộc tính, nhưng bạn chỉ thường sử dụng thuộc tính đối tượng hàm trong trường hợp giới hạn (ví dụ `foo.bar`).
 
-**Note:** For more information on JS values and their types, see the first two chapters of the *Types & Grammar* title of this series.
+**Chú ý:** Thông tin chi tiết về giá trị và kiểu của JS, xem hai chương đầu của phần *Kiểu & Ngữ pháp*.
 
-### Built-In Type Methods
+### Các phương thức kiểu dựng sẵn
 
 The built-in types and subtypes we've just discussed have behaviors exposed as properties and methods that are quite powerful and useful.
 
@@ -169,11 +169,11 @@ a.toUpperCase();		// "HELLO WORLD"
 b.toFixed(4);			// "3.1416"
 ```
 
-The "how" behind being able to call `a.toUpperCase()` is more complicated than just that method existing on the value.
+Việc "làm cách nào" đằng sau lệnh `a.toUpperCase()` phức tạp hơn chỉ là phương thức hiện có trong giá trị.
 
-Briefly, there is a `String` (capital `S`) object wrapper form, typically called a "native," that pairs with the primitive `string` type; it's this object wrapper that defines the `toUpperCase()` method on its prototype.
+Tóm tắt thì nó là một dạng bao lấy object `String` (viết hoa `S`), thường được gọi là "native," cặp với `string` nguyên thủy; đó là object bao ngoài định nghĩa phương thức `toUpperCase()` trên nguyên mẫu của nó.
 
-When you use a primitive value like `"hello world"` as an `object` by referencing a property or method (e.g., `a.toUpperCase()` in the previous snippet), JS automatically "boxes" the value to its object wrapper counterpart (hidden under the covers).
+Khi bạn sử dụng giá trị ban đầu `"hello world"` như một `object` bằng cách tham chiếu một thuộc tính hay phương thức (vd: `a.toUpperCase()` trong đoạn code trên), JS tự động "đóng hộp" giá trị cho đối tượng bao ngoài của nó.
 
 A `string` value can be wrapped by a `String` object, a `number` can be wrapped by a `Number` object, and a `boolean` can be wrapped by a `Boolean` object. For the most part, you don't need to worry about or directly use these object wrapper forms of the values -- prefer the primitive value forms in practically all cases and JavaScript will take care of the rest for you.
 
