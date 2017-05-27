@@ -156,9 +156,9 @@ Một lần nữa, hàm là kiểu con của `objects` -- `typeof` trả kết q
 
 ### Các phương thức kiểu dựng sẵn
 
-The built-in types and subtypes we've just discussed have behaviors exposed as properties and methods that are quite powerful and useful.
+Những kiêu dựng sẵn và kiểu con mà chúng ta vừa bàn luận có hành vi rõ ràng như các thuộc tính và phương thức của nó rất mạnh mẽ, hữu dụng.
 
-For example:
+Ví dụ:
 
 ```js
 var a = "hello world";
@@ -175,25 +175,25 @@ Tóm tắt thì nó là một dạng bao lấy object `String` (viết hoa `S`),
 
 Khi bạn sử dụng giá trị ban đầu `"hello world"` như một `object` bằng cách tham chiếu một thuộc tính hay phương thức (vd: `a.toUpperCase()` trong đoạn code trên), JS tự động "đóng hộp" giá trị cho đối tượng bao ngoài của nó.
 
-A `string` value can be wrapped by a `String` object, a `number` can be wrapped by a `Number` object, and a `boolean` can be wrapped by a `Boolean` object. For the most part, you don't need to worry about or directly use these object wrapper forms of the values -- prefer the primitive value forms in practically all cases and JavaScript will take care of the rest for you.
+Một giá trị `string` có thể được bao bởi một `String` object, một `number` có thể được bao bởi `Number` object, và `boolean` được bao bởi `Boolean` object. Phần lớn, bạn không cần phải lo lắng hoặc trực tiếp sử dụng những dạng bao object của giá trị -- Sử dụng định dạng giá trị nguyên thủy trong thực tế, JS sẽ lo phần còn lại.
 
-**Note:** For more information on JS natives and "boxing," see Chapter 3 of the *Types & Grammar* title of this series. To better understand the prototype of an object, see Chapter 5 of the *this & Object Prototypes* title of this series.
+**Ghi chú:** Để biết thêm về các bản chất của JS và "đóng hộp", xem Chương 3 *Kiểu & Ngữ pháp*. Để hiểu hơn về prototype và object, xem Chương 5 *this & Object Proptotypes*
 
-### Comparing Values
+### So sánh các giá trị.
 
-There are two main types of value comparison that you will need to make in your JS programs: *equality* and *inequality*. The result of any comparison is a strictly `boolean` value (`true` or `false`), regardless of what value types are compared.
+Có hai kiểu so sánh giá trị chính mà bạn cần thực hiện trong chương trình JS: *bằng nhau* và không *bằng nhau*. Kết quả của bất kỳ sự so sánh nào đều là `boolean` (`true` hoặc `false`), bất kể kiểu già trị nào được so sánh.
 
-#### Coercion
+#### Sự cưỡng bức
 
-We talked briefly about coercion in Chapter 1, but let's revisit it here.
+Chúng ta đã nói ngắn gọn về sự cưỡng bức ở Chương 1, nhưng chúng ta sẽ thảo luận thêm ở đây.
 
-Coercion comes in two forms in JavaScript: *explicit* and *implicit*. Explicit coercion is simply that you can see obviously from the code that a conversion from one type to another will occur, whereas implicit coercion is when the type conversion can happen as more of a non-obvious side effect of some other operation.
+Sự cưỡng bức xuất hiện trong 2 dạng của JavaScript: *minh bạch* và *tiềm ẩn*. Sự cưỡng bức minh bạch đơn giản là bạn thấy rõ ràng trong code có một sự chuyển đổi từ dạng này sang dạng khác, trong khi đó sự cưỡng bức tiềm ẩn là khi chuyển đổi dạng có thể xảy ra nhiều hơn một hiệu ứng phụ của một số hoạt động khác.
 
-You've probably heard sentiments like "coercion is evil" drawn from the fact that there are clearly places where coercion can produce some surprising results. Perhaps nothing evokes frustration from developers more than when the language surprises them.
+Bạn có thể từng nghe ý kiến rằng "sự cưỡng bức là ma quỷ" được nêu ra trong một số sự kiện tại một vị trí rõ ràng nào đó, nơi mà sự cưỡng bức có thể tạo nên những kết quả bất ngờ. Có lẽ đối với các developer thì không có gì thất vọng hơn khi một ngôn ngữ làm họ bất ngờ.
 
-Coercion is not evil, nor does it have to be surprising. In fact, the majority of cases you can construct with type coercion are quite sensible and understandable, and can even be used to *improve* the readability of your code. But we won't go much further into that debate -- Chapter 4 of the *Types & Grammar* title of this series covers all sides.
+Sự cưỡng bức không phải là ma quỷ cũng như mang lại sự bất ngờ. Thực tế, phần lớn các trường hợp chính bạn có thể xây dựng với kiểu cưỡng bức hợp lý và dễ hiểu, thậm chí còn có thể sử dụng để *cải thiện* khả năng đọc code. Nhưng chúng ta không đi sâu vào tranh luận điều này. -- Chương 4 *Kiểu & Ngữ pháp* sẽ giải quyết hết các vấn đề.
 
-Here's an example of *explicit* coercion:
+Dưới đây là ví dụ của cưỡng bức *minh bạch*::
 
 ```js
 var a = "42";
@@ -204,7 +204,7 @@ a;				// "42"
 b;				// 42 -- the number!
 ```
 
-And here's an example of *implicit* coercion:
+Và dưới đây là ví dụ của cưỡng bức *không minh bạch*:
 
 ```js
 var a = "42";
@@ -215,7 +215,7 @@ a;				// "42"
 b;				// 42 -- the number!
 ```
 
-#### Truthy & Falsy
+#### Đúng và Sai
 
 In Chapter 1, we briefly mentioned the "truthy" and "falsy" nature of values: when a non-`boolean` value is coerced to a `boolean`, does it become `true` or `false`, respectively?
 
