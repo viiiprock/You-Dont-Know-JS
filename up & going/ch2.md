@@ -217,16 +217,16 @@ b;				// 42 -- the number!
 
 #### Đúng và Sai
 
-In Chapter 1, we briefly mentioned the "truthy" and "falsy" nature of values: when a non-`boolean` value is coerced to a `boolean`, does it become `true` or `false`, respectively?
+Trong chương 1, chúng ta đã đề cập ngắn gọn đến tính "truthy" và "falsy" tự nhiên của giá trị: khi một giá trị không phải `boolean` bị ép thành `boolean`, nó có trở thành tính `true` hay `false` tương ứng?
 
-The specific list of "falsy" values in JavaScript is as follows:
+Danh sách cụ thể của giá trị "falsy" trong JS:
 
-* `""` (empty string)
-* `0`, `-0`, `NaN` (invalid `number`)
+* `""` (chuỗi rỗng)
+* `0`, `-0`, `NaN` (`number` không hợp lệ)
 * `null`, `undefined`
 * `false`
 
-Any value that's not on this "falsy" list is "truthy." Here are some examples of those:
+Bất kỳ giá trị nào không phải "falsy" thì là "truthy". Đây là ví dụ:
 
 * `"hello"`
 * `42`
@@ -235,11 +235,11 @@ Any value that's not on this "falsy" list is "truthy." Here are some examples of
 * `{ }`, `{ a: 42 }` (objects)
 * `function foo() { .. }` (functions)
 
-It's important to remember that a non-`boolean` value only follows this "truthy"/"falsy" coercion if it's actually coerced to a `boolean`. It's not all that difficult to confuse yourself with a situation that seems like it's coercing a value to a `boolean` when it's not.
+Điều quan trọng là phải nhớ rằng giá trị `boolean` chỉ theo sự cưỡng ép "truthy"/"falsy" nếu nó bị ép theo `boolean`. Cũng không phải khó khăn gì để tự nhầm lẫn với một tình huống có vẻ như nó đang buộc một giá trị thành `boolean` khi nó không phải.
 
-#### Equality
+#### Đẳng thức
 
-There are four equality operators: `==`, `===`, `!=`, and `!==`. The `!` forms are of course the symmetric "not equal" versions of their counterparts; *non-equality* should not be confused with *inequality*.
+Có bốn loại đẳng thức: `==`, `===`, `!=`, và `!==`. Dạng `!` tất nhiên là bản "không bình đẳng" đối xứng với các đối chiếu của nó; *non-equality* should not be confused with *inequality*.
 
 The difference between `==` and `===` is usually characterized that `==` checks for value equality and `===` checks for both value and type equality. However, this is inaccurate. The proper way to characterize them is that `==` checks for value equality with coercion allowed, and `===` checks for value equality without allowing coercion; `===` is often called "strict equality" for this reason.
 
