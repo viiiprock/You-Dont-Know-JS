@@ -1,9 +1,9 @@
 # You Don't Know JS: Scope & Closures
-# Chapter 1: What is Scope?
+# Chapter 1: Scope là gì?
 
-One of the most fundamental paradigms of nearly all programming languages is the ability to store values in variables, and later retrieve or modify those values. In fact, the ability to store values and pull values out of variables is what gives a program *state*.
+Một trong những mô hình cơ bản của các ngôn ngữ lập trình gần nhất là khả năng lưu trữ giá trị trong biến và sau đó gọi các giá trị đó hoặc thay đổi chúng. Thực tế, khả năng lưu trữ giá trị và kéo giá trị đó ra khỏi biến là cách tạo ra *state* của chương trình.
 
-Without such a concept, a program could perform some tasks, but they would be extremely limited and not terribly interesting.
+Không có khái niệm như vậy, một chương trình sẽ cực kỳ giới hạn và thậm chí không thú vị mặc dù nó có thể thực thi một số nhiệm vụ. (chắc ông này muốn nói tới html css đây hehe)
 
 But the inclusion of variables into our program begets the most interesting questions we will now address: where do those variables *live*? In other words, where are they stored? And, most importantly, how does our program find them when it needs them?
 

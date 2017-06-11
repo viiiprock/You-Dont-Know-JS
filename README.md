@@ -18,7 +18,7 @@ Bạn có thể chỉnh sửa bản dịch của mình hoặc góp ý.
 
 ## Titles
 
-* Xem online (miễn phí!): ["Khởi đầu và phát triển"](https://github.com/viiiprock/You-Dont-Know-JS/tree/master/up%20%26%20going), Published: [Buy Now](http://shop.oreilly.com/product/0636920039303.do) in print, but the ebook format is free!
+* Xem online (miễn phí!): ["Khởi đầu"](https://github.com/viiiprock/You-Dont-Know-JS/tree/master/up%20%26%20going), Published: [Buy Now](http://shop.oreilly.com/product/0636920039303.do) in print, but the ebook format is free!
 * Xem online (miễn phí!): ["Scope & Closures"](https://github.com/viiiprock/You-Dont-Know-JS/tree/master/scope%20%26%20closures), Published: [Buy Now](http://shop.oreilly.com/product/0636920026327.do)
 * Xem online (miễn phí!): ["*this* & Các nguyên mẫu đối tượng (object proptotypes)"](https://github.com/viiiprock/You-Dont-Know-JS/tree/master/this%20%26%20object%20prototypes), Published: [Buy Now](http://shop.oreilly.com/product/0636920033738.do)
 * Xem online (miễn phí!): ["Kiểu & Ngữ pháp"](https://github.com/viiiprock/You-Dont-Know-JS/tree/master/types%20%26%20grammar), Published: [Buy Now](http://shop.oreilly.com/product/0636920033745.do)

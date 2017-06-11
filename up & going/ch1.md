@@ -1,4 +1,4 @@
-# You Don't Know JS: Khởi đầu và phát triển
+# You Don't Know JS: Khởi đầu
 # Chương 1: Hiểu về lập trình
 
 Chào mừng bạn đến với seri You Don't Know JS (YDKJS).
