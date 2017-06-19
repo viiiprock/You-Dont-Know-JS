@@ -239,9 +239,9 @@ Bất kỳ giá trị nào không phải "falsy" thì là "truthy". Đây là v�
 
 #### Đẳng thức
 
-Có bốn loại đẳng thức: `==`, `===`, `!=`, và `!==`. Dạng `!` tất nhiên là bản "không bình đẳng" đối xứng với các đối chiếu của nó; *non-equality* should not be confused with *inequality*.
+Có bốn loại đẳng thức: `==`, `===`, `!=`, và `!==`. Dạng `!` tất nhiên là bản "không bình đẳng" đối xứng với các đối chiếu của nó; không nên nhầm lẫn giữa *không bằng tuyệt đối* và *không bằng tương đối*.
 
-The difference between `==` and `===` is usually characterized that `==` checks for value equality and `===` checks for both value and type equality. However, this is inaccurate. The proper way to characterize them is that `==` checks for value equality with coercion allowed, and `===` checks for value equality without allowing coercion; `===` is often called "strict equality" for this reason.
+Sự khác biệt giữa `==` và `===` thường được đặc trưng hóa rằng `==` kiểm tra bằng nhau của giá trị và `===` kiểm tra bằng nhau cả giá trị lẫn kiểu. Tuy nhiên, điều này không đúng. Cách thích hợp để đặc trưng hóa chúng là `==` kiểm tra bằng nhau của giá trị với việc cưỡng bức được cho phép, và `===` không cho phép cưỡng bức; `===` thường được gọi là "bình đẳng nghiêm ngặt" (strict equality) vì lý do này.
 
 Consider the implicit coercion that's allowed by the `==` loose-equality comparison and not allowed with the `===` strict-equality:
 
