@@ -5,25 +5,25 @@ Một trong những mô hình cơ bản của các ngôn ngữ lập trình gầ
 
 Không có khái niệm như vậy, một chương trình sẽ cực kỳ giới hạn và thậm chí không thú vị mặc dù nó có thể thực thi một số nhiệm vụ. (chắc ông này muốn nói tới html css đây hehe)
 
-But the inclusion of variables into our program begets the most interesting questions we will now address: where do those variables *live*? In other words, where are they stored? And, most importantly, how does our program find them when it needs them?
+Nhưng việc đưa các biến vào trong chương trình của chúng ta sinh ra câu hỏi thú vị nhất mà chúng ta sẽ giải quyết: những biến đó *sống* ở đâu? Hay nói cách khác, nó được lưu ở đâu? Và quan trọng nhất là làm cách nào chương trình có thể tìm thấy nó khi cần?
 
-These questions speak to the need for a well-defined set of rules for storing variables in some location, and for finding those variables at a later time. We'll call that set of rules: *Scope*.
+Những câu hỏi nói lên sự cần thiết của các quy tắc được xác định rõ ràng của việc lưu trữ các biến ở đâu đó, cùng việc tìm các biến sau đó. Chúng ta gọi quy tắc đó là *Scope*
 
-But, where and how do these *Scope* rules get set?
+Nhưng, các quy tắc *Scope* được thiết lập ở đâu và như thế nào?
 
-## Compiler Theory
+## Lý thuyết trình biên dịch
 
-It may be self-evident, or it may be surprising, depending on your level of interaction with various languages, but despite the fact that JavaScript falls under the general category of "dynamic" or "interpreted" languages, it is in fact a compiled language. It is *not* compiled well in advance, as are many traditionally-compiled languages, nor are the results of compilation portable among various distributed systems.
+Tùy thuộc vào mức độ bạn tương tác với các ngôn ngữ khác nhau, nó có thể là hiển nhiên hoặc lạ lẫm, mặc dù thực tế JS là một ngôn ngữ nằm trong hạng mục "năng động" hoặc "giải nghĩa", thực tế nó là ngôn ngữ được biên dịch. Cũng như nhiều ngôn ngữ được biên dịch truyền thống khác, nó không được biên dịch trước hay cũng không phải là kết quả của sự kết hợp giữa các hệ thống phân phối khác nhau.
 
-But, nevertheless, the JavaScript engine performs many of the same steps, albeit in more sophisticated ways than we may commonly be aware, of any traditional language-compiler.
+Tuy nhiên JS engine thực hiện nhiều bước đồng thời, theo những cách phức tạp hơn mà chúng ta từng biết, kể cả bất trình biên dịch truyền thống nào.
 
-In traditional compiled-language process, a chunk of source code, your program, will undergo typically three steps *before* it is executed, roughly called "compilation":
+Trong tiến trình biên dịch của ngôn ngữ truyền thống, mã nguồn sẽ thông qua ba bước trước khi thực thi chương trình, gọi là biên dịch:
 
-1. **Tokenizing/Lexing:** breaking up a string of characters into meaningful (to the language) chunks, called tokens. For instance, consider the program: `var a = 2;`. This program would likely be broken up into the following tokens: `var`, `a`, `=`, `2`, and `;`. Whitespace may or may not be persisted as a token, depending on whether it's meaningful or not.
+1. **Tokenizing/Lexing:** Tách các chuỗi ký tự thành các khối có ý nghĩa (đối với ngôn ngữ), được gọi là token. Ví dụ: `var a = 2;`. Chương trình sẽ được phân thành các token sau: `var`, `a`, `=`, `2`, và `;`. Khoảng trắng có thể có hoặc không duy trì như một token, tùy thuộc vào nó có nghĩa hay không.
 
-    **Note:** The difference between tokenizing and lexing is subtle and academic, but it centers on whether or not these tokens are identified in a *stateless* or *stateful* way. Put simply, if the tokenizer were to invoke stateful parsing rules to figure out whether `a` should be considered a distinct token or just part of another token, *that* would be **lexing**.
+    **Ghi chú:** Sự khác biệt giữa tokenizing và lexing là tinh tế và học thuật (subtle and academic), nhưng nó tập trung vào việc các token này được xác định theo cách là có *trạng thái* hay *không trạng thái*. Nói đơn giản, nếu tokenizer were to invoke stateful parsing rules to figure out whether `a` should be considered a distinct token or just part of another token, *that* would be **lexing**.
 
-2. **Parsing:** taking a stream (array) of tokens and turning it into a tree of nested elements, which collectively represent the grammatical structure of the program. This tree is called an "AST" (<b>A</b>bstract <b>S</b>yntax <b>T</b>ree).
+2. **Phân tích cú pháp (parsing):** taking a stream (array) of tokens and turning it into a tree of nested elements, which collectively represent the grammatical structure of the program. This tree is called an "AST" (<b>A</b>bstract <b>S</b>yntax <b>T</b>ree).
 
     The tree for `var a = 2;` might start with a top-level node called `VariableDeclaration`, with a child node called `Identifier` (whose value is `a`), and another child called `AssignmentExpression` which itself has a child called `NumericLiteral` (whose value is `2`).
 

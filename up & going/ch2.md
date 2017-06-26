@@ -243,7 +243,7 @@ Có bốn loại đẳng thức: `==`, `===`, `!=`, và `!==`. Dạng `!` tất 
 
 Sự khác biệt giữa `==` và `===` thường được đặc trưng hóa rằng `==` kiểm tra bằng nhau của giá trị và `===` kiểm tra bằng nhau cả giá trị lẫn kiểu. Tuy nhiên, điều này không đúng. Cách thích hợp để đặc trưng hóa chúng là `==` kiểm tra bằng nhau của giá trị với việc cưỡng bức được cho phép, và `===` không cho phép cưỡng bức; `===` thường được gọi là "bình đẳng nghiêm ngặt" (strict equality) vì lý do này.
 
-Consider the implicit coercion that's allowed by the `==` loose-equality comparison and not allowed with the `===` strict-equality:
+Xem sự cưỡng bức ngầm cho phép bằng cách so sánh bình đẳng `==` và không được phép với sự cưỡng bức nghiêm ngặt `===`:
 
 ```js
 var a = "42";
@@ -253,7 +253,7 @@ a == b;			// true
 a === b;		// false
 ```
 
-In the `a == b` comparison, JS notices that the types do not match, so it goes through an ordered series of steps to coerce one or both values to a different type until the types match, where then a simple value equality can be checked.
+Trong việc so sánh `a == b`, JS notices that the types do not match, so it goes through an ordered series of steps to coerce one or both values to a different type until the types match, where then a simple value equality can be checked.
 
 If you think about it, there's two possible ways `a == b` could give `true` via coercion. Either the comparison could end up as `42 == 42` or it could be `"42" == "42"`. So which is it?
 
