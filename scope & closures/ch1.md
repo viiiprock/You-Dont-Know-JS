@@ -43,11 +43,11 @@ Với JavaScript, trong nhiều trường hợp, sự biên dịch được xả
 
 Nói cho đơn giản, bất kỳ đoạn code JavaScript cũng phải được biên dịch trước khi nó thực thi (thường là *ngày trước khi*). Vậy, trình biên dịch JS sẽ lấy `var a = 2;` và biên dịch nó *trước*, sau đó sẽ thực thi nó, thường là ngay tức thì.
 
-## Tìm hiểu Scope
+## Hiểu Scope
 
-The way we will approach learning about scope is to think of the process in terms of a conversation. But, *who* is having the conversation?
+Cách chúng ta tiếp cận học scope là nghĩ về quá trình của một cuộc hội thoại. Nhưng *ai* có cuộc hội thoại đó?
 
-### The Cast
+### Vai diễn
 
 Let's meet the cast of characters that interact to process the program `var a = 2;`, so we understand their conversations that we'll listen in on shortly:
 

@@ -185,15 +185,15 @@ Có hai kiểu so sánh giá trị chính mà bạn cần thực hiện trong ch
 
 #### Sự cưỡng bức
 
-Chúng ta đã nói ngắn gọn về sự cưỡng bức ở Chương 1, nhưng chúng ta sẽ thảo luận thêm ở đây.
+Chúng ta đã nói ngắn gọn về sự ép buộcở Chương 1, nhưng chúng ta sẽ thảo luận thêm ở đây.
 
-Sự cưỡng bức xuất hiện trong 2 dạng của JavaScript: *minh bạch* và *tiềm ẩn*. Sự cưỡng bức minh bạch đơn giản là bạn thấy rõ ràng trong code có một sự chuyển đổi từ dạng này sang dạng khác, trong khi đó sự cưỡng bức tiềm ẩn là khi chuyển đổi dạng có thể xảy ra nhiều hơn một hiệu ứng phụ của một số hoạt động khác.
+Sự ép buộcxuất hiện trong 2 dạng của JavaScript: *minh bạch* và *tiềm ẩn*. Sự ép buộcminh bạch đơn giản là bạn thấy rõ ràng trong code có một sự chuyển đổi từ dạng này sang dạng khác, trong khi đó sự ép buộctiềm ẩn là khi chuyển đổi dạng có thể xảy ra nhiều hơn một hiệu ứng phụ của một số hoạt động khác.
 
-Bạn có thể từng nghe ý kiến rằng "sự cưỡng bức là ma quỷ" được nêu ra trong một số sự kiện tại một vị trí rõ ràng nào đó, nơi mà sự cưỡng bức có thể tạo nên những kết quả bất ngờ. Có lẽ đối với các developer thì không có gì thất vọng hơn khi một ngôn ngữ làm họ bất ngờ.
+Bạn có thể từng nghe ý kiến rằng "sự ép buộc là ma quỷ" được nêu ra trong một số sự kiện tại một vị trí rõ ràng nào đó, nơi mà sự ép buộc có thể tạo nên những kết quả bất ngờ. Có lẽ đối với các developer thì không có gì thất vọng hơn khi một ngôn ngữ làm họ bất ngờ.
 
-Sự cưỡng bức không phải là ma quỷ cũng như mang lại sự bất ngờ. Thực tế, phần lớn các trường hợp chính bạn có thể xây dựng với kiểu cưỡng bức hợp lý và dễ hiểu, thậm chí còn có thể sử dụng để *cải thiện* khả năng đọc code. Nhưng chúng ta không đi sâu vào tranh luận điều này. -- Chương 4 *Kiểu & Ngữ pháp* sẽ giải quyết hết các vấn đề.
+Sự ép buộc không phải là ma quỷ cũng như mang lại sự bất ngờ. Thực tế, phần lớn các trường hợp chính bạn có thể xây dựng với kiểu ép buộc hợp lý và dễ hiểu, thậm chí còn có thể sử dụng để *cải thiện* khả năng đọc code. Nhưng chúng ta không đi sâu vào tranh luận điều này. -- Chương 4 *Kiểu & Ngữ pháp* sẽ giải quyết hết các vấn đề.
 
-Dưới đây là ví dụ của cưỡng bức *minh bạch*::
+Dưới đây là ví dụ của ép buộc *minh bạch*::
 
 ```js
 var a = "42";
@@ -204,12 +204,12 @@ a;				// "42"
 b;				// 42 -- số!
 ```
 
-Và dưới đây là ví dụ của cưỡng bức *không minh bạch*:
+Và dưới đây là ví dụ của ép buộc *không minh bạch*:
 
 ```js
 var a = "42";
 
-var b = a * 1;	// "42" cưỡng bức ngầm 42 tại đây
+var b = a * 1;	// "42" ép buộc ngầm 42 tại đây
 
 a;				// "42"
 b;				// 42 -- số!
@@ -241,9 +241,9 @@ Bất kỳ giá trị nào không phải "falsy" thì là "truthy". Đây là v�
 
 Có bốn loại đẳng thức: `==`, `===`, `!=`, và `!==`. Dạng `!` tất nhiên là bản "không bình đẳng" đối xứng với các đối chiếu của nó; không nên nhầm lẫn giữa *không bằng tuyệt đối* và *không bằng tương đối*.
 
-Sự khác biệt giữa `==` và `===` thường được đặc trưng hóa rằng `==` kiểm tra bằng nhau của giá trị và `===` kiểm tra bằng nhau cả giá trị lẫn kiểu. Tuy nhiên, điều này không đúng. Cách thích hợp để đặc trưng hóa chúng là `==` kiểm tra bằng nhau của giá trị với việc cưỡng bức được cho phép, và `===` không cho phép cưỡng bức; `===` thường được gọi là "bình đẳng nghiêm ngặt" (strict equality) vì lý do này.
+Sự khác biệt giữa `==` và `===` thường được đặc trưng hóa rằng `==` kiểm tra bằng nhau của giá trị và `===` kiểm tra bằng nhau cả giá trị lẫn kiểu. Tuy nhiên, điều này không đúng. Cách thích hợp để đặc trưng hóa chúng là `==` kiểm tra bằng nhau của giá trị với việc ép buộc được cho phép, và `===` không cho phép cưỡng bức; `===` thường được gọi là "bình đẳng nghiêm ngặt" (strict equality) vì lý do này.
 
-Xem sự cưỡng bức ngầm cho phép bằng cách so sánh bình đẳng `==` và không được phép với sự cưỡng bức nghiêm ngặt `===`:
+Xem sự ép buộc ngầm cho phép bằng cách so sánh bình đẳng `==` và không được phép với sự ép buộcnghiêm ngặt `===`:
 
 ```js
 var a = "42";
@@ -253,17 +253,17 @@ a == b;			// true
 a === b;		// false
 ```
 
-Trong việc so sánh `a == b`, JS nhận thấy rằng kiểu không trùng khớp, nên nó
-notices that the types do not match, so it goes through an ordered series of steps to coerce one or both values to a different type until the types match, where then a simple value equality can be checked.
+Trong việc so sánh `a == b`, JS nhận thấy rằng kiểu không trùng khớp, nên nó phải qua một loạt các bước theo trình tự ép buộc một hoặc cả hai giá trị khác kiểu cho đến khi chúng phù hợp, tại điểm này một phép so sánh giá trị đơn giản có thể được kiểm tra.
 
-If you think about it, there's two possible ways `a == b` could give `true` via coercion. Either the comparison could end up as `42 == 42` or it could be `"42" == "42"`. So which is it?
+Nếu bạn nghĩ, có hai cách để `a == b` có thể `true` thông qua ép buộc. Hoặc nó được so sánh là `42 == 42` hoặc nó là `"42" == "42"`, thì nó là cái nào?
 
-The answer: `"42"` becomes `42`, to make the comparison `42 == 42`. In such a simple example, it doesn't really seem to matter which way that process goes, as the end result is the same. There are more complex cases where it matters not just what the end result of the comparison is, but *how* you get there.
+Câu trả lời:  `"42"` trở thành `42`, để so sánh `42 == 42`. Trong ví dụ đơn giản, nó cũng không thực sự quan trọng tiến trình nào xảy ra, vì kết quả cũng như nhau. Nhưng đối với trường hợp phức tạp hơn thì nó quan trọng bởi vì nó không chỉ là kết quả của việc so sánh, mà là *làm thế nào* để dẫn tới điều này.
 
-The `a === b` produces `false`, because the coercion is not allowed, so the simple value comparison obviously fails. Many developers feel that `===` is more predictable, so they advocate always using that form and staying away from `==`. I think this view is very shortsighted. I believe `==` is a powerful tool that helps your program, *if you take the time to learn how it works.*
+`a === b` tạo nên `false` bởi vì sự ép buộc không cho phép, vì vậy sự so sánh đơn giản của giá trị đương nhiên sai. Nhiều lập trình viên cảm thấy `===`có thể dự đoán được, vậy nên họ hay dùng mẫu này và tránh xa `==`. Tôi nghĩ cách nhìn này khá ngắn. Tôi tin `==` là một công cụ quan trong để giúp chúng ta lập trình, *nếu bạn bỏ thời gian học cách nó hoạt động thế nào*
 
-We're not going to cover all the nitty-gritty details of how the coercion in `==` comparisons works here. Much of it is pretty sensible, but there are some important corner cases to be careful of. You can read section 11.9.3 of the ES5 specification (http://www.ecma-international.org/ecma-262/5.1/) to see the exact rules, and you'll be surprised at just how straightforward this mechanism is, compared to all the negative hype surrounding it.
+Chúng ta sẽ không bao hết chi tiết nền tảng về phương thức so sánh `==` ép buộc như thế nào. Hầu hết khá là hợp lý, nhưng cũng có một vài trường hợp góc cạnh quan trọng cũng nên cẩn thận. Bạn có thể đọc phần 11.9.3 của đặc tính ES5 (http://www.ecma-international.org/ecma-262/5.1/) để biết luật chính xác, và bạn sẽ ngạc nhiên cơ chế này đơn giản thế nào khi so sánh với những cường điệu trái ngược xung quanh nó.
 
+Để
 To boil down a whole lot of details to a few simple takeaways, and help you know whether to use `==` or `===` in various situations, here are my simple rules:
 
 * If either value (aka side) in a comparison could be the `true` or `false` value, avoid `==` and use `===`.
