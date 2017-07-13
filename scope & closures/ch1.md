@@ -27,23 +27,23 @@ Trong tiến trình biên dịch của ngôn ngữ truyền thống, mã nguồn
 
     Cây của `var a = 2;` có thể bắt đầu với một nút cao nhất được gọi là `VariableDeclaration`, với một nút con được gọi là `Identifier` (giá trị là `a`), và nút con khác được gọi là `AssignmentExpression` với bản thân nó có một con được gọi là `NumericLiteral` (giá trị là `2`).
 
-3. **Code-Generation:** the process of taking an AST and turning it into executable code. This part varies greatly depending on the language, the platform it's targeting, etc.
+3. **Xử lý mã (Code-Generation):** là quá trình lấy AST và biến nó thành mã thực thi. Phần này khác nhau rất nhiều tùy thuộc vào ngôn ngữ, nền tảng mà nó nhắm đến, ...
 
-    So, rather than get mired in details, we'll just handwave and say that there's a way to take our above described AST for `var a = 2;` and turn it into a set of machine instructions to actually *create* a variable called `a` (including reserving memory, etc.), and then store a value into `a`.
+    Vì vậy, thay vì đắm chìm vào chi tiết, chúng ta chỉ phẩy tay và nói rằng có cách để lấy AST được mô tả ở trên cho `var a = 2;` và chuyển nó thành một tập mã máy để thực sự *tạo* ra một biến gọi là `a` (bao gồm cả việc lưu trữ bộ nhớ, v.v...), và sau lưu trữ một giá trị vào `a`.
 
-    **Note:** The details of how the engine manages system resources are deeper than we will dig, so we'll just take it for granted that the engine is able to create and store variables as needed.
+    **Ghi chú:** Chi tiết về quản lý hệ thống của máy sâu hơn những gì chúng ta sẽ tìm hiểu, vì vậy chúng ta chỉ cần biết rằng máy có thể tạo và lưu trữ biến theo mong muốn.
 
-The JavaScript engine is vastly more complex than *just* those three steps, as are most other language compilers. For instance, in the process of parsing and code-generation, there are certainly steps to optimize the performance of the execution, including collapsing redundant elements, etc.
+Cũng như những ngôn ngữ biên dịch khác, JavaScript engine phức tạp và mênh mông hơn là chỉ có ba bước trên. Ví dụ, trong tiến trình phân tích và xử lý mã, trong đó đã có các bước tối ưu hiệu suất thực thi, bao gồm gộp các phần tử thừa,...
 
-So, I'm painting only with broad strokes here. But I think you'll see shortly why *these* details we *do* cover, even at a high level, are relevant.
+Vì vậy, tôi chỉ tô vẽ những nét lớn ở đây. Nhưng tôi nghĩ bạn sẽ mau nhận ra vì sao những chi tiết đó chúng ta cần biết, thậm chí là ở mức cao.
 
-For one thing, JavaScript engines don't get the luxury (like other language compilers) of having plenty of time to optimize, because JavaScript compilation doesn't happen in a build step ahead of time, as with other languages.
+Có một điều là JS engine không có nhiều thời gian tối ưu hóa sang chảnh như các trình biên dịch ngôn ngữ khác, bởi việc biên dịch JS không xảy ra trước hạn trong bước xây dựng (JavaScript compilation doesn't happen in a build step ahead of time) như những ngôn ngữ khác.
 
-For JavaScript, the compilation that occurs happens, in many cases, mere microseconds (or less!) before the code is executed. To ensure the fastest performance, JS engines use all kinds of tricks (like JITs, which lazy compile and even hot re-compile, etc.) which are well beyond the "scope" of our discussion here.
+Với JavaScript, trong nhiều trường hợp, sự biên dịch được xảy ra trong vài mili giây (hoặc ít hơn) trước khi code được thực thi. Để đảm bảo hiệu suất nhanh nhất, JS engine sử dụng tất cả các mẹo vượt qua luôn cả phạm vi chúng ta thảo luận ở đây ( như JITs, biên dịch chậm và thậm chí biên dịch lại, ...).
 
-Let's just say, for simplicity's sake, that any snippet of JavaScript has to be compiled before (usually *right* before!) it's executed. So, the JS compiler will take the program `var a = 2;` and compile it *first*, and then be ready to execute it, usually right away.
+Nói cho đơn giản, bất kỳ đoạn code JavaScript cũng phải được biên dịch trước khi nó thực thi (thường là *ngày trước khi*). Vậy, trình biên dịch JS sẽ lấy `var a = 2;` và biên dịch nó *trước*, sau đó sẽ thực thi nó, thường là ngay tức thì.
 
-## Understanding Scope
+## Tìm hiểu Scope
 
 The way we will approach learning about scope is to think of the process in terms of a conversation. But, *who* is having the conversation?
 

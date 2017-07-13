@@ -727,11 +727,11 @@ Bạn hãy ghi nhớ, hãy luyên tập các nguyên lý mà chúng ta đã họ
 * Bạn nên xác định các hàm cho việc tính toán thuế và định dạng giá tiền hoàn chỉnh với "$" và làm trong thành hai số thập phân.
 * **Thách thức tăng cường:** Thử kết hợp đầu vào chương trình, có thể là `prompt(..)` được đề cập trong "Input" ở trên. Bạn có thể nhắc người dùng về số dư trong tài khoản, ví dụ vậy. Chúc vui và sáng tạo.
 
-OK, go ahead. Try it. Don't peek at my code listing until you've given it a shot yourself!
+OK, triển thôi. Đừng nhìn code của tôi cho đến khi bạn có gì đó!
 
-**Note:** Because this is a JavaScript book, I'm obviously going to solve the practice exercise in JavaScript. But you can do it in another language for now if you feel more comfortable.
+**Ghi chú:** Bởi đây là cuốn sách JavaScript, Tôi sẽ giải bài tập bằng JavaScript. Nhưng bạn có thể thực hiện nó với ngôn ngữ khác nếu bạn cảm thấy thoải mái hơn.
 
-Here's my JavaScript solution for this exercise:
+Đây là giải pháp của tôi:
 
 ```js
 const SPENDING_THRESHOLD = 200;
@@ -750,55 +750,52 @@ function formatAmount(amount) {
 	return "$" + amount.toFixed( 2 );
 }
 
-// keep buying phones while you still have money
+// còn tiền thì mua tiếp
 while (amount < bank_balance) {
-	// buy a new phone!
+	// mua điện thoại mới!
 	amount = amount + PHONE_PRICE;
 
-	// can we afford the accessory?
+	// chúng ta có thể mua phụ kiện được không?
 	if (amount < SPENDING_THRESHOLD) {
 		amount = amount + ACCESSORY_PRICE;
 	}
 }
 
-// don't forget to pay the government, too
+// đừng quên trả tiền cho chính phủ
 amount = amount + calculateTax( amount );
 
 console.log(
 	"Your purchase: " + formatAmount( amount )
 );
-// Your purchase: $334.76
+// Bạn dùng hết: $334.76
 
-// can you actually afford this purchase?
+// bạn trả tiền nổi không?
 if (amount > bank_balance) {
 	console.log(
 		"You can't afford this purchase. :("
 	);
 }
-// You can't afford this purchase. :(
+// Bạn không trả nổi. :(
 ```
 
-**Note:** The simplest way to run this JavaScript program is to type it into the developer console of your nearest browser.
+**Ghi chú:** Cách đơn giản nhất để chạy chương trình JavaScript là gõ trên console trình duyệt mà bạn quen thuộc.
 
-How did you do? It wouldn't hurt to try it again now that you've seen my code. And play around with changing some of the constants to see how the program runs with different values.
+Bạn đã làm như thế nào? Cũng không khổ sở gì để thử lại nếu bạn đã thấy code của tôi. Có thể chơi một chút bằng cách thay đổi vài hằng số và xem chương trình nó chạy với những giá trị khác nhau.
 
-## Review
+## Ôn lại
 
-Learning programming doesn't have to be a complex and overwhelming process. There are just a few basic concepts you need to wrap your head around.
+Học lập trình không cần thiết phải theo tiến trình phức tạp và nặng nề. Nó chỉ có vài nguyên lý cơ bản bạn cần ghi nhớ trong đầu.
 
-These act like building blocks. To build a tall tower, you start first by putting block on top of block on top of block. The same goes with programming. Here are some of the essential programming building blocks:
+Việc học cũng như xây nhà. Để tạo ra một tòa tháp cao, bạn phải bắt đầu đặt những viên gạch này lên trên những viên gạch khác. Đây là vài chương trình cần thiết để xây tháp:
 
-* You need *operators* to perform actions on values.
-* You need values and *types* to perform different kinds of actions like math on `number`s or output with `string`s.
-* You need *variables* to store data (aka *state*) during your program's execution.
-* You need *conditionals* like `if` statements to make decisions.
-* You need *loops* to repeat tasks until a condition stops being true.
-* You need *functions* to organize your code into logical and reusable chunks.
+* Bạn cần *toán tử* để thực hiện hành động trên các giá trị.
+* Bạn cần các giá trị và *kiểu* để thực hiện vài kiểu tác vụ khác nhau như toán với `number` hoặc xuất đầu ra với `string`.
+* Bạn cần *biến* để lưu trữ dữ liệu (cũng như *state*) trong suốt quá trình thực thi chương trình.
+* Bạn cần *điều kiện* như câu lệnh `if` để ra quyết định.
+* Bạn cần *vòng lặp* để lặp lại tác vụ cho đến khi điều kiện ngừng xác thực.
+* Bạn cần *hàm* để tổ chức code của bạn thành những thành phần logic và tái sử dụng.
 
-Code comments are one effective way to write more readable code, which makes your program easier to understand, maintain, and fix later if there are problems.
+Bình luận code là một trong những các hiệu quả để giúp cho code dễ đọc, làm cho chương trình của bạn dể hiểu, dễ bảo trì và sửa chữa sau đó nếu có vấn đề.
 
-Finally, don't neglect the power of practice. The best way to learn how to write code is to write code.
+Cuối cùng, đừng bỏ qua sức mạnh của thực hành. Cách tốt nhất để học lập trình là lập trình.
 
-I'm excited you're well on your way to learning how to code, now! Keep it up. Don't forget to check out other beginner programming resources (books, blogs, online training, etc.). This chapter and this book are a great start, but they're just a brief introduction.
-
-The next chapter will review many of the concepts from this chapter, but from a more JavaScript-specific perspective, which will highlight most of the major topics that are addressed in deeper detail throughout the rest of the series.

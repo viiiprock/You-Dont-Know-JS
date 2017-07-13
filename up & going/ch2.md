@@ -201,7 +201,7 @@ var a = "42";
 var b = Number( a );
 
 a;				// "42"
-b;				// 42 -- the number!
+b;				// 42 -- số!
 ```
 
 Và dưới đây là ví dụ của cưỡng bức *không minh bạch*:
@@ -209,10 +209,10 @@ Và dưới đây là ví dụ của cưỡng bức *không minh bạch*:
 ```js
 var a = "42";
 
-var b = a * 1;	// "42" implicitly coerced to 42 here
+var b = a * 1;	// "42" cưỡng bức ngầm 42 tại đây
 
 a;				// "42"
-b;				// 42 -- the number!
+b;				// 42 -- số!
 ```
 
 #### Đúng và Sai
@@ -253,7 +253,8 @@ a == b;			// true
 a === b;		// false
 ```
 
-Trong việc so sánh `a == b`, JS notices that the types do not match, so it goes through an ordered series of steps to coerce one or both values to a different type until the types match, where then a simple value equality can be checked.
+Trong việc so sánh `a == b`, JS nhận thấy rằng kiểu không trùng khớp, nên nó
+notices that the types do not match, so it goes through an ordered series of steps to coerce one or both values to a different type until the types match, where then a simple value equality can be checked.
 
 If you think about it, there's two possible ways `a == b` could give `true` via coercion. Either the comparison could end up as `42 == 42` or it could be `"42" == "42"`. So which is it?
 
