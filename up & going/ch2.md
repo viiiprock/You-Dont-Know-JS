@@ -59,7 +59,7 @@ Chú ý rằng đoạn code này, biến `a` giữ mọi kiểu của giá trị
 
 ### Objects
 
-Kiểu `object` đề cập đến một phức hợp giá trị mà bạn có thể lập các thuộc tính (vị trí được đặt tên) mà mỗi cái đều có thể có giá trị của riên chúng với bất kỳ kiểu nào. Đây có lẽ là một trong nhưng kiểu hữu dụng nhất trong JS.
+Kiểu `object` đề cập đến một phức hợp giá trị mà bạn có thể lập các thuộc tính (vị trí được đặt tên) mà mỗi cái đều có thể có giá trị của riêng chúng với bất kỳ kiểu nào. Đây có lẽ là một trong nhưng kiểu hữu dụng nhất trong JS.
 
 ```js
 var obj = {
@@ -263,20 +263,19 @@ Câu trả lời:  `"42"` trở thành `42`, để so sánh `42 == 42`. Trong v�
 
 Chúng ta sẽ không bao hết chi tiết nền tảng về phương thức so sánh `==` ép buộc như thế nào. Hầu hết khá là hợp lý, nhưng cũng có một vài trường hợp góc cạnh quan trọng cũng nên cẩn thận. Bạn có thể đọc phần 11.9.3 của đặc tính ES5 (http://www.ecma-international.org/ecma-262/5.1/) để biết luật chính xác, và bạn sẽ ngạc nhiên cơ chế này đơn giản thế nào khi so sánh với những cường điệu trái ngược xung quanh nó.
 
-Để
-To boil down a whole lot of details to a few simple takeaways, and help you know whether to use `==` or `===` in various situations, here are my simple rules:
+Để làm rõ toàn bộ những chi tiết của vài điều cần ghi nhớ đơn giản, giúp bạn biết được khi nào thì dùng `==` hay `===`, tôi liệt kê một số nguyên tắc sau:
 
-* If either value (aka side) in a comparison could be the `true` or `false` value, avoid `==` and use `===`.
-* If either value in a comparison could be of these specific values (`0`, `""`, or `[]` -- empty array), avoid `==` and use `===`.
-* In *all* other cases, you're safe to use `==`. Not only is it safe, but in many cases it simplifies your code in a way that improves readability.
+* Nếu một trong hai bên trong phép so sánh là có thể là giá trị `true` hoặc `false`, tránh dùng `==` mà dùng `===`.
+* Nếu một trong hai bên trong phép so sánh là có thể một giá trị cụ thể (`0`, `""`, hoặc `[]` -- array rỗng), tránh `==` mà dùng `===`.
+* Trong *tất cả* các trường hợp khác, bạn yên tâm dùng `==`. Không chỉ vì nó an toàn, đơn giản là giúp code của bạn dễ đọc hơn trong nhiều trường hợp.
 
-What these rules boil down to is requiring you to think critically about your code and about what kinds of values can come through variables that get compared for equality. If you can be certain about the values, and `==` is safe, use it! If you can't be certain about the values, use `===`. It's that simple.
+Những nguyên tắc trên là để yêu cầu bạn suy nghĩ nghiêm túc về code của bạn và về những loại giá trị nào có thể đi qua các biến để được so sánh bằng. Nếu bạn chắc chắn về giá trị, và `==` an toàn, hãy dùng nó! Nếu bạn không thể chắc chắn về giá trị, sử dụng `===`. Đơn giản vậy thôi.
 
-The `!=` non-equality form pairs with `==`, and the `!==` form pairs with `===`. All the rules and observations we just discussed hold symmetrically for these non-equality comparisons.
+Ký hiệu không bằng `!=` đi cặp với `==`, và `!==` đi với `===`. Tất cả các quy tắc và quan sát chúng ta vừa thảo luận đều cũng được áp dụng với phép so sánh không bằng này.
 
-You should take special note of the `==` and `===` comparison rules if you're comparing two non-primitive values, like `object`s (including `function` and `array`). Because those values are actually held by reference, both `==` and `===` comparisons will simply check whether the references match, not anything about the underlying values.
+Bạn nên chú ý đặc biệt về các so sánh `==` và `===` khi so sánh hai giá trị không phải là nguyên thủy, như là `object` ( bao gồm `function` và `array`). Bởi vì các giá trị đó là tham chiếu, cả `==` và `===` đều kiểm tra khi nào các tham chiếu phù hợp chứ không phải các giá trị bên trong.
 
-For example, `array`s are by default coerced to `string`s by simply joining all the values with commas (`,`) in between. You might think that two `array`s with the same contents would be `==` equal, but they're not:
+Ví dụ, `array` được mặc định ép buộc sang `string` bằng cách đơn giản gộp tất cả các giá trị với dấu phẩy (`,`) ở giữa. Bạn có thể nghĩ là hai `array` với nội dung như nhau có thể là `==`, nhưng không phải:
 
 ```js
 var a = [1,2,3];
@@ -288,15 +287,15 @@ b == c;		// true
 a == b;		// false
 ```
 
-**Note:** For more information about the `==` equality comparison rules, see the ES5 specification (section 11.9.3) and also consult Chapter 4 of the *Types & Grammar* title of this series; see Chapter 2 for more information about values versus references.
+**Chý ý:** Để biết thêm về quy tắc so sánh `==`, xem ES5 specification (section 11.9.3) và cũng có bàn bạc trong Chương 4 của *Kiểu & Ngữ pháp* trong bộ này; xem Chương 2 để biết thêm về giá trị với tham chiếu.
 
-#### Inequality
+#### Bất bình đẳng
 
-The `<`, `>`, `<=`, and `>=` operators are used for inequality, referred to in the specification as "relational comparison." Typically they will be used with ordinally comparable values like `number`s. It's easy to understand that `3 < 4`.
+Toán tử `<`, `>`, `<=`, và `>=` sử dụng cho bất bình đẳng, được đề cập trong đặc là như là "so sánh quan hệ". Thông thường chúng được sử dụng với các giá trị so sánh theo thứ tự như `number`. Như `3 < 4` cũng dễ hiểu.
 
-But JavaScript `string` values can also be compared for inequality, using typical alphabetic rules (`"bar" < "foo"`).
+Nhưng giá trị JavaScript `string` cũng có thể được so sánh bất bình đẳng, sử dụng nguyên tắc alphabe thông thường (`"bar" < "foo"`).
 
-What about coercion? Similar rules as `==` comparison (though not exactly identical!) apply to the inequality operators. Notably, there are no "strict inequality" operators that would disallow coercion the same way `===` "strict equality" does.
+Về sự ép buộc thì sao? Tương tự như nguyên tắc so sánh `==` (mặc dù không giống hệt vậy) áp dụng trong toán tử bất bình đẳng. Đáng chú ý, Notably, there are no "strict inequality" operators that would disallow coercion the same way `===` "strict equality" does.
 
 Consider:
 
