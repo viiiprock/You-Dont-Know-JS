@@ -295,7 +295,7 @@ Toán tử `<`, `>`, `<=`, và `>=` sử dụng cho bất bình đẳng, đượ
 
 Nhưng giá trị JavaScript `string` cũng có thể được so sánh bất bình đẳng, sử dụng nguyên tắc alphabe thông thường (`"bar" < "foo"`).
 
-Về sự ép buộc thì sao? Tương tự như nguyên tắc so sánh `==` (mặc dù không giống hệt vậy) áp dụng trong toán tử bất bình đẳng. Đáng chú ý, Notably, there are no "strict inequality" operators that would disallow coercion the same way `===` "strict equality" does.
+Về sự ép buộc thì sao? Tương tự như nguyên tắc so sánh `==` (mặc dù không giống hệt vậy) áp dụng trong toán tử bất bình đẳng. Đáng chú ý, không có toán tử "bất bình đẳng nghiêm ngặt" không cho phép ép buộc như `===` như trong "bình đẳng nghiêm ngặt".
 
 Consider:
 
@@ -308,9 +308,9 @@ a < b;		// true
 b < c;		// true
 ```
 
-What happens here? In section 11.8.5 of the ES5 specification, it says that if both values in the `<` comparison are `string`s, as it is with `b < c`, the comparison is made lexicographically (aka alphabetically like a dictionary). But if one or both is not a `string`, as it is with `a < b`, then both values are coerced to be `number`s, and a typical numeric comparison occurs.
+Chuyện gì đang xảy ra? ở phần 11.8.5 của đặc tính kỹ thuật ES5, nó nói rằng nếu cả hai giá trị trong so sánh `<` đều là `string`, như ví dụ `b < c` trên, việc so sánh được thực hiện bằng từ điển học (??). Nhưng nếu một trong hai giá trị không phải là `string`, như so sánh `a < b`, thì cả hai giá trị bị ép thành `number`, và phép so sánh số thông thường diễn ra.
 
-The biggest gotcha you may run into here with comparisons between potentially different value types -- remember, there are no "strict inequality" forms to use -- is when one of the values cannot be made into a valid number, such as:
+Hãy nhớ rằng là không có "bất bình đẳng nghiêm ngặt" để sử dụng, cái hay nhất là bạn có thể sử dụng phép so sánh với nhiều kiểu giá trị khác nhau khi một trong các giá trị không phải là một giá trị số hợp lệ, ví dụ:
 
 ```js
 var a = 42;
@@ -321,7 +321,7 @@ a > b;		// false
 a == b;		// false
 ```
 
-Wait, how can all three of those comparisons be `false`? Because the `b` value is being coerced to the "invalid number value" `NaN` in the `<` and `>` comparisons, and the specification says that `NaN` is neither greater-than nor less-than any other value.
+Khoan, cách nào mà tất cả ba phép so sánh trên có thể `false`? Bởi vì giá trị `b` bị ép buộc thành "một giá trị number không hợp lệ" `NaN` trong `<` và `>`, và đặc điểm kỹ thuật cho biết `NaN` có thể là lớn hoặc nhỏ hơn bất kỳ một giá trị khác nào.
 
 The `==` comparison fails for a different reason. `a == b` could fail if it's interpreted either as `42 == NaN` or `"42" == "foo"` -- as we explained earlier, the former is the case.
 
