@@ -321,15 +321,16 @@ a > b;		// false
 a == b;		// false
 ```
 
-Khoan, cách nào mà tất cả ba phép so sánh trên có thể `false`? Bởi vì giá trị `b` bị ép buộc thành "một giá trị number không hợp lệ" `NaN` trong `<` và `>`, và đặc điểm kỹ thuật cho biết `NaN` có thể là lớn hoặc nhỏ hơn bất kỳ một giá trị khác nào.
+Khoan, cách nào mà tất cả ba phép so sánh trên có thể `false`? Bởi vì giá trị `b` bị ép buộc thành "một giá trị number không hợp lệ" `NaN` trong `<` và `>`, và đặc điểm kỹ thuật cho biết `NaN` có thể là lớn hoặc nhỏ hơn bất kỳ một giá trị khác.
 
-The `==` comparison fails for a different reason. `a == b` could fail if it's interpreted either as `42 == NaN` or `"42" == "foo"` -- as we explained earlier, the former is the case.
+Phép so sánh `==` thất bại vì một lý do khác. `a == b`  có thể thất bại kể cả được thông dịch ở cả hai cách `42 == NaN` hay `"42" == "foo"` -- như chúng ta đã giải thích lúc trước.
 
-**Note:** For more information about the inequality comparison rules, see section 11.8.5 of the ES5 specification and also consult Chapter 4 of the *Types & Grammar* title of this series.
+**Chú ý:** Để biết thêm thông tin về luật của phép so sánh bất bình đẳng, xem phần 11.8.5 của đặc tính kỹ thuật ES5, đồng thời tham khảo đề mục *Kiểu & Ngữ pháp* Chương 4 của bộ sách này.
 
-## Variables
+## Biến
 
-In JavaScript, variable names (including function names) must be valid *identifiers*. The strict and complete rules for valid characters in identifiers are a little complex when you consider nontraditional characters such as Unicode. If you only consider typical ASCII alphanumeric characters, though, the rules are simple.
+Trong JavaScript, tên biến (bao gồm tên hàm) phải là *nhận diện* hợp lệ. Sự nghiêm ngặt và hoàn chỉnh của
+The strict and complete rules for valid characters in identifiers are a little complex when you consider nontraditional characters such as Unicode. If you only consider typical ASCII alphanumeric characters, though, the rules are simple.
 
 An identifier must start with `a`-`z`, `A`-`Z`, `$`, or `_`. It can then contain any of those characters plus the numerals `0`-`9`.
 
