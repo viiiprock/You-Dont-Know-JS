@@ -243,7 +243,7 @@ Có bốn loại đẳng thức: `==`, `===`, `!=`, và `!==`. Dạng `!` tất 
 
 Sự khác biệt giữa `==` và `===` thường được đặc trưng hóa rằng `==` kiểm tra bằng nhau của giá trị và `===` kiểm tra bằng nhau cả giá trị lẫn kiểu. Tuy nhiên, điều này không đúng. Cách thích hợp để đặc trưng hóa chúng là `==` kiểm tra bằng nhau của giá trị với việc ép buộc được cho phép, và `===` không cho phép cưỡng bức; `===` thường được gọi là "bình đẳng nghiêm ngặt" (strict equality) vì lý do này.
 
-Xem sự ép buộc ngầm cho phép bằng cách so sánh bình đẳng `==` và không được phép với sự ép buộcnghiêm ngặt `===`:
+Xem sự ép buộc ngầm cho phép bằng cách so sánh bình đẳng `==` và không được phép với sự ép buộc nghiêm ngặt `===`:
 
 ```js
 var a = "42";
@@ -409,8 +409,7 @@ a;			// 1 -- oops, tự động trở thành biến toàn cục :(
 
 Đây là một trường hợp vô cùng tệ. Đừng làm điều này, bạn phải luôn khai báo biến một cách bình thường.
 
-
-In addition to creating declarations for variables at the function level, ES6 *lets* you declare variables to belong to individual blocks (pairs of `{ .. }`), using the `let` keyword. Besides some nuanced details, the scoping rules will behave roughly the same as we just saw with functions:
+Trong phương thức khai báo biến cho function, ES6 *cho phép* bạn khai báo các biến thuộc về các khối (block) riêng biệt `{...}` sử dụng từ khóa `let`. Bên cạnh các sắc thái chi tiết, nguyên tắc của scope sẽ hoạt động y với những gì chúng ta đã thấy ở các function:
 
 ```js
 function foo() {
@@ -432,11 +431,11 @@ foo();
 // 5 7 9
 ```
 
-Because of using `let` instead of `var`, `b` will belong only to the `if` statement and thus not to the whole `foo()` function's scope. Similarly, `c` belongs only to the `while` loop. Block scoping is very useful for managing your variable scopes in a more fine-grained fashion, which can make your code much easier to maintain over time.
+Bởi vì sử dụng `let` thay vì `var`, `b` chỉ thuộc về biểu thức `if` chứ không phải toàn bộ scope của function `foo()`. Tương tự, `c` chỉ thuộc về vòng lặp `while`. Cụm phạm vi hóa rất hữu ích để quản lý biến scope theo phương thức tốt hơn, giúp cho code của bạn dễ dàng bảo trì.
 
-**Note:** For more information about scope, see the *Scope & Closures* title of this series. See the *ES6 & Beyond* title of this series for more information about `let` block scoping.
+**Ghi chú:** Xem thêm phần *Scope & Closures* để nắm rõ hơn. Đối với phạm vi hóa `let`, xem phần *ES6 & Beyond*.
 
-## Conditionals
+## Điều kiện
 
 In addition to the `if` statement we introduced briefly in Chapter 1, JavaScript provides a few other conditionals mechanisms that we should take a look at.
 
