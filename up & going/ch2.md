@@ -329,50 +329,46 @@ Phép so sánh `==` thất bại vì một lý do khác. `a == b`  có thể th�
 
 ## Biến
 
-Trong JavaScript, tên biến (bao gồm tên hàm) phải là *nhận diện* hợp lệ. Sự nghiêm ngặt và hoàn chỉnh của
-The strict and complete rules for valid characters in identifiers are a little complex when you consider nontraditional characters such as Unicode. If you only consider typical ASCII alphanumeric characters, though, the rules are simple.
+Trong JavaScript, tên biến (bao gồm tên hàm) phải là *nhận diện* hợp lệ. Sự nghiêm ngặt và hoàn chỉnh của các nguyên tắc cho các ký tự hợp lệ trong việc định danh hơi phức tạp một chút khi bạn xem xét các ký tự không phổ biến như là Unicode. Nếu bạn chỉ xem xét các ký tự ASCII tiêu biểu thì các quy tắc lại trở nên đơn giản.
 
-An identifier must start with `a`-`z`, `A`-`Z`, `$`, or `_`. It can then contain any of those characters plus the numerals `0`-`9`.
+Một định danh nên bắt đầu với `a`-`z`, `A`-`Z`, `$`, hay `_`. Và nó có thể chứa bất kỳ các ký tự như vậy cùng với số từ `0`-`9`.
+Nói chung, các quy tắc tương tự áp dụng cho tên thuộc tính như là một biến số nhận diện. Tuy nhiên, một số từ nhất định không thể được sử dụng như các biến, nhưng cũng OK khi đặt tên thuộc tính. Những từ này gọi là từ "dành riêng", và bao gồm các từ khóa JS (`for`, `in`, `if`, v.v...) cũng như `null`, `true`, và `false`.
 
-Generally, the same rules apply to a property name as to a variable identifier. However, certain words cannot be used as variables, but are OK as property names. These words are called "reserved words," and include the JS keywords (`for`, `in`, `if`, etc.) as well as `null`, `true`, and `false`.
+**Ghi chú:** Để biết thêm thông tin về từ dành riêng, xem Phụ lục A của tập *Kiểu & ngữ pháp*
 
-**Note:** For more information about reserved words, see Appendix A of the *Types & Grammar* title of this series.
+### Function Scopes (Phạm vi chức năng)
 
-### Function Scopes
-
-You use the `var` keyword to declare a variable that will belong to the current function scope, or the global scope if at the top level outside of any function.
+Bạn sử dụng từ khóa `var` để khai báo biến cho scope chức năng gần nhất, hoặc là scope toàn cục nếu nó nằm ở tầng trên cùng ngoài tất cả các function.
 
 #### Hoisting
 
-Wherever a `var` appears inside a scope, that declaration is taken to belong to the entire scope and accessible everywhere throughout.
+Khi bất kỳ một `var` xuất hiện bên trong phạm vi, việc khai báo có thể thực hiện mọi nơi trong toàn bộ scope đó.
 
-Metaphorically, this behavior is called *hoisting*, when a `var` declaration is conceptually "moved" to the top of its enclosing scope. Technically, this process is more accurately explained by how code is compiled, but we can skip over those details for now.
+Một cách ẩn dụ, hành vi này gọi là *hoisting*, khi khai báo `var` "di chuyển" lên trên đầu scope của chính nó. Về mặt kỹ thuật, quá trình này được giải thích chính xác hơn bằng code được biên dịch như thế nào, nhưng tạm thời chúng ta bỏ qua chi tiết.
 
-Consider:
+Ví dụ:
 
 ```js
 var a = 2;
 
-foo();					// works because `foo()`
-						// declaration is "hoisted"
+foo();					// hoạt động nhờ khai báo `foo()` được "dời lên"
 
 function foo() {
 	a = 3;
 
 	console.log( a );	// 3
 
-	var a;				// declaration is "hoisted"
-						// to the top of `foo()`
+	var a;				// khai báo được "dời" lên trên đầu của `foo()`
 }
 
 console.log( a );	// 2
 ```
 
-**Warning:** It's not common or a good idea to rely on variable *hoisting* to use a variable earlier in its scope than its `var` declaration appears; it can be quite confusing. It's much more common and accepted to use *hoisted* function declarations, as we do with the `foo()` call appearing before its formal declaration.
+**Chú ý:** Đây không thường là một ý hay khi dựa vào biến *hoisting* để sử một biến trước đó trong scope của nó hơn là `var` được khai báo bởi chính nó, điều này có thể gây bối rối. Cách thông thường và được chấp nhận để sử dụng *hoisted* function là gọi trước khi nó được khai báo như chúng ta làm với `foo()`.
 
-#### Nested Scopes
+#### Scopes lồng nhau.
 
-When you declare a variable, it is available anywhere in that scope, as well as any lower/inner scopes. For example:
+Khi bạn khai báo một biến, nó có hiệu lực ở toàn bộ trong scope đó, kể cả scope con. Ví dụ:
 
 ```js
 function foo() {
@@ -398,20 +394,21 @@ function foo() {
 foo();
 ```
 
-Notice that `c` is not available inside of `bar()`, because it's declared only inside the inner `baz()` scope, and that `b` is not available to `foo()` for the same reason.
+Chú ý là `c` khôn có bên trong `bar()`, bởi vì nó chỉ được khai báo bên trong scope `baz()`, và tương tự `b` không có trong `foo()`.
 
-If you try to access a variable's value in a scope where it's not available, you'll get a `ReferenceError` thrown. If you try to set a variable that hasn't been declared, you'll either end up creating a variable in the top-level global scope (bad!) or getting an error, depending on "strict mode" (see "Strict Mode"). Let's take a look:
+Nếu bạn muốn tiếp cận giá trị của một biến trong một scope không có nó, bạn sẽ gặp lỗi `ReferenceError`. Nếu bạn cố lập một biến chưa được khai báo, bạn cũng sẽ vô tình tạo một biến ở tầng cao nhất - toàn cục (bad!) hoặc gặp lỗi, tùy vào "strict mode" (xem "Strict Mode"). Hãy xem ví dụ:
 
 ```js
 function foo() {
-	a = 1;	// `a` not formally declared
+	a = 1;	// `a` không được khai báo thông thường
 }
 
 foo();
-a;			// 1 -- oops, auto global variable :(
+a;			// 1 -- oops, tự động trở thành biến toàn cục :(
 ```
 
-This is a very bad practice. Don't do it! Always formally declare your variables.
+Đây là một trường hợp vô cùng tệ. Đừng làm điều này, bạn phải luôn khai báo biến một cách bình thường.
+
 
 In addition to creating declarations for variables at the function level, ES6 *lets* you declare variables to belong to individual blocks (pairs of `{ .. }`), using the `let` keyword. Besides some nuanced details, the scoping rules will behave roughly the same as we just saw with functions:
 
@@ -608,9 +605,9 @@ For more information, see the *Scope & Closures* title of this series.
 
 ### Immediately Invoked Function Expressions (IIFEs)
 
-In the previous snippet, neither of the function expressions are executed -- we could if we had included `foo()` or `x()`, for instance.
+Trong đoạn code trên, muốn biểu thức function được thực thi - chúng ta phải có thêm `foo()` hoặc `x()`.
 
-There's another way to execute a function expression, which is typically referred to as an *immediately invoked function expression* (IIFE):
+Có một cách khác để thực hi một biểu thức function, nó thường được gọi là *immediately invoked function expression - (tạm dịch) Biểu thức function thực hiện ngay lập tức* (IIFE):
 
 ```js
 (function IIFE(){
@@ -619,27 +616,27 @@ There's another way to execute a function expression, which is typically referre
 // "Hello!"
 ```
 
-The outer `( .. )` that surrounds the `(function IIFE(){ .. })` function expression is just a nuance of JS grammar needed to prevent it from being treated as a normal function declaration.
+`( .. )` bao ngoài `(function IIFE(){ .. })` function là một sắc thái cần thiết trong ngữ pháp JS để bảo vệ nó khỏi bị hành xử giống như function thông thường.
 
-The final `()` on the end of the expression -- the `})();` line -- is what actually executes the function expression referenced immediately before it.
+Dấu `()` cuối cùng của biểu thức `})();` là chính xác cái gì sẽ thực thi tức thì trước nó.
 
-That may seem strange, but it's not as foreign as first glance. Consider the similarities between `foo` and `IIFE` here:
+Cái này có vẻ lạ, nhưng không phải xa lạ với cái nhìn đầu tiên. Xem ví dụ tương tự giữa  `foo` và `IIFE`:
 
 ```js
 function foo() { .. }
 
-// `foo` function reference expression,
-// then `()` executes it
+// biểu thức function đại diện `foo`,
+// sau đó `()` thực thi nó
 foo();
 
-// `IIFE` function expression,
-// then `()` executes it
+// biểu thức function `IIFE`,
+// sau đó `()` thực thi nó
 (function IIFE(){ .. })();
 ```
 
-As you can see, listing the `(function IIFE(){ .. })` before its executing `()` is essentially the same as including `foo` before its executing `()`; in both cases, the function reference is executed with `()` immediately after it.
+Như bạn thấy, liệt kê `(function IIFE(){ .. })` trước khi nó thực thi `()` là cần thiết tương tự `foo` trước khi thực thi nó bằng `()`; trong cả hai trường hợp, function đại diện thực thi ngay tức thì sau dấu `()`.
 
-Because an IIFE is just a function, and functions create variable *scope*, using an IIFE in this fashion is often used to declare variables that won't affect the surrounding code outside the IIFE:
+Bỏi vì IIFE chỉ là một function và function thì tạo *phạm vi* biến, sử dụng IIFE theo cách này thường là để khai báo biến không ảnh hưởng đến code bên ngoài IIFE:
 
 ```js
 var a = 42;
@@ -652,7 +649,7 @@ var a = 42;
 console.log( a );		// 42
 ```
 
-IIFEs can also have return values:
+IIFEs có thể trả kết quả:
 
 ```js
 var x = (function IIFE(){
@@ -662,7 +659,7 @@ var x = (function IIFE(){
 x;	// 42
 ```
 
-The `42` value gets `return`ed from the `IIFE`-named function being executed, and is then assigned to `x`.
+Giá trị `42` được `return` từ `IIFE`- thực thi function được đặt tên theo `x`.
 
 ### Closure
 
