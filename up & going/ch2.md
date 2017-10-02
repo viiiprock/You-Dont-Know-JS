@@ -515,7 +515,7 @@ The conditional operator doesn't have to be used in an assignment, but that's de
 
 **Note:** For more information about testing conditions and other patterns for `switch` and `? :`, see the *Types & Grammar* title of this series.
 
-## Strict Mode
+## Chế độ nghiêm ngặt
 
 ES5 added a "strict mode" to the language, which tightens the rules for certain behaviors. Generally, these restrictions are seen as keeping the code to a safer and more appropriate set of guidelines. Also, adhering to strict mode makes your code generally more optimizable by the engine. Strict mode is a big win for code, and you should use it for all your programs.
 
@@ -660,20 +660,17 @@ x;	// 42
 
 Giá trị `42` được `return` từ `IIFE`- thực thi function được đặt tên theo `x`.
 
-### Closure
+### Closure (đóng kín)
 
-*Closure* is one of the most important, and often least understood, concepts in JavaScript. I won't cover it in deep detail here, and instead refer you to the *Scope & Closures* title of this series. But I want to say a few things about it so you understand the general concept. It will be one of the most important techniques in your JS skillset.
+*Closure* là một trong những vấn đề quan trọng nhất, và ít được hiểu nhất, khái niệm của JS. Tôi sẽ không đi sâu ở đây, và sẽ phân tích ở *Scope & Closures*. Nhưng tôi sẽ nêu một vài vấn đề để bạn có cái nhìn tổng quan về khái niệm của nó. Nó sẽ là một trong nhưng kỹ thuật quan trọng nhất của bạn.
 
-You can think of closure as a way to "remember" and continue to access a function's scope (its variables) even once the function has finished running.
+Bạn có thể nghĩ closure là một cách để "nhớ" và tiếp tục tiếp cận scope của function (biến của nó) kể cả khi function đã hoàn tất.
 
-Consider:
+Xem:
 
 ```js
 function makeAdder(x) {
-	// parameter `x` is an inner variable
-
-	// inner function `add()` uses `x`, so
-	// it has a "closure" over it
+	// tham số `x` là một biến bên trong function `add()`, vì vậy nó là một "closure" thông qua nó.
 	function add(y) {
 		return y + x;
 	};
@@ -682,17 +679,15 @@ function makeAdder(x) {
 }
 ```
 
-The reference to the inner `add(..)` function that gets returned with each call to the outer `makeAdder(..)` is able to remember whatever `x` value was passed in to `makeAdder(..)`. Now, let's use `makeAdder(..)`:
+Mối tương quan giữa function `add(...)` được trả với mỗi lần gọi hàm `makeAdder(..)` trên nó là ghi nhớ giá trị `x` được truyền vào `makeAdder(..)`. Giờ hãy sử dụng `makeAdder(..)`:
 
 ```js
-// `plusOne` gets a reference to the inner `add(..)`
-// function with closure over the `x` parameter of
-// the outer `makeAdder(..)`
+// `plusOne` có một mối quan hệ khép kín với hàm `add(..)`
+// thông qua tham số `x`
+// của hàm `makeAdder(..)` trên nó
 var plusOne = makeAdder( 1 );
 
-// `plusTen` gets a reference to the inner `add(..)`
-// function with closure over the `x` parameter of
-// the outer `makeAdder(..)`
+// `plusTen` tương tự
 var plusTen = makeAdder( 10 );
 
 plusOne( 3 );		// 4  <-- 1 + 3
@@ -701,16 +696,14 @@ plusOne( 41 );		// 42 <-- 1 + 41
 plusTen( 13 );		// 23 <-- 10 + 13
 ```
 
-More on how this code works:
+Code hoạt động như sau:
 
-1. When we call `makeAdder(1)`, we get back a reference to its inner `add(..)` that remembers `x` as `1`. We call this function reference `plusOne(..)`.
-2. When we call `makeAdder(10)`, we get back another reference to its inner `add(..)` that remembers `x` as `10`. We call this function reference `plusTen(..)`.
-3. When we call `plusOne(3)`, it adds `3` (its inner `y`) to the `1` (remembered by `x`), and we get `4` as the result.
-4. When we call `plusTen(13)`, it adds `13` (its inner `y`) to the `10` (remembered by `x`), and we get `23` as the result.
+1. Khi gọi `makeAdder(1)`, chúng ta có được quy chiếu với `add(..)` bên trong nó là `x` bằng `1`. Chúng ta gọi là hàm tham chiếu `plusOne(..)`.
+2. Tương tự khi ta gọi `makeAdder(10)`, chúng ta lại có một quy chiếu khác đến `add(..)` rằng `x` là `10`. Chúng ta gọi là hàm tham chiếu `plusTen(..)`.
+3. Khi chúng ta gọi `plusOne(3)`, nó cộng `3` (`y` bên trong) với `1` (được ghi nhớ bởi `x`), và chúng ta có kết quả là `4`.
+4. Khi chúng ta gọi `plusTen(13)`, nó cộng `13` (`y` bên trong) với `10` (được ghi nhớ bởi  `x`), và chúng ta có kết quả là `23`.
 
-Don't worry if this seems strange and confusing at first -- it can be! It'll take lots of practice to understand it fully.
-
-But trust me, once you do, it's one of the most powerful and useful techniques in all of programming. It's definitely worth the effort to let your brain simmer on closures for a bit. In the next section, we'll get a little more practice with closure.
+Đừng lo lắng nếu nó có thể xa lạ và hơi bối rối lúc ban đầu -- có thể là vậy! Ta sẽ có nhiều bài tập để hiểu nó đầy đủ hơn. Hãy tin tôi, khi bạn đã hiểu, nó là một trong những những kỹ thuật bá đạo và hữu dụng nhất trong tất cả chương trình. Nó tất nhiên là đáng để cho não bạn căng lên chút. Trong phần tiếp theo, tôi sẽ có một ít bài tập với closure.
 
 #### Modules
 
