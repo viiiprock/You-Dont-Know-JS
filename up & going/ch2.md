@@ -662,7 +662,7 @@ Giá trị `42` được `return` từ `IIFE`- thực thi function được đ�
 
 ### Closure (đóng kín)
 
-*Closure* là một trong những vấn đề quan trọng nhất, và ít được hiểu nhất, khái niệm của JS. Tôi sẽ không đi sâu ở đây, và sẽ phân tích ở *Scope & Closures*. Nhưng tôi sẽ nêu một vài vấn đề để bạn có cái nhìn tổng quan về khái niệm của nó. Nó sẽ là một trong nhưng kỹ thuật quan trọng nhất của bạn.
+*Closure* là một trong những khái niệm JS quan trọng nhất, và ít được hiểu nhất. Tôi sẽ không đi sâu ở đây, và sẽ phân tích ở *Scope & Closures*. Nhưng tôi sẽ nêu một vài vấn đề để bạn có cái nhìn tổng quan về khái niệm của nó. Nó sẽ là một trong nhưng kỹ thuật quan trọng nhất của bạn.
 
 Bạn có thể nghĩ closure là một cách để "nhớ" và tiếp tục tiếp cận scope của function (biến của nó) kể cả khi function đã hoàn tất.
 
