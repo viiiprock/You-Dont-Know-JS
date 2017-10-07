@@ -707,9 +707,9 @@ Code hoạt động như sau:
 
 #### Modules
 
-The most common usage of closure in JavaScript is the module pattern. Modules let you define private implementation details (variables, functions) that are hidden from the outside world, as well as a public API that *is* accessible from the outside.
+Cách sử dụng closure trong JS nhiều nhất là module pattern (mẫu mô-đun). Module cho phép bạn xác định các chi tiết thực hiện khép kín (biến, hàm) cá thể, ẩn khỏi các phần bên ngoài, không giống như API công khai có thể tiếp cận từ phía ngoài.
 
-Consider:
+Xem:
 
 ```js
 function User(){
@@ -719,7 +719,7 @@ function User(){
 		username = user;
 		password = pw;
 
-		// do the rest of the login work
+		// bên trong là các phương thức login
 	}
 
 	var publicAPI = {
@@ -729,31 +729,31 @@ function User(){
 	return publicAPI;
 }
 
-// create a `User` module instance
+// Tạo ngay một module `User`
 var fred = User();
 
 fred.login( "fred", "12Battery34!" );
 ```
 
-The `User()` function serves as an outer scope that holds the variables `username` and `password`, as well as the inner `doLogin()` function; these are all private inner details of this `User` module that cannot be accessed from the outside world.
+Hàm `User()` thực hiện với vai trò là scope ngoài cùng chứa biến `username` và `password`, trong khi hàm `doLogin()` bên trong với các nội dung của module `User` đều là cục bộ và không thể tiếp cận từ bên ngoài.
 
-**Warning:** We are not calling `new User()` here, on purpose, despite the fact that probably seems more common to most readers. `User()` is just a function, not a class to be instantiated, so it's just called normally. Using `new` would be inappropriate and actually waste resources.
+**Chú ý:** Chúng ta không gọi `new User()` mặc dù nó có vẻ thông thường với mọi bạn đọc.`User()` chỉ là một hàm, không phải một class để khởi tạo, nên chỉ gọi nó bình thường. Sử dụng `new` là không thích hợp và đương nhiên là lãng phí tài nguyên.
 
-Executing `User()` creates an *instance* of the `User` module -- a whole new scope is created, and thus a whole new copy of each of these inner variables/functions. We assign this instance to `fred`. If we run `User()` again, we'd get a new instance entirely separate from `fred`.
+Thực thi `User()` tạo ra một module `User` tức thì -- toàn bộ scope mới được tạo ra, và do đó một bản sao hoàn toàn mới cũa mỗi biến/hàm bên trong. Chúng ta gán nó với `fred`. Nếu chúng ta chạy tiếp `User()`, chúng ta sẽ có một trường hợp mới tách biệt với `fred`.
 
-The inner `doLogin()` function has a closure over `username` and `password`, meaning it will retain its access to them even after the `User()` function finishes running.
+Hàm `doLogin()` bên trong có một closure đối với `username` và `password`, nghĩa là nó vẫn giữ nguyên khả năng truy cập đến chúng sau khi hàm `User()` đã chạy xong.
 
-`publicAPI` is an object with one property/method on it, `login`, which is a reference to the inner `doLogin()` function. When we return `publicAPI` from `User()`, it becomes the instance we call `fred`.
+`publicAPI` là một object với một thuộc tính/phương thức `login` trong nó. Khi chúng ta trả `publicAPI` từ `User()`, nó trở nên tức thì mà ta gọi là `fred`.
 
-At this point, the outer `User()` function has finished executing. Normally, you'd think the inner variables like `username` and `password` have gone away. But here they have not, because there's a closure in the `login()` function keeping them alive.
+Lúc này, hàm `User()` đã hoàn tất thực thi. Thông thường, chúng ta nghĩ biến bên trong như là `username` và `password` đã biến mất. Nhưng không, bởi có một closure bên trong hàm `login()` giữ nó tồn tại.
 
-That's why we can call `fred.login(..)` -- the same as calling the inner `doLogin(..)` -- and it can still access `username` and `password` inner variables.
+Đó là lý do tại sao chúng ta gọi `fred.login(..)` cũng như khi gọi hàm `doLogin(..)` và nó vẫn truy cập biến `username` và `password` bên trong.
 
-There's a good chance that with just this brief glimpse at closure and the module pattern, some of it is still a bit confusing. That's OK! It takes some work to wrap your brain around it.
+Có cái nhìn thoáng qua về closure và module pattern thật là một cơ hội tốt, một vài vấn đề trong nó vẫn còn bối rối. Vậy cũng ổn! Nó cũng cần vài thứ để nạp vào đầu bạn.
 
-From here, go read the *Scope & Closures* title of this series for a much more in-depth exploration.
+Từ chỗ này, xem phần *Scope & Closures* sẽ có sự khám phá sâu hơn.
 
-## `this` Identifier
+## Nhận diện `this`
 
 Another very commonly misunderstood concept in JavaScript is the `this` identifier. Again, there's a couple of chapters on it in the *this & Object Prototypes* title of this series, so here we'll just briefly introduce the concept.
 
