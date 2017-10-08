@@ -800,43 +800,44 @@ Dòng cuối: để hiểu `this` trỏ đi đâu, bạn phải xem xét hàm đ
 
 **Ghi chú:** Để biết thêm về `this`, xem Chương 1 và 2 của phần *this & Object Prototypes*.
 
-## Prototypes
+## Prototypes (nguyên mẫu)
 
-The prototype mechanism in JavaScript is quite complicated. We will only glance at it here. You will want to spend plenty of time reviewing Chapters 4-6 of the *this & Object Prototypes* title of this series for all the details.
+Cơ chế nguyên mẫu trong JavaScript khá là phức tạp. Chúng ta chỉ xem qua nó ở đây. Bạn sẽ dành nhiều thời gian với nó hơn trong Chương 4-6 của phần *this & Object Prototypes*.
 
-When you reference a property on an object, if that property doesn't exist, JavaScript will automatically use that object's internal prototype reference to find another object to look for the property on. You could think of this almost as a fallback if the property is missing.
+Khi bạn tham chiếu một thuộc tính bên trong object, nếu thuộc tính đó không tồn tại, JS sẽ tự động sử dụng tham chiếu nguyên mẫu bên trong để tìm object khác để tìm thuộc tính. Bạn có thể cho rằng đây gần như là dự phòng nếu thuộc tính bị thiếu.
 
-The internal prototype reference linkage from one object to its fallback happens at the time the object is created. The simplest way to illustrate it is with a built-in utility called `Object.create(..)`.
+Các mối liên kết tham chiếu nội bộ nguyên mẫu từ một object đến dự phòng của nó xảy ra tại thời điểm object được tạo. Cách đơn giản nhất để minh họa nó là hàm có sẵn `Object.create(..)`.
 
-Consider:
+
+Ví dụ:
 
 ```js
 var foo = {
 	a: 42
 };
 
-// create `bar` and link it to `foo`
+// tạo `bar` và liên kết với `foo`
 var bar = Object.create( foo );
 
 bar.b = "hello world";
 
 bar.b;		// "hello world"
-bar.a;		// 42 <-- delegated to `foo`
+bar.a;		// 42 <-- ủy thác đến `foo`
 ```
 
-It may help to visualize the `foo` and `bar` objects and their relationship:
+Đây là sơ đồ mối quan hệ giữa `foo` và `bar`:
 
 <img src="fig6.png">
 
-The `a` property doesn't actually exist on the `bar` object, but because `bar` is prototype-linked to `foo`, JavaScript automatically falls back to looking for `a` on the `foo` object, where it's found.
+Thuộc tính `a` không thực sự tồn tại trong object `bar`, nhưng vì liên kết nguyên mẫu `bar` với `foo`, JavaScript tự động tìm `a` trong `foo` object.
 
-This linkage may seem like a strange feature of the language. The most common way this feature is used -- and I would argue, abused -- is to try to emulate/fake a "class" mechanism with "inheritance."
+Sự liên kết có lẽ là một đặc trưng đặc biệt khác lạ của ngôn ngữ. Cách thông dụng nhất của tính năng này được sử dụng nhiều nhất là cố giả lập/giả tạo một cơ chế "class" với "sự thừa kế".
 
-But a more natural way of applying prototypes is a pattern called "behavior delegation," where you intentionally design your linked objects to be able to *delegate* from one to the other for parts of the needed behavior.
+Nhưng cách tự nhiên hơn để áp dụng nguyên mẫu là một pattern gọi là "hành vi ủy quyền (delegation)", nơi bạn cố ý thiết kế các đối tương liên kết có thể *ủy thác* từ một đến nhiều các phần cần hành vi đó.
 
-**Note:** For more information about prototypes and behavior delegation, see Chapters 4-6 of the *this & Object Prototypes* title of this series.
+**Ghi chú:** Để biết thêm về nguyên mẫu và hành vi ủy quyền, xem Chương 4-6 của phần *this & Object Prototypes*.
 
-## Old & New
+## Cũ & Mới
 
 Some of the JS features we've already covered, and certainly many of the features covered in the rest of this series, are newer additions and will not necessarily be available in older browsers. In fact, some of the newest features in the specification aren't even implemented in any stable browsers yet.
 
