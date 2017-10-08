@@ -437,69 +437,69 @@ Bởi vì sử dụng `let` thay vì `var`, `b` chỉ thuộc về biểu thức
 
 ## Điều kiện
 
-In addition to the `if` statement we introduced briefly in Chapter 1, JavaScript provides a few other conditionals mechanisms that we should take a look at.
+Thêm một số thông tin về biểu thức `if` chúng ta đã giới thiệu ngắn gọn trong Chương 1, Javascript cung cấp một vài cơ chế mà chúng ta cần xem qua.
 
-Sometimes you may find yourself writing a series of `if..else..if` statements like this:
+Đôi khi bạn sẽ thấy mình viết một loạt điều kiện `if..else..if` như sau:
 
 ```js
 if (a == 2) {
-	// do something
+	// làm gì đó
 }
 else if (a == 10) {
-	// do another thing
+	// làm gì đó khác
 }
 else if (a == 42) {
-	// do yet another thing
+	// làm gì đó khác nữa
 }
 else {
-	// fallback to here
+	// không thì sẽ là
 }
 ```
 
-This structure works, but it's a little verbose because you need to specify the `a` test for each case. Here's another option, the `switch` statement:
+Cấu trúc này hoạt động, nhưng hơi bị rườm rà vì bạn cần kiểm thử `a` cho mỗi trường hợp. Đây là một phương thức khác với biểu thức `switch`:
 
 ```js
 switch (a) {
 	case 2:
-		// do something
+		// làm gì đó
 		break;
 	case 10:
-		// do another thing
+		// làm gì đó khác
 		break;
 	case 42:
-		// do yet another thing
+		//  làm gì đó khác nữa
 		break;
 	default:
-		// fallback to here
+		// không thì sẽ là
 }
 ```
 
-The `break` is important if you want only the statement(s) in one `case` to run. If you omit `break` from a `case`, and that `case` matches or runs, execution will continue with the next `case`'s statements regardless of that `case` matching. This so called "fall through" is sometimes useful/desired:
+`break` quan trọng nếu bạn muốn mỗi biểu thức trong một `case` hoạt động. Nếu bạn bỏ sót `break` ở một `case`, và `case` đó chạy, sự thực thi sẽ tiếp tục đến biểu thức `case` tiếp theo vì `case` kia đã khớp. Cái này được gọi là "thất bại" đôi khi lại hữu dụng:
 
 ```js
 switch (a) {
 	case 2:
 	case 10:
-		// some cool stuff
+		// làm gì đó
 		break;
 	case 42:
-		// other stuff
+		// làm gì đó khác
 		break;
 	default:
-		// fallback
+		// không thì sẽ là
 }
 ```
 
-Here, if `a` is either `2` or `10`, it will execute the "some cool stuff" code statements.
+Ở đây, nếu `a` là `2` hoặc `10`, nó sẽ sẽ thực thi biểu thức "làm gì đó".
 
-Another form of conditional in JavaScript is the "conditional operator," often called the "ternary operator." It's like a more concise form of a single `if..else` statement, such as:
+Một dạng khác của điều kiện trong JavaScript là "điều hành điều kiện", thường được gọi là "toán tử bậc 3". Nó như là một dạng rút gọn của biểu thức `if..else`, ví dụ:
 
 ```js
 var a = 42;
 
 var b = (a > 41) ? "hello" : "world";
 
-// similar to:
+// tương tự với:
 
 // if (a > 41) {
 //    b = "hello";
@@ -509,11 +509,11 @@ var b = (a > 41) ? "hello" : "world";
 // }
 ```
 
-If the test expression (`a > 41` here) evaluates as `true`, the first clause (`"hello"`) results, otherwise the second clause (`"world"`) results, and whatever the result is then gets assigned to `b`.
+Nếu biểu thức (`a > 41` ở đây) thỏa `true`, kết qủa là mệnh đề đầu tiên(`"hello"`), ngược lại là kết quả (`"world"`), và cho dù kết quả là gì thì đều gán vào `b`.
 
-The conditional operator doesn't have to be used in an assignment, but that's definitely the most common usage.
+Điều hành điều kiện không nhất thiết phải gán như vậy, nhưng tất nhiên đây là cách được dùng nhiều nhất.
 
-**Note:** For more information about testing conditions and other patterns for `switch` and `? :`, see the *Types & Grammar* title of this series.
+**Chi ghú:** Để biết thêm kiểm tra điều kiện và mẫu khác của `switch` và `? :`, xem phần *Kiểu & Ngữ pháp*.
 
 ## Chế độ nghiêm ngặt
 
