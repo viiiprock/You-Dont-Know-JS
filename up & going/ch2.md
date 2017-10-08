@@ -753,17 +753,17 @@ Có cái nhìn thoáng qua về closure và module pattern thật là một cơ 
 
 Từ chỗ này, xem phần *Scope & Closures* sẽ có sự khám phá sâu hơn.
 
-## Nhận diện `this`
+## Xác định `this`
 
-Another very commonly misunderstood concept in JavaScript is the `this` identifier. Again, there's a couple of chapters on it in the *this & Object Prototypes* title of this series, so here we'll just briefly introduce the concept.
+Một concept khác của Javascript hay bị hiểu sai là xác định `this`. Chúng ta cũng có hẳn một phần nói về nó *this & Object Prototypes*, ở đây ta chỉ giới thiệu sơ qua thôi.
 
-While it may often seem that `this` is related to "object-oriented patterns," in JS `this` is a different mechanism.
+Trong mọi người thường nghĩ `this` liên quan đến "mẫu hướng đối tượng", trong JS `this` lại là cơ chế khác.
 
-If a function has a `this` reference inside it, that `this` reference usually points to an `object`. But which `object` it points to depends on how the function was called.
+Nếu một hàm có `this` bên trong nó, sự quy chiếu của `this` này thường chỉ đến một `object`. Nhưng `object` nào thì tùy vào hàm nó gọi cái gì.
 
-It's important to realize that `this` *does not* refer to the function itself, as is the most common misconception.
+Điều quan trọng là `this` đó *không* tham chiếu đến bản thân hàm của nó, và đây là đây chính là điều hay bị hiểu lầm.
 
-Here's a quick illustration:
+Đây là một minh họa nhanh:
 
 ```js
 function foo() {
@@ -789,16 +789,16 @@ foo.call( obj2 );	// "obj2"
 new foo();			// undefined
 ```
 
-There are four rules for how `this` gets set, and they're shown in those last four lines of that snippet.
+Có 4 nguyên tắc cho việc lập `this` ra sao, và nó được thể hiện bằng bốn dòng cuối của đoạn code.
 
-1. `foo()` ends up setting `this` to the global object in non-strict mode -- in strict mode, `this` would be `undefined` and you'd get an error in accessing the `bar` property -- so `"global"` is the value found for `this.bar`.
-2. `obj1.foo()` sets `this` to the `obj1` object.
-3. `foo.call(obj2)` sets `this` to the `obj2` object.
-4. `new foo()` sets `this` to a brand new empty object.
+1. `foo()` kết thúc việc thiết lập `this` bằng một object toàn cục ở chế độ không nghiêm ngặt (strict mode) -- với chế độ nghiêm ngặt thì `this`sẽ là `undefined` và bạn sẽ gặp lỗi khi truy vấn thuộc tính `bar` -- vì vậy `"global"` là giá trị tìm thấy cho `this.bar`.
+2. `obj1.foo()` đặt `this` cho object `obj1`.
+3. `foo.call(obj2)` đặt `this` cho object `obj2`.
+4. `new foo()` đặt `this` cho một object rỗng mới.
 
-Bottom line: to understand what `this` points to, you have to examine how the function in question was called. It will be one of those four ways just shown, and that will then answer what `this` is.
+Dòng cuối: để hiểu `this` trỏ đi đâu, bạn phải xem xét hàm được gọi như thế nào. Nó sẽ là một trong 4 cách vừa được thể hiện, và nó sẽ trả lời `this` là gì.
 
-**Note:** For more information about `this`, see Chapters 1 and 2 of the *this & Object Prototypes* title of this series.
+**Ghi chú:** Để biết thêm về `this`, xem Chương 1 và 2 của phần *this & Object Prototypes*.
 
 ## Prototypes
 
