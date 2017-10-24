@@ -336,7 +336,7 @@ Nói chung, các quy tắc tương tự áp dụng cho tên thuộc tính như l
 
 **Ghi chú:** Để biết thêm thông tin về từ dành riêng, xem Phụ lục A của tập *Kiểu & ngữ pháp*
 
-### Function Scopes (Phạm vi chức năng)
+### Function Scopes (Phạm vi hàm)
 
 Bạn sử dụng từ khóa `var` để khai báo biến cho scope chức năng gần nhất, hoặc là scope toàn cục nếu nó nằm ở tầng trên cùng ngoài tất cả các function.
 
@@ -364,7 +364,7 @@ function foo() {
 console.log( a );	// 2
 ```
 
-**Chú ý:** Đây không thường là một ý hay khi dựa vào biến *hoisting* để sử một biến trước đó trong scope của nó hơn là `var` được khai báo bởi chính nó, điều này có thể gây bối rối. Cách thông thường và được chấp nhận để sử dụng *hoisted* function là gọi trước khi nó được khai báo như chúng ta làm với `foo()`.
+**Chú ý:** Đây không thường là một ý hay khi dựa vào biến *hoisting* để sử một biến trước đó trong scope của nó hơn là `var` được khai báo bởi chính nó, điều này có thể gây bối rối. Cách thông thường và được chấp nhận để sử dụng hàm *hoisted*, là gọi trước khi nó được khai báo như chúng ta làm với `foo()`.
 
 #### Scopes lồng nhau.
 
@@ -515,62 +515,62 @@ Nếu biểu thức (`a > 41` ở đây) thỏa `true`, kết qủa là mệnh �
 
 **Chi ghú:** Để biết thêm kiểm tra điều kiện và mẫu khác của `switch` và `? :`, xem phần *Kiểu & Ngữ pháp*.
 
-## Chế độ nghiêm ngặt
+## Chế độ "nghiêm ngặt" (strict)
 
-ES5 added a "strict mode" to the language, which tightens the rules for certain behaviors. Generally, these restrictions are seen as keeping the code to a safer and more appropriate set of guidelines. Also, adhering to strict mode makes your code generally more optimizable by the engine. Strict mode is a big win for code, and you should use it for all your programs.
+ES5 bổ sung "strict mode" cho ngôn ngữ, giúp các hành vi nhất định có nguyên tắc chặt chẽ hơn. Tổng quan thì sự strict được xem như là giữ cho code an toàn và phù hợp hơn. Đồng thời, tôn trong chế độ strict giúp cho bạn được tối ưu hóa hơn bởi cơ chế. Chế độ strict là bàn thắng lớn của code, và bạn nên sử dụng nó cho toàn bộ chương trình của mình.
 
-You can opt in to strict mode for an individual function, or an entire file, depending on where you put the strict mode pragma:
+Bạn có thể tham gia chế độ strict cho một hàm riêng biệt hay toàn bộ file, tùy thuộc bạn đặt chế độ strict đó ở đâu:
 
 ```js
 function foo() {
 	"use strict";
 
-	// this code is strict mode
+	// Đoạn code này theo chế độ strict
 
 	function bar() {
-		// this code is strict mode
+		// Đoạn code này theo chế độ strict
 	}
 }
 
-// this code is not strict mode
+// Đoạn code này không có chế độ strict
 ```
 
-Compare that to:
+So sánh với:
 
 ```js
 "use strict";
 
 function foo() {
-	// this code is strict mode
+	// Đoạn code này theo chế độ strict
 
 	function bar() {
-		// this code is strict mode
+		// Đoạn code này theo chế độ strict
 	}
 }
 
-// this code is strict mode
+// Đoạn code này theo chế độ strict
 ```
 
-One key difference (improvement!) with strict mode is disallowing the implicit auto-global variable declaration from omitting the `var`:
+Điểm khác biệt mấu chốt (cải tiến!) ở chế độ strict là không cho phép tự động tiềm ẩn khai báo biến toàn cục khi bỏ qua `var`:
 
 ```js
 function foo() {
-	"use strict";	// turn on strict mode
-	a = 1;			// `var` missing, ReferenceError
+	"use strict";	// đặt chế độ strict
+	a = 1;			// `var` thiếu, ReferenceError
 }
 
 foo();
 ```
 
-If you turn on strict mode in your code, and you get errors, or code starts behaving buggy, your temptation might be to avoid strict mode. But that instinct would be a bad idea to indulge. If strict mode causes issues in your program, almost certainly it's a sign that you have things in your program you should fix.
+Bạn sẽ gặp lỗi nếu bạn chuyển sang chế độ strict, hoặc code sẽ dính bug, bạn có thể bị cám dỗ việc né tránh strict. Nhưng bản năng đó là một ý tưởng tồi để lạm dụng. Nếu chế độ strict gây ra các vấn đề trong chương trình, gần như chắc chắn nó là dấu hiệu rằng chương trình của bạn cần khắc phục.
 
-Not only will strict mode keep your code to a safer path, and not only will it make your code more optimizable, but it also represents the future direction of the language. It'd be easier on you to get used to strict mode now than to keep putting it off -- it'll only get harder to convert later!
+Chế độ strict không chỉ giúp cho code của bạn theo một lối an toàn hơn, tối ưu hóa hơn, mà nó cũng là đại diện cho tương lai của ngôn ngữ. Bắt đầu với chế độ này sẽ dễ dàng hơn là sau mới chuyển qua.
 
-**Note:** For more information about strict mode, see the Chapter 5 of the *Types & Grammar* title of this series.
+**Ghi chú:** Xem thêm Chương 5 của phần *Kiểu & Ngữ pháp*.
 
-## Functions As Values
+## Hàm là giá trị
 
-So far, we've discussed functions as the primary mechanism of *scope* in JavaScript. You recall typical `function` declaration syntax as follows:
+Tới giờ, chúng ta đã đề cập hàm như là một cơ chế đầu tiên của *scope* trong JavaScript. Cú pháp khai báo hàm thông thường như sau:
 
 ```js
 function foo() {
@@ -578,7 +578,9 @@ function foo() {
 }
 ```
 
-Though it may not seem obvious from that syntax, `foo` is basically just a variable in the outer enclosing scope that's given a reference to the `function` being declared. That is, the `function` itself is a value, just like `42` or `[1,2,3]` would be.
+Cơ bản `foo` là một biến trong phạm vi bao quanh bên ngoài được tham chiếu với `function` khai báo, mặc dù dựa trên cú pháp điều này không rõ ràng. Vậy nên, `function` bản thân nó là một giá trị, như là `42` hay `[1,2,3]`.
+
+Mới nghe có vẻ lạ, nên có thể bạn cần một phút suy ngẫm chuyện này.
 
 This may sound like a strange concept at first, so take a moment to ponder it. Not only can you pass a value (argument) *to* a function, but *a function itself can be a value* that's assigned to variables, or passed to or returned from other functions.
 
