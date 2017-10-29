@@ -924,30 +924,29 @@ Có vài transpiler để bạn chọn, dưới đây là 2 cách để bạn xe
 
 ## Non-JavaScript
 
-So far, the only things we've covered are in the JS language itself. The reality is that most JS is written to run in and interact with environments like browsers. A good chunk of the stuff that you write in your code is, strictly speaking, not directly controlled by JavaScript. That probably sounds a little strange.
+Tới giờ, điều duy nhất chúng ta quan tâm là bản thân JS. Thực tế thì hầu hết JS được viết để chạy và tương tác với môi trường như trình duyệt. Nhưng nói nghe hơi lạ là những gì bạn viết, thẳng ra là vậy, không được điều khiển bởi JavaScript.
 
-The most common non-JavaScript JavaScript you'll encounter is the DOM API. For example:
+Ví dụ đoạn code mà bạn hay dùng nhất trong DOM API không phải là JavaScript
 
 ```js
 var el = document.getElementById( "foo" );
 ```
+Biến `document` tồn tại như một biến toàn cục khi code của bạn chạy trên trình duyệt. Nó không được cung cấp bởi JS engine hay được đặc biệt điều khiển bởi đặc tính JavaScript. Nó lấy dạng của gì đó trông kinh hơn JS `object` thông thường, mà cũng không chính xác là nó. Nó là một `object` đặc biệt, thường được gọi là "host object".
 
-The `document` variable exists as a global variable when your code is running in a browser. It's not provided by the JS engine, nor is it particularly controlled by the JavaScript specification. It takes the form of something that looks an awful lot like a normal JS `object`, but it's not really exactly that. It's a special `object,` often called a "host object."
+Hơn nữa, phương thức `getElementById(..)` ở `document` trông như hàm JS thông thường, nhưng nó chỉ là một giao diện mỏng được lộ ra với phương thức tích hợp bởi DOM từ trình duyệt. Trong một vài trình duyệt mới, lớp này có thể ở trong JS, nhưng bản chất thì DOM và hành vi của nó được thực hiện bởi gì đó như là C/C++.
 
-Moreover, the `getElementById(..)` method on `document` looks like a normal JS function, but it's just a thinly exposed interface to a built-in method provided by the DOM from your browser. In some (newer-generation) browsers, this layer may also be in JS, but traditionally the DOM and its behavior is implemented in something more like C/C++.
+Một ví dụ khác là với input/output (I/O).
 
-Another example is with input/output (I/O).
+Mọi người ưa thích pop up `alert(..)` trên cửa sổ trình duyệt. `alert(..)` được cung cấp cho JS của bạn thông qua trình duyệt, không phải JS engine. Khi gọi hàm, nó gửi nội dung đến bên trong trình duyệt và nó sẽ vẽ và hiển thị khung nội dung đó.
 
-Everyone's favorite `alert(..)` pops up a message box in the user's browser window. `alert(..)` is provided to your JS program by the browser, not by the JS engine itself. The call you make sends the message to the browser internals and it handles drawing and displaying the message box.
+Tương tự với `console.log(..)`; trình duyệt của bạn cung cấp cơ chế và nối chúng với công cụ phát triển (developer tools).
 
-The same goes with `console.log(..)`; your browser provides such mechanisms and hooks them up to the developer tools.
+Cuốn sách này tập trung vào ngôn ngữ JavaScript. Vì vậy bạn sẽ không thấy để cập non-JavaScript nhiều. Tuy nhiên bạn cần phải có nhận thức về chúng, nó ngay trong mọi chương trình JS bạn viết.
 
-This book, and this whole series, focuses on JavaScript the language. That's why you don't see any substantial coverage of these non-JavaScript JavaScript mechanisms. Nevertheless, you need to be aware of them, as they'll be in every JS program you write!
+## Ôn lại
 
-## Review
+Bước đầu tiên để học JavaScript là hiểu cơ bản về cơ chế cốt lõi của nó như (không dịch) value, type, closure, `this`, và prototypes.
 
-The first step to learning JavaScript's flavor of programming is to get a basic understanding of its core mechanisms like values, types, function closures, `this`, and prototypes.
+Đương nhiên, mỗi đề mục được đáng được cụ thể hơn bạn thấy ở đây, đó là l1y do tại sao nó được đề cập suốt trong các phần bộ sách. Sau khi bạn cảm thấy thoải mái với các khái niệm và mẫu code trong chương này, phần còn lại của bộ sách chờ bạn đào sâu vào ngôn ngữ hơn.
 
-Of course, each of these topics deserves much greater coverage than you've seen here, but that's why they have chapters and books dedicated to them throughout the rest of this series. After you feel pretty comfortable with the concepts and code samples in this chapter, the rest of the series awaits you to really dig in and get to know the language deeply.
-
-The final chapter of this book will briefly summarize each of the other titles in the series and the other concepts they cover besides what we've already explored.
+Chương cuối của cuốn sách sẽ tóm tắt từng mỗi tiêu đề và các khái niệm khác bên cạnh những gì chúng ta khám phá.
