@@ -1,5 +1,5 @@
 # You Don't Know JS: Scope & Closures
-# Phụ lục A: Scope động
+# Phụ lục A: Scope động (dynamic scope)
 
 Trong chương 2, we talked about "Dynamic Scope" as a contrast to the "Lexical Scope" model, which is how scope works in JavaScript (and in fact, most other languages).
 

@@ -1,11 +1,11 @@
 # You Don't Know JS: Scope & Closures
 # Chapter 1: Scope là gì?
 
-Một trong những mô hình cơ bản của các ngôn ngữ lập trình gần nhất là khả năng lưu trữ giá trị trong biến và sau đó gọi các giá trị đó hoặc thay đổi chúng. Thực tế, khả năng lưu trữ giá trị và kéo giá trị đó ra khỏi biến là cách tạo ra *state* của chương trình.
+Một trong những mô hình cơ bản của các ngôn ngữ lập trình là khả năng lưu trữ giá trị trong biến và sau đó gọi các giá trị đó hoặc thay đổi chúng. Thực tế, khả năng lưu trữ giá trị và lấy giá trị đó ra khỏi biến là cách tạo ra *state* của chương trình.
 
-Không có khái niệm như vậy, một chương trình sẽ cực kỳ giới hạn và thậm chí không thú vị mặc dù nó có thể thực thi một số nhiệm vụ. (chắc ông này muốn nói tới html css đây hehe)
+Không có khái niệm như vậy, một chương trình sẽ cực kỳ giới hạn và thậm chí không thú vị mặc dù nó có thể thực thi một số nhiệm vụ.
 
-Nhưng việc đưa các biến vào trong chương trình của chúng ta sinh ra câu hỏi thú vị nhất mà chúng ta sẽ giải quyết: những biến đó *sống* ở đâu? Hay nói cách khác, nó được lưu ở đâu? Và quan trọng nhất là làm cách nào chương trình có thể tìm thấy nó khi cần?
+Nhưng việc đưa các biến vào trong chương trình của chúng ta đặt ra câu hỏi thú vị nhất mà chúng ta sẽ giải quyết: những biến đó *sống* ở đâu? Hay nói cách khác, nó được lưu ở đâu? Và quan trọng nhất là làm cách nào chương trình có thể tìm thấy nó khi cần?
 
 Những câu hỏi nói lên sự cần thiết của các quy tắc được xác định rõ ràng của việc lưu trữ các biến ở đâu đó, cùng việc tìm các biến sau đó. Chúng ta gọi quy tắc đó là *Scope*
 
@@ -13,31 +13,31 @@ Nhưng, các quy tắc *Scope* được thiết lập ở đâu và như thế n
 
 ## Lý thuyết trình biên dịch
 
-Tùy thuộc vào mức độ bạn tương tác với các ngôn ngữ khác nhau, nó có thể là hiển nhiên hoặc lạ lẫm, mặc dù thực tế JS là một ngôn ngữ nằm trong hạng mục "năng động" hoặc "giải nghĩa", thực tế nó là ngôn ngữ được biên dịch. Cũng như nhiều ngôn ngữ được biên dịch truyền thống khác, nó không được biên dịch trước hay cũng không phải là kết quả của sự kết hợp giữa các hệ thống phân phối khác nhau.
+Tùy thuộc vào mức độ bạn tương tác với các ngôn ngữ khác nhau, nó có thể là hiển nhiên hoặc lạ lẫm, mặc dù thực tế JS là một ngôn ngữ nằm trong hạng mục "động" hoặc "giải nghĩa", thực tế nó là ngôn ngữ được biên dịch. Cũng như nhiều ngôn ngữ được biên dịch truyền thống khác, nó không được biên dịch trước hay cũng không phải là kết quả của sự kết hợp giữa các hệ thống phân phối khác nhau.
 
 Tuy nhiên JS engine thực hiện nhiều bước đồng thời, theo những cách phức tạp hơn mà chúng ta từng biết, kể cả bất trình biên dịch truyền thống nào.
 
 Trong tiến trình biên dịch của ngôn ngữ truyền thống, mã nguồn sẽ thông qua ba bước trước khi thực thi chương trình, gọi là biên dịch:
 
-1. **Tokenizing/Lexing:** Tách các chuỗi ký tự thành các khối có ý nghĩa (đối với ngôn ngữ), được gọi là token. Ví dụ: `var a = 2;`. Chương trình sẽ được phân thành các token sau: `var`, `a`, `=`, `2`, và `;`. Khoảng trắng có thể có hoặc không duy trì như một token, tùy thuộc vào nó có nghĩa hay không.
+1. **Tokenizing/Lexing:** Tách các chuỗi ký tự thành các khối có ý nghĩa (đối với ngôn ngữ), được gọi là token (thẻ xác thực). Ví dụ: `var a = 2;`. Chương trình sẽ được phân thành các token sau: `var`, `a`, `=`, `2`, và `;`. Khoảng trắng có thể có hoặc không duy trì như một token, tùy thuộc vào nó có nghĩa hay không.
 
-    **Ghi chú:** Sự khác biệt giữa tokenizing và lexing là tinh tế và học thuật (subtle and academic), nhưng nó tập trung vào việc các token này được xác định theo cách là có *trạng thái* hay *không trạng thái*. Nói đơn giản, nếu tokenizer were to invoke stateful parsing rules to figure out whether `a` should be considered a distinct token or just part of another token, *that* would be **lexing**.
+    **Ghi chú:** Sự khác biệt giữa tokenizing và lexing là tinh tế và học thuật (subtle and academic), nhưng nó tập trung vào việc các token này được xác định theo cách là có *trạng thái* hay *không trạng thái*. Nói đơn giản, nếu tokenizer gọi các quy tắc phân tích trạng thái để xác định liệu `a` có được xem là một token riêng biệt hay chỉ là một phần của token, *đó* chính là **lexing**.
 
 2. **Phân tích cú pháp (parsing):** lấy một mảng (array) token và chuyển nó thành các phần tử cây lồng nhau, đại diện cho cấu trúc ngữ pháp của chương trình. Cây này được gọi là "AST" (<b>A</b>bstract <b>S</b>yntax <b>T</b>ree).
 
-    Cây của `var a = 2;` có thể bắt đầu với một nút cao nhất được gọi là `VariableDeclaration`, với một nút con được gọi là `Identifier` (giá trị là `a`), và nút con khác được gọi là `AssignmentExpression` với bản thân nó có một con được gọi là `NumericLiteral` (giá trị là `2`).
+    Cây của `var a = 2;` có thể bắt đầu với một nút cao nhất được gọi là `VariableDeclaration`, với một nút con được gọi là `Identifier` (giá trị `a`), và nút con khác được gọi là `AssignmentExpression` với bản thân nó có một con được gọi là `NumericLiteral` (giá trị `2`).
 
 3. **Xử lý mã (Code-Generation):** là quá trình lấy AST và biến nó thành mã thực thi. Phần này khác nhau rất nhiều tùy thuộc vào ngôn ngữ, nền tảng mà nó nhắm đến, ...
 
-    Vì vậy, thay vì đắm chìm vào chi tiết, chúng ta chỉ phẩy tay và nói rằng có cách để lấy AST được mô tả ở trên cho `var a = 2;` và chuyển nó thành một tập mã máy để thực sự *tạo* ra một biến gọi là `a` (bao gồm cả việc lưu trữ bộ nhớ, v.v...), và sau lưu trữ một giá trị vào `a`.
+	Vì vậy, thay vì đắm chìm vào chi tiết, chúng ta chỉ phẩy tay và nói rằng có cách để lấy AST được mô tả ở trên cho `var a = 2;` và chuyển nó thành một tập mã máy để thực sự *tạo* ra một biến gọi là `a` (bao gồm cả việc lưu trữ bộ nhớ, v.v...), và sao lưu trữ một giá trị vào `a`.
 
-    **Ghi chú:** Chi tiết về quản lý hệ thống của máy sâu hơn những gì chúng ta sẽ tìm hiểu, vì vậy chúng ta chỉ cần biết rằng máy có thể tạo và lưu trữ biến theo mong muốn.
+	**Ghi chú:** Chi tiết về quản lý hệ thống của máy sâu hơn những gì chúng ta sẽ tìm hiểu, vì vậy chúng ta chỉ cần biết rằng máy có thể tạo và lưu trữ biến theo mong muốn.
 
 Cũng như những ngôn ngữ biên dịch khác, JavaScript engine phức tạp và mênh mông hơn là chỉ có ba bước trên. Ví dụ, trong tiến trình phân tích và xử lý mã, trong đó đã có các bước tối ưu hiệu suất thực thi, bao gồm gộp các phần tử thừa,...
 
 Vì vậy, tôi chỉ tô vẽ những nét lớn ở đây. Nhưng tôi nghĩ bạn sẽ mau nhận ra vì sao những chi tiết đó chúng ta cần biết, thậm chí là ở mức cao.
 
-Có một điều là JS engine không có nhiều thời gian tối ưu hóa sang chảnh như các trình biên dịch ngôn ngữ khác, bởi việc biên dịch JS không xảy ra trước hạn trong bước xây dựng (JavaScript compilation doesn't happen in a build step ahead of time) như những ngôn ngữ khác.
+Có một điều là JS engine không có nhiều thời gian tối ưu hóa sang chảnh như các trình biên dịch ngôn ngữ khác, bởi việc biên dịch JS không xảy ra trước trong bước xây dựng như những ngôn ngữ khác.
 
 Với JavaScript, trong nhiều trường hợp, sự biên dịch được xảy ra trong vài mili giây (hoặc ít hơn) trước khi code được thực thi. Để đảm bảo hiệu suất nhanh nhất, JS engine sử dụng tất cả các mẹo vượt qua luôn cả phạm vi chúng ta thảo luận ở đây ( như JITs, biên dịch chậm và thậm chí biên dịch lại, ...).
 
@@ -49,13 +49,13 @@ Cách chúng ta tiếp cận học scope là nghĩ về quá trình của một 
 
 ### Vai diễn
 
-Let's meet the cast of characters that interact to process the program `var a = 2;`, so we understand their conversations that we'll listen in on shortly:
+Hãy gặp vai diễn của các nhân vật tương tác để tiếp cận chương trình `var a = 2;` để hiểu đoạn hội thoại mà chúng ta sẽ được xem:
 
-1. *Engine*: responsible for start-to-finish compilation and execution of our JavaScript program.
+1. *Engine*: chịu trách nhiệm biên soạn và thực thi từ đầu đến kết thúc chương trình JavaScript của chúng ta.
 
-2. *Compiler*: one of *Engine*'s friends; handles all the dirty work of parsing and code-generation (see previous section).
+2. *Compiler*: Một trong những người bạn của *Engine*; phụ trách tất cả các việc nặng nề của của phân tích cú pháp và xử lý mã (xem phần trên).
 
-3. *Scope*: another friend of *Engine*; collects and maintains a look-up list of all the declared identifiers (variables), and enforces a strict set of rules as to how these are accessible to currently executing code.
+3. *Scope*: người bạn khác của *Engine*; tập hợp và duy trì collects and maintains a look-up list of all the declared identifiers (variables), and enforces a strict set of rules as to how these are accessible to currently executing code.
 
 For you to *fully understand* how JavaScript works, you need to begin to *think* like *Engine* (and friends) think, ask the questions they ask, and answer those questions the same.
 

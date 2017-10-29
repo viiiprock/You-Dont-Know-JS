@@ -941,7 +941,7 @@ Tương tự với `console.log(..)`; trình duyệt của bạn cung cấp cơ 
 
 Cuốn sách này tập trung vào ngôn ngữ JavaScript. Vì vậy bạn sẽ không thấy để cập non-JavaScript nhiều. Tuy nhiên bạn cần phải có nhận thức về chúng, nó ngay trong mọi chương trình JS bạn viết.
 
-## Ôn lại
+## Ôn tập
 
 Bước đầu tiên để học JavaScript là hiểu cơ bản về cơ chế cốt lõi của nó như (không dịch) value, type, closure, `this`, và prototypes.
 
