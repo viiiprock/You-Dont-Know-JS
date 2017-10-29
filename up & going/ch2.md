@@ -1,4 +1,4 @@
-# You Don't Know JS: Up & Going
+# You Don't Know JS: Khởi đầu
 # Chương 2: Hiểu về JavaScript
 
 Trong chương trước, tôi giới thiệu những cụm căn bản của lập trình như là biến, vòng lặp, điều kiện, hàm. Tất nhiên, tất cả các code đều trình diễn theo ngôn ngữ JS. Nhưng trong chương này, tôi muốn tập trung đặc biệt vào những điều cần biết về JS để bạn khởi đầu trở thành một lập trình viên JS.
@@ -47,7 +47,7 @@ a = { b: "c" };
 typeof a;				// "object"
 ```
 
-Giá trị trả lại từ biểu thức `typeof` luôn là một trong sáu kiểu ở dạng giá trị string( 7 đối với ES6 -- kiểu "symbol"). Đó là, `typeof "abc"` trả lại `"string"`, không phải `string`.
+Giá trị trả lại từ biểu thức `typeof` luôn là một trong sáu kiểu ở dạng giá trị string (ES6 là 7 -- thêm kiểu "symbol"). Đó là, `typeof "abc"` trả lại `"string"`, không phải `string`.
 
 Chú ý rằng đoạn code này, biến `a` giữ mọi kiểu của giá trị, và mặc dù là có bề ngoài, `typeof a` sẽ không hỏi "kiểu của `a`", mà là "kiểu của giá trị hiện tại trong `a`." Trong JS chỉ có giá trị mới có kiểu; biến chỉ đơn giản là vật chứa các giá trị đó.
 
@@ -55,11 +55,11 @@ Chú ý rằng đoạn code này, biến `a` giữ mọi kiểu của giá trị
 
 **Cảnh báo:** Đây là một lỗi trường kỳ của JS và dường như sẽ không bao giờ được sửa. Quá nhiều code trên web liên quan đến lỗi mà cố sửa nó thì nó sẽ tạo ra nhiều lỗi hơn.
 
-Đồng thời, chú ý `a = undefined`. Chúng ta thiết lập rõ ràng `a` là giá trị `undefined`, nhưng nó cũng có hành vi không khác với biến chưa có giá trị, ví dụ như `var a;` ở đoạn code bên trên. Một biến có thể nhận trạng thái "undefined" này bằng nhiều cách khác nhau, bao gồm hàm trả lại không có giá trị và các sử dụng `void`.
+Đồng thời, chú ý `a = undefined`. Chúng ta thiết lập rõ ràng `a` là giá trị `undefined`, nhưng nó cũng có hành vi không khác với biến chưa có giá trị, ví dụ như `var a;` ở đoạn code bên trên. Một biến có thể nhận trạng thái "undefined" này bằng nhiều cách khác nhau, bao gồm hàm trả lại không có giá trị và cách sử dụng `void`.
 
 ### Objects
 
-Kiểu `object` đề cập đến một phức hợp giá trị mà bạn có thể lập các thuộc tính (vị trí được đặt tên) mà mỗi cái đều có thể có giá trị của riêng chúng với bất kỳ kiểu nào. Đây có lẽ là một trong nhưng kiểu hữu dụng nhất trong JS.
+Kiểu `object` đề cập đến một giá trị phức hợp mà bạn có thể lập các thuộc tính, mỗi cái đều có thể có giá trị của riêng chúng với bất kỳ kiểu nào. Đây có lẽ là một trong nhưng kiểu hữu dụng nhất trong JS.
 
 ```js
 var obj = {
@@ -101,7 +101,7 @@ obj["b"];		// 42
 
 **Ghi chú:** Xem thêm tập *this & Object Prototypes* đặc biệt ở Chương 3 để biết thêm về `object`.
 
-Có một vài kiểu giá trị mà bạn có thể tương tác với chương trình JS: *array* và *function*. Nhưng thay vì là các kiểu dựng sẵn phù hợp, nó phải được coi như là các kiểu thứ cấp -- phiên bản đặc biệt của kiểu `object`.
+Có một vài kiểu giá trị mà bạn có thể tương tác với chương trình JS: *array* và *function*. Nhưng thay vì là các tích hợp phù hợp, nó phải được coi như là các kiểu thứ cấp -- là phiên bản đặc biệt của kiểu `object`.
 
 #### Mảng (array)
 
@@ -130,7 +130,7 @@ typeof arr;		// "object"
 
 Bởi vì mảng là một object đặc biệt (như `typeof` đã ngụ ý), nó có thể có thuộc tính, bao gồm thuộc tính `length` cũng được tự động cập nhật.
 
-Về mặt lý thuyết, bạn có thể sử dụng mảng như một object bình thường với tên thuộc tính tự bạn đặt, hoặc bạn có thể sử dụng một `object` nhưng chỉ cho các thuộc tính số (`0`, `1`, ...) tương tự như một mảng (wtf). Tuy nhiên, điều này thường được coi là sử dụng không đúng loại tương ứng.
+Về mặt lý thuyết, bạn có thể sử dụng mảng như một object bình thường, hoặc bạn có thể sử dụng một `object` nhưng chỉ cho các thuộc tính số (`0`, `1`, ...) tương tự như một mảng. Tuy nhiên, điều này thường được coi là sử dụng không đúng loại tương ứng.
 
 Cách tự nhiên và tốt nhất là sử dụng mảng cho các giá trị được xác định vị trí theo số và sử dụng `object` cho các thuộc tính có tên.
 
@@ -169,13 +169,13 @@ a.toUpperCase();		// "HELLO WORLD"
 b.toFixed(4);			// "3.1416"
 ```
 
-Việc "làm cách nào" đằng sau lệnh `a.toUpperCase()` phức tạp hơn chỉ là phương thức hiện có trong giá trị.
+Việc "làm cách nào" đằng sau lệnh `a.toUpperCase()` phức tạp hơn chỉ là phương thức hiện tại.
 
 Tóm tắt thì nó là một dạng bao lấy object `String` (viết hoa `S`), thường được gọi là "native," cặp với `string` nguyên thủy; đó là object bao ngoài định nghĩa phương thức `toUpperCase()` trên nguyên mẫu của nó.
 
 Khi bạn sử dụng giá trị ban đầu `"hello world"` như một `object` bằng cách tham chiếu một thuộc tính hay phương thức (vd: `a.toUpperCase()` trong đoạn code trên), JS tự động "đóng hộp" giá trị cho đối tượng bao ngoài của nó.
 
-Một giá trị `string` có thể được bao bởi một `String` object, một `number` có thể được bao bởi `Number` object, và `boolean` được bao bởi `Boolean` object. Phần lớn, bạn không cần phải lo lắng hoặc trực tiếp sử dụng những dạng bao object của giá trị -- Sử dụng định dạng giá trị nguyên thủy trong thực tế, JS sẽ lo phần còn lại.
+Một giá trị `string` có thể được bao bởi một `String` object, một `number` có thể được bao bởi `Number` object, và `boolean` được bao bởi `Boolean` object. Phần lớn, bạn không cần phải lo lắng hoặc trực tiếp sử dụng những dạng bao object của giá trị (trong thực tế bạn sử dụng định dạng giá trị nguyên thủy, JS sẽ lo phần còn lại).
 
 **Ghi chú:** Để biết thêm về các bản chất của JS và "đóng hộp", xem Chương 3 *Kiểu & Ngữ pháp*. Để hiểu hơn về prototype và object, xem Chương 5 *this & Object Proptotypes*
 
@@ -185,13 +185,13 @@ Có hai kiểu so sánh giá trị chính mà bạn cần thực hiện trong ch
 
 #### Sự cưỡng bức
 
-Chúng ta đã nói ngắn gọn về sự ép buộcở Chương 1, nhưng chúng ta sẽ thảo luận thêm ở đây.
+Chúng ta đã nói ngắn gọn về sự ép buộc ở Chương 1, nhưng chúng ta sẽ thảo luận thêm ở đây.
 
-Sự ép buộcxuất hiện trong 2 dạng của JavaScript: *minh bạch* và *tiềm ẩn*. Sự ép buộcminh bạch đơn giản là bạn thấy rõ ràng trong code có một sự chuyển đổi từ dạng này sang dạng khác, trong khi đó sự ép buộctiềm ẩn là khi chuyển đổi dạng có thể xảy ra nhiều hơn một hiệu ứng phụ của một số hoạt động khác.
+Sự ép buộc xuất hiện trong 2 dạng của JavaScript: *minh bạch* và *tiềm ẩn*. Sự ép buộc minh bạch đơn giản là bạn thấy rõ ràng trong code có một sự chuyển đổi từ dạng này sang dạng khác, trong khi đó sự ép buộc tiềm ẩn là khi chuyển đổi dạng có thể xảy ra nhiều hơn một hiệu ứng phụ của một số hoạt động khác.
 
 Bạn có thể từng nghe ý kiến rằng "sự ép buộc là ma quỷ" được nêu ra trong một số sự kiện tại một vị trí rõ ràng nào đó, nơi mà sự ép buộc có thể tạo nên những kết quả bất ngờ. Có lẽ đối với các developer thì không có gì thất vọng hơn khi một ngôn ngữ làm họ bất ngờ.
 
-Sự ép buộc không phải là ma quỷ cũng như mang lại sự bất ngờ. Thực tế, phần lớn các trường hợp chính bạn có thể xây dựng với kiểu ép buộc hợp lý và dễ hiểu, thậm chí còn có thể sử dụng để *cải thiện* khả năng đọc code. Nhưng chúng ta không đi sâu vào tranh luận điều này. -- Chương 4 *Kiểu & Ngữ pháp* sẽ giải quyết hết các vấn đề.
+Sự ép buộc không phải là ma quỷ hay sự bất ngờ. Thực tế, phần lớn các trường hợp chính bạn có thể xây dựng với kiểu ép buộc hợp lý và dễ hiểu, thậm chí còn có thể sử dụng để *cải thiện* khả năng đọc code. Nhưng chúng ta không đi sâu vào tranh luận điều này. -- Chương 4 *Kiểu & Ngữ pháp* sẽ giải quyết hết các vấn đề.
 
 Dưới đây là ví dụ của ép buộc *minh bạch*::
 
@@ -297,7 +297,7 @@ Nhưng giá trị JavaScript `string` cũng có thể được so sánh bất b�
 
 Về sự ép buộc thì sao? Tương tự như nguyên tắc so sánh `==` (mặc dù không giống hệt vậy) áp dụng trong toán tử bất bình đẳng. Đáng chú ý, không có toán tử "bất bình đẳng nghiêm ngặt" không cho phép ép buộc như `===` như trong "bình đẳng nghiêm ngặt".
 
-Consider:
+Ví dụ:
 
 ```js
 var a = 41;
@@ -308,7 +308,7 @@ a < b;		// true
 b < c;		// true
 ```
 
-Chuyện gì đang xảy ra? ở phần 11.8.5 của đặc tính kỹ thuật ES5, nó nói rằng nếu cả hai giá trị trong so sánh `<` đều là `string`, như ví dụ `b < c` trên, việc so sánh được thực hiện bằng từ điển học (??). Nhưng nếu một trong hai giá trị không phải là `string`, như so sánh `a < b`, thì cả hai giá trị bị ép thành `number`, và phép so sánh số thông thường diễn ra.
+Chuyện gì đang xảy ra? ở phần 11.8.5 của đặc tính kỹ thuật ES5, nó nói rằng nếu cả hai giá trị trong so sánh `<` đều là `string`, như ví dụ `b < c` trên, việc so sánh được thực hiện bằng từ điển học (wtf??). Nhưng nếu một trong hai giá trị không phải là `string`, như so sánh `a < b`, thì cả hai giá trị bị ép thành `number`, và phép so sánh số thông thường diễn ra.
 
 Hãy nhớ rằng là không có "bất bình đẳng nghiêm ngặt" để sử dụng, cái hay nhất là bạn có thể sử dụng phép so sánh với nhiều kiểu giá trị khác nhau khi một trong các giá trị không phải là một giá trị số hợp lệ, ví dụ:
 
@@ -580,11 +580,9 @@ function foo() {
 
 Cơ bản `foo` là một biến trong phạm vi bao quanh bên ngoài được tham chiếu với `function` khai báo, mặc dù dựa trên cú pháp điều này không rõ ràng. Vậy nên, `function` bản thân nó là một giá trị, như là `42` hay `[1,2,3]`.
 
-Mới nghe có vẻ lạ, nên có thể bạn cần một phút suy ngẫm chuyện này.
+Mới nghe có vẻ lạ, nên có thể bạn cần một phút suy ngẫm chuyện này. Bạn không chỉ truyền giá trị (tham số) *vào* một hàm, mà *một hàm tự nó có thể là một giá trị* được gán vào biến, hoặc được truyền hay trả từ hàm khác.
 
-This may sound like a strange concept at first, so take a moment to ponder it. Not only can you pass a value (argument) *to* a function, but *a function itself can be a value* that's assigned to variables, or passed to or returned from other functions.
-
-As such, a function value should be thought of as an expression, much like any other value or expression.
+Như vậy, một giá trị hàm có thể coi là một biểu thức, giống như các biểu thức hay giá trị khác.
 
 Ví dụ:
 
@@ -598,17 +596,17 @@ var x = function bar(){
 };
 ```
 
-The first function expression assigned to the `foo` variable is called *anonymous* because it has no `name`.
+Biểu thức hàm đầu tiên gán vào biến `foo` được gọi là *anonymous(ẩn danh)* bởi vì không có `name`.
 
-The second function expression is *named* (`bar`), even as a reference to it is also assigned to the `x` variable. *Named function expressions* are generally more preferable, though *anonymous function expressions* are still extremely common.
+Biểu thức hàm tiếp theo được *đặt tên* (`bar`), ngay cả khi một tham chiếu đến nó cũng được gán vào biến `x`. *Hàm biểu thức được đặt tên* thường thích hợp hơn, mặc dù *hàm biểu thức vô danh* được sử dụng nhiều hơn.
 
-For more information, see the *Scope & Closures* title of this series.
+Để tìm hiểu thêm, xem phần *Scope & Closures*
 
 ### Immediately Invoked Function Expressions (IIFEs)
 
 Trong đoạn code trên, muốn biểu thức function được thực thi - chúng ta phải có thêm `foo()` hoặc `x()`.
 
-Có một cách khác để thực hi một biểu thức function, nó thường được gọi là *immediately invoked function expression - (tạm dịch) Biểu thức function thực hiện ngay lập tức* (IIFE):
+Có một cách khác để thực hi một biểu thức function, nó thường được gọi là *immediately invoked function expression - (tạm dịch) Hàm biểu thức thực hiện ngay lập tức* (IIFE):
 
 ```js
 (function IIFE(){
@@ -666,7 +664,7 @@ Giá trị `42` được `return` từ `IIFE`- thực thi function được đ�
 
 *Closure* là một trong những khái niệm JS quan trọng nhất, và ít được hiểu nhất. Tôi sẽ không đi sâu ở đây, và sẽ phân tích ở *Scope & Closures*. Nhưng tôi sẽ nêu một vài vấn đề để bạn có cái nhìn tổng quan về khái niệm của nó. Nó sẽ là một trong nhưng kỹ thuật quan trọng nhất của bạn.
 
-Bạn có thể nghĩ closure là một cách để "nhớ" và tiếp tục tiếp cận scope của function (biến của nó) kể cả khi function đã hoàn tất.
+Bạn có thể nghĩ closure là một cách để "nhớ" và tiếp tục tiếp cận scope của hàm (biến của nó) kể cả khi hàm đã hoàn tất.
 
 Xem:
 
@@ -681,7 +679,7 @@ function makeAdder(x) {
 }
 ```
 
-Mối tương quan giữa function `add(...)` được trả với mỗi lần gọi hàm `makeAdder(..)` trên nó là ghi nhớ giá trị `x` được truyền vào `makeAdder(..)`. Giờ hãy sử dụng `makeAdder(..)`:
+Mối tương quan giữa hàm `add(...)` được trả với mỗi lần gọi hàm `makeAdder(..)` trên nó là ghi nhớ giá trị `x` được truyền vào `makeAdder(..)`. Giờ hãy sử dụng `makeAdder(..)`:
 
 ```js
 // `plusOne` có một mối quan hệ khép kín với hàm `add(..)`
@@ -705,7 +703,7 @@ Code hoạt động như sau:
 3. Khi chúng ta gọi `plusOne(3)`, nó cộng `3` (`y` bên trong) với `1` (được ghi nhớ bởi `x`), và chúng ta có kết quả là `4`.
 4. Khi chúng ta gọi `plusTen(13)`, nó cộng `13` (`y` bên trong) với `10` (được ghi nhớ bởi  `x`), và chúng ta có kết quả là `23`.
 
-Đừng lo lắng nếu nó có thể xa lạ và hơi bối rối lúc ban đầu -- có thể là vậy! Ta sẽ có nhiều bài tập để hiểu nó đầy đủ hơn. Hãy tin tôi, khi bạn đã hiểu, nó là một trong những những kỹ thuật bá đạo và hữu dụng nhất trong tất cả chương trình. Nó tất nhiên là đáng để cho não bạn căng lên chút. Trong phần tiếp theo, tôi sẽ có một ít bài tập với closure.
+Đừng lo lắng nếu nó có thể xa lạ và hơi bối rối lúc ban đầu (có thể!) Ta sẽ có nhiều bài tập để hiểu nó đầy đủ hơn. Hãy tin tôi, khi bạn đã hiểu, nó là một trong những những kỹ thuật bá đạo và hữu dụng nhất trong tất cả chương trình. Nó tất nhiên là đáng để cho não bạn căng lên chút. Trong phần tiếp theo, tôi sẽ có một ít bài tập với closure.
 
 #### Modules
 
