@@ -71,27 +71,27 @@ Một giả định hợp lý là *Compiler* sẽ tạo ra mã có thể đượ
 
 *Compiler* sẽ làm như sau:
 
-1. Encountering `var a`, *Compiler* asks *Scope* to see if a variable `a` already exists for that particular scope collection. If so, *Compiler* ignores this declaration and moves on. Otherwise, *Compiler* asks *Scope* to declare a new variable called `a` for that scope collection.
+1. Gặp `var a`, *Compiler* hỏi *Scope* xem nếu biến `a` có tồn tại trong bộ scope cụ thể đó hay không. Nếu có, *Compiler* bỏ qua khai báo và tiếp tục. Ngược lại, *Compiler* yêu cầu *Scope* khai báo một biến mới tên `a`.
 
-2. *Compiler* then produces code for *Engine* to later execute, to handle the `a = 2` assignment. The code *Engine* runs will first ask *Scope* if there is a variable called `a` accessible in the current scope collection. If so, *Engine* uses that variable. If not, *Engine* looks *elsewhere* (see nested *Scope* section below).
+2. *Compiler* sau đó tạo ra code cho *Engine* thực thi sau đó, thực hiện việc gán `a = 2`. Khi *Engine* chạy sẽ hỏi *Scope* rằng có biến nào trong bộ sưu tập tên là `a` có thể truy cập được hay không. Nếu có, *Engine* sử dụng biến 9do1, nếu không thì *Engine* sẽ tìm ở *đâu đó* (xem phần *Scope* lồng nhau bên dưới).
 
-If *Engine* eventually finds a variable, it assigns the value `2` to it. If not, *Engine* will raise its hand and yell out an error!
+Nếu *Engine* cuối cùng tìm thấy một biến, nó gán giá trị `2` vào đó. Nếu không, *Engine* sẽ hô lên là có lỗi!
 
-To summarize: two distinct actions are taken for a variable assignment: First, *Compiler* declares a variable (if not previously declared in the current scope), and second, when executing, *Engine* looks up the variable in *Scope* and assigns to it, if found.
+Túm lại: Hai hành động riêng biệt được thực hiện cho một phép gán biến: Một là *Compiler* khai báo một biến (nếu chưa có trong scope hiện tại), và thứ hai là khi thực thi, *Engine* tìm biến trong *SCope* và nếu tìm thấy thì sẽ gán nó vào.
 
-### Compiler Speak
+### Lời của Compiler
 
-We need a little bit more compiler terminology to proceed further with understanding.
+Chúng ta cần một chút thuật ngữ của compiler để tiếp tục hiểu sâu hơn.
 
-When *Engine* executes the code that *Compiler* produced for step (2), it has to look-up the variable `a` to see if it has been declared, and this look-up is consulting *Scope*. But the type of look-up *Engine* performs affects the outcome of the look-up.
+Khi *Engine* thực thi code do *Compiler* tạo ra cho bước (2), nó phải tra cứu biến `a` để xem nó đã khai báo hay chưa, và việc tra cứu này là cố vấn *Scope*. Nhưng kiểu tra cứu *Engine* thực hiện ảnh hưởng đến kết quả của việc tra cứu.
 
-In our case, it is said that *Engine* would be performing an "LHS" look-up for the variable `a`. The other type of look-up is called "RHS".
+Trong trường hợp của chúng ta, *Engine* thực hiện một tra cứu "LHS" cho biến `a`. Một kiểu tra cứu khác là "RHS".
 
-I bet you can guess what the "L" and "R" mean. These terms stand for "Left-hand Side" and "Right-hand Side".
+Tôi cá là bạn có thể đoán "L" và "R" nghĩa là gì. Cụm từ để chỉ cho "Left-hand Side (Phía bên trái)" và "Right-hand Side (Phía bên phải)".
 
-Side... of what? **Of an assignment operation.**
+Phía... cùa cái gì? **Của một phép gán**
 
-In other words, an LHS look-up is done when a variable appears on the left-hand side of an assignment operation, and an RHS look-up is done when a variable appears on the right-hand side of an assignment operation.
+Nói cách khác, tra cứu LHS được hoàn tất khi một biến xuất hiện ở bên trái của phép gán, và một tra cứu RHS hoàn tất khi một biến xuất hiện ở bên phải của phép gán.
 
 Actually, let's be a little more precise. An RHS look-up is indistinguishable, for our purposes, from simply a look-up of the value of some variable, whereas the LHS look-up is trying to find the variable container itself, so that it can assign. In this way, RHS doesn't *really* mean "right-hand side of an assignment" per se, it just, more accurately, means "not left-hand side".
 
