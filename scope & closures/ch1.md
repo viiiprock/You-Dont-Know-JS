@@ -93,7 +93,7 @@ Phía... cùa cái gì? **Của một phép gán**
 
 Nói cách khác, tra cứu LHS được hoàn tất khi một biến xuất hiện ở bên trái của phép gán, và một tra cứu RHS hoàn tất khi một biến xuất hiện ở bên phải của phép gán.
 
-Actually, let's be a little more precise. An RHS look-up is indistinguishable, for our purposes, from simply a look-up of the value of some variable, whereas the LHS look-up is trying to find the variable container itself, so that it can assign. In this way, RHS doesn't *really* mean "right-hand side of an assignment" per se, it just, more accurately, means "not left-hand side".
+Chính xác hơn một chút, tìm kiếm RHS không thể phân biệt được với mục đích của chúng ta, đơn giản chỉ là tra cứu của một giá trị của biến nào đó, trong khi tra cứu LHS để tìm vùng chứa biến để gán. Bằng cách này, RHS không *thực sự* nghĩa là "phía bên phải của một phép gán" cho chính nó, mà chính xác chỉ là "không phải phía bên trái"
 
 Being slightly glib for a moment, you could also think "RHS" instead means "retrieve his/her source (value)", implying that RHS means "go get the value of...".
 
@@ -102,7 +102,7 @@ Let's dig into that deeper.
 When I say:
 
 ```js
-console.log( a );
+console.log(a);
 ```
 
 The reference to `a` is an RHS reference, because nothing is being assigned to `a` here. Instead, we're looking-up to retrieve the value of `a`, so that the value can be passed to `console.log(..)`.
