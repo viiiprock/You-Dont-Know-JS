@@ -586,7 +586,7 @@ This may sound like a strange concept at first, so take a moment to ponder it. N
 
 As such, a function value should be thought of as an expression, much like any other value or expression.
 
-Consider:
+Ví dụ:
 
 ```js
 var foo = function() {
@@ -841,21 +841,19 @@ Nhưng cách tự nhiên hơn để áp dụng nguyên mẫu là một pattern g
 
 ## Cũ & Mới
 
-Some of the JS features we've already covered, and certainly many of the features covered in the rest of this series, are newer additions and will not necessarily be available in older browsers. In fact, some of the newest features in the specification aren't even implemented in any stable browsers yet.
+Một số tính năng của JS chúng ta cũng đã biết, nhiều tính năng còn lại chúng ta sẽ tìm hiểu trong các phần còn lại, có những tính năng không phù hợp với trình duyệt cũ. Trên thực tế, có cả một số tính năng đặc trưng còn chưa được triển khai trên các trình duyệt ổn định.
 
-So, what do you do with the new stuff? Do you just have to wait around for years or decades for all the old browsers to fade into obscurity?
+Vì vậy, bạn phải làm gì với hàng mới? Bạn có phải chờ hàng năm hay cả thập kỷ để để cho các trình duyệt cũ chìm vào trong bóng tối?
 
-That's how many people think about the situation, but it's really not a healthy approach to JS.
+Đó là cách nhiều người nghĩ vậy, nhưng đó là ý nghĩ không "lành mạnh" đối với việc tiếp cận JS.
 
-There are two main techniques you can use to "bring" the newer JavaScript stuff to the older browsers: polyfilling and transpiling.
+Có hai kỹ thuật chính để đem đồ chơi mới của JavaScript chiến trên trình duyệt cũ: polyfilling và transpiling.
 
 ### Polyfilling
 
-The word "polyfill" is an invented term (by Remy Sharp) (https://remysharp.com/2010/10/08/what-is-a-polyfill) used to refer to taking the definition of a newer feature and producing a piece of code that's equivalent to the behavior, but is able to run in older JS environments.
+Từ "polyfill" là một thuật ngữ được phát kiến bởi (Remy Sharp) (https://remysharp.com/2010/10/08/what-is-a-polyfill) được dùng để mô tả việc xác định một tính năng mới và tái tạo lại đoạn code có thể chạy trên môi trường JS cũ với những hành vi tương tự.
 
-For example, ES6 defines a utility called `Number.isNaN(..)` to provide an accurate non-buggy check for `NaN` values, deprecating the original `isNaN(..)` utility. But it's easy to polyfill that utility so that you can start using it in your code regardless of whether the end user is in an ES6 browser or not.
-
-Consider:
+Ví dụ, ES6 định nghĩa một tiện ích gọi là `Number.isNaN(..)` để cung cấp một phương thức kiểm tra chính xác không lỗi cho giá trị `NaN` thay cho tiện ích gốc `isNaN(..)`. Nhưng cũng dễ dàng để polyfill tiện ích đó nên bạn có thể bắt đầu sử dụng nó bất kể người dùng cuối có dùng trình duyệt ES6 hay không:
 
 ```js
 if (!Number.isNaN) {
@@ -865,31 +863,31 @@ if (!Number.isNaN) {
 }
 ```
 
-The `if` statement guards against applying the polyfill definition in ES6 browsers where it will already exist. If it's not already present, we define `Number.isNaN(..)`.
+Câu lệnh `if` bảo vệ việc áp dụng polyfill trong trình duyệt ES6. Nếu nó chưa có, chúng ta định nghĩa `Number.isNaN(..)`.
 
-**Note:** The check we do here takes advantage of a quirk with `NaN` values, which is that they're the only value in the whole language that is not equal to itself. So the `NaN` value is the only one that would make `x !== x` be `true`.
+**Ghi chú:** Việc kiểm tra mà chúng ta thực hiện tận dụng lợi thế của giá trị quái đản `NaN`, nó là giá trị duy nhất trong toàn bộ ngôn ngữ không bằng với chính nó. Ví vậy giá trị `NaN` là loại duy nhất có thể làm cho `x !== x` trở thành `true`.
 
-Not all new features are fully polyfillable. Sometimes most of the behavior can be polyfilled, but there are still small deviations. You should be really, really careful in implementing a polyfill yourself, to make sure you are adhering to the specification as strictly as possible.
+Không phải tất cả các tính năng mới để có thể polyfill được hoàn toàn. Đôi khi hầu hết các hành vi có thể được polyfill, nhưng cũng có những sai lệch nhỏ. Bạn phải rất rất cẩn thận khi tự thực hiện polyfill, để đảm bảo rằng bạn đang tuân thủ các đặc điểm kỹ thuật càng chặt chẽ càng tốt.
 
-Or better yet, use an already vetted set of polyfills that you can trust, such as those provided by ES5-Shim (https://github.com/es-shims/es5-shim) and ES6-Shim (https://github.com/es-shims/es6-shim).
+Hoặc tốt hơn, sử dụng một bộ polyfill tin cậy đã được cung cấp bởi ES5-Shim (https://github.com/es-shims/es5-shim) và ES6-Shim (https://github.com/es-shims/es6-shim).
 
 ### Transpiling
 
-There's no way to polyfill new syntax that has been added to the language. The new syntax would throw an error in the old JS engine as unrecognized/invalid.
+Không có cách nào để polyfill cú pháp mới khi đã được thêm vào ngôn ngữ. Cú pháp mới sẽ báo lỗi không nhận/không hợp pháp trong JS engine cũ.
 
-So the better option is to use a tool that converts your newer code into older code equivalents. This process is commonly called "transpiling," a term for transforming + compiling.
+Vì vậy phương án tiếp tốt hơn là sử dụng công cụ để chuyển đoạn code của bạn sang đoạn code cũ tương ứng. Các này thường được gọi là "transpiling", cụm từ của transforming + compiling.
 
-Essentially, your source code is authored in the new syntax form, but what you deploy to the browser is the transpiled code in old syntax form. You typically insert the transpiler into your build process, similar to your code linter or your minifier.
+Về bản chất, mã nguồn của bạn được tạo theo dạng cú pháp mới, nhưng những gì bạn triển khai trên trình duyệt là mã nguồn cũ. Bạn thường cho transpiler trong quá trình build, tương tự như linter (kiểm lỗi cú pháp) & minifier (nén code).
 
-You might wonder why you'd go to the trouble to write new syntax only to have it transpiled away to older code -- why not just write the older code directly?
+Bạn có thể thắc mắc vì sao bạn phải cú pháp mới chỉ để chuyển nó theo cách cũ -- tại sao không viết luôn code kiểu cũ cho rồi?
 
-There are several important reasons you should care about transpiling:
+Có vài lý do quan trọng để bạn quan tâm đến transpiling:
 
-* The new syntax added to the language is designed to make your code more readable and maintainable. The older equivalents are often much more convoluted. You should prefer writing newer and cleaner syntax, not only for yourself but for all other members of the development team.
-* If you transpile only for older browsers, but serve the new syntax to the newest browsers, you get to take advantage of browser performance optimizations with the new syntax. This also lets browser makers have more real-world code to test their implementations and optimizations on.
-* Using the new syntax earlier allows it to be tested more robustly in the real world, which provides earlier feedback to the JavaScript committee (TC39). If issues are found early enough, they can be changed/fixed before those language design mistakes become permanent.
+* Cú pháp mới được thiết kế để đưa vào ngôn ngữ làm cho code của bạn dễ đọc dễ bảo trì hơn. Code cũ tương ứng thường phức tạp hơn rất nhiều. Bạn sẽ muốn viết theo cách mới với cú pháp rõ ràng hơn, không chỉ cho riêng bạn mà còn cho thành viên khác trong nhóm của bạn.
+* Nếu bạn chỉ transpile cho trình duyệt cũ, sử dụng cú pháp mới cho trình duyệt mới, bạn sẽ tận dụng được hiệu suất của cú pháp mới. Nó đồng thời giúp người tạo ra trình duyệt có nhiều thực tế để kiểm tra và tối ưu trình duyệt của họ.
+* Sử dụng cú pháp mới sớm hơn cho phép thử nghiệm mạnh mẽ hơn trong thực tế, đưa ra phản hồi cho ủy ban JavaScript (TC39). Nếu phát hiện sớm các vấn đề, họ có thể thay đổi/sửa chữa trước khi lỗi thiết kế ngôn ngữ trở nên vĩnh viễn.
 
-Here's a quick example of transpiling. ES6 adds a feature called "default parameter values." It looks like this:
+Đây là một ví dụ nhanh cho transpiling. ES6 thêm một tính năng gọi là "tham chiếu mặc định" như thế này:
 
 ```js
 function foo(a = 2) {
@@ -900,7 +898,7 @@ foo();		// 2
 foo( 42 );	// 42
 ```
 
-Simple, right? Helpful, too! But it's new syntax that's invalid in pre-ES6 engines. So what will a transpiler do with that code to make it run in older environments?
+Đơn giản phải không? Cũng rất hữu dụng nữa! Nhưng mà cú pháp mới này không tương thích với ES engine cũ. Vì vậy nó sẽ transpiler sang code cũ để phục vụ môi trường cũ.
 
 ```js
 function foo() {
@@ -909,17 +907,17 @@ function foo() {
 }
 ```
 
-As you can see, it checks to see if the `arguments[0]` value is `void 0` (aka `undefined`), and if so provides the `2` default value; otherwise, it assigns whatever was passed.
+Như bạn thấy, nó kiểm tra nếu giá trị `arguments[0]` là `void 0` (tức `undefined`), thì sẽ là giá trị mặc định `2`; ngược lại, nó sẽ chỉ định vào bất kỳ gì truyền vào.
 
-In addition to being able to now use the nicer syntax even in older browsers, looking at the transpiled code actually explains the intended behavior more clearly.
+Bây giờ ngoài việc có thể sử dụng cú pháp đẹp hơn cho trình duyệt cũ, nhìn vào mã transpile có thể giải thích hành vi rõ ràng hơn.
 
-You may not have realized just from looking at the ES6 version that `undefined` is the only value that can't get explicitly passed in for a default-value parameter, but the transpiled code makes that much more clear.
+Bạn có thể không nhận ra rằng `undefined` là giá trị duy nhất không thể truyền vào thông qua việc cho một tham số mặc định khi nhìn vào bản ES6, nhưng ở bản transpile thì nó rõ ràng hơn.
 
-The last important detail to emphasize about transpilers is that they should now be thought of as a standard part of the JS development ecosystem and process. JS is going to continue to evolve, much more quickly than before, so every few months new syntax and new features will be added.
+Chi tiết quan trọng cuối cùng nhấn mạnh vào transpiler là không nên cho nó là một phần tiêu chuẩn của cộng đồng phát triển JS. JS sẽ tiếp tục phát triển nhanh chóng hơn bao giờ hết, nên chỉ vài tháng là có vài tính năng mới được bổ sung.
 
-If you use a transpiler by default, you'll always be able to make that switch to newer syntax whenever you find it useful, rather than always waiting for years for today's browsers to phase out.
+Nếu bạn mặc định sử dụng transpiler, bạn phải luôn cho phép nó chuyển qua cú pháp mới khi bạn thấy nó hữu dụng thay vì phải chờ đợi nhiều năm cho trình duyệt hiện tại lu mờ.
 
-There are quite a few great transpilers for you to choose from. Here are some good options at the time of this writing:
+Có vài transpiler để bạn chọn, dưới đây là 2 cách để bạn xem xét:
 
 * Babel (https://babeljs.io) (formerly 6to5): Transpiles ES6+ into ES5
 * Traceur (https://github.com/google/traceur-compiler): Transpiles ES6, ES7, and beyond into ES5
