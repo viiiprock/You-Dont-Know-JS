@@ -1,5 +1,5 @@
 # You Don't Know JS: Scope & Closures
-# Chapter 1: Scope là gì?
+# Chương 1: Scope là gì?
 
 Một trong những mô hình cơ bản của các ngôn ngữ lập trình là khả năng lưu trữ giá trị trong biến và sau đó gọi các giá trị đó hoặc thay đổi chúng. Thực tế, khả năng lưu trữ giá trị và lấy giá trị đó ra khỏi biến là cách tạo ra *state* của chương trình.
 
@@ -55,21 +55,21 @@ Hãy gặp vai diễn của các nhân vật tương tác để tiếp cận ch�
 
 2. *Compiler*: Một trong những người bạn của *Engine*; phụ trách tất cả các việc nặng nề của của phân tích cú pháp và xử lý mã (xem phần trên).
 
-3. *Scope*: người bạn khác của *Engine*; tập hợp và duy trì collects and maintains a look-up list of all the declared identifiers (variables), and enforces a strict set of rules as to how these are accessible to currently executing code.
+3. *Scope*: người bạn khác của *Engine*; tập hợp và duy trì một danh sách các định danh đã khai báo (biến), và thực hiện một tập hợp các quy tắc nghiêm ngặt về cách thức truy cập các mã vừa thực thi.
 
-For you to *fully understand* how JavaScript works, you need to begin to *think* like *Engine* (and friends) think, ask the questions they ask, and answer those questions the same.
+Để bạn *hiểu đầy đủ* hơn JavaSript làm việc như thế nào, bạn cần bắt đầu *nghĩ* như *Engine* (và bạn bè), đặt những câu hỏi chúng hỏi, đồng thời trả lời những câu hỏi đó.
 
-### Back & Forth
+### Trước và sau
 
-When you see the program `var a = 2;`, you most likely think of that as one statement. But that's not how our new friend *Engine* sees it. In fact, *Engine* sees two distinct statements, one which *Compiler* will handle during compilation, and one which *Engine* will handle during execution.
+Khi bạn thấy chương trình `var a = 2;` bạn hầu như nghĩ nó như một câu lệnh. Nhưng mà anh bạn mới *Engine* của chúng ta không thấy vậy. Chính xác là *Engine* thấy hai câu lệnh riêng biệt, một do *Compiler* sẽ phụ trách trong quá trình biên dịch, và một do *Engine* sẽ phụ trách trong quá trình thực thi.
 
-So, let's break down how *Engine* and friends will approach the program `var a = 2;`.
+Vậy, hãy phân tích cách *Engine* và bạn bè đã tiếp cận `var a = 2;`
 
-The first thing *Compiler* will do with this program is perform lexing to break it down into tokens, which it will then parse into a tree. But when *Compiler* gets to code-generation, it will treat this program somewhat differently than perhaps assumed.
+Đầu tiên *Compiler* sẽ thực hiện phân tích để tách nó ra thành các token, các token này sẽ tách thành cây. Nhưng khi *Compiler* thực hiện xử lý mã, nó sẽ coi chương trình hơi khác so với giả định.
 
-A reasonable assumption would be that *Compiler* will produce code that could be summed up by this pseudo-code: "Allocate memory for a variable, label it `a`, then stick the value `2` into that variable." Unfortunately, that's not quite accurate.
+Một giả định hợp lý là *Compiler* sẽ tạo ra mã có thể được tóm tắt bởi mã giả: "Phân bổ bộ nhớ cho biến, gắn nhãn `a` cho nó, sau đó gán giá trị `2` cho biến đó". Thật không may là nó không hẳn chính xác.
 
-*Compiler* will instead proceed as:
+*Compiler* sẽ làm như sau:
 
 1. Encountering `var a`, *Compiler* asks *Scope* to see if a variable `a` already exists for that particular scope collection. If so, *Compiler* ignores this declaration and moves on. Otherwise, *Compiler* asks *Scope* to declare a new variable called `a` for that scope collection.
 
@@ -153,7 +153,7 @@ foo( 2 );
 
 Let's imagine the above exchange (which processes this code snippet) as a conversation. The conversation would go a little something like this:
 
-> ***Engine***: Hey *Scope*, I have an RHS reference for `foo`. Ever heard of it?
+> ***Engine***: Ê *Scope*, I have an RHS reference for `foo`. Ever heard of it?
 
 > ***Scope***: Why yes, I have. *Compiler* declared it just a second ago. He's a function. Here you go.
 
