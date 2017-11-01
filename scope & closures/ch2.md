@@ -1,5 +1,5 @@
 # You Don't Know JS: Scope & Closures
-# Chapter 2: Lexical Scope
+# Chương 2: Lexical Scope (phạm vi từ vựng)
 
 In Chapter 1, we defined "scope" as the set of rules that govern how the *Engine* can look up a variable by its identifier name and find it, either in the current *Scope*, or in any of the *Nested Scopes* it's contained within.
 

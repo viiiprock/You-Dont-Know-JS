@@ -1,5 +1,5 @@
 # You Don't Know JS: Scope & Closures
-# Chương 1: Scope là gì?
+# Chương 1: Scope (phạm vi) là gì?
 
 Một trong những mô hình cơ bản của các ngôn ngữ lập trình là khả năng lưu trữ giá trị trong biến và sau đó gọi các giá trị đó hoặc thay đổi chúng. Thực tế, khả năng lưu trữ giá trị và lấy giá trị đó ra khỏi biến là cách tạo ra *state* của chương trình.
 
@@ -93,13 +93,11 @@ Phía... cùa cái gì? **Của một phép gán**
 
 Nói cách khác, tra cứu LHS được hoàn tất khi một biến xuất hiện ở bên trái của phép gán, và một tra cứu RHS hoàn tất khi một biến xuất hiện ở bên phải của phép gán.
 
-Chính xác hơn một chút, tìm kiếm RHS không thể phân biệt được với mục đích của chúng ta, đơn giản chỉ là tra cứu của một giá trị của biến nào đó, trong khi tra cứu LHS để tìm vùng chứa biến để gán. Bằng cách này, RHS không *thực sự* nghĩa là "phía bên phải của một phép gán" cho chính nó, mà chính xác chỉ là "không phải phía bên trái"
+Chính xác hơn một chút, tìm kiếm RHS không thể phân biệt được với mục đích của chúng ta, đơn giản chỉ là tra cứu của một giá trị của biến nào đó, trong khi tra cứu LHS để tìm vùng chứa biến để gán. Bằng cách này, RHS không *thực sự* nghĩa là "phía bên phải của một phép gán" cho chính nó, mà chính xác chỉ là "không phải phía bên trái".
 
-Being slightly glib for a moment, you could also think "RHS" instead means "retrieve his/her source (value)", implying that RHS means "go get the value of...".
+Ngắn gọn hơn, bạn có thể nghĩ "RHS" thay vì "lấy đi nguồn (giá trị) của nó" thì là "đi lấy giá trị của..."
 
-Let's dig into that deeper.
-
-When I say:
+Đào sâu hơn chút. Khi tôi nói:
 
 ```js
 console.log(a);

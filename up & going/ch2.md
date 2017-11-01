@@ -49,7 +49,7 @@ typeof a;				// "object"
 
 Giá trị trả lại từ biểu thức `typeof` luôn là một trong sáu kiểu ở dạng giá trị string (ES6 là 7 -- thêm kiểu "symbol"). Đó là, `typeof "abc"` trả lại `"string"`, không phải `string`.
 
-Chú ý rằng đoạn code này, biến `a` giữ mọi kiểu của giá trị, và mặc dù là có bề ngoài, `typeof a` sẽ không hỏi "kiểu của `a`", mà là "kiểu của giá trị hiện tại trong `a`." Trong JS chỉ có giá trị mới có kiểu; biến chỉ đơn giản là vật chứa các giá trị đó.
+Chú ý rằng đoạn code này, biến `a` giữ mọi kiểu của giá trị, và mặc dù là có bề ngoài, `typeof a` sẽ không hỏi "kiểu của `a`", mà là "kiểu của giá trị hiện tại trong `a`". Trong JS chỉ có giá trị mới có kiểu; biến chỉ đơn giản là vật chứa các giá trị đó.
 
 `typeof null` là một trường hợp thú vị, bởi vì nó trả sai thành `"object"`, trong khi bạn mong muốn nó trả `"null"`.
 
@@ -77,7 +77,7 @@ obj["b"];	// 42
 obj["c"];	// true
 ```
 
-Thật hữu ích khi xem giá trị của `obj` một cách trực quan:
+Tốt hơn là xem giá trị của `obj` một cách trực quan:
 
 <img src="fig4.png">
 
@@ -171,7 +171,7 @@ b.toFixed(4);			// "3.1416"
 
 Việc "làm cách nào" đằng sau lệnh `a.toUpperCase()` phức tạp hơn chỉ là phương thức hiện tại.
 
-Tóm tắt thì nó là một dạng bao lấy object `String` (viết hoa `S`), thường được gọi là "native," cặp với `string` nguyên thủy; đó là object bao ngoài định nghĩa phương thức `toUpperCase()` trên nguyên mẫu của nó.
+Tóm tắt thì nó là một dạng bao lấy object `String` (viết hoa `S`), thường được gọi là "native", cặp với `string` nguyên thủy; đó là object bao ngoài định nghĩa phương thức `toUpperCase()` trên nguyên mẫu của nó.
 
 Khi bạn sử dụng giá trị ban đầu `"hello world"` như một `object` bằng cách tham chiếu một thuộc tính hay phương thức (vd: `a.toUpperCase()` trong đoạn code trên), JS tự động "đóng hộp" giá trị cho đối tượng bao ngoài của nó.
 
@@ -183,13 +183,13 @@ Một giá trị `string` có thể được bao bởi một `String` object, m�
 
 Có hai kiểu so sánh giá trị chính mà bạn cần thực hiện trong chương trình JS: *bằng nhau* và không *bằng nhau*. Kết quả của bất kỳ sự so sánh nào đều là `boolean` (`true` hoặc `false`), bất kể kiểu già trị nào được so sánh.
 
-#### Sự cưỡng bức
+#### Sự ép buộc
 
 Chúng ta đã nói ngắn gọn về sự ép buộc ở Chương 1, nhưng chúng ta sẽ thảo luận thêm ở đây.
 
-Sự ép buộc xuất hiện trong 2 dạng của JavaScript: *minh bạch* và *tiềm ẩn*. Sự ép buộc minh bạch đơn giản là bạn thấy rõ ràng trong code có một sự chuyển đổi từ dạng này sang dạng khác, trong khi đó sự ép buộc tiềm ẩn là khi chuyển đổi dạng có thể xảy ra nhiều hơn một hiệu ứng phụ của một số hoạt động khác.
+Sự ép buộc xuất hiện trong 2 dạng của JavaScript: *minh bạch* và *tiềm ẩn*. Sự ép buộc minh bạch đơn giản là bạn thấy rõ ràng trong code có một sự chuyển đổi từ dạng này sang dạng khác, trong khi đó sự ép buộc tiềm ẩn là khi chuyển đổi dạng có thể xảy ra nhiều hơn, là một hiệu ứng phụ của một số hoạt động khác.
 
-Bạn có thể từng nghe ý kiến rằng "sự ép buộc là ma quỷ" được nêu ra trong một số sự kiện tại một vị trí rõ ràng nào đó, nơi mà sự ép buộc có thể tạo nên những kết quả bất ngờ. Có lẽ đối với các developer thì không có gì thất vọng hơn khi một ngôn ngữ làm họ bất ngờ.
+Bạn có thể từng nghe ý kiến rằng "sự ép buộc là ma quỷ" được nêu ra trong một số sự kiện tại một vị trí rõ ràng nào đó, nơi mà sự ép buộc có thể tạo nên những kết quả bỡ ngỡ. Có lẽ đối với các developer thì không có gì thất vọng hơn khi một ngôn ngữ làm họ bỡ ngỡ.
 
 Sự ép buộc không phải là ma quỷ hay sự bất ngờ. Thực tế, phần lớn các trường hợp chính bạn có thể xây dựng với kiểu ép buộc hợp lý và dễ hiểu, thậm chí còn có thể sử dụng để *cải thiện* khả năng đọc code. Nhưng chúng ta không đi sâu vào tranh luận điều này. -- Chương 4 *Kiểu & Ngữ pháp* sẽ giải quyết hết các vấn đề.
 
@@ -261,7 +261,7 @@ Câu trả lời:  `"42"` trở thành `42`, để so sánh `42 == 42`. Trong v�
 
 `a === b` tạo nên `false` bởi vì sự ép buộc không cho phép, vì vậy sự so sánh đơn giản của giá trị đương nhiên sai. Nhiều lập trình viên cảm thấy `===`có thể dự đoán được, vậy nên họ hay dùng mẫu này và tránh xa `==`. Tôi nghĩ cách nhìn này khá ngắn. Tôi tin `==` là một công cụ quan trong để giúp chúng ta lập trình, *nếu bạn bỏ thời gian học cách nó hoạt động thế nào*
 
-Chúng ta sẽ không bao hết chi tiết nền tảng về phương thức so sánh `==` ép buộc như thế nào. Hầu hết khá là hợp lý, nhưng cũng có một vài trường hợp góc cạnh quan trọng cũng nên cẩn thận. Bạn có thể đọc phần 11.9.3 của đặc tính ES5 (http://www.ecma-international.org/ecma-262/5.1/) để biết luật chính xác, và bạn sẽ ngạc nhiên cơ chế này đơn giản thế nào khi so sánh với những cường điệu trái ngược xung quanh nó.
+Chúng ta sẽ không đi chi tiết hết nền tảng về phương thức so sánh `==` ép buộc như thế nào. Hầu hết khá là hợp lý, nhưng cũng có một vài trường hợp góc cạnh quan trọng cũng nên cẩn thận. Bạn có thể đọc phần 11.9.3 của đặc tính ES5 (http://www.ecma-international.org/ecma-262/5.1/) để biết luật chính xác, và bạn sẽ ngạc nhiên cơ chế này đơn giản thế nào khi so sánh với những cường điệu trái ngược xung quanh nó.
 
 Để làm rõ toàn bộ những chi tiết của vài điều cần ghi nhớ đơn giản, giúp bạn biết được khi nào thì dùng `==` hay `===`, tôi liệt kê một số nguyên tắc sau:
 
@@ -331,20 +331,19 @@ Phép so sánh `==` thất bại vì một lý do khác. `a == b`  có thể th�
 
 Trong JavaScript, tên biến (bao gồm tên hàm) phải là *nhận diện* hợp lệ. Sự nghiêm ngặt và hoàn chỉnh của các nguyên tắc cho các ký tự hợp lệ trong việc định danh hơi phức tạp một chút khi bạn xem xét các ký tự không phổ biến như là Unicode. Nếu bạn chỉ xem xét các ký tự ASCII tiêu biểu thì các quy tắc lại trở nên đơn giản.
 
-Một định danh nên bắt đầu với `a`-`z`, `A`-`Z`, `$`, hay `_`. Và nó có thể chứa bất kỳ các ký tự như vậy cùng với số từ `0`-`9`.
-Nói chung, các quy tắc tương tự áp dụng cho tên thuộc tính như là một biến số nhận diện. Tuy nhiên, một số từ nhất định không thể được sử dụng như các biến, nhưng cũng OK khi đặt tên thuộc tính. Những từ này gọi là từ "dành riêng", và bao gồm các từ khóa JS (`for`, `in`, `if`, v.v...) cũng như `null`, `true`, và `false`.
+Một định danh nên bắt đầu với `a`-`z`, `A`-`Z`, `$`, hay `_`. Và nó có thể chứa bất kỳ các ký tự như vậy cùng với số từ `0`-`9`. Nói chung, các quy tắc tương tự áp dụng cho tên thuộc tính như là một biến số nhận diện. Tuy nhiên, một số từ nhất định không thể được sử dụng như các biến, nhưng cũng OK khi đặt tên thuộc tính. Những từ này gọi là từ "dành riêng", và bao gồm các từ khóa JS (`for`, `in`, `if`, v.v...) cũng như `null`, `true`, và `false`.
 
 **Ghi chú:** Để biết thêm thông tin về từ dành riêng, xem Phụ lục A của tập *Kiểu & ngữ pháp*
 
 ### Function Scopes (Phạm vi hàm)
 
-Bạn sử dụng từ khóa `var` để khai báo biến cho scope chức năng gần nhất, hoặc là scope toàn cục nếu nó nằm ở tầng trên cùng ngoài tất cả các function.
+Bạn sử dụng từ khóa `var` để khai báo biến cho phạm vi chức năng gần nhất, hoặc là toàn cục nếu nó nằm ở tầng trên cùng ngoài tất cả các hàm.
 
 #### Hoisting
 
-Khi bất kỳ một `var` xuất hiện bên trong phạm vi, việc khai báo có thể thực hiện mọi nơi trong toàn bộ scope đó.
+Khi bất kỳ một `var` xuất hiện bên trong phạm vi, việc khai báo có thể thực hiện mọi nơi trong toàn bộ phạm vi đó.
 
-Một cách ẩn dụ, hành vi này gọi là *hoisting*, khi khai báo `var` "di chuyển" lên trên đầu scope của chính nó. Về mặt kỹ thuật, quá trình này được giải thích chính xác hơn bằng code được biên dịch như thế nào, nhưng tạm thời chúng ta bỏ qua chi tiết.
+Một cách ẩn dụ, hành vi này gọi là *hoisting*, khi khai báo `var` "di chuyển" lên trên đầu phạm vi của chính nó. Về mặt kỹ thuật, quá trình này được giải thích chính xác hơn bằng code được biên dịch như thế nào, nhưng tạm thời chúng ta bỏ qua chi tiết.
 
 Ví dụ:
 
@@ -364,11 +363,11 @@ function foo() {
 console.log( a );	// 2
 ```
 
-**Chú ý:** Đây không thường là một ý hay khi dựa vào biến *hoisting* để sử một biến trước đó trong scope của nó hơn là `var` được khai báo bởi chính nó, điều này có thể gây bối rối. Cách thông thường và được chấp nhận để sử dụng hàm *hoisted*, là gọi trước khi nó được khai báo như chúng ta làm với `foo()`.
+**Chú ý:** Đây là một ý không hay khi dựa vào biến *hoisting* để sử một biến trước đó trong phạm vi của nó hơn là `var` được khai báo bởi chính nó, điều này có thể gây bối rối. Cách thông thường và được chấp nhận để sử dụng hàm *hoisted*, là gọi trước khi nó được khai báo như chúng ta làm với `foo()`.
 
-#### Scopes lồng nhau.
+#### Phạm vi (scope) lồng nhau.
 
-Khi bạn khai báo một biến, nó có hiệu lực ở toàn bộ trong scope đó, kể cả scope con. Ví dụ:
+Khi bạn khai báo một biến, nó có hiệu lực ở toàn bộ trong phạm vi đó, kể cả phạm vi con. Ví dụ:
 
 ```js
 function foo() {
@@ -394,7 +393,7 @@ function foo() {
 foo();
 ```
 
-Chú ý là `c` khôn có bên trong `bar()`, bởi vì nó chỉ được khai báo bên trong scope `baz()`, và tương tự `b` không có trong `foo()`.
+Chú ý là `c` không có bên trong `bar()`, bởi vì nó chỉ được khai báo bên trong scope `baz()`, và tương tự `b` không có trong `foo()`.
 
 Nếu bạn muốn tiếp cận giá trị của một biến trong một scope không có nó, bạn sẽ gặp lỗi `ReferenceError`. Nếu bạn cố lập một biến chưa được khai báo, bạn cũng sẽ vô tình tạo một biến ở tầng cao nhất - toàn cục (bad!) hoặc gặp lỗi, tùy vào "strict mode" (xem "Strict Mode"). Hãy xem ví dụ:
 
@@ -739,7 +738,7 @@ Hàm `User()` thực hiện với vai trò là scope ngoài cùng chứa biến 
 
 **Chú ý:** Chúng ta không gọi `new User()` mặc dù nó có vẻ thông thường với mọi bạn đọc.`User()` chỉ là một hàm, không phải một class để khởi tạo, nên chỉ gọi nó bình thường. Sử dụng `new` là không thích hợp và đương nhiên là lãng phí tài nguyên.
 
-Thực thi `User()` tạo ra một module `User` tức thì -- toàn bộ scope mới được tạo ra, và do đó một bản sao hoàn toàn mới cũa mỗi biến/hàm bên trong. Chúng ta gán nó với `fred`. Nếu chúng ta chạy tiếp `User()`, chúng ta sẽ có một trường hợp mới tách biệt với `fred`.
+Thực thi `User()` tạo ra một module `User` tức thì -- toàn bộ scope mới được tạo ra, và do đó một bản sao hoàn toàn mới của mỗi biến/hàm bên trong. Chúng ta gán nó với `fred`. Nếu chúng ta chạy tiếp `User()`, chúng ta sẽ có một trường hợp mới tách biệt với `fred`.
 
 Hàm `doLogin()` bên trong có một closure đối với `username` và `password`, nghĩa là nó vẫn giữ nguyên khả năng truy cập đến chúng sau khi hàm `User()` đã chạy xong.
 
@@ -749,7 +748,7 @@ Lúc này, hàm `User()` đã hoàn tất thực thi. Thông thường, chúng t
 
 Đó là lý do tại sao chúng ta gọi `fred.login(..)` cũng như khi gọi hàm `doLogin(..)` và nó vẫn truy cập biến `username` và `password` bên trong.
 
-Có cái nhìn thoáng qua về closure và module pattern thật là một cơ hội tốt, một vài vấn đề trong nó vẫn còn bối rối. Vậy cũng ổn! Nó cũng cần vài thứ để nạp vào đầu bạn.
+Có cái nhìn thoáng qua về closure và module pattern thật là một cơ hội tốt, một vài vấn đề trong nó vẫn còn gây bối rối. Vẫn ổn thôi! Nó cũng cần vài thứ để nạp vào đầu bạn.
 
 Từ chỗ này, xem phần *Scope & Closures* sẽ có sự khám phá sâu hơn.
 
