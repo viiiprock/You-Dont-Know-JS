@@ -103,19 +103,19 @@ Ngắn gọn hơn, bạn có thể nghĩ "RHS" thay vì "lấy đi nguồn (giá
 console.log(a);
 ```
 
-The reference to `a` is an RHS reference, because nothing is being assigned to `a` here. Instead, we're looking-up to retrieve the value of `a`, so that the value can be passed to `console.log(..)`.
+Tham chiếu đến `a` là một tham chiếu RHS, bởi vì không có gì được gán cho `a` cả. Thay vào đó, chúng ta đang tìm kiếm để lấy giá trị của `a` để truyền vào `console.log(..)`.
 
-By contrast:
+Ngược lại:
 
 ```js
 a = 2;
 ```
 
-The reference to `a` here is an LHS reference, because we don't actually care what the current value is, we simply want to find the variable as a target for the `= 2` assignment operation.
+Tham chiếu của `a` ở đây là tham chiếu LHS, bởi vị chúng ta không cần quan tâm giá trị gần nhất là gì, chúng ta chỉ đơn giản muốn tìm biến mục tiêu của phép gán `=a`
 
-**Note:** LHS and RHS meaning "left/right-hand side of an assignment" doesn't necessarily literally mean "left/right side of the `=` assignment operator". There are several other ways that assignments happen, and so it's better to conceptually think about it as: "who's the target of the assignment (LHS)" and "who's the source of the assignment (RHS)".
+**Ghi chú:** LHS và RHS có nghĩa "phép gán bên trái/phải" không nhất thiết có phải chính xác là "phía bên trái/phải của phép gán `=`". Có vài cách khác mà phép gán đó có thể xảy ra, do đó tốt hơn là nghĩ khái niệm đó như sau: "cái gì là mục tiêu của phép gán (LHS)" và "cái gì là nguồn của phép gán (RHS)"
 
-Consider this program, which has both LHS and RHS references:
+Ví dụ chương trình có cả LHS và RHS dưới đây:
 
 ```js
 function foo(a) {
@@ -125,9 +125,9 @@ function foo(a) {
 foo( 2 );
 ```
 
-The last line that invokes `foo(..)` as a function call requires an RHS reference to `foo`, meaning, "go look-up the value of `foo`, and give it to me." Moreover, `(..)` means the value of `foo` should be executed, so it'd better actually be a function!
+Dòng cuối cùng gọi hàm `foo (..)` yêu cầu một tham chiếu RHS đến `foo`, có nghĩa là,"hãy tra cứu giá trị của `foo`, và đưa nó cho tôi". Hơn nữa, `(..)` có nghĩa là giá trị của `foo` cần được thực hiện, vì vậy nó thực sự là một hàm!
 
-There's a subtle but important assignment here. **Did you spot it?**
+**Bạn có phát hiện ra được rằng** có một phép gán tinh tế quan trọng ở đây không?
 
 You may have missed the implied `a = 2` in this code snippet. It happens when the value `2` is passed as an argument to the `foo(..)` function, in which case the `2` value is **assigned** to the parameter `a`. To (implicitly) assign to parameter `a`, an LHS look-up is performed.
 
