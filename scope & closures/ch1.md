@@ -127,15 +127,15 @@ foo( 2 );
 
 Dòng cuối cùng gọi hàm `foo (..)` yêu cầu một tham chiếu RHS đến `foo`, có nghĩa là,"hãy tra cứu giá trị của `foo`, và đưa nó cho tôi". Hơn nữa, `(..)` có nghĩa là giá trị của `foo` cần được thực hiện, vì vậy nó thực sự là một hàm!
 
-**Bạn có phát hiện ra được rằng** có một phép gán tinh tế quan trọng ở đây không?
+**Bạn có phát hiện ra được** là có một phép gán tinh tế quan trọng ở đây không?
 
-You may have missed the implied `a = 2` in this code snippet. It happens when the value `2` is passed as an argument to the `foo(..)` function, in which case the `2` value is **assigned** to the parameter `a`. To (implicitly) assign to parameter `a`, an LHS look-up is performed.
+Bạn có thể quên ngụ ý của `a = 2` trong đoạn code này. Nó xảy ra khi giá trị `2` được truyền như một đối số trong hàm `foo(..)`, tức `2` được **gán** cho tham số `a`. Phép tra cứu LHS đã được thực hiện để (ngầm) gán đến tham số `a`.
 
-There's also an RHS reference for the value of `a`, and that resulting value is passed to `console.log(..)`. `console.log(..)` needs a reference to execute. It's an RHS look-up for the `console` object, then a property-resolution occurs to see if it has a method called `log`.
+Đồng thời cũng có một quan hệ RHS của giá trị `a`, và kết quả được chuyển đến `console.log(..)`. `console.log(..)` cần một tham chiếu để thực thi, đó là tra cứu RHS cho object `console`, sau đó xử lý thuộc tính thực hiện để xem có phương thức nào gọi là `log` hay không.
 
-Finally, we can conceptualize that there's an LHS/RHS exchange of passing the value `2` (by way of variable `a`'s RHS look-up) into `log(..)`. Inside of the native implementation of `log(..)`, we can assume it has parameters, the first of which (perhaps called `arg1`) has an LHS reference look-up, before assigning `2` to it.
+Cuối cùng, chúng ta có thể khái niệm hóa rằng có một trao đổi LHS / RHS chuyển giá trị `2` (bằng cách tra cứu RHS biến` a`) vào `log (..)`. Bên trong việc thực hiện `log (..)`, chúng ta có thể giả định rằng nó có các tham số, phần đầu (chắc gọi là `arg1`) có một tham chiếu LHS trước khi gán` 2` vào nó.
 
-**Note:** You might be tempted to conceptualize the function declaration `function foo(a) {...` as a normal variable declaration and assignment, such as `var foo` and `foo = function(a){...`. In so doing, it would be tempting to think of this function declaration as involving an LHS look-up.
+**Ghi chú:** You might be tempted to conceptualize the function declaration `function foo(a) {...` as a normal variable declaration and assignment, such as `var foo` and `foo = function(a){...`. In so doing, it would be tempting to think of this function declaration as involving an LHS look-up.
 
 However, the subtle but important difference is that *Compiler* handles both the declaration and the value definition during code-generation, such that when *Engine* is executing code, there's no processing necessary to "assign" a function value to `foo`. Thus, it's not really appropriate to think of a function declaration as an LHS look-up assignment in the way we're discussing them here.
 
