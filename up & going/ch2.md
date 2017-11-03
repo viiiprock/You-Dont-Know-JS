@@ -661,15 +661,15 @@ Giá trị `42` được `return` từ `IIFE`- thực thi function được đ�
 
 ### Closure (đóng kín)
 
-*Closure* là một trong những khái niệm JS quan trọng nhất, và ít được hiểu nhất. Tôi sẽ không đi sâu ở đây, và sẽ phân tích ở *Scope & Closures*. Nhưng tôi sẽ nêu một vài vấn đề để bạn có cái nhìn tổng quan về khái niệm của nó. Nó sẽ là một trong nhưng kỹ thuật quan trọng nhất của bạn.
+*Closure* là một trong những khái niệm JS quan trọng nhất, và ít được hiểu nhất. Tôi sẽ không đi sâu ở đây, và sẽ phân tích ở *Scope & Closures*. Nhưng tôi sẽ nêu một vài vấn đề để bạn có cái nhìn tổng quan về nó. Đây sẽ là một trong nhưng kỹ thuật quan trọng nhất của bạn.
 
-Bạn có thể nghĩ closure là một cách để "nhớ" và tiếp tục tiếp cận scope của hàm (biến của nó) kể cả khi hàm đã hoàn tất.
+Bạn có thể nghĩ closure là một cách để "nhớ" và tiếp tục tiếp cận scope của hàm (biến) kể cả khi hàm đã hoàn tất.
 
 Xem:
 
 ```js
 function makeAdder(x) {
-	// tham số `x` là một biến bên trong function `add()`, vì vậy nó là một "closure" thông qua nó.
+	// tham số `x` là một biến bên trong hàm `add()`, vì vậy nó là một "closure" thông qua nó.
 	function add(y) {
 		return y + x;
 	};
@@ -706,9 +706,9 @@ Code hoạt động như sau:
 
 #### Modules
 
-Cách sử dụng closure trong JS nhiều nhất là module pattern (mẫu mô-đun). Module cho phép bạn xác định các chi tiết thực hiện khép kín (biến, hàm) cá thể, ẩn khỏi các phần bên ngoài, không giống như API công khai có thể tiếp cận từ phía ngoài.
+Cách sử dụng closure trong JS nhiều nhất là module pattern (mẫu mô-đun). Không giống như API công khai có thể tiếp cận từ phía ngoài, module cho phép bạn xác định các chi tiết (biến, hàm) thực hiện khép kín theo cá thể, ẩn khỏi các yếu tố bên ngoài.
 
-Xem:
+Ví dụ:
 
 ```js
 function User(){
@@ -736,7 +736,7 @@ fred.login( "fred", "12Battery34!" );
 
 Hàm `User()` thực hiện với vai trò là scope ngoài cùng chứa biến `username` và `password`, trong khi hàm `doLogin()` bên trong với các nội dung của module `User` đều là cục bộ và không thể tiếp cận từ bên ngoài.
 
-**Chú ý:** Chúng ta không gọi `new User()` mặc dù nó có vẻ thông thường với mọi bạn đọc.`User()` chỉ là một hàm, không phải một class để khởi tạo, nên chỉ gọi nó bình thường. Sử dụng `new` là không thích hợp và đương nhiên là lãng phí tài nguyên.
+**Chú ý:** Chúng ta không gọi `new User()` mặc dù nó có vẻ thông thường với nhiều người.`User()` chỉ là một hàm, không phải một class để khởi tạo, nên chỉ gọi nó bình thường. Sử dụng `new` là không thích hợp và đương nhiên là lãng phí tài nguyên.
 
 Thực thi `User()` tạo ra một module `User` tức thì -- toàn bộ scope mới được tạo ra, và do đó một bản sao hoàn toàn mới của mỗi biến/hàm bên trong. Chúng ta gán nó với `fred`. Nếu chúng ta chạy tiếp `User()`, chúng ta sẽ có một trường hợp mới tách biệt với `fred`.
 
@@ -748,7 +748,7 @@ Lúc này, hàm `User()` đã hoàn tất thực thi. Thông thường, chúng t
 
 Đó là lý do tại sao chúng ta gọi `fred.login(..)` cũng như khi gọi hàm `doLogin(..)` và nó vẫn truy cập biến `username` và `password` bên trong.
 
-Có cái nhìn thoáng qua về closure và module pattern thật là một cơ hội tốt, một vài vấn đề trong nó vẫn còn gây bối rối. Vẫn ổn thôi! Nó cũng cần vài thứ để nạp vào đầu bạn.
+Tuy một vài vấn đề trong nó vẫn còn gây bối rối nhưng vậy tạm ổn rồi! Cũng cần vài thứ để nạp vào đầu bạn.
 
 Từ chỗ này, xem phần *Scope & Closures* sẽ có sự khám phá sâu hơn.
 
@@ -942,8 +942,8 @@ Cuốn sách này tập trung vào ngôn ngữ JavaScript. Vì vậy bạn sẽ 
 
 ## Ôn tập
 
-Bước đầu tiên để học JavaScript là hiểu cơ bản về cơ chế cốt lõi của nó như (không dịch) value, type, closure, `this`, và prototypes.
+Bước đầu tiên để học JavaScript là hiểu cơ bản về cơ chế cốt lõi của nó như: value, type, closure, `this`, và prototypes.
 
-Đương nhiên, mỗi đề mục được đáng được cụ thể hơn bạn thấy ở đây, đó là l1y do tại sao nó được đề cập suốt trong các phần bộ sách. Sau khi bạn cảm thấy thoải mái với các khái niệm và mẫu code trong chương này, phần còn lại của bộ sách chờ bạn đào sâu vào ngôn ngữ hơn.
+Đương nhiên, mỗi đề mục được đáng được cụ thể hơn bạn thấy ở đây, đó là lý do tại sao nó được đề cập suốt trong các phần bộ sách. Sau khi bạn cảm thấy thoải mái với các khái niệm và mẫu code trong chương này, phần còn lại của bộ sách chờ bạn đào sâu vào ngôn ngữ hơn.
 
 Chương cuối của cuốn sách sẽ tóm tắt từng mỗi tiêu đề và các khái niệm khác bên cạnh những gì chúng ta khám phá.
