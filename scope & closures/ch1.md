@@ -280,12 +280,11 @@ JavaScript *Engine* biên dịch code trước khi thực thi, và khi làm như
 
 2. Sau đó, `a = 2` để tìm biến (LHS) và gán cho nó nếu nó được tìm thấy.
 
-Cả tra cứu LHS và RHS đều được bắt đầu ở *Scope* thực thi gần nhất, và nếu cần thiết (tức là nó không tìm thấy cái nó đang tìm trong đó), nó sẽ hoạt động bằng cách đi lên trên *Scope* lồng nhau, một phạm vi (tầng trệt) trong một thời điểm,
-Both LHS and RHS reference look-ups start at the currently executing *Scope*, and if need be (that is, they don't find what they're looking for there), they work their way up the nested *Scope*, one scope (floor) at a time, looking for the identifier, until they get to the global (top floor) and stop, and either find it, or don't.
+Cả tra cứu LHS và RHS đều được bắt đầu ở *Scope* thực thi gần nhất, và nếu cần thiết (tức là nó không tìm thấy cái nó đang tìm trong đó), nó sẽ hoạt động bằng cách đi lên trên *Scope* lồng nhau, trong một thời điểm việc tìm kiếm thực hiện cho đến khi nó đi lên tầng cuối cùng toàn cục rồi dừng lại, kể cả có tìm thấy hay không.
 
-Unfulfilled RHS references result in `ReferenceError`s being thrown. Unfulfilled LHS references result in an automatic, implicitly-created global of that name (if not in "Strict Mode" [^note-strictmode]), or a `ReferenceError` (if in "Strict Mode" [^note-strictmode]).
+Kết quả tham chiếu RHS không hoàn thành sẽ là lỗi `ReferenceError`. Kết quả tham chiếu LHS sẽ tự động tạo ra một biến toàn cục theo tến đó nếu không ở "Strict Mode" hoặc lỗi `ReferenceError` nếu đang ở "strict mode".
 
-### Quiz Answers
+### Trả lời câu đố
 
 ```js
 function foo(a) {
@@ -296,13 +295,13 @@ function foo(a) {
 var c = foo( 2 );
 ```
 
-1. Identify all the LHS look-ups (there are 3!).
+1. Nhận diện tất cả các tra cứu LHS.
 
-	**`c = ..`, `a = 2` (implicit param assignment) and `b = ..`**
+	**`c = ..`, `a = 2` (ngầm gán) và `b = ..`**
 
-2. Identify all the RHS look-ups (there are 4!).
+2. Nhận diện tất cả các tra cứu RHS.
 
-    **`foo(2..`, `= a;`, `a + ..` and `.. + b`**
+    **`foo(2..`, `= a;`, `a + ..` và `.. + b`**
 
 
 [^note-strictmode]: MDN: [Strict Mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode)
