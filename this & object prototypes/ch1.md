@@ -1,8 +1,8 @@
-# You Don't Know JS: *this* & Các nguyên mẫu đối tượng (object proptotypes)
-# Chương 1: `this` hay  That?
+# You Don't Know JS: *this* & Nguyên mẫu đối tượng (object proptotypes)
+# Chương 1: `this` hay là That?
 
 Một trong những cơ chế hãi hùng nhất của JavaScript là từ khoá `this`. Nó là một từ khoá nhận dạng đặc biệt tự động xác định trong scope của mọi hàm, nhưng những gì chính xác nó đề cập đến còn làm điêu đứng ngay cả JavaScript dev dày dạn.
-> Không phân biệt được công nghệ *tiên tiến* với ma thuật. -- Arthur C. Clarke
+> Công nghệ *tiên tiến* với phép thuật không phân biệt được. -- Arthur C. Clarke
 
 Cơ chế của `this` không hẳn ghê gớm như vậy, nhưng các lập trình viên thường diễn giải trong tâm trí bằng cách thêm từ "phức tạp" hoặc "mơ hồ", và không có câu hỏi nào ngoài việc hiểu rõ ràng, `this` có thể xem là sự huyền diệu trong sự hoang mang của bạn.
 

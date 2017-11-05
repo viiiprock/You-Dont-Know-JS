@@ -135,11 +135,11 @@ Bạn có thể quên ngụ ý của `a = 2` trong đoạn code này. Nó xảy 
 
 Cuối cùng, chúng ta có thể khái niệm hóa rằng có một trao đổi LHS / RHS chuyển giá trị `2` (bằng cách tra cứu RHS biến` a`) vào `log (..)`. Bên trong việc thực hiện `log (..)`, chúng ta có thể giả định rằng nó có các tham số, phần đầu (chắc gọi là `arg1`) có một tham chiếu LHS trước khi gán` 2` vào nó.
 
-**Ghi chú:** You might be tempted to conceptualize the function declaration `function foo(a) {...` as a normal variable declaration and assignment, such as `var foo` and `foo = function(a){...`. In so doing, it would be tempting to think of this function declaration as involving an LHS look-up.
+**Ghi chú:** Bạn có thể bị cám dỗ khái niệm hóa khai báo hàm `function foo(a) {...` như một khai báo biến và gán bình thường như `var foo` và `foo = function(a){...`. Làm như vậy thì nó sẽ hướng suy nghĩ rằng việc khai báo hàm này như một tra cứu LHS.
 
-However, the subtle but important difference is that *Compiler* handles both the declaration and the value definition during code-generation, such that when *Engine* is executing code, there's no processing necessary to "assign" a function value to `foo`. Thus, it's not really appropriate to think of a function declaration as an LHS look-up assignment in the way we're discussing them here.
+Tuy nhiên, sự khác biệt tinh tế quan trọng ở đây là *Compiler* đảm nhiệm cả việc khai báo và xác định giá trị trong quá trình tạo code. Chẳng hạn như khi *Engine* thực thi code, không cần phải thêm bước "gán" một giá trị hàm cho `foo`.
 
-### Engine/Scope Conversation
+### Hội thoại Engine/Scope
 
 ```js
 function foo(a) {
@@ -149,37 +149,36 @@ function foo(a) {
 foo( 2 );
 ```
 
-Let's imagine the above exchange (which processes this code snippet) as a conversation. The conversation would go a little something like this:
+Hãy tưởng tượng sự trao đổi xử lý đoạn mã ở trên như một đoạn hội thoại. Đoạn hội thoại sẽ trở nên gì đó giống như vầy:
 
-> ***Engine***: Ê *Scope*, I have an RHS reference for `foo`. Ever heard of it?
+> ***Engine***: Ê *Scope*, tao có một tham chiếu RHS cho `foo`. Có thấy bao giờ chưa?
 
-> ***Scope***: Why yes, I have. *Compiler* declared it just a second ago. He's a function. Here you go.
+> ***Scope***: Có có, có chớ. *Compiler* mới khai báo một giây trước. Nó là hàm, đây nè.
 
-> ***Engine***: Great, thanks! OK, I'm executing `foo`.
+> ***Engine***: Tuyệt, cảm ơn. OK, tao đang xử `foo`
 
-> ***Engine***: Hey, *Scope*, I've got an LHS reference for `a`, ever heard of it?
+> ***Engine***: Ê *Scope*, tao cũng có tham chiếu LHS cho `a` nè, mày biết ko?
 
-> ***Scope***: Why yes, I have. *Compiler* declared it as a formal parameter to `foo` just recently. Here you go.
+> ***Scope***: Hả, có luôn. Đây nè, *Compiler* mới báo nó như một tham số cho `foo`.
 
-> ***Engine***: Helpful as always, *Scope*. Thanks again. Now, time to assign `2` to `a`.
+> ***Engine***: Vẫn ngon như mọi khi, *Scope* ạ. Cảm ơn nhiều. Giờ thì gán `2` cho `a` thôi.
 
-> ***Engine***: Hey, *Scope*, sorry to bother you again. I need an RHS look-up for `console`. Ever heard of it?
+> ***Engine***: Ờ... *Scope*, làm phiền mày tiếp. Tao cần tra cứu RHS để kiếm `console`. Có không?
 
-> ***Scope***: No problem, *Engine*, this is what I do all day. Yes, I've got `console`. He's built-in. Here ya go.
-
+> ***Scope***: Không sao *Engine*, tao làm mấy chuyện này suốt ngày. Tao có `console` chớ, nó là hàm dựng sẵn mà.
 > ***Engine***: Perfect. Looking up `log(..)`. OK, great, it's a function.
 
-> ***Engine***: Yo, *Scope*. Can you help me out with an RHS reference to `a`. I think I remember it, but just want to double-check.
+> ***Engine***: Yo, *Scope*, mày có thể giúp tao một tham chiếu RHS cho `a` không? Tao nghĩ là tao nhớ nó rồi, nhưng mà kiểm lại lần nữa.
 
-> ***Scope***: You're right, *Engine*. Same guy, hasn't changed. Here ya go.
+> ***Scope***: Ờ đúng rồi, cũng là nó đó, không đổi gì hết.
 
-> ***Engine***: Cool. Passing the value of `a`, which is `2`, into `log(..)`.
+> ***Engine***: Ngon rồi. Chuyển giá trị `2` cho `a` vào trong `log(..)`.
 
 > ...
 
-### Quiz
+### Câu đố
 
-Check your understanding so far. Make sure to play the part of *Engine* and have a "conversation" with the *Scope*:
+Giờ kiểm tra khả năng hiểu của bạn. Mà nhớ là chơi trò này giống như là một phần của "hội thoại" của hai thằng *Engine* với *Scope*:
 
 ```js
 function foo(a) {
@@ -190,19 +189,19 @@ function foo(a) {
 var c = foo( 2 );
 ```
 
-1. Identify all the LHS look-ups (there are 3!).
+1. Xác định tất cả tra cứu LHS (có 3!).
 
-2. Identify all the RHS look-ups (there are 4!).
+2. Xác định các tra cứu RHS ( có 4!).
 
-**Note:** See the chapter review for the quiz answers!
+**Ghi chú:** Xem lời giải ở Ôn tập!
 
-## Nested Scope
+## Scope lồng nhau
 
-We said that *Scope* is a set of rules for looking up variables by their identifier name. There's usually more than one *Scope* to consider, however.
+Chúng ta đã nói *Scope* là một tập hợp các quy tắc để tìm kiếm biến được nhận diện theo tên. Tuy nhiên thì thường có nhiều hơn một *Scope*.
 
-Just as a block or function is nested inside another block or function, scopes are nested inside other scopes. So, if a variable cannot be found in the immediate scope, *Engine* consults the next outer containing scope, continuing until found or until the outermost (aka, global) scope has been reached.
+Cũng như một cụm hàm được lồng vào cụm hàm khác, scope này cũng lồng trong scope kia. Nên nếu một biến không tìm thấy trong scope ngay liền, *Engine* sẽ tham khảo scope bên ngoài, tiếp tục kiếm cho tới khi nào ra tới ngoài cùng nhất (cũng là toàn cục).
 
-Consider:
+Ví dụ:
 
 ```js
 function foo(a) {
@@ -214,37 +213,37 @@ var b = 2;
 foo( 2 ); // 4
 ```
 
-The RHS reference for `b` cannot be resolved inside the function `foo`, but it can be resolved in the *Scope* surrounding it (in this case, the global).
+Tham chiếu RHS cho `b` khộng thể tìm thấy trong hàm `foo`, nhưng nó có thể được thấy trong *Scope* bao ngoài (trong trường hợp này là toàn cục).
 
-So, revisiting the conversations between *Engine* and *Scope*, we'd overhear:
+Vì vậy, quay lại đoạn hội thoại giữa *Engine* và *Scope*, chúng ta sẽ nghe:
 
-> ***Engine***: "Hey, *Scope* of `foo`, ever heard of `b`? Got an RHS reference for it."
+> ***Engine***: "Uầy, *Scope* của `foo`, có `b` không? Có tham chiếu cho nó nè"
 
-> ***Scope***: "Nope, never heard of it. Go fish."
+> ***Scope***: "Không thấy, chưa nghe bao giờ, thôi lượn đi"
 
-> ***Engine***: "Hey, *Scope* outside of `foo`, oh you're the global *Scope*, ok cool. Ever heard of `b`? Got an RHS reference for it."
+> ***Engine***: "Này, *Scope* bên ngoài`foo`, à ờ mày là *Scope* toàn cục à, cũng được . Nghe thấy `b` bao giờ chưa? có tham chiếu RHS cho nó nè."
 
-> ***Scope***: "Yep, sure have. Here ya go."
+> ***Scope***: "Có, chắc cú. Đầy nè."
 
-The simple rules for traversing nested *Scope*: *Engine* starts at the currently executing *Scope*, looks for the variable there, then if not found, keeps going up one level, and so on. If the outermost global scope is reached, the search stops, whether it finds the variable or not.
+Nguyên tắc đơn giản để đi qua *Scope* lồng nhau là: *Engine* bắt đầu từ xử lý *Scope* gần nhất, tìm biến trong đó, nếu không có, lên tầng trên, và cứ tiếp tục như vậy. Tới khi ra tận phạm vi toàn cục, tìm thấy biến hay không thì việc tìm kiếm cũng dừng lại.
 
-### Building on Metaphors
+### Xây dựng trên phép ẩn dụ.
 
-To visualize the process of nested *Scope* resolution, I want you to think of this tall building.
+Để hình dung chi tiết *Scope* lồng nhau, bạn hãy nghĩ nó như một tòa nhà cao tầng.
 
 <img src="fig1.png" width="250">
 
-The building represents our program's nested *Scope* rule set. The first floor of the building represents your currently executing *Scope*, wherever you are. The top level of the building is the global *Scope*.
+Tòa nhà đại diện cho một tập hợp *Scope* lồng nhau của chương trình. Tầng trệt của tòa nhà đại diện cho *Scope* thực thi gần nhất. Tầng cao nhất là *Scope* toàn cục.
 
-You resolve LHS and RHS references by looking on your current floor, and if you don't find it, taking the elevator to the next floor, looking there, then the next, and so on. Once you get to the top floor (the global *Scope*), you either find what you're looking for, or you don't. But you have to stop regardless.
+Chúng ta giải quyết tham chiếu LHS và RHS bằng việc nhìn vào tầng hiện tại của bạn, và nếu bạn không tìm thấy nó, leo lên tầng tiếp theo rồi tìm, rồi tiếp tục như vậy. Cho đến khi bạn đến tầng thượng (*Scope* toàn cục), bạn có thể tìm thấy cái mình cần hoặc không. Bất kể sao thì bạn vẫn dừng lại.
 
-## Errors
+## Lỗi
 
-Why does it matter whether we call it LHS or RHS?
+Tại sao lại quan trọng khi chúng ta gọi nó là LHS hay RHS?
 
-Because these two types of look-ups behave differently in the circumstance where the variable has not yet been declared (is not found in any consulted *Scope*).
+Bởi vì có hai kiểu tra cứu hành xử khác nhau trong trường hợp biến chưa được khai báo (không tìm thấy trong bất *Scope* nào).
 
-Consider:
+Ví dụ:
 
 ```js
 function foo(a) {
@@ -255,32 +254,33 @@ function foo(a) {
 foo( 2 );
 ```
 
-When the RHS look-up occurs for `b` the first time, it will not be found. This is said to be an "undeclared" variable, because it is not found in the scope.
+Khi tra cứu RHS tìm `b` lần đầu xảy ra, nó sẽ không được tìm thấy. Đây được gọi là "chưa khai báo biến" bởi vì nó không tìm thấy trong phạm vi.
 
-If an RHS look-up fails to ever find a variable, anywhere in the nested *Scope*s, this results in a `ReferenceError` being thrown by the *Engine*. It's important to note that the error is of the type `ReferenceError`.
+Nếu một tra cứu RHS thất bại khi tìm biến, kết quả `ReferenceError` sẽ được đưa ra bởi *Engine*. Việc báo lỗi `ReferenceError` quan trọng.
 
-By contrast, if the *Engine* is performing an LHS look-up and arrives at the top floor (global *Scope*) without finding it, and if the program is not running in "Strict Mode" [^note-strictmode], then the global *Scope* will create a new variable of that name **in the global scope**, and hand it back to *Engine*.
+Ngược lại, nếu *Engine* thực hiện tra cứu LHS và đến tầng trên cùng rồi mà vẫn không thấy nó, và nếu chương trình không đang chạy ở "strict mode", *Scope* toàn cục sẽ tạo ra một biến mới theo tên đó **ở phạm vi toàn cục** và chuyển đến *Engine*
 
-*"No, there wasn't one before, but I was helpful and created one for you."*
+*"Không, chưa bao giờ có biến đó cả, nhưng tao sẽ hỗ trợ tạo một cái cho mày."*
 
-"Strict Mode" [^note-strictmode], which was added in ES5, has a number of different behaviors from normal/relaxed/lazy mode. One such behavior is that it disallows the automatic/implicit global variable creation. In that case, there would be no global *Scope*'d variable to hand back from an LHS look-up, and *Engine* would throw a `ReferenceError` similarly to the RHS case.
+"Strict Mode" được thêm vào từ ES5, có một số hành vi khác nhau từ chế độ bình thường/thoải mái/lười, một trong những hành vi như vậy sẽ không cho phép tự động tạo biến toàn cầu hay ngầm định. Trong trường hợp đó, sẽ không có biến nào của *Scope* toàn cục để trả cho tra cứu LHS, và *Engine*  sẽ đưa ra lỗi `ReferenceError` tương tự trường hợp RHS.
 
-Now, if a variable is found for an RHS look-up, but you try to do something with its value that is impossible, such as trying to execute-as-function a non-function value, or reference a property on a `null` or `undefined` value, then *Engine* throws a different kind of error, called a `TypeError`.
+Giờ đây, nếu một biến được tìm thấy cho một tra cứu RHS, nhưng nếu cố làm gì đó với giá trị của nó là không thể, chẳng hạn như cố thực thi hàm cho một giá trị phi hàm hoặc tham chiếu một thuộc tính của giá trị `null` hay `undefined`, *Engine* sẽ đưa ra một loại lỗi khác, gọi là `TypeError`.
 
-`ReferenceError` is *Scope* resolution-failure related, whereas `TypeError` implies that *Scope* resolution was successful, but that there was an illegal/impossible action attempted against the result.
+`ReferenceError` là lỗi liên quan của chi tiết *Scope* trong khi `TypeError` lại ngụ ý rằng chi tiết *Scope* đúng, nhưng lại có một hành động không hợp lệ/bất khả thi cố gắng đi ngược kết quả.
 
-## Review (TL;DR)
+## Ôn tập (TL;DR)
 
-Scope is the set of rules that determines where and how a variable (identifier) can be looked-up. This look-up may be for the purposes of assigning to the variable, which is an LHS (left-hand-side) reference, or it may be for the purposes of retrieving its value, which is an RHS (right-hand-side) reference.
+Phạm vi là một tập hợp các nguyên tắc xác định biến được tìm ở đâu và như thế nào. Việc tra cứu có thể nhằm mục đích gán biến, là tham chiếu từ LHS, hay nhằm mục đích truy xuất dữ liệu của nó dựa trên tham chiếu RHS.
 
-LHS references result from assignment operations. *Scope*-related assignments can occur either with the `=` operator or by passing arguments to (assign to) function parameters.
+Tham chiếu LHS là kết quả của quá trình gán.Phép gán liên quan *Scope* có thể xảy ra với phép toán `=` hay đưa đối số (gán) đến tham số của hàm.
 
-The JavaScript *Engine* first compiles code before it executes, and in so doing, it splits up statements like `var a = 2;` into two separate steps:
+JavaScript *Engine* biên dịch code trước khi thực thi, và khi làm như vậy, nó chia các lệnh, ví dụ `var a = 2;`, thành hai bước riêng biệt:
 
-1. First, `var a` to declare it in that *Scope*. This is performed at the beginning, before code execution.
+1. Đầu tiên, `var a` để khai báo nó trong *Scope* đó. Việc này được thực hiện từ đầu, trước khi code được thực thi.
 
-2. Later, `a = 2` to look up the variable (LHS reference) and assign to it if found.
+2. Sau đó, `a = 2` để tìm biến (LHS) và gán cho nó nếu nó được tìm thấy.
 
+Cả tra cứu LHS và RHS đều được bắt đầu ở *Scope* thực thi gần nhất, và nếu cần thiết (tức là nó không tìm thấy cái nó đang tìm trong đó), nó sẽ hoạt động bằng cách đi lên trên *Scope* lồng nhau, một phạm vi (tầng trệt) trong một thời điểm,
 Both LHS and RHS reference look-ups start at the currently executing *Scope*, and if need be (that is, they don't find what they're looking for there), they work their way up the nested *Scope*, one scope (floor) at a time, looking for the identifier, until they get to the global (top floor) and stop, and either find it, or don't.
 
 Unfulfilled RHS references result in `ReferenceError`s being thrown. Unfulfilled LHS references result in an automatic, implicitly-created global of that name (if not in "Strict Mode" [^note-strictmode]), or a `ReferenceError` (if in "Strict Mode" [^note-strictmode]).
