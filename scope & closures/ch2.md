@@ -9,15 +9,16 @@ Dynamic Scope được đề cập ở Phụ lục A. Tôi gợi ý nó chỉ đ
 
 ## Lex-time
 
-As we discussed in Chapter 1, the first traditional phase of a standard language compiler is called lexing (aka, tokenizing). If you recall, the lexing process examines a string of source code characters and assigns semantic meaning to the tokens as a result of some stateful parsing.
+Theo thảo luận ở Chương 1 - phần 1, giai đoạn truyền thống đầu tiên của trình dịch ngữ được gọi là lexing (hay tonkenizing). Nếu bạn nhớ lại, quá trình lexing kiểm tra một chuỗi các ký tự mã nguồn và gán ngữ nghĩa cho các token như là kết quả của một số trạng thái phân tích cú pháp.
 
-It is this concept which provides the foundation to understand what lexical scope is and where the name comes from.
+Chính khái niệm này cung cấp nền tảng để hiểu được phạm vi từ vựng là gì và cái tên đến từ đâu.
 
-To define it somewhat circularly, lexical scope is scope that is defined at lexing time. In other words, lexical scope is based on where variables and blocks of scope are authored, by you, at write time, and thus is (mostly) set in stone by the time the lexer processes your code.
+Lexical scope là một phạm vi được định nghĩa trong thời gian lexing. Nói cách khác, lexical scope dựa trên các biến và khối phạm vi do bạn tạo tại thời điểm viết, do đó hầu hết viên gạch được xây ra từ ngay thời điểm lexer xử lý code của bạn.
 
-**Note:** We will see in a little bit there are some ways to cheat lexical scope, thereby modifying it after the lexer has passed by, but these are frowned upon. It is considered best practice to treat lexical scope as, in fact, lexical-only, and thus entirely author-time in nature.
+**Ghi chú:**
+We will see in a little bit there are some ways to cheat lexical scope, thereby modifying it after the lexer has passed by, but these are frowned upon. It is considered best practice to treat lexical scope as, in fact, lexical-only, and thus entirely author-time in nature.
 
-Let's consider this block of code:
+Xem đoạn code dưới đây:
 
 ```js
 function foo(a) {
@@ -33,16 +34,15 @@ function foo(a) {
 
 foo( 2 ); // 2 4 12
 ```
-
-There are three nested scopes inherent in this code example. It may be helpful to think about these scopes as bubbles inside of each other.
+Có ba phạm vi lồng nhau ở đoạn code ở trên. Để dễ hình dung thì cứ nghĩ các phạm vi đó như bong bóng bên trong từng cụm.
 
 <img src="fig2.png" width="500">
 
-**Bubble 1** encompasses the global scope, and has just one identifier in it: `foo`.
+**Bong bóng 1** bao gồm phạm vi toàn cục, và chỉ có một đối tượng trong nó: `foo`.
 
-**Bubble 2** encompasses the scope of `foo`, which includes the three identifiers: `a`, `bar` and `b`.
+**Bong bóng 2** bao gồm phạm vi của `foo`, bao gồm ba đối tượng: `a`, `bar` and `b`.
 
-**Bubble 3** encompasses the scope of `bar`, and it includes just one identifier: `c`.
+**Bong bóng 3** bao gồm phạm vi của `bar`, và chỉ có một đối tượng: `c`.
 
 Scope bubbles are defined by where the blocks of scope are written, which one is nested inside the other, etc. In the next chapter, we'll discuss different units of scope, but for now, let's just assume that each function creates a new bubble of scope.
 
