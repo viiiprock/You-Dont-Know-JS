@@ -44,6 +44,7 @@ Có ba phạm vi lồng nhau ở đoạn code ở trên. Để dễ hình dung t
 
 **Bong bóng 3** bao gồm phạm vi của `bar`, và chỉ có một đối tượng: `c`.
 
+Phạm vi của các bong bóng được xác định ở tại các cụm scope được viết, cái này chồng cái kia,... Trong chương tiếp theo, chúng ta sẽ thảo luận các đơn vị khác của scope nhưng giờ thì
 Scope bubbles are defined by where the blocks of scope are written, which one is nested inside the other, etc. In the next chapter, we'll discuss different units of scope, but for now, let's just assume that each function creates a new bubble of scope.
 
 The bubble for `bar` is entirely contained within the bubble for `foo`, because (and only because) that's where we chose to define the function `bar`.
