@@ -16,7 +16,7 @@ Chính khái niệm này cung cấp nền tảng để hiểu được phạm vi
 Lexical scope là một phạm vi được định nghĩa trong thời gian lexing. Nói cách khác, lexical scope dựa trên các biến và khối phạm vi do bạn tạo tại thời điểm viết, do đó hầu hết viên gạch được xây ra từ ngay thời điểm lexer xử lý code của bạn.
 
 **Ghi chú:**
-We will see in a little bit there are some ways to cheat lexical scope, thereby modifying it after the lexer has passed by, but these are frowned upon. It is considered best practice to treat lexical scope as, in fact, lexical-only, and thus entirely author-time in nature.
+Chúng ta sẽ hơi thấy có vài cách để đánh lừa lexical scope bằng cách sửa đổi nó sau khi lexer đã truyền qua, nhưng việc này không hay. Bài tốt nhất vẫn là hành xử lexical scope với vài trò lexical thôi, mọi thứ đều theo tự nhiên.
 
 Xem đoạn code dưới đây:
 
@@ -44,22 +44,21 @@ Có ba phạm vi lồng nhau ở đoạn code ở trên. Để dễ hình dung t
 
 **Bong bóng 3** bao gồm phạm vi của `bar`, và chỉ có một đối tượng: `c`.
 
-Phạm vi của các bong bóng được xác định ở tại các cụm scope được viết, cái này chồng cái kia,... Trong chương tiếp theo, chúng ta sẽ thảo luận các đơn vị khác của scope nhưng giờ thì
-Scope bubbles are defined by where the blocks of scope are written, which one is nested inside the other, etc. In the next chapter, we'll discuss different units of scope, but for now, let's just assume that each function creates a new bubble of scope.
+Phạm vi của các bong bóng được xác định ở tại các cụm scope được viết, cái này chồng cái kia,... Trong chương tiếp theo, chúng ta sẽ thảo luận các đơn vị khác của scope nhưng giờ chỉ cần giả định mỗi hàm tạo một scope bong bóng mới.
 
-The bubble for `bar` is entirely contained within the bubble for `foo`, because (and only because) that's where we chose to define the function `bar`.
+Bong bóng `bar` được chứa hoàn toàn trong bong bóng `foo`, bởi vì (và chỉ vì) đó là nơi chúng ta chọn để xác định hàm `bar`.
 
-Notice that these nested bubbles are strictly nested. We're not talking about Venn diagrams where the bubbles can cross boundaries. In other words, no bubble for some function can simultaneously exist (partially) inside two other outer scope bubbles, just as no function can partially be inside each of two parent functions.
+Lưu ý rằng những bong bóng lồng nhau này được lồng một cách chặt chẽ. Chúng ta không nói về biểu đồ Venn, nơi các bong bóng có thể vượt qua ranh giới. Nói khác đi, không có bong bóng cho một số hàm đồng thời tồn tại bên trong hai bong bóng bên ngoài khác, cũng như không có hàm nào có thể một phần bên trong hai hàm cha.
 
-### Look-ups
+### Tra cứu
 
-The structure and relative placement of these scope bubbles fully explains to the *Engine* all the places it needs to look to find an identifier.
+Cấu trúc và vị trí tương quan của các bong bóng phạm vi này giải thích đầy đủ cho cho *Engine* tất cả các nơi nó cần đến để tìm nhận diện.
 
-In the above code snippet, the *Engine* executes the `console.log(..)` statement and goes looking for the three referenced variables `a`, `b`, and `c`. It first starts with the innermost scope bubble, the scope of the `bar(..)` function. It won't find `a` there, so it goes up one level, out to the next nearest scope bubble, the scope of `foo(..)`. It finds `a` there, and so it uses that `a`. Same thing for `b`. But `c`, it does find inside of `bar(..)`.
+Ở đoạn code ở trên, *Engine* thực thi biểu thức `console.log(..)`  và tìm ba biến tham chiếu `a`, `b`, và `c`. Đầu tiên nó sẽ tìm ở phạm vi bong bóng bên trong nhất là hàm `bar(...)`. Nếu nó không tìm thấy `a` ở đó, nó sẽ đi lên trên một bậc là phạm vi `foo(...)`. Nếu nó tìm thấy `a` ở đó, thì nó sẽ dùng `a`. Tương tự với `b`. Nhưng `c` được thấy bên trong `bar(...)`
 
-Had there been a `c` both inside of `bar(..)` and inside of `foo(..)`, the `console.log(..)` statement would have found and used the one in `bar(..)`, never getting to the one in `foo(..)`.
+Nếu đã có `c` bên trong `bar (..)` và bên trong `foo (.. )`, lệnh `console.log (..)` đã tìm và sử dụng trong `bar ( ..)` rồi, nên không bao giờ là cái trong `foo (..) `.
 
-**Scope look-up stops once it finds the first match**. The same identifier name can be specified at multiple layers of nested scope, which is called "shadowing" (the inner identifier "shadows" the outer identifier). Regardless of shadowing, scope look-up always starts at the innermost scope being executed at the time, and works its way outward/upward until the first match, and stops.
+**Tra cứu phạm vi dừng lại một khi nó "khớp lệnh"**. Tên định danh giống nhau có thể được đặt ở nhiều lớp khác nhau trong phạm vi lồng nhau, được gọi là "đổ bóng" (nhận dạng bên trong "che bóng" nhận dạng bên ngoài). Bất kể là đổ bóng, phạm vi luôn bắt đầu tra cứu từ phạm vi trong nhất, và làm việc từ trong ra ngoài, từ dưới lên trên cho đến khi nó khớp lệnh và dừng lại.
 
 **Note:** Global variables are also automatically properties of the global object (`window` in browsers, etc.), so it *is* possible to reference a global variable not directly by its lexical name, but instead indirectly as a property reference of the global object.
 
