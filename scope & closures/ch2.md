@@ -60,20 +60,20 @@ Nếu đã có `c` bên trong `bar (..)` và bên trong `foo (.. )`, lệnh `con
 
 **Tra cứu phạm vi dừng lại một khi nó "khớp lệnh"**. Tên định danh giống nhau có thể được đặt ở nhiều lớp khác nhau trong phạm vi lồng nhau, được gọi là "đổ bóng" (nhận dạng bên trong "che bóng" nhận dạng bên ngoài). Bất kể là đổ bóng, phạm vi luôn bắt đầu tra cứu từ phạm vi trong nhất, và làm việc từ trong ra ngoài, từ dưới lên trên cho đến khi nó khớp lệnh và dừng lại.
 
-**Note:** Global variables are also automatically properties of the global object (`window` in browsers, etc.), so it *is* possible to reference a global variable not directly by its lexical name, but instead indirectly as a property reference of the global object.
+**Ghi chú:** Các biến toàn cục cũng tự động là thuộc tính của đối tượng toàn cục (`window` của các trình duyệt...) vì thế có thể tham chiếu đến một biến toàn cục không trực tiếp bằng tên từ vựng của nó, thay vào đó là gián tiếp bằng một đại diện thuộc tính toàn cục.
 
 ```js
 window.a
 ```
+Kỹ thuật này cho phép truy cập vào một biến toàn cục, nếu không thì sẽ bị che bóng. Tuy nhiên, không phải biến toàn cục mà không bị che bóng thì cũng không truy cập được.
 
-This technique gives access to a global variable which would otherwise be inaccessible due to it being shadowed. However, non-global shadowed variables cannot be accessed.
+Cho dù một hàm được gọi ra từ đâu, hay kể cả được gọi như thế nào, phạm vi từ vựng của nó chỉ xác định tại nơi hàm được khai báo.
 
-No matter *where* a function is invoked from, or even *how* it is invoked, its lexical scope is **only** defined by where the function was declared.
+Quy trình tra cứu phạm vi từ vựng chỉ áp dụng cho lớp nhận dạng đầu tiên, ví dụ như `a`, `b`, và `c`. Nếu bạn có một tham chiếu đến `foo.bar.baz` trong một mẩu code, phạm vi từ vựng sẽ tra cứu đến nhận diện `foo`, một khi đã định vị biến đó rồi, các quy tắc truy cập thuộc tính đối tượng sẽ tiếp tục giải quyết thuộc tính `bar` và `baz` tương ứng.
 
-The lexical scope look-up process *only* applies to first-class identifiers, such as the `a`, `b`, and `c`. If you had a reference to `foo.bar.baz` in a piece of code, the lexical scope look-up would apply to finding the `foo` identifier, but once it locates that variable, object property-access rules take over to resolve the `bar` and `baz` properties, respectively.
+## Ăn gian từ vựng
 
-## Cheating Lexical
-
+Nếu phạm vi từ vựng chỉ được xác định tại nơi hàm được khai báo,
 If lexical scope is defined only by where a function is declared, which is entirely an author-time decision, how could there possibly be a way to "modify" (aka, cheat) lexical scope at run-time?
 
 JavaScript has two such mechanisms. Both of them are equally frowned-upon in the wider community as bad practices to use in your code. But the typical arguments against them are often missing the most important point: **cheating lexical scope leads to poorer performance.**

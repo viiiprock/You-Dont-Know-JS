@@ -1,8 +1,8 @@
 # You Don't Know JS: Scope & Closures
-# Chương 3: Function vs. Block Scope
-Như chúng ta đã khám phá trong chương 2, scope bao gồm một tập hợp các "bong bóng", mỗi scope hoạt động như vật chứa trong đó xác định các định danh (biến, function). Các bong bóng tổ hợp (nesting) gọn gàng bên trong bong bóng khác, và tổ hợp này được xác định tại author-time. 
+# Chương 3: Hàm vs. Khối phạm vi
+Như chúng ta đã khám phá trong chương 2, scope bao gồm một tập hợp các "bong bóng", mỗi scope hoạt động như vật chứa trong đó xác định các định danh (biến, function). Các bong bóng tổ hợp (nesting) gọn gàng bên trong bong bóng khác, và tổ hợp này được xác định tại author-time.
 
-Nhưng chính xác là cái gì tạo ra bong bóng mới? Có phải chỉ có function? Có cấu trúc nào khác tạo ra các bong bóng trong scope JavaScript? 
+Nhưng chính xác là cái gì tạo ra bong bóng mới? Có phải chỉ có function? Có cấu trúc nào khác tạo ra các bong bóng trong scope JavaScript?
 
 ## Scope từ các Function
 Câu trả lời phổ biến nhất cho các câu hỏi trên là JavaScript có scope nền function (function-based scope). Nghĩa là, mỗi function bạn khai báo sẽ tự tạo bong bóng, và không có bất kỳ cấu trúc nào khác tự tạo bong bóng. Nếu chúng ta để ý một chút thì điều này không hoàn toàn đúng.
@@ -29,7 +29,7 @@ function foo(a) {
 ```
 
 
-Trong đoạn trích này, bong bóng scope của `foo(..)` bao gồm nhận dạng `a`, `b`, `c` và `bar`. **Nó không quan trọng** một  khai báo xuất hiện *ở đâu* trong scope, bất kể biến hoặc function bong bóng scope chứa nó. Chúng ta sẽ khám phá các hoạt động đó trong chương kế tiếp. 
+Trong đoạn trích này, bong bóng scope của `foo(..)` bao gồm nhận dạng `a`, `b`, `c` và `bar`. **Nó không quan trọng** một  khai báo xuất hiện *ở đâu* trong scope, bất kể biến hoặc function bong bóng scope chứa nó. Chúng ta sẽ khám phá các hoạt động đó trong chương kế tiếp.
 
 `bar(..)` có bong bóng của riêng nó. Scope toàn cũng chỉ có một định danh gắn liền: `foo`
 
@@ -152,7 +152,7 @@ It should be observed that these tools do not possess "magic" functionality that
 
 As such, you can code defensively and achieve the same results as the dependency managers do without actually needing to use them, if you so choose. See the Chapter 5 for more information about the module pattern.
 
-## Function như là Scope 
+## Function như là Scope
 
 Chúng ta đã thấy rằng có thể lấy bất kỳ đoạn code và bao nó bằng một function, điều này tạo ra hiệu quả "giấu" bất kỳ biến hoặc function đã khai báo với phía bên ngoài scope hoặc function khác nằm bên trong scope.
 
@@ -165,8 +165,8 @@ function foo() { // <-- chèn
 	var a = 3;
 	console.log( a ); // 3
 
-} // <-- 
-foo(); // <-- và 
+} // <--
+foo(); // <-- và
 
 console.log( a ); // 2
 ```
