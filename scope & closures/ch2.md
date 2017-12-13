@@ -73,22 +73,22 @@ Quy trình tra cứu phạm vi từ vựng chỉ áp dụng cho lớp nhận d�
 
 ## Ăn gian từ vựng
 
-Nếu phạm vi từ vựng chỉ được xác định tại nơi hàm được khai báo,
-If lexical scope is defined only by where a function is declared, which is entirely an author-time decision, how could there possibly be a way to "modify" (aka, cheat) lexical scope at run-time?
+Nếu phạm vi từ vựng chỉ được xác định tại nơi hàm được khai báo, hoàn toàn là một quyết định của author-time (tạm không dịch - phân biệt author-time & run-time), làm cách nào có thể có cách để "chỉnh sửa" (ăn gian) phạm vi từ vựng tại run-time?
 
-JavaScript has two such mechanisms. Both of them are equally frowned-upon in the wider community as bad practices to use in your code. But the typical arguments against them are often missing the most important point: **cheating lexical scope leads to poorer performance.**
+JavaScript có hai cơ chế như vậy. Cả hai đều khó chịu như nhau như là một trải nghiệm xấu trong code của bạn. Nhưng những lập luận phản đối đều thường thiếu điểm quan trọng nhất: **ăn gian phạm vi từ vựng dẫn đến hiệu suất nghèo nàn.**
 
-Before I explain the performance issue, though, let's look at how these two mechanisms work.
+Trước khi tôi giải thích về vấn đề hiệu suất, hãy xem hai cơ chế đó như thế nào.
 
 ### `eval`
 
-The `eval(..)` function in JavaScript takes a string as an argument, and treats the contents of the string as if it had actually been authored code at that point in the program. In other words, you can programmatically generate code inside of your authored code, and run the generated code as if it had been there at author time.
+Hàm `eval(..)` trong JS lấy một chuỗi như là một đối số và xử lý các nội dung của chuỗi như thể nó thực sự là tác giả code (authored) tại thời điểm đó. Nói cách khác, bạn có thể lập trình tạo code bên trong authored code, và chạy code mới tạo đó như thể là nó đã ở đó tại thời điểm author time.
 
-Evaluating `eval(..)` (pun intended) in that light, it should be clear how `eval(..)` allows you to modify the lexical scope environment by cheating and pretending that author-time (aka, lexical) code was there all along.
+Đánh giá (chơi chữ) `eval(..)` ở đây, cần làm rõ `eval(..)` cho phép bạn sửa đổi môi trường phạm vi từ vựng bằng cách đánh lừa và giả vờ rằng author-time code đó đã tồn tại như thế nào.
 
+Trên các dòng mã tiếp theo sau khi `eval(..)` được thực thi, *Engine* sẽ không biết hoặc quan tâm rằng code trước đó
 On subsequent lines of code after an `eval(..)` has executed, the *Engine* will not "know" or "care" that the previous code in question was dynamically interpreted and thus modified the lexical scope environment. The *Engine* will simply perform its lexical scope look-ups as it always does.
 
-Consider the following code:
+Xem ví dụ sau:
 
 ```js
 function foo(str, a) {
