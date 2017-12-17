@@ -120,19 +120,19 @@ function foo(str) {
 foo( "var a = 2" );
 ```
 
-Có một điều kiện dễ dàng khác trong JavaScript mang lại hiệu ứng tương tự như `eval(..)`. `setTimeout(..)` và `setInterval(..)` *có thể* lấy một chuỗi cho đối số đầu tiên của nó,  take a string for their respective first argument, the contents of which are `eval`uated as the code of a dynamically-generated function. This is old, legacy behavior and long-since deprecated. Don't do it!
+Có một điều kiện dễ dàng khác trong JavaScript mang lại hiệu ứng tương tự như `eval(..)`. `setTimeout(..)` và `setInterval(..)` *có thể* lấy một chuỗi cho đối số đầu tiên của nó, nội dung được định lượng giống như code của hàm tự tạo ra. Đừng sử dụng cách này, từ lâu người ta đã không tán thành.
 
-The `new Function(..)` function constructor similarly takes a string of code in its **last** argument to turn into a dynamically-generated function (the first argument(s), if any, are the named parameters for the new function). This function-constructor syntax is slightly safer than `eval(..)`, but it should still be avoided in your code.
+Phương thức khởi tạo `new Function(..)` cũng lấy một chuỗi của code trong đối số **cuối** trong nó để biến thành một hàm tự tự động (các đối số đầu tiên), nếu có,là các tham số cho hàm mới). Cú pháp hàm khởi tạo này an toàn hơn `eval(..)`, nhưng cũng nên tránh sử dụng.
 
-The use-cases for dynamically generating code inside your program are incredibly rare, as the performance degradations are almost never worth the capability.
+Việc sử dụng tự tạo code động trong chương trình thực sự rất hiếm, vì nó làm xuống cấp hiệu suất và hầu như không bao giờ đáng.
 
 ### `with`
 
-The other frowned-upon (and now deprecated!) feature in JavaScript which cheats lexical scope is the `with` keyword. There are multiple valid ways that `with` can be explained, but I will choose here to explain it from the perspective of how it interacts with and affects lexical scope.
+Tính năng khác nữa (đã hết sử dụng) trong JS để lừa phạm vi từ vựng là `with`. Có vài cách hợp lệ để giải thích cho `with`, nhưng tôi chọn hướng giải thích theo góc độ cách nó tương tác và ảnh hưởng đến phạm vi từ vựng.
 
-`with` is typically explained as a short-hand for making multiple property references against an object *without* repeating the object reference itself each time.
+`with` được giải thích như là một cách ngắn gọn để tạo nhiều tham chiếu đối với một object mà bản thân nó không phải lặp lại tham chiếu object nhiều lần.
 
-For example:
+Ví dụ:
 
 ```js
 var obj = {
@@ -141,12 +141,12 @@ var obj = {
 	c: 3
 };
 
-// more "tedious" to repeat "obj"
+// sự lặp lại "obj" một cách "tẻ nhạt"
 obj.a = 2;
 obj.b = 3;
 obj.c = 4;
 
-// "easier" short-hand
+// cách giản tiện hơn
 with (obj) {
 	a = 3;
 	b = 4;
@@ -154,7 +154,7 @@ with (obj) {
 }
 ```
 
-However, there's much more going on here than just a convenient short-hand for object property access. Consider:
+Tuy nhiên, có nhiều thứ xảy ra hơn đơn giản chỉ là cách giản tiện cho cách try cập object:
 
 ```js
 function foo(obj) {
@@ -175,11 +175,13 @@ foo( o1 );
 console.log( o1.a ); // 2
 
 foo( o2 );
-console.log( o2.a ); // undefined
-console.log( a ); // 2 -- Oops, leaked global!
+console.log( o2.a ); // không xác định
+console.log( a ); // 2 -- Oops, bị rò ra ngoài toàn cục!
 ```
 
-In this code example, two objects `o1` and `o2` are created. One has an `a` property, and the other does not. The `foo(..)` function takes an object reference `obj` as an argument, and calls `with (obj) { .. }` on the reference. Inside the `with` block, we make what appears to be a normal lexical reference to a variable `a`, an LHS reference in fact (see Chapter 1), to assign to it the value of `2`.
+Trong ví dụ, hai object `o1` và `o2` được tạo ra. Một có thuộc tính `a`, còn cái khác thì không có. Hàm `foo(...)` lấy một tham chiếu của object `obj` như một tham số, và gọi `with (obj) { .. }`
+
+roperty, and the other does not. The `foo(..)` function takes an object reference `obj` as an argument, and calls `with (obj) { .. }` on the reference. Inside the `with` block, we make what appears to be a normal lexical reference to a variable `a`, an LHS reference in fact (see Chapter 1), to assign to it the value of `2`.
 
 When we pass in `o1`, the `a = 2` assignment finds the property `o1.a` and assigns it the value `2`, as reflected in the subsequent `console.log(o1.a)` statement. However, when we pass in `o2`, since it does not have an `a` property, no such property is created, and `o2.a` remains `undefined`.
 
