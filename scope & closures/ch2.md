@@ -85,14 +85,13 @@ Hàm `eval(..)` trong JS lấy một chuỗi như là một đối số và xử
 
 Đánh giá (chơi chữ) `eval(..)` ở đây, cần làm rõ `eval(..)` cho phép bạn sửa đổi môi trường phạm vi từ vựng bằng cách đánh lừa và giả vờ rằng author-time code đó đã tồn tại như thế nào.
 
-Trên các dòng mã tiếp theo sau khi `eval(..)` được thực thi, *Engine* sẽ không biết hoặc quan tâm rằng code trước đó
-On subsequent lines of code after an `eval(..)` has executed, the *Engine* will not "know" or "care" that the previous code in question was dynamically interpreted and thus modified the lexical scope environment. The *Engine* will simply perform its lexical scope look-ups as it always does.
+Trên các dòng mã tiếp theo sau khi `eval(..)` được thực thi, *Engine* sẽ không biết hoặc quan tâm rằng code trước đó đang được diễn dịch động và do đó đã thay đổi môi trường phạm vi từ vựng. *Engine* chỉ đơn giản thực hiện tra cứu phạm vi từ vựng theo cách nó luôn hoạt động.
 
 Xem ví dụ sau:
 
 ```js
 function foo(str, a) {
-	eval( str ); // cheating!
+	eval( str ); // ăn gian!
 	console.log( a, b );
 }
 
@@ -101,27 +100,27 @@ var b = 2;
 foo( "var b = 3;", 1 ); // 1, 3
 ```
 
-The string `"var b = 3;"` is treated, at the point of the `eval(..)` call, as code that was there all along. Because that code happens to declare a new variable `b`, it modifies the existing lexical scope of `foo(..)`. In fact, as mentioned above, this code actually creates variable `b` inside of `foo(..)` that shadows the `b` that was declared in the outer (global) scope.
+Chuỗi `"var b = 3;"` được xử lý như là nó đã tồn tại tại hàm `eval(..)`. Bởi vì code đó xảy ra để khai báo biến `b` mới, nó sửa đổi phạm vi từ vựng hiện tại của `foo(..)`. Thực tế như đã đề cập ở trên thì code đã tạo biến `b` trong `foo(..)` đã che bóng `b` khai báo ở phạm vi bên ngoài (toàn cục).
 
-When the `console.log(..)` call occurs, it finds both `a` and `b` in the scope of `foo(..)`, and never finds the outer `b`. Thus, we print out "1, 3" instead of "1, 2" as would have normally been the case.
+Khi thực thi `console.log(..)`, nó tìm cả `a` và `b` trong phạm vi của `foo(..)`, và không bao giờ tìm `b` bên ngoài. Vì vậy, chúng ta in ra "1, 3" thay vì "1, 2" như trường hợp thông thường.
 
-**Note:** In this example, for simplicity's sake, the string of "code" we pass in was a fixed literal. But it could easily have been programmatically created by adding characters together based on your program's logic. `eval(..)` is usually used to execute dynamically created code, as dynamically evaluating essentially static code from a string literal would provide no real benefit to just authoring the code directly.
+**Ghi chú:** Trong ví dụ này, cho đơn giản, chuỗi của "code" chúng ta truyền vào là một chuỗi trực kiện cố định. Nhưng nó có thể dễ dàng tạo ra bằng cách thêm các ký tự dựa trên logic chương trình. `eval(..)` thường được sử dụng để thực thi tạo code động, nhưng việc định lượng động code tĩnh từ một chuỗi trực kiện thường không mang một lợi ích thực tế nào thay cho chỉ cần tạo code trực tiếp.
 
-By default, if a string of code that `eval(..)` executes contains one or more declarations (either variables or functions), this action modifies the existing lexical scope in which the `eval(..)` resides. Technically, `eval(..)` can be invoked "indirectly", through various tricks (beyond our discussion here), which causes it to instead execute in the context of the global scope, thus modifying it. But in either case, `eval(..)` can at runtime modify an author-time lexical scope.
+Mặc định một chuỗi code mà `eval(..)` thực thi chứa một hay nhiều khai báo (bao gồm biến và hàm), hoạt động này sửa đổi phạm vi từ vựng hiện hữu tại nơi `eval(..)` tồn tại. Về mặt kỹ thuật, `eval(..)` có thể được gọi "gián tiếp" bằng một vài thủ thuật (ngoài phạm trù thảo luận) làm cho nó thay vì thực thi ở bối cảnh toàn cục, thì lại sửa đổi nó. Nhưng trong cả hai trường hợp, `eval(..)` có thể sửa đổi theo runtime một phạm vi từ vựng author-time.
 
-**Note:** `eval(..)` when used in a strict-mode program operates in its own lexical scope, which means declarations made inside of the `eval()` do not actually modify the enclosing scope.
+**Ghi chú:** `eval(..)` khi được sử dụng ở strict-mode nó hoạt động trong phạm vi từ vựng của chính nó, nghĩa là các khai báo được tạo bên trong `eval()` không thực sự sửa đổi phạm vi.
 
 ```js
 function foo(str) {
    "use strict";
    eval( str );
-   console.log( a ); // ReferenceError: a is not defined
+   console.log( a ); // ReferenceError: a không xác định
 }
 
 foo( "var a = 2" );
 ```
 
-There are other facilities in JavaScript which amount to a very similar effect to `eval(..)`. `setTimeout(..)` and `setInterval(..)` *can* take a string for their respective first argument, the contents of which are `eval`uated as the code of a dynamically-generated function. This is old, legacy behavior and long-since deprecated. Don't do it!
+Có một điều kiện dễ dàng khác trong JavaScript mang lại hiệu ứng tương tự như `eval(..)`. `setTimeout(..)` và `setInterval(..)` *có thể* lấy một chuỗi cho đối số đầu tiên của nó,  take a string for their respective first argument, the contents of which are `eval`uated as the code of a dynamically-generated function. This is old, legacy behavior and long-since deprecated. Don't do it!
 
 The `new Function(..)` function constructor similarly takes a string of code in its **last** argument to turn into a dynamically-generated function (the first argument(s), if any, are the named parameters for the new function). This function-constructor syntax is slightly safer than `eval(..)`, but it should still be avoided in your code.
 
