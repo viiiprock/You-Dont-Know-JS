@@ -1,4 +1,4 @@
-# You Don't Know JS: Scope & Closures
+# You Don't Know JS: Phạm vi & Bao đóng
 # Chương 2: Lexical Scope (phạm vi từ vựng)
 
 Trong Chương 1, chúng ta đã tìm hiểu "phạm vi" như một tập hợp quy tắc vận hành cách *Engine* có thể tra cứu biến với tên nhận diện có thể là trong *Scope* gần nhất hoặc bất kỳ *Scope lồng nhau*.
@@ -195,29 +195,28 @@ Hiểu theo cách này, "phạm vi" được khia báo bởi lệnh `with` khi t
 
 Không phải "phạm vi" của `o2`, hay phạm vi của `foo(..)`, hay kể cả phạm vi toàn cục, có nhận diện `a` được tìm thấy, vì vậy khi `a = 2` được thực thi, kết quả của nó là sự tự tạo của toàn cục (dùng ở non-strict mode).
 
-It is a strange sort of mind-bending thought to see `with` turning, at runtime, an object and its properties into a "scope" *with* "identifiers". But that is the clearest explanation I can give for the results we see.
+Muốn thấy `with` chuyển hướng một object và thuộc tính của nó thành một phạm vi với các nhận diện tại runtime là kiểu suy nghĩ lệch lạc lạ lùng. Nhưng nó là cái giải thích rõ ràng nhất mà tôi có thể trình bày kết quả.
 
-**Note:** In addition to being a bad idea to use, both `eval(..)` and `with` are affected (restricted) by Strict Mode. `with` is outright disallowed, whereas various forms of indirect or unsafe `eval(..)` are disallowed while retaining the core functionality.
+**Ghi chú:** Cộng thêm đây là ý tưởng tồi để sử dụng, cả `eval(..)` và `with` đều bị ảnh hưởng (cản trở) bởi Strict Mode. `with` thì hoàn toàn không được phép, trong khi một vài dạng gián tiếp hay không an toàn như `eval(..)` không được phép khi giữ chức năng cốt lõi.
 
 ### Hiệu suất
 
-Cả `eval(..)` và `with`
-Both `eval(..)` and `with` cheat the otherwise author-time defined lexical scope by modifying or creating new lexical scope at runtime.
+Cả `eval(..)` và `with` gian lận để author-time làm trái việc xác định phạm vi từ vựng bằng cách sửa đổi hay tạo phạm vi từ vựng mới tại runtime.
 
-So, what's the big deal, you ask? If they offer more sophisticated functionality and coding flexibility, aren't these *good* features? **No.**
+Nếu bạn hỏi, có lợi hại gì? nếu người cho thêm nhiều tính năng phức tạp và linh hoạt, chẳng phải là tốt hay sao? **Không**
 
-The JavaScript *Engine* has a number of performance optimizations that it performs during the compilation phase. Some of these boil down to being able to essentially statically analyze the code as it lexes, and pre-determine where all the variable and function declarations are, so that it takes less effort to resolve identifiers during execution.
+JavaScript *Engine* có một lượng tối ưu hiệu suất được thực hiện trong suốt quá trình biên dịch. Một số đã giản gọn để có thể phân tích tĩnh cần thiết và xác định trước chỗ tất cả các biến và hàm khai báo, để nó có thể giảm tải việc giải quyết các định danh trong quá trình thực thi.
 
-But if the *Engine* finds an `eval(..)` or `with` in the code, it essentially has to *assume* that all its awareness of identifier location may be invalid, because it cannot know at lexing time exactly what code you may pass to `eval(..)` to modify the lexical scope, or the contents of the object you may pass to `with` to create a new lexical scope to be consulted.
+Nhưng nếu *Engine* tìm thấy một `eval(..)` hoặc `with` trong code, về cơ bản nó phải thừa nhận tất cả nhận thức về vị trí định danh không hợp lệ, bởi vì nó không thể biết tại lexing time (tạo từ vựng) có chính xác bao nhiêu code được đưa vào `eval(..)` để sửa đổi phạm vi từ vựng, hoặc nội dung của object bạn có thể chuyển vào `with` để tạo ra phạm vi từ vựng mới.
 
-In other words, in the pessimistic sense, most of those optimizations it *would* make are pointless if `eval(..)` or `with` are present, so it simply doesn't perform the optimizations *at all*.
+Nói theo nghĩa bi quan, hầu hết những tối ưu hóa mà nó tạo ra đều vô nghĩa nếu `eval(..)` hay `with` tồn tại, vì nó đơn giản không thực hiện tối ưu hóa nào cả.
 
-Your code will almost certainly tend to run slower simply by the fact that you include an `eval(..)` or `with` anywhere in the code. No matter how smart the *Engine* may be about trying to limit the side-effects of these pessimistic assumptions, **there's no getting around the fact that without the optimizations, code runs slower.**
+Code của bạn sẽ hầu như chắc chắn chạy chậm hơn bởi việc bạn thêm `eval(..)` hay `with` bất kỳ đâu trong code. Dù cho *Engine* có thông minh cỡ nào không thể giới hạn những hiệu ứng phụ của những giả định bi quan đó.
 
 ## Ôn tập (TL;DR)
 
-Lexical scope means that scope is defined by author-time decisions of where functions are declared. The lexing phase of compilation is essentially able to know where and how all identifiers are declared, and thus predict how they will be looked-up during execution.
+Phạm vi từ vựng nghĩa là phạm vi được xác định bởi author-time tại nơi hàm được khai báo. Giai đoạn lexing của biên dịch cần xảy ra để biết tất cả các định danh được khai báo ở đâu và ra sao, và cả dự đoán việc chúng sẽ được tìm như thế nào trong quá trình thực thi.
 
-Two mechanisms in JavaScript can "cheat" lexical scope: `eval(..)` and `with`. The former can modify existing lexical scope (at runtime) by evaluating a string of "code" which has one or more declarations in it. The latter essentially creates a whole new lexical scope (again, at runtime) by treating an object reference *as* a "scope" and that object's properties as scoped identifiers.
+Hai cơ chế trong JavaScript  có thể "đánh lừa" phạm vi từ vựng: `eval(..)` và `with`. Dạng này có thể sửa đổi phạm vi từ vựng (tại runtime) bằng cách đánh giá một chuỗi các mã được khai trong đó, hay là tạo ra toàn bộ phạm vi từ vựng mới tại (runtime) bằng cách hành xử tham chiếu object như là "phạm vi" và các thuộc tính của object đó như là định danh của phạm vi.
 
-The downside to these mechanisms is that it defeats the *Engine*'s ability to perform compile-time optimizations regarding scope look-up, because the *Engine* has to assume pessimistically that such optimizations will be invalid. Code *will* run slower as a result of using either feature. **Don't use them.**
+Nhược điểm của cơ chế này là đánh bạnh khả năng thực hiện tối ưu trong quá trình biên dịch của *Engine* liên quan đến phạm vi tra cứu, bởi *Engine* phải giả định rằng tối ưu hóa như vậy sẽ không hợp lệ. Code sẽ chạy chậm hơn khi sử dụng những tính năng này. **Đừng dùng chún**
