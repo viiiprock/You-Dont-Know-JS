@@ -179,30 +179,29 @@ console.log( o2.a ); // không xác định
 console.log( a ); // 2 -- Oops, bị rò ra ngoài toàn cục!
 ```
 
-Trong ví dụ, hai object `o1` và `o2` được tạo ra. Một có thuộc tính `a`, còn cái khác thì không có. Hàm `foo(...)` lấy một tham chiếu của object `obj` như một tham số, và gọi `with (obj) { .. }`
+Trong ví dụ, hai object `o1` và `o2` được tạo ra. Một có thuộc tính `a`, còn cái khác thì không có. Hàm `foo(...)` lấy tham chiếu `obj` như là một tham số, và gọi `with (obj) { .. }` về tham chiếu đó. Bên trong khối `with`, ta làm cho những gì hiện hữu trở thành tham chiếu từ vựng thông thường cho biến `a`, tham chiếu LHS (xem Chương 1) xảy ra, gán giá trị `2` cho nó.
 
-roperty, and the other does not. The `foo(..)` function takes an object reference `obj` as an argument, and calls `with (obj) { .. }` on the reference. Inside the `with` block, we make what appears to be a normal lexical reference to a variable `a`, an LHS reference in fact (see Chapter 1), to assign to it the value of `2`.
+Khi chúng ta truyền vào `o1`, phép gán `a = 2` tìm thuộc tính `o1.a` và gán giá trị `2` như phản hồi của `console.log(o1.a)`. Tuy nhiên, khi chúng ta truyền vào `o2`, nó không có thuộc tính `a`, chẳng có gì được tạo ra nên `o2.a` giữ nguyên `undefined`.
 
-When we pass in `o1`, the `a = 2` assignment finds the property `o1.a` and assigns it the value `2`, as reflected in the subsequent `console.log(o1.a)` statement. However, when we pass in `o2`, since it does not have an `a` property, no such property is created, and `o2.a` remains `undefined`.
+Nhưng chúng cần lưu ý một hiệu ứng phụ đặc biệt, đó là biến toàn cục `a` được tạo bởi phép gán `a = 2`. Sao lại như vậy?
 
-But then we note a peculiar side-effect, the fact that a global variable `a` was created by the `a = 2` assignment. How can this be?
+Lệnh `with` lấy một object không hoặc có các thuộc tính, và **xử lý object như thể nó là một phạm vi từ vựng riêng biệt hoàn toàn**, và do đó các thuộc tính của object được coi như là các định danh từ vựng trong "phạm vi".
 
-The `with` statement takes an object, one which has zero or more properties, and **treats that object as if *it* is a wholly separate lexical scope**, and thus the object's properties are treated as lexically defined identifiers in that "scope".
+**Ghi chú:** Mặc dù  một khối `with` xử lý đối tượng như một phạm vi từ vựng, khai báo `var` thông thường bên trong `with` sẽ không được mở rộng đến khối `with`, thay vào đó là chứa phạm vi hàm.
 
-**Note:** Even though a `with` block treats an object like a lexical scope, a normal `var` declaration inside that `with` block will not be scoped to that `with` block, but instead the containing function scope.
+Trong khi hàm `eval(..)` có thể thay đổi phạm vi từ vựng hiện tại nếu nó có một chuỗi của code với một hay nhiều khai báo bên trong, lệnh `with` lại thực sự tạo ra **một phạm vi hoàn toàn mới** từ object mà bạn đưa vào nó.
 
-While the `eval(..)` function can modify existing lexical scope if it takes a string of code with one or more declarations in it, the `with` statement actually creates a **whole new lexical scope** out of thin air, from the object you pass to it.
+Hiểu theo cách này, "phạm vi" được khia báo bởi lệnh `with` khi ta đưa vào `o1` là `o1`, và "phạm vi" này có "nhận diện" trong đó tương ứng thuộc tính `o1.a`. Nhưng khi chúng ta dùng `o2` như là "phạm vi", nó không có nhận diện `a` bên trong, và nguyên tắc của tra cứu nhận diện LHS được thực hiện.
 
-Understood in this way, the "scope" declared by the `with` statement when we passed in `o1` was `o1`, and that "scope" had an "identifier" in it which corresponds to the `o1.a` property. But when we used `o2` as the "scope", it had no such `a` "identifier" in it, and so the normal rules of LHS identifier look-up (see Chapter 1) occurred.
-
-Neither the "scope" of `o2`, nor the scope of `foo(..)`, nor the global scope even, has an `a` identifier to be found, so when `a = 2` is executed, it results in the automatic-global being created (since we're in non-strict mode).
+Không phải "phạm vi" của `o2`, hay phạm vi của `foo(..)`, hay kể cả phạm vi toàn cục, có nhận diện `a` được tìm thấy, vì vậy khi `a = 2` được thực thi, kết quả của nó là sự tự tạo của toàn cục (dùng ở non-strict mode).
 
 It is a strange sort of mind-bending thought to see `with` turning, at runtime, an object and its properties into a "scope" *with* "identifiers". But that is the clearest explanation I can give for the results we see.
 
 **Note:** In addition to being a bad idea to use, both `eval(..)` and `with` are affected (restricted) by Strict Mode. `with` is outright disallowed, whereas various forms of indirect or unsafe `eval(..)` are disallowed while retaining the core functionality.
 
-### Performance
+### Hiệu suất
 
+Cả `eval(..)` và `with`
 Both `eval(..)` and `with` cheat the otherwise author-time defined lexical scope by modifying or creating new lexical scope at runtime.
 
 So, what's the big deal, you ask? If they offer more sophisticated functionality and coding flexibility, aren't these *good* features? **No.**
@@ -215,7 +214,7 @@ In other words, in the pessimistic sense, most of those optimizations it *would*
 
 Your code will almost certainly tend to run slower simply by the fact that you include an `eval(..)` or `with` anywhere in the code. No matter how smart the *Engine* may be about trying to limit the side-effects of these pessimistic assumptions, **there's no getting around the fact that without the optimizations, code runs slower.**
 
-## Review (TL;DR)
+## Ôn tập (TL;DR)
 
 Lexical scope means that scope is defined by author-time decisions of where functions are declared. The lexing phase of compilation is essentially able to know where and how all identifiers are declared, and thus predict how they will be looked-up during execution.
 
