@@ -1,16 +1,16 @@
 # You Don't Know JS: Scope & Closures
 # Chương 3: Hàm vs. Khối phạm vi
+
+**Vài lời: Sau vài chương dịch thì tôi thấy văn phong tác giả có phần rườm rà, nhiều đoạn lặp lại không cần thiết, mặt khác thì tôi cũng bận nhiều việc nên từ chương này tôi sẽ dịch tóm lược những vấn đề quan trọng, không sa đà vào câu chữ của tác giả nữa**
+
 Như chúng ta đã khám phá trong chương 2, scope bao gồm một tập hợp các "bong bóng", mỗi scope hoạt động như vật chứa trong đó xác định các định danh (biến, function). Các bong bóng tổ hợp (nesting) gọn gàng bên trong bong bóng khác, và tổ hợp này được xác định tại author-time.
 
-Nhưng chính xác là cái gì tạo ra bong bóng mới? Có phải chỉ có function? Có cấu trúc nào khác tạo ra các bong bóng trong scope JavaScript?
+Nhưng chính xác là cái gì tạo ra bong bóng mới? Có phải chỉ có hàm? Có cấu trúc nào khác tạo ra các bong bóng trong phạm vi?
 
-## Scope từ các Function
-Câu trả lời phổ biến nhất cho các câu hỏi trên là JavaScript có scope nền function (function-based scope). Nghĩa là, mỗi function bạn khai báo sẽ tự tạo bong bóng, và không có bất kỳ cấu trúc nào khác tự tạo bong bóng. Nếu chúng ta để ý một chút thì điều này không hoàn toàn đúng.
+## Phạm vi từ các Hàm
+Câu trả lời phổ biến nhất cho các câu hỏi trên là JavaScript có scope nền function (function-based scope). Nghĩa là, mỗi function bạn khai báo sẽ tự tạo bong bóng, và không có bất kỳ cấu trúc nào khác tự tạo bong bóng. Nếu chúng ta để ý thì điều này không hoàn toàn đúng.
 
-
-Nhưng trước tiên, hãy khám phá function scope & các hàm ý của nó.
-
-Xem đoạn code sau đây:
+Trước hết, ta hãy khám phá function scope & các hàm ý của nó:
 
 ```js
 function foo(a) {
@@ -29,19 +29,19 @@ function foo(a) {
 ```
 
 
-Trong đoạn trích này, bong bóng scope của `foo(..)` bao gồm nhận dạng `a`, `b`, `c` và `bar`. **Nó không quan trọng** một  khai báo xuất hiện *ở đâu* trong scope, bất kể biến hoặc function bong bóng scope chứa nó. Chúng ta sẽ khám phá các hoạt động đó trong chương kế tiếp.
+Trong đoạn trích này, bong bóng phạm vi của `foo(..)` bao gồm nhận dạng `a`, `b`, `c` và `bar`. **Nó không quan trọng** một  khai báo xuất hiện *ở đâu* trong phạm vi, bất kể biến hoặc bong bóng phạm vi hàm chứa nó.
 
-`bar(..)` có bong bóng của riêng nó. Scope toàn cũng chỉ có một định danh gắn liền: `foo`
+`bar(..)` có bong bóng của riêng nó. Phạm vi toàn cũng chỉ có một định danh gắn liền: `foo`
 
-Bởi vì `a`, `b`, `c`, và `bar` đều thuộc về bong bóng scope của `foo(..)`, nó sẽ không thể tiếp cận bên ngoài `foo(..)`. Bởi vì, dòng code dưới đây đều có kết quả lỗi `ReferenceError` , khi các định danh đều không có sẵn tại scope toàn cục:
+Bởi vì `a`, `b`, `c`, và `bar` đều thuộc về bong bóng phạm vi của `foo(..)`, nó sẽ không thể tiếp cận bên ngoài `foo(..)`. Bởi vì, dòng code dưới đây đều có kết quả lỗi `ReferenceError` , khi các định danh đều không có sẵn tại phạm vi toàn cục:
 
 ```js
-bar(); // fails
+bar(); // thất bại
 
-console.log( a, b, c ); // all 3 fail
+console.log( a, b, c ); // cả 3 đều thất bại
 ```
 
-Tuy nhiên, tất cả các định danh (`a`, `b`, `c`, `foo`, and `bar`) are accessible *inside* of `foo(..)`, and indeed also available inside of `bar(..)` (assuming there are no shadow identifier declarations inside `bar(..)`).
+Tuy nhiên, tất cả các định danh (`a`, `b`, `c`, `foo`, và `bar`) are accessible *inside* of `foo(..)`, and indeed also available inside of `bar(..)` (assuming there are no shadow identifier declarations inside `bar(..)`).
 
 Function scope encourages the idea that all variables belong to the function, and can be used and reused throughout the entirety of the function (and indeed, accessible even to nested scopes). This design approach can be quite useful, and certainly can make full use of the "dynamic" nature of JavaScript variables to take on values of different types as needed.
 
