@@ -29,11 +29,11 @@ function foo(a) {
 ```
 
 
-Trong đoạn trích này, bong bóng phạm vi của `foo(..)` bao gồm nhận dạng `a`, `b`, `c` và `bar`. **Nó không quan trọng** một  khai báo xuất hiện *ở đâu* trong phạm vi, bất kể biến hoặc bong bóng phạm vi hàm chứa nó.
+Trong đoạn trích này, bong bóng phạm vi của `foo(..)` bao gồm nhận dạng `a`, `b`, `c` và `bar`. Một khai báo xuất hiện *ở đâu* trong phạm vi **không quan trọng**, bất kể biến hoặc bong bóng phạm vi hàm chứa nó.
 
 `bar(..)` có bong bóng của riêng nó. Phạm vi toàn cũng chỉ có một định danh gắn liền: `foo`
 
-Bởi vì `a`, `b`, `c`, và `bar` đều thuộc về bong bóng phạm vi của `foo(..)`, nó sẽ không thể tiếp cận bên ngoài `foo(..)`. Bởi vì, dòng code dưới đây đều có kết quả lỗi `ReferenceError` , khi các định danh đều không có sẵn tại phạm vi toàn cục:
+Bởi vì `a`, `b`, `c`, và `bar` đều thuộc về bong bóng phạm vi của `foo(..)`, nó sẽ không thể tiếp cận bên ngoài `foo(..)`. Dòng code dưới đây đều có kết quả lỗi `ReferenceError`, khi các định danh đều không có sẵn tại phạm vi toàn cục:
 
 ```js
 bar(); // thất bại
@@ -41,13 +41,13 @@ bar(); // thất bại
 console.log( a, b, c ); // cả 3 đều thất bại
 ```
 
-Tuy nhiên, tất cả các định danh (`a`, `b`, `c`, `foo`, và `bar`) are accessible *inside* of `foo(..)`, and indeed also available inside of `bar(..)` (assuming there are no shadow identifier declarations inside `bar(..)`).
+Tuy vậy, các định danh (`a`, `b`, `c`, `foo`, và `bar`) đều có thể tiếp cận được bên trong `foo(..)`, và cũng hợp lệ bên trong `bar(..)` (giả định không có khai báo che bóng nào bên trong `bar(..)`).
 
-Function scope encourages the idea that all variables belong to the function, and can be used and reused throughout the entirety of the function (and indeed, accessible even to nested scopes). This design approach can be quite useful, and certainly can make full use of the "dynamic" nature of JavaScript variables to take on values of different types as needed.
+Phạm vi hàm khuyến khích ý tưởng tất cả các biến thuộc về hàm, và có thể sử dụng/tái sử dụng xuyên suốt trong hàm đó (tiếp cận được trong phạm vi lồng nhau). Các thiết kế này khá là hữu dụng, và mang lại các biến JS sự "linh hoạt" khi lấy giá trị với các kiểu khác nhau khi cần.
 
-On the other hand, if you don't take careful precautions, variables existing across the entirety of a scope can lead to some unexpected pitfalls.
+Mặt khác nếu bạn không cẩn thận, biến đã tồn tại bên trong phạm vi có thể sẽ dẫn đến kết quả không mong muốn.
 
-## Hiding In Plain Scope
+## Ẩn bên trong phạm vi
 
 The traditional way of thinking about functions is that you declare a function, and then add code inside it. But the inverse thinking is equally powerful and useful: take any arbitrary section of code you've written, and wrap a function declaration around it, which in effect "hides" the code.
 
