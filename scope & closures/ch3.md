@@ -49,17 +49,17 @@ Mặt khác nếu bạn không cẩn thận, biến đã tồn tại bên trong 
 
 ## Ẩn bên trong phạm vi
 
-The traditional way of thinking about functions is that you declare a function, and then add code inside it. But the inverse thinking is equally powerful and useful: take any arbitrary section of code you've written, and wrap a function declaration around it, which in effect "hides" the code.
+Theo cách nghĩ thông thường thì bạn khai báo hàm, viết code bên trong. Nếu nghĩ ngược lại thì sẽ thấy lợi thế: lấy một đoạn code đã viết bất kỳ, bao nó bằng một hàm khai báo mới, nó sẽ tạo hiệu ứng ẩn code.
 
-The practical result is to create a scope bubble around the code in question, which means that any declarations (variable or function) in that code will now be tied to the scope of the new wrapping function, rather than the previously enclosing scope. In other words, you can "hide" variables and functions by enclosing them in the scope of a function.
+Kết quả thực tế là tạo một phạm vi bong bóng quanh đoạn code, bất kỳ khai báo nào bên trong được gắn với phạm vi của hàm mới, tức là bạn có thể dấu code bên trong phạm vi của một hàm.
 
-Why would "hiding" variables and functions be a useful technique?
+Lý do hữu ích của việc giấu code?
 
-There's a variety of reasons motivating this scope-based hiding. They tend to arise from the software design principle "Principle of Least Privilege" [^note-leastprivilege], also sometimes called "Least Authority" or "Least Exposure". This principle states that in the design of software, such as the API for a module/object, you should expose only what is minimally necessary, and "hide" everything else.
+Xuất phát từ nguyên lý thiết kế phần mềm "Nguyên tắc ưu tiên thấp nhất", có khi gọi là "Quyền tối thiểu", hay "Phơi bày thấp nhất", thường dùng trong thiết kế API cho một module/object, chúng ta chỉ lộ những phần tối thiểu cần thiết và giấu những phần còn lại.
 
-This principle extends to the choice of which scope to contain variables and functions. If all variables and functions were in the global scope, they would of course be accessible to any nested scope. But this would violate the "Least..." principle in that you are (likely) exposing many variables or functions which you should otherwise keep private, as proper use of the code would discourage access to those variables/functions.
+Nguyên tắc này dẫn đến việc lựa chọn phạm vi nào sẽ chứa biến và hàm. Nếu tất cả các biến và hàm đều ở toàn cục, nó sẽ truy cập được ở bất kỳ phạm vi lồng nhau. Tức là vi phạm nguyên tắc "tối thiểu ..."
 
-For example:
+Ví dụ:
 
 ```js
 function doSomething(a) {

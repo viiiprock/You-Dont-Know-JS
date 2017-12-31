@@ -5,6 +5,7 @@ By now, you should be fairly comfortable with the idea of scope, and how variabl
 
 But there's a subtle detail of how scope attachment works with declarations that appear in various locations within a scope, and that detail is what we will examine here.
 
+
 ## Chicken Or The Egg?
 
 There's a temptation to think that all of the code you see in a JavaScript program is interpreted line-by-line, top-down in order, as the program executes. While that is substantially true, there's one part of that assumption which can lead to incorrect thinking about your program.
