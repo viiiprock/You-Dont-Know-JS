@@ -77,9 +77,9 @@ var b;
 doSomething( 2 ); // 15
 ```
 
-In this snippet, the `b` variable and the `doSomethingElse(..)` function are likely "private" details of how `doSomething(..)` does its job. Giving the enclosing scope "access" to `b` and `doSomethingElse(..)` is not only unnecessary but also possibly "dangerous", in that they may be used in unexpected ways, intentionally or not, and this may violate pre-condition assumptions of `doSomething(..)`.
+Trong đoạn code trên, biến `b` và hàm `doSomethingElse(..)` ẩn đi chi tiết cách `doSomething(..)` hoạt động ra sao. Tạo phạm vi bao vây việc truy cập vào `b` và `doSomethingElse(..)` không chỉ không cần thiết mà còn có thể "nguy hiểm", nó có thể có kết quả không mong muốn, dù vô tình hay cố ý thì điều này cũng vi phạm nguyên tắc tiền giả định của `doSomething(..)`.
 
-A more "proper" design would hide these private details inside the scope of `doSomething(..)`, such as:
+Thiết kế hợp lý hơn sẽ ẩn chi tiết bên trong phạm vi của `doSomething(..)`:
 
 ```js
 function doSomething(a) {
@@ -97,40 +97,40 @@ function doSomething(a) {
 doSomething( 2 ); // 15
 ```
 
-Now, `b` and `doSomethingElse(..)` are not accessible to any outside influence, instead controlled only by `doSomething(..)`. The functionality and end-result has not been affected, but the design keeps private details private, which is usually considered better software.
+Giờ đây, `b` và `doSomethingElse(..)` không thể tiếp cận từ bên ngoài mà chỉ được điều khiển bởi `doSomething(..)`. Chi tiết được thiết kế biệt lập, hoạt động của hàm và kết quả không bị ảnh hưởng, nhưng thiết kế giữ cho chi tiết được ẩn đi, điều này sẽ làm cho ứng dụng tốt hơn.
 
-### Collision Avoidance
+### Tránh trùng lặp
 
-Another benefit of "hiding" variables and functions inside a scope is to avoid unintended collision between two different identifiers with the same name but different intended usages. Collision results often in unexpected overwriting of values.
+Lợi ích khác của việc ẩn biến và hàm trong phạm vi là tránh được sự trùng lặp không chủ định giữa hai định danh cùng tên nhưng khác phương thức sử dụng. Việc trùng lặp sẽ ghi đè giá trị không mong muốn.
 
-For example:
+Ví dụ:
 
 ```js
 function foo() {
 	function bar(a) {
-		i = 3; // changing the `i` in the enclosing scope's for-loop
+		i = 3; // thay đổi `i` bên trong phạm vi vòng lặp for
 		console.log( a + i );
 	}
 
 	for (var i=0; i<10; i++) {
-		bar( i * 2 ); // oops, infinite loop ahead!
+		bar( i * 2 ); // oops, lặp vô định!
 	}
 }
 
 foo();
 ```
+Phép gán `i = 3` bên trong `bar(..)` ghi đè, nhưng `i` lại được khai báo trong `foo(..)` trong vòng lặp for. Trường hợp này kết quả là vòng lặp vô tận, vì `i` được đặt giá trị "cứng" `3` và luôn luôn có giá trị `< 10`.
 
-The `i = 3` assignment inside of `bar(..)` overwrites, unexpectedly, the `i` that was declared in `foo(..)` at the for-loop. In this case, it will result in an infinite loop, because `i` is set to a fixed value of `3` and that will forever remain `< 10`.
+Phép gán bên trong `bar(..)` cần được khai bái một biến nội bộ để sử dụng, bất kể thên nào được chọn. `var i = 3;` sẽ sửa lỗi ( "biến đổ bóng" `i`). Phương án (không thay thế) khác là chọn định danh khác, chẳng hạn như `var j = 3;`. Nhưng việc thiết kế phần mềm tự nhiên sẽ có tên định danh giống nhau, cho nên việc ẩn khai báo bên trong là cách tốt nhất trong trường hợp này.
 
-The assignment inside `bar(..)` needs to declare a local variable to use, regardless of what identifier name is chosen. `var i = 3;` would fix the problem (and would create the previously mentioned "shadowed variable" declaration for `i`). An *additional*, not alternate, option is to pick another identifier name entirely, such as `var j = 3;`. But your software design may naturally call for the same identifier name, so utilizing scope to "hide" your inner declaration is your best/only option in that case.
+#### "Namespaces" toàn cục
 
-#### Global "Namespaces"
+Một ví dụ rõ ràng về việc va chạm biến xảy ra trong phạm vi toàn cục là khi nhiều thư viện nạp vào chương trình có thể dễ dàng va chạm nhau nếu bạn không ẩn biến và hàm.
 
-A particularly strong example of (likely) variable collision occurs in the global scope. Multiple libraries loaded into your program can quite easily collide with each other if they don't properly hide their internal/private functions and variables.
+Các thư viện như vậy thường tạo ra một biến duy nhất, thường là object, với một tên duy nhất trong toàn cục. Object này
+sử dụng như là một "không gian tên" cho thư viện đó, các chức năng phơi bày như các thuộc tính của object.
 
-Such libraries typically will create a single variable declaration, often an object, with a sufficiently unique name, in the global scope. This object is then used as a "namespace" for that library, where all specific exposures of functionality are made as properties off that object (namespace), rather than as top-level lexically scoped identifiers themselves.
-
-For example:
+Ví dụ:
 
 ```js
 var MyReallyCoolLibrary = {
@@ -144,19 +144,17 @@ var MyReallyCoolLibrary = {
 };
 ```
 
-#### Module Management
+#### Quản lý module
 
-Another option for collision avoidance is the more modern "module" approach, using any of various dependency managers. Using these tools, no libraries ever add any identifiers to the global scope, but are instead required to have their identifier(s) be explicitly imported into another specific scope through usage of the dependency manager's various mechanisms.
+Phương án khác hiện đại hơn để tránh va chạm là "module", sử dụng bất kỳ quản lý phụ thuộc. Theo cách này thì không có thư viện nào thêm vào định danh toàn cục, thay vào đó là phải nhập các nhận dạng vào một phạm vi cụ thể thông qua cơ chế khác nhau của bộ phận quả lý module phụ thuộc (dependecy manager).
 
-It should be observed that these tools do not possess "magic" functionality that is exempt from lexical scoping rules. They simply use the rules of scoping as explained here to enforce that no identifiers are injected into any shared scope, and are instead kept in private, non-collision-susceptible scopes, which prevents any accidental scope collisions.
+Cần lưu ý là các công cụ này không có phương thức "thần thánh" nào để miễn quy tắc phạm vi từ vựng. Nó chỉ đơn giản sử dụng quy tắc đã giải thích là không có bất kỳ định danh chung nào trong phạm vi, thay vào đó là giữ cá thể, không va chạm, ngăn ngừa bất kỳ sự va chạm vô tình nào.
 
-As such, you can code defensively and achieve the same results as the dependency managers do without actually needing to use them, if you so choose. See the Chapter 5 for more information about the module pattern.
+Xem Chương 5 để biết thêm về module pattern.
 
-## Function như là Scope
+## Hàm đóng vai trò phạm vi
 
-Chúng ta đã thấy rằng có thể lấy bất kỳ đoạn code và bao nó bằng một function, điều này tạo ra hiệu quả "giấu" bất kỳ biến hoặc function đã khai báo với phía bên ngoài scope hoặc function khác nằm bên trong scope.
-
-Ví dụ:
+Chúng ta đã thấy rằng có thể lấy bất kỳ đoạn code và bao nó bằng một hàm, điều này tạo ra hiệu quả "giấu" bất kỳ biến hoặc hàm đã khai báo với phía bên ngoài phạm vi hoặc hàm khác nằm bên trong phạm vi.
 
 ```js
 var a = 2;
@@ -171,26 +169,26 @@ foo(); // <-- và
 console.log( a ); // 2
 ```
 
-Khi kỹ thuật này "hoạt động", không nhất thiết nó phải rất lý tưởng. Có vài vấn đề xảy ra. Đầu tiên là chúng ta phải khai báo một tên fungtion `foo()`, which means that the identifier name `foo` itself "pollutes" the enclosing scope (global, in this case). We also have to explicitly call the function by name (`foo()`) so that the wrapped code actually executes.
+Đầu tiên là chúng ta phải khai báo một tên hàm `foo()`, nghĩa là bản thân định danh `foo` "làm bẩn" phạm vi bên trong, chúng ta đồng thời gọi tên hàm để nó thực thi.
 
-It would be more ideal if the function didn't need a name (or, rather, the name didn't pollute the enclosing scope), and if the function could automatically be executed.
+Lý tưởng hơn nếu hàm không cần tên (hoặc tên không làm dơ phạm vi bên trong), và nếu hàm tự động thực thi.
 
-Fortunately, JavaScript offers a solution to both problems.
+May mắn là JavaScript có cả giải pháp cho hai vấn đề.
 
 ```js
 var a = 2;
 
-(function foo(){ // <-- insert this
+(function foo(){ // <-- thêm cái này
 
 	var a = 3;
 	console.log( a ); // 3
 
-})(); // <-- and this
+})(); // <-- và này
 
 console.log( a ); // 2
 ```
 
-Let's break down what's happening here.
+Phân tích.
 
 First, notice that the wrapping function statement starts with `(function...` as opposed to just `function...`. While this may seem like a minor detail, it's actually a major change. Instead of treating the function as a standard declaration, the function is treated as a function-expression.
 
@@ -202,9 +200,9 @@ Compare the previous two snippets. In the first snippet, the name `foo` is bound
 
 In other words, `(function foo(){ .. })` as an expression means the identifier `foo` is found *only* in the scope where the `..` indicates, not in the outer scope. Hiding the name `foo` inside itself means it does not pollute the enclosing scope unnecessarily.
 
-### Anonymous vs. Named
+### Vô danh vs. Có tên
 
-You are probably most familiar with function expressions as callback parameters, such as:
+Bạn đã quen thuộc với biểu thức hàm là tham chiếu callback, như là:
 
 ```js
 setTimeout( function(){
@@ -212,7 +210,7 @@ setTimeout( function(){
 }, 1000 );
 ```
 
-This is called an "anonymous function expression", because `function()...` has no name identifier on it. Function expressions can be anonymous, but function declarations cannot omit the name -- that would be illegal JS grammar.
+Cái này được gọi là "biểu thức hàm vô danh", bởi vì `function()...` không có tên định danh. Function expressions can be anonymous, but function declarations cannot omit the name -- that would be illegal JS grammar.
 
 Anonymous function expressions are quick and easy to type, and many libraries and tools tend to encourage this idiomatic style of code. However, they have several draw-backs to consider:
 
@@ -230,7 +228,7 @@ setTimeout( function timeoutHandler(){ // <-- Look, I have a name!
 }, 1000 );
 ```
 
-### Invoking Function Expressions Immediately
+### Invoking Function Expressions Immediately (IIFE - Gọi biểu thức hàm tức thì)
 
 ```js
 var a = 2;

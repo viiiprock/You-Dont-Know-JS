@@ -1,5 +1,5 @@
 # You Don't Know JS: Scope & Closures
-# Chapter 5: Scope Closure
+# Chương 5: Phạm vi bao đóng
 
 We arrive at this point with hopefully a very healthy, solid understanding of how scope works.
 
