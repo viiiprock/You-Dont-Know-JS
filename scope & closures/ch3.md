@@ -210,20 +210,20 @@ setTimeout( function(){
 }, 1000 );
 ```
 
-Cái này được gọi là "biểu thức hàm vô danh", bởi vì `function()...` không có tên định danh. Function expressions can be anonymous, but function declarations cannot omit the name -- that would be illegal JS grammar.
+Cái này được gọi là "biểu thức hàm vô danh", bởi vì `function()...` không có tên định danh. Biểu thức hàm có thể vô danh, nhưng khai báo hàm phải có tên.
 
-Anonymous function expressions are quick and easy to type, and many libraries and tools tend to encourage this idiomatic style of code. However, they have several draw-backs to consider:
+Hàm vô danh nhanh và tiện gõ, và nhiều thư viện và công cụ có xu hướng khuyến khích điều này, nhưng có vài vấn đề cần phải nắm rõ:
 
-1. Anonymous functions have no useful name to display in stack traces, which can make debugging more difficult.
+1. Hàm vô danh sẽ không có tên trong truy dấu, khó debug.
 
-2. Without a name, if the function needs to refer to itself, for recursion, etc., the **deprecated** `arguments.callee` reference is unfortunately required. Another example of needing to self-reference is when an event handler function wants to unbind itself after it fires.
+2. Không có tên, nếu hàm muốn tham chiếu đến nó, hoặc đệ quy, ..., tham chiếu **đã bị bỏ** `arguments.callee` lại cần thiết. Ví dụ khác nữa là khi một hàm điều khiển sự kiện cần unbind chính nó sau khi chạy.
 
-3. Anonymous functions omit a name that is often helpful in providing more readable/understandable code. A descriptive name helps self-document the code in question.
+3. Hàm vô danh làm code khó đọc hơn. Một cái tên còn chính là document của code.
 
-**Inline function expressions** are powerful and useful -- the question of anonymous vs. named doesn't detract from that. Providing a name for your function expression quite effectively addresses all these draw-backs, but has no tangible downsides. The best practice is to always name your function expressions:
+**Biểu thức hàm trực tiếp** rất mạnh và hữu dụng -- câu hỏi giữa hàm ẩn danh vs. hàm có tên cũng không ảnh hưởng. Đặt tên tất nhiên là tốt hơn, nhưng không có nhược điểm. Dù gì tốt nhất vẫn phải luôn đặt tên hàm:
 
 ```js
-setTimeout( function timeoutHandler(){ // <-- Look, I have a name!
+setTimeout( function timeoutHandler(){ // <-- coi nè, tui có tên đó!
 	console.log( "I waited 1 second!" );
 }, 1000 );
 ```
@@ -243,11 +243,11 @@ var a = 2;
 console.log( a ); // 2
 ```
 
-Now that we have a function as an expression by virtue of wrapping it in a `( )` pair, we can execute that function by adding another `()` on the end, like `(function foo(){ .. })()`. The first enclosing `( )` pair makes the function an expression, and the second `()` executes the function.
+Ta có một hàm như một biểu thức được đặt trong `( )`, chúng ta có thể xử lý hàm đó bằng thêm `()` vào phía cuối `(function foo(){ .. })()`. `( )` đằng trước tạo ra một biểu thức cho hàm, và `()` thực thi hàm.
 
-This pattern is so common, a few years ago the community agreed on a term for it: **IIFE**, which stands for **I**mmediately **I**nvoked **F**unction **E**xpression.
+Mẫu này rất thông thường, một vài năm trước cộng đồng đã đồng ý cho cụm từ: **IIFE**, đại diện cho **I**mmediately **I**nvoked **F**unction **E**xpression.
 
-Of course, IIFE's don't need names, necessarily -- the most common form of IIFE is to use an anonymous function expression. While certainly less common, naming an IIFE has all the aforementioned benefits over anonymous function expressions, so it's a good practice to adopt.
+Đương nhiên, IIFE không cần tên -- dạng thông thường của IIFE được sử dụng theo cách vô danh. Việc đặt tên IIFE không phổ biến nhưng lợi ích đối với hàm ẩn danh nói trên thì đây cũng là việc tốt để thực hành.
 
 ```js
 var a = 2;
@@ -262,13 +262,13 @@ var a = 2;
 console.log( a ); // 2
 ```
 
-There's a slight variation on the traditional IIFE form, which some prefer: `(function(){ .. }())`. Look closely to see the difference. In the first form, the function expression is wrapped in `( )`, and then the invoking `()` pair is on the outside right after it. In the second form, the invoking `()` pair is moved to the inside of the outer `( )` wrapping pair.
+Có một biến tấu nhỏ trong dạng IIFE truyền thống, một số người thích: `(function(){ .. }())`. Nhìn kỹ để thấy sựa khác biệt. Trong dạng đầu tiên, biểu thức hàm được bao trong `( )`, và sau đó `()` gọi hàm nằm ngay bên ngoài. Trong dạng thứ 2, `()` lại được bỏ vào trong `( )`.
 
-These two forms are identical in functionality. **It's purely a stylistic choice which you prefer.**
+Hai dạng này giống hệt nhau. **Tùy theo phong cách bạn chọn thôi.**
 
-Another variation on IIFE's which is quite common is to use the fact that they are, in fact, just function calls, and pass in argument(s).
+Biến tấu khác của IIFE cũng hay thấy là sử dụng sự kiện trong sự kiện, chỉ gọi hàm, và truyền vào tham số.
 
-For instance:
+Ví dụ:
 
 ```js
 var a = 2;
@@ -284,7 +284,7 @@ var a = 2;
 console.log( a ); // 2
 ```
 
-We pass in the `window` object reference, but we name the parameter `global`, so that we have a clear stylistic delineation for global vs. non-global references. Of course, you can pass in anything from an enclosing scope you want, and you can name the parameter(s) anything that suits you. This is mostly just stylistic choice.
+Ta gọi tham chiếu `window` nhưng đặt tên tham số là `global`, nên ta có một cách mô tả rõ ràng giữa đại diện toàn cục vs. không toàn cục. Đương nhiên bạn có thể truyền bất cứ gì vào phạm vi bên trong bạn cần, và bạn có thể đặt tên tham số bất kỳ. Nó hầu như cũng chỉ là phong cách.
 
 Another application of this pattern addresses the (minor niche) concern that the default `undefined` identifier might have its value incorrectly overwritten, causing unexpected results. By naming a parameter `undefined`, but not passing any value for that argument, we can guarantee that the `undefined` identifier is in fact the undefined value in a block of code:
 
