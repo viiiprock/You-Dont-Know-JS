@@ -286,22 +286,22 @@ console.log( a ); // 2
 
 Ta gọi tham chiếu `window` nhưng đặt tên tham số là `global`, nên ta có một cách mô tả rõ ràng giữa đại diện toàn cục vs. không toàn cục. Đương nhiên bạn có thể truyền bất cứ gì vào phạm vi bên trong bạn cần, và bạn có thể đặt tên tham số bất kỳ. Nó hầu như cũng chỉ là phong cách.
 
-Another application of this pattern addresses the (minor niche) concern that the default `undefined` identifier might have its value incorrectly overwritten, causing unexpected results. By naming a parameter `undefined`, but not passing any value for that argument, we can guarantee that the `undefined` identifier is in fact the undefined value in a block of code:
+Ứng dụng khác của mẫu này cũng giải quyết một hiệu ứng phụ là định danh `undefined` mặc định có thể có giá trị không hợp lệ ghi đè dẫn đến kết quả không mong muốn. Bằng cách đặt tên tham số `undefined`, nhưng không truyền bất kỳ giá trị đối số nào, ta có thể đảm bảo giá trị không xác định ở trong khối code:
 
 ```js
-undefined = true; // setting a land-mine for other code! avoid!
+undefined = true; // đây là đặt mìn ngầm cho code! cần tránh!
 
 (function IIFE( undefined ){
 
 	var a;
 	if (a === undefined) {
-		console.log( "Undefined is safe here!" );
+		console.log( "Undefined an toàn ở đây!" );
 	}
 
 })();
 ```
 
-Still another variation of the IIFE inverts the order of things, where the function to execute is given second, *after* the invocation and parameters to pass to it. This pattern is used in the UMD (Universal Module Definition) project. Some people find it a little cleaner to understand, though it is slightly more verbose.
+Và biến thể khác của IIFE là đảo ngược thứ tự các thứ, hàm có thể thực thi sau khi viện dẫn tham số để truyền vào nó. Mẫu này được sử dụng trong dự án UDM (Universal Module Definition). Dù nó hơi dài dòng, một số người lại thấy vậy lại dễ hiểu.
 
 ```js
 var a = 2;
@@ -316,16 +316,15 @@ var a = 2;
 
 });
 ```
+Hàm `def` được xác định trong phần thứ hai của đoạn code, và sau đó truyền như một tham số (gọi là `def`) vào hàm `IIFE` ở phần đầu của đoạn code. Cuối cùng, tham số `def` (hàm) được gọi, truyền `window` vào với tham số `global`.
 
-The `def` function expression is defined in the second-half of the snippet, and then passed as a parameter (also called `def`) to the `IIFE` function defined in the first half of the snippet. Finally, the parameter `def` (the function) is invoked, passing `window` in as the `global` parameter.
+## Khối với vai trò phạm vi (Block scope)
 
-## Blocks As Scopes
+Trong khi hàm là đơn vị thường thấy của phạm vi, và quy mô của nó trong thiết kế JS cũng lan rộng khắp chương trình, các đơn vị khác thì lại có thể dẫn đến sự rõ ràng, sạch sẽ để bảo trì code.
 
-While functions are the most common unit of scope, and certainly the most wide-spread of the design approaches in the majority of JS in circulation, other units of scope are possible, and the usage of these other scope units can lead to even better, cleaner to maintain code.
+Nhiều ngôn ngữ khác JavaScript hỗ trợ Block Scope, và người lập trình các ngôn ngữ đó thường quen với khái niệm này, còn dân chỉ chơi JavaScript có thể thấy khái niệm này hơi lạ lẫm.
 
-Many languages other than JavaScript support Block Scope, and so developers from those languages are accustomed to the mindset, whereas those who've primarily only worked in JavaScript may find the concept slightly foreign.
-
-But even if you've never written a single line of code in block-scoped fashion, you are still probably familiar with this extremely common idiom in JavaScript:
+Nhưng mặc dù bạn chưa bao giờ viết bất kỳ dòng code nào theo lối block-scoped, bạn vẫn quen với kiểu này như một thành ngũ trong JavaScript:
 
 ```js
 for (var i=0; i<10; i++) {
@@ -333,9 +332,9 @@ for (var i=0; i<10; i++) {
 }
 ```
 
-We declare the variable `i` directly inside the for-loop head, most likely because our *intent* is to use `i` only within the context of that for-loop, and essentially ignore the fact that the variable actually scopes itself to the enclosing scope (function or global).
+Ta khai báo biến `i` trực tiếp trong đầu vòng lặp for, bởi vì ý định của chúng ta là chỉ sử dụng `i` cho ngữ cảnh của vòng lặp này, và cơ bản bỏ qua ảnh hưởng của phạm vi ngoài (hàm hay toàn cục).
 
-That's what block-scoping is all about. Declaring variables as close as possible, as local as possible, to where they will be used. Another example:
+Đó là tất cả nội dung của khối phạm vi: khai báo biến tại nơi nó được sử dụng càng cục bộ càng tốt. Ví dụ khác:
 
 ```js
 var foo = true;
