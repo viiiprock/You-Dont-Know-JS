@@ -190,15 +190,15 @@ console.log( a ); // 2
 
 Phân tích.
 
-First, notice that the wrapping function statement starts with `(function...` as opposed to just `function...`. While this may seem like a minor detail, it's actually a major change. Instead of treating the function as a standard declaration, the function is treated as a function-expression.
+Đầu tiên, để ý rằng bao lệnh hàm được bắt đầu bằng `(function...` đối lập với `function...`. Trong khi nhìn nó là chi tiết phụ nhưng nó lại là thay đổi chính. Thay vì ứng xử hàm như một khai báo chuẩn, thì hàm lại coi như là một biểu thức của hàm.
 
-**Note:** The easiest way to distinguish declaration vs. expression is the position of the word "function" in the statement (not just a line, but a distinct statement). If "function" is the very first thing in the statement, then it's a function declaration. Otherwise, it's a function expression.
+**Ghi chú:** Cách đơn giản để phân biết khai báo hay biểu thức là vị trí của từ "function" trong câu lệnh (không chỉ khác một dòng, mà là cả câu lệnh). Nếu "function" là cái trước nhất của biểu thức, thì nó là khai báo. Ngược lại, nó là một biểu thức hàm.
 
-The key difference we can observe here between a function declaration and a function expression relates to where its name is bound as an identifier.
+Mấu chốt khác biệt mà ta thấy ở đây là một khai báo hàm và biểu thức hàm liên quan đến nơi tên của nó được ràng buộc như một định danh.
 
-Compare the previous two snippets. In the first snippet, the name `foo` is bound in the enclosing scope, and we call it directly with `foo()`. In the second snippet, the name `foo` is not bound in the enclosing scope, but instead is bound only inside of its own function.
+So sánh hai đoạn code trên. Nếu đoạn code đầu, cái tên `foo` được ràng buộc với phạm vi của nó, và ta gọi trực tiếp `foo()`. Trong đoạn thứ hai, cái tên `foo` không ràng buộc với phạm vi của nó, mà chỉ ràng buộc với bên trong chính hàm của nó.
 
-In other words, `(function foo(){ .. })` as an expression means the identifier `foo` is found *only* in the scope where the `..` indicates, not in the outer scope. Hiding the name `foo` inside itself means it does not pollute the enclosing scope unnecessarily.
+Nói khác đi, `(function foo(){ .. })` là một biểu thức nghĩa là định danh `foo` chỉ được tìm thấy trong phạm vi `..` chỉ ra, không phải phạm vi bên ngoài. Ẩn `foo` bên trong chính nó nghĩa là không làm ảnh hưởng phạm vi của nó.
 
 ### Vô danh vs. Có tên
 
@@ -346,11 +346,11 @@ if (foo) {
 }
 ```
 
-We are using a `bar` variable only in the context of the if-statement, so it makes a kind of sense that we would declare it inside the if-block. However, where we declare variables is not relevant when using `var`, because they will always belong to the enclosing scope. This snippet is essentially "fake" block-scoping, for stylistic reasons, and relying on self-enforcement not to accidentally use `bar` in another place in that scope.
+Ta dùng biến `bar` chỉ trong ngữ cảnh của lệnh if, nên nó tạo ra cảm giác rằng ta có thể khai báo nó bên trong khối if. Tuy nhiên, nơi khai báo lại không liên quan khi sử dụng `var`, vì nó luôn thuộc về scope bên trong nó. Đoạn code này cơ bản là "giả" block-scoping, và nên dựa vào việc tự thực thi chứ đừng vô tình sử dụng `bar` ở chỗ khác trong phạm vi.
 
-Block scope is a tool to extend the earlier "Principle of Least ~~Privilege~~ Exposure" [^note-leastprivilege] from hiding information in functions to hiding information in blocks of our code.
+Khối phạm vi là công cụ để mở rộng "Principle of Least ~~Privilege~~ Exposure" (Nguyên tắc tối thiểu) để ẩn thông tin trong hàm thành ẩn thông tin trong khối của code.
 
-Consider the for-loop example again:
+Xem lại đoạn code:
 
 ```js
 for (var i=0; i<10; i++) {
