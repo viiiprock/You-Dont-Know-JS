@@ -1,5 +1,5 @@
 # You Don't Know JS: Scope & Closures
-# Chương 3: Hàm vs. Khối phạm vi
+# Chương 3: Hàm vs. Block scope
 
 **Vài lời: Sau vài chương dịch thì tôi thấy văn phong tác giả có phần rườm rà, nhiều đoạn lặp lại không cần thiết, mặt khác thì tôi cũng bận nhiều việc nên từ chương này tôi sẽ dịch tóm lược những vấn đề quan trọng, không sa đà vào câu chữ của tác giả nữa**
 
@@ -318,7 +318,7 @@ var a = 2;
 ```
 Hàm `def` được xác định trong phần thứ hai của đoạn code, và sau đó truyền như một tham số (gọi là `def`) vào hàm `IIFE` ở phần đầu của đoạn code. Cuối cùng, tham số `def` (hàm) được gọi, truyền `window` vào với tham số `global`.
 
-## Khối với vai trò phạm vi (Block scope)
+## Block scope
 
 Trong khi hàm là đơn vị thường thấy của phạm vi, và quy mô của nó trong thiết kế JS cũng lan rộng khắp chương trình, các đơn vị khác thì lại có thể dẫn đến sự rõ ràng, sạch sẽ để bảo trì code.
 
@@ -334,7 +334,7 @@ for (var i=0; i<10; i++) {
 
 Ta khai báo biến `i` trực tiếp trong đầu vòng lặp for, bởi vì ý định của chúng ta là chỉ sử dụng `i` cho ngữ cảnh của vòng lặp này, và cơ bản bỏ qua ảnh hưởng của phạm vi ngoài (hàm hay toàn cục).
 
-Đó là tất cả nội dung của khối phạm vi: khai báo biến tại nơi nó được sử dụng càng cục bộ càng tốt. Ví dụ khác:
+Đó là tất cả nội dung của block scope: khai báo biến tại nơi nó được sử dụng càng cục bộ càng tốt. Ví dụ khác:
 
 ```js
 var foo = true;
@@ -348,7 +348,7 @@ if (foo) {
 
 Ta dùng biến `bar` chỉ trong ngữ cảnh của lệnh if, nên nó tạo ra cảm giác rằng ta có thể khai báo nó bên trong khối if. Tuy nhiên, nơi khai báo lại không liên quan khi sử dụng `var`, vì nó luôn thuộc về scope bên trong nó. Đoạn code này cơ bản là "giả" block-scoping, và nên dựa vào việc tự thực thi chứ đừng vô tình sử dụng `bar` ở chỗ khác trong phạm vi.
 
-Khối phạm vi là công cụ để mở rộng "Principle of Least ~~Privilege~~ Exposure" (Nguyên tắc tối thiểu) để ẩn thông tin trong hàm thành ẩn thông tin trong khối của code.
+Block scope là công cụ để mở rộng "Principle of Least ~~Privilege~~ Exposure" (Nguyên tắc tối thiểu) để ẩn thông tin trong hàm thành ẩn thông tin trong khối của code.
 
 Xem lại đoạn code:
 
@@ -358,38 +358,36 @@ for (var i=0; i<10; i++) {
 }
 ```
 
-Why pollute the entire scope of a function with the `i` variable that is only going to be (or only *should be*, at least) used for the for-loop?
+Vì sao ảnh hưởng toàn bộ phạm vi hàm với biến `i` lại chỉ sử dụng (và chỉ nên sử dụng) cho vòng lặp for?
 
-But more importantly, developers may prefer to *check* themselves against accidentally (re)using variables outside of their intended purpose, such as being issued an error about an unknown variable if you try to use it in the wrong place. Block-scoping (if it were possible) for the `i` variable would make `i` available only for the for-loop, causing an error if `i` is accessed elsewhere in the function. This helps ensure variables are not re-used in confusing or hard-to-maintain ways.
+Điều quan trọng nhất là nhà phát triển muốn nó tự kiểm để tránh vô tình sử dụng biến ngoài mục đích, chẳng hạn như báo lỗi biến không xác định nếu bạn sử dụng biến sai chỗ. Block scope cho biến `i` làm cho `i` chỉ khả dụng cho vòng lặp for, sẽ lỗi nếu `i` truy cập chỗ khác trong hàm. Việc này chắc chắn biến không được tái sử dụng nhầm lẫn và khó bảo trì.
 
-But, the sad reality is that, on the surface, JavaScript has no facility for block scope.
-
-That is, until you dig a little further.
+Một thực tế đáng buồn là xét ở bề mặt thì JavaScript không có cơ sở cho block scope, bạn khai thác thêm mới có.
 
 ### `with`
 
-We learned about `with` in Chapter 2. While it is a frowned upon construct, it *is* an example of (a form of) block scope, in that the scope that is created from the object only exists for the lifetime of that `with` statement, and not in the enclosing scope.
+Chúng ta đã tìm hiểu `with` ở Chương 2. Dù nó là một cấu trúc kỳ quặc nhưng nó chính là ví dụ của block scope, trong đó, phạm vi được tào từ object chỉ tồn tại trong vòng đời của `with`, và không ở trong toàn bộ phạm vi.
 
 ### `try/catch`
 
-It's a *very* little known fact that JavaScript in ES3 specified the variable declaration in the `catch` clause of a `try/catch` to be block-scoped to the `catch` block.
+Một chi tiết nhỏ rằng từ JavaScript ES3 đã chỉ định khai báo biến trong mệnh đề `catch` của `try/catch` để block-scoped cho khối `catch`.
 
-For instance:
+Ví dụ:
 
 ```js
 try {
-	undefined(); // illegal operation to force an exception!
+	undefined(); // thực thi bất hợp lệ nhằm được chấp nhận!
 }
 catch (err) {
-	console.log( err ); // works!
+	console.log( err ); // hoạt động!
 }
 
-console.log( err ); // ReferenceError: `err` not found
+console.log( err ); // ReferenceError: `err` không tìm thấy
 ```
 
-As you can see, `err` exists only in the `catch` clause, and throws an error when you try to reference it elsewhere.
+Như bạn thấy, `err` chỉ tồn tại trong mệnh đề `catch`, và báo lỗi khi bạn muốn thao chiếu nó đâu đó.
 
-**Note:** While this behavior has been specified and true of practically all standard JS environments (except perhaps old IE), many linters seem to still complain if you have two or more `catch` clauses in the same scope which each declare their error variable with the same identifier name. This is not actually a re-definition, since the variables are safely block-scoped, but the linters still seem to, annoyingly, complain about this fact.
+**Ghi chú:** While this behavior has been specified and true of practically all standard JS environments (except perhaps old IE), many linters seem to still complain if you have two or more `catch` clauses in the same scope which each declare their error variable with the same identifier name. This is not actually a re-definition, since the variables are safely block-scoped, but the linters still seem to, annoyingly, complain about this fact.
 
 To avoid these unnecessary warnings, some devs will name their `catch` variables `err1`, `err2`, etc. Other devs will simply turn off the linting check for duplicate variable names.
 
