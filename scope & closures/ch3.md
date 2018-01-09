@@ -1,7 +1,7 @@
 # You Don't Know JS: Scope & Closures
 # Chương 3: Hàm vs. Block scope
 
-**Vài lời: Sau vài chương dịch thì tôi thấy văn phong tác giả có phần rườm rà, nhiều đoạn lặp lại không cần thiết, mặt khác thì tôi cũng bận nhiều việc nên từ chương này tôi sẽ dịch tóm lược những vấn đề quan trọng, không sa đà vào câu chữ của tác giả nữa**
+**Vài lời: Sau vài chương dịch thì tôi thấy văn phong tác giả có phần rườm rà, nhiều đoạn lặp lại không cần thiết, mặt khác thì tôi cũng bận nhiều việc nên từ chương này tôi sẽ cố gắng tóm lược những vấn đề quan trọng, không sa đà vào câu chữ của tác giả nữa**
 
 Như chúng ta đã khám phá trong chương 2, scope bao gồm một tập hợp các "bong bóng", mỗi scope hoạt động như vật chứa trong đó xác định các định danh (biến, function). Các bong bóng tổ hợp (nesting) gọn gàng bên trong bong bóng khác, và tổ hợp này được xác định tại author-time.
 
@@ -362,7 +362,7 @@ Vì sao ảnh hưởng toàn bộ phạm vi hàm với biến `i` lại chỉ s�
 
 Điều quan trọng nhất là nhà phát triển muốn nó tự kiểm để tránh vô tình sử dụng biến ngoài mục đích, chẳng hạn như báo lỗi biến không xác định nếu bạn sử dụng biến sai chỗ. Block scope cho biến `i` làm cho `i` chỉ khả dụng cho vòng lặp for, sẽ lỗi nếu `i` truy cập chỗ khác trong hàm. Việc này chắc chắn biến không được tái sử dụng nhầm lẫn và khó bảo trì.
 
-Một thực tế đáng buồn là xét ở bề mặt thì JavaScript không có cơ sở cho block scope, bạn khai thác thêm mới có.
+Thực tế đáng buồn là xét ở bề mặt thì JavaScript không có cơ sở cho block scope, bạn khai thác thêm mới có.
 
 ### `with`
 
@@ -387,19 +387,19 @@ console.log( err ); // ReferenceError: `err` không tìm thấy
 
 Như bạn thấy, `err` chỉ tồn tại trong mệnh đề `catch`, và báo lỗi khi bạn muốn thao chiếu nó đâu đó.
 
-**Ghi chú:** While this behavior has been specified and true of practically all standard JS environments (except perhaps old IE), many linters seem to still complain if you have two or more `catch` clauses in the same scope which each declare their error variable with the same identifier name. This is not actually a re-definition, since the variables are safely block-scoped, but the linters still seem to, annoyingly, complain about this fact.
+**Ghi chú:** Trong khi hành vi này được xác định và đúng với tất cả môi trường JS tiêu chuẩn (có thể ngoại trừ một số trình duyệt IE cũ), nhiều linter có vẻ vẫn khó chịu với nhiều hơn hai mệnh đề `catch` trong cùng một phạm vi mà mỗi khai báo biến lỗi cùng với tên định danh, mặc dù việc này không cần định nghĩa lại vì các biến đã block-scoped an toàn.
 
-To avoid these unnecessary warnings, some devs will name their `catch` variables `err1`, `err2`, etc. Other devs will simply turn off the linting check for duplicate variable names.
+Để tránh những cảnh báo không cần thiết, một số lập trình viên sẽ đặt tên biến `catch` với `err1`, `err2`... Một số khác chỉ đơn giản tắt báo trùng tên biên của linter.
 
-The block-scoping nature of `catch` may seem like a useless academic fact, but see Appendix B for more information on just how useful it might be.
+Bản chất của `catch` block-scoping trông có vẻ vô dụng, nhưng trong Phụ Lục B sẽ giải thích vì sao nó hữu dụng.
 
 ### `let`
 
-Thus far, we've seen that JavaScript only has some strange niche behaviors which expose block scope functionality. If that were all we had, and *it was* for many, many years, then block scoping would not be terribly useful to the JavaScript developer.
+Chúng ta đã thấy JavaScript cũng chỉ có vài hành vi lạ phơi bày chức năng block scope. Nếu đó là những gì ta có (điều đã xảy ra trong nhiều năm), thì block scoping chẳng có lợi ích cho lập trình viên JavaScript.
 
-Fortunately, ES6 changes that, and introduces a new keyword `let` which sits alongside `var` as another way to declare variables.
+May mắn là ES6 đã thay đổi điều này, từ khóa `let` ra như một cách khai báo biến khác bên cạnh `var`.
 
-The `let` keyword attaches the variable declaration to the scope of whatever block (commonly a `{ .. }` pair) it's contained in. In other words, `let` implicitly hijacks any block's scope for its variable declaration.
+Từ khóa `let` gắn liền việc khai báo với phạm vi của bất kỳ khối nào (thường là trong `{ .. }`) chứa nó.
 
 ```js
 var foo = true;
@@ -412,16 +412,15 @@ if (foo) {
 
 console.log( bar ); // ReferenceError
 ```
+Sử dụng `let` để gắn một biến vào một block hiện hữu có gì đó hơi ngầm. Nó có thể làm bạn nhầm nếu bạn không để ý block nào có biến nào suốt quá trình phát triển code bằng việc di chuyển block, bao nó trong block khác...
 
-Using `let` to attach a variable to an existing block is somewhat implicit. It can confuse if you're not paying close attention to which blocks have variables scoped to them, and are in the habit of moving blocks around, wrapping them in other blocks, etc., as you develop and evolve code.
-
-Creating explicit blocks for block-scoping can address some of these concerns, making it more obvious where variables are attached and not. Usually, explicit code is preferable over implicit or subtle code. This explicit block-scoping style is easy to achieve, and fits more naturally with how block-scoping works in other languages:
+Tạo các block biệt lập cho block-scoping có thể giải quyết một số mối lo, cho thấy rõ nó có được gắn liền hay không. Thông thường, đoạn code ngầm được ưa dùng hơn code biệt lập, nhưng kiểu tách block-scoping này dễ diễn đạt, và tự nhiên phù hợp hơn cách block-scoping hoạt động như trong các ngôn ngữ khác:
 
 ```js
 var foo = true;
 
 if (foo) {
-	{ // <-- explicit block
+	{ // <-- khối biệt lập
 		let bar = foo * 2;
 		bar = something( bar );
 		console.log( bar );
@@ -431,13 +430,13 @@ if (foo) {
 console.log( bar ); // ReferenceError
 ```
 
-We can create an arbitrary block for `let` to bind to by simply including a `{ .. }` pair anywhere a statement is valid grammar. In this case, we've made an explicit block *inside* the if-statement, which may be easier as a whole block to move around later in refactoring, without affecting the position and semantics of the enclosing if-statement.
+Ta có thể tạo một block ngẫu nhiên cho `let` đơn giản bằng cách thêm cặp `{ .. }` bất cứ chỗ nào trong một cú pháp hợp lệ. Trong trường hợp này, bạn tạo một block biệt lập trong lệnh if, nó giúp dễ dàng hơn khi di chuyển trong quá trình refactor mà không ảnh hưởng vị trí và ngữ nghĩa của lệnh if đi kèm.
 
-**Note:** For another way to express explicit block scopes, see Appendix B.
+**Ghi chú:** Cách khác để diễn đạt block scope rõ ràng có thể xem phụ lục B.
 
-In Chapter 4, we will address hoisting, which talks about declarations being taken as existing for the entire scope in which they occur.
+Trong Chương 4, ta sẽ tìm hiểu hoisting, việc khai báo được đưa ra trước cho toàn bộ phạm vi chứa nó.
 
-However, declarations made with `let` will *not* hoist to the entire scope of the block they appear in. Such declarations will not observably "exist" in the block until the declaration statement.
+Tuy nhiên, khai báo được tạo ra với `let` sẽ *không* đưa lên trong toàn bộ block nó xuất hiện. Bởi việc khai báo sẽ không "tồn tại" cho đến khi có biểu thức khai báo.
 
 ```js
 {
@@ -446,15 +445,13 @@ However, declarations made with `let` will *not* hoist to the entire scope of th
 }
 ```
 
-#### Garbage Collection
+#### Gom rác
 
-Another reason block-scoping is useful relates to closures and garbage collection to reclaim memory. We'll briefly illustrate here, but the closure mechanism is explained in detail in Chapter 5.
-
-Consider:
+Lý do khác cho block-scoping là sự hữu ích liên quan đến closures và gom rác để lấy lại bộ nhớ. Tôi sẽ minh họa ngắn ở đây, cơ chế closure sẽ được giải thích chi tiết trong Chương 5.
 
 ```js
 function process(data) {
-	// do something interesting
+	// làm gì đó thú vị
 }
 
 var someReallyBigData = { .. };
