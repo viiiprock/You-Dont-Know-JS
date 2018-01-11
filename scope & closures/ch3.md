@@ -1,8 +1,6 @@
 # You Don't Know JS: Scope & Closures
 # Chương 3: Hàm vs. Block scope
 
-**Vài lời: Sau vài chương dịch thì tôi thấy văn phong tác giả có phần rườm rà, nhiều đoạn lặp lại không cần thiết, mặt khác thì tôi cũng bận nhiều việc nên từ chương này tôi sẽ cố gắng tóm lược những vấn đề quan trọng, không sa đà vào câu chữ của tác giả nữa**
-
 Như chúng ta đã khám phá trong chương 2, scope bao gồm một tập hợp các "bong bóng", mỗi scope hoạt động như vật chứa trong đó xác định các định danh (biến, function). Các bong bóng tổ hợp (nesting) gọn gàng bên trong bong bóng khác, và tổ hợp này được xác định tại author-time.
 
 Nhưng chính xác là cái gì tạo ra bong bóng mới? Có phải chỉ có hàm? Có cấu trúc nào khác tạo ra các bong bóng trong phạm vi?
@@ -465,16 +463,16 @@ btn.addEventListener( "click", function click(evt){
 }, /*capturingPhase=*/false );
 ```
 
-The `click` function click handler callback doesn't *need* the `someReallyBigData` variable at all. That means, theoretically, after `process(..)` runs, the big memory-heavy data structure could be garbage collected. However, it's quite likely (though implementation dependent) that the JS engine will still have to keep the structure around, since the `click` function has a closure over the entire scope.
+Hàm callback điều khiển `click` không cần biến `someReallyBigData` gì hết. Nghĩa là về mặt lý thuyết, sau khi `process(..)` chạy, cấu trúc dữ liệu hao bộ nhớ được gom lại. Tuy nhiên, nó kiểu giống như JS engine vẫn giữ cấu trúc đâu đó, khi hàm `click` có một closure trên toàn bộ scope.
 
-Block-scoping can address this concern, making it clearer to the engine that it does not need to keep `someReallyBigData` around:
+Block-scoping làm cho engine hiểu rõ nó không cần giữ `someReallyBigData` xung quanh:
 
 ```js
 function process(data) {
-	// do something interesting
+	// làm gì đó
 }
 
-// anything declared inside this block can go away after!
+// bất kỳ khai báo trong khối này sẽ "ra đi" sau đó!
 {
 	let someReallyBigData = { .. };
 
@@ -488,11 +486,11 @@ btn.addEventListener( "click", function click(evt){
 }, /*capturingPhase=*/false );
 ```
 
-Declaring explicit blocks for variables to locally bind to is a powerful tool that you can add to your code toolbox.
+Khai báo các khối riêng biệt cho biến ràng buộc cục bộ là một công cụ mạnh mẽ.
 
-#### `let` Loops
+#### Vòng lặp `let`
 
-A particular case where `let` shines is in the for-loop case as we discussed previously.
+Một trường hợp đặc biệt mà `let` tỏa sáng là trong vòng lặp for.
 
 ```js
 for (let i=0; i<10; i++) {
@@ -502,15 +500,15 @@ for (let i=0; i<10; i++) {
 console.log( i ); // ReferenceError
 ```
 
-Not only does `let` in the for-loop header bind the `i` to the for-loop body, but in fact, it **re-binds it** to each *iteration* of the loop, making sure to re-assign it the value from the end of the previous loop iteration.
+Không chỉ có `let` trong đầu vòng lặp ràng buộc `i` vào thân của vòng lặp, mà còn tái ráng buộc nó vào mỗi lần lặp, đảm bảo gán lại giá trị của nó từ cuối của lần lặp trước.
 
-Here's another way of illustrating the per-iteration binding behavior that occurs:
+Đây là cách khác để minh họa hành vi mỗi lần lặp:
 
 ```js
 {
 	let j;
 	for (j=0; j<10; j++) {
-		let i = j; // re-bound for each iteration!
+		let i = j; // chuyển qua mỗi lần lặp!
 		console.log( i );
 	}
 }
