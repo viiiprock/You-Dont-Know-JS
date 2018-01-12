@@ -3,14 +3,13 @@
 
 Đọc tới chương này là coi như bạn đã thoải mái với phạm vi, và cách biến được gắn với các phạm vi ở tầng khác nhau, cách nó được khai báo. Cả phạm vi hàm (function scope) và phạm vi khối (block scope) đều có chung nguyên tắc: biến nào khai báo ở phạm vi nào thì thuộc về phạm vi đó.
 
-But there's a subtle detail of how scope attachment works with declarations that appear in various locations within a scope, and that detail is what we will examine here.
-
+Có một chi tiết tinh tế về cách thức đính kèm scope hoạt ra sao với khai báo xuất hiện ở các vị trí khác trong scope.
 
 ## Gà hay trứng?
 
-There's a temptation to think that all of the code you see in a JavaScript program is interpreted line-by-line, top-down in order, as the program executes. While that is substantially true, there's one part of that assumption which can lead to incorrect thinking about your program.
+Có thể bạn nghĩ rằng JavaScript được thông dịch theo từng dòng, từ trên xuống dưới khi thực thi chương trình. Đúng là vậy, nhưng lại có một phần giả định đó sẽ dẫn đến suy nghĩ sai.
 
-Consider this code:
+Xem đoạn code sau:
 
 ```js
 a = 2;
@@ -20,11 +19,11 @@ var a;
 console.log( a );
 ```
 
-What do you expect to be printed in the `console.log(..)` statement?
+Bạn nghĩ nó sẽ log ra cái gì trong lệnh `console.log(..)`?
 
-Many developers would expect `undefined`, since the `var a` statement comes after the `a = 2`, and it would seem natural to assume that the variable is re-defined, and thus assigned the default `undefined`. However, the output will be `2`.
+Nhiều lập trình viên sẽ nghĩ là `undefined` vì `var a` xuất hiện sau `a = 2`, và đương nhiên biến đó sẽ được định nghĩa lại theo tự nhiên, và sẽ là `undefined`. Nhưng kết quả là `2`.
 
-Consider another piece of code:
+Xem đoạn code dưới đây:
 
 ```js
 console.log( a );
@@ -32,14 +31,15 @@ console.log( a );
 var a = 2;
 ```
 
-You might be tempted to assume that, since the previous snippet exhibited some less-than-top-down looking behavior, perhaps in this snippet, `2` will also be printed. Others may think that since the `a` variable is used before it is declared, this must result in a `ReferenceError` being thrown.
+Dựa theo đoạn code ở trên kia thì có thể bạn sẽ nghĩ rằng `2` sẽ được in ra, kiểu như hành vi tìm kiếm từ trên xuống được tối thiểu hóa. Một số người thì nghĩ rằng `a` được gọi trước khi khai báo, nên kết quả chắc chắn là `ReferenceError`.
 
-Unfortunately, both guesses are incorrect. `undefined` is the output.
+Không may, cả hai đều sai, kết quả là `undefined`.
 
-**So, what's going on here?** It would appear we have a chicken-and-the-egg question. Which comes first, the declaration ("egg"), or the assignment ("chicken")?
+**Vậy chuyện gì đã xảy ra?** Câu chuyện gà và trứng xuất hiện. Cái nào có trước? Trứng hay gà?
 
-## The Compiler Strikes Again
+## Lại phản biện của trình biên dịch
 
+Để trả lời câu hỏi này, chúng ta cần ngược lại Chương 1, và câu chuyện trình biên dịch của chúng ta. Gọi lại *Engine* sẽ biên dịch code trước khi diễn giải nó.
 To answer this question, we need to refer back to Chapter 1, and our discussion of compilers. Recall that the *Engine* actually will compile your JavaScript code before it interprets it. Part of the compilation phase was to find and associate all declarations with their appropriate scopes. Chapter 2 showed us that this is the heart of Lexical Scope.
 
 So, the best way to think about things is that all declarations, both variables and functions, are processed first, before any part of your code is executed.
