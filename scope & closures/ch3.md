@@ -514,11 +514,11 @@ Không chỉ có `let` trong đầu vòng lặp ràng buộc `i` vào thân củ
 }
 ```
 
-The reason why this per-iteration binding is interesting will become clear in Chapter 5 when we discuss closures.
+Lý do tại sao ràng buộc từng lần lặp lại hay sẽ thảo luận rõ ở Chương 5.
 
-Because `let` declarations attach to arbitrary blocks rather than to the enclosing function's scope (or global), there can be gotchas where existing code has a hidden reliance on function-scoped `var` declarations, and replacing the `var` with `let` may require additional care when refactoring code.
+Vì khai báo `let` đính kèm khối tùy ý chứ không phải phạm vi hàm bao quanh (hay toàn cục), nó có thể tạo được tại nơi code hiện hữu có một khai báo ẩn `var` trong function scoped, việc thay thế `var` bằng `let` có thể cần chú ý khi refactor code.
 
-Consider:
+ví dụ:
 
 ```js
 var foo = true, baz = 10;
@@ -534,7 +534,7 @@ if (foo) {
 }
 ```
 
-This code is fairly easily re-factored as:
+Code này có thể dễ dàng refactor như sau:
 
 ```js
 var foo = true, baz = 10;
@@ -549,8 +549,7 @@ if (baz > bar) {
 	console.log( baz );
 }
 ```
-
-But, be careful of such changes when using block-scoped variables:
+Nhưng cẩn thận với các thay đổi khi sử dụng biến trong block scope:
 
 ```js
 var foo = true, baz = 10;
@@ -558,24 +557,24 @@ var foo = true, baz = 10;
 if (foo) {
 	let bar = 3;
 
-	if (baz > bar) { // <-- don't forget `bar` when moving!
+	if (baz > bar) { // <-- đừng quên `bar` khi thay đổi!
 		console.log( baz );
 	}
 }
 ```
 
-See Appendix B for an alternate (more explicit) style of block-scoping which may provide easier to maintain/refactor code that's more robust to these scenarios.
+Xem phụ lục B cho kiểu khác (cụ thể hơn) của block-scoping, có thể cung cấp một hướng để bảo trì/refactor code dễ dàng hơn.
 
 ### `const`
 
-In addition to `let`, ES6 introduces `const`, which also creates a block-scoped variable, but whose value is fixed (constant). Any attempt to change that value at a later time results in an error.
+Bên cạnh `let`, ES6 cũng giới thiệu `const`, cũng là tạo ra biến trong block-scoped, nhưng giá trị được cố định (constant - hằng số). Bất kỳ ý định thay đổi giá trị của nó sẽ bị lỗi.
 
 ```js
 var foo = true;
 
 if (foo) {
 	var a = 2;
-	const b = 3; // block-scoped to the containing `if`
+	const b = 3; // block-scoped trong mệnh đề `if`
 
 	a = 3; // just fine!
 	b = 4; // error!
@@ -585,16 +584,18 @@ console.log( a ); // 3
 console.log( b ); // ReferenceError!
 ```
 
-## Review (TL;DR)
+## Ôn tập (TL;DR)
 
-Functions are the most common unit of scope in JavaScript. Variables and functions that are declared inside another function are essentially "hidden" from any of the enclosing "scopes", which is an intentional design principle of good software.
+Hàm là một trong những đơn vị thông thường của phạm vi (scope) trong JavaScript. Biến và hàm được khai báo bên trong
+hàm khác sẽ "ẩn" đối với "scope" bao ngoài nó, đây là một nguyên tắc thiết kế phần mềm tốt.
 
-But functions are by no means the only unit of scope. Block-scope refers to the idea that variables and functions can belong to an arbitrary block (generally, any `{ .. }` pair) of code, rather than only to the enclosing function.
+Nhưng hàm không phải là đơn vị duy nhất của scope. Block-scope đề cập đến ý tưởng rằng biến và hàm có thể thuộc một block bất kỳ (chính xác là `{...}`) chứ không chỉ là hàm trên nó.
 
-Starting with ES3, the `try/catch` structure has block-scope in the `catch` clause.
+Bắt đầu từ ES3, cấu trúc `try/catch` có block-scope trong mệnh đề `catch`.
 
-In ES6, the `let` keyword (a cousin to the `var` keyword) is introduced to allow declarations of variables in any arbitrary block of code. `if (..) { let a = 2; }` will declare a variable `a` that essentially hijacks the scope of the `if`'s `{ .. }` block and attaches itself there.
+Trong ES6, từ khóa `let` (bà con của `var`) được giới thiệu cho phép khai báo biến trong block bất kỳ. `if (..) { let a = 2; }` sẽ khai báo biến `a` rằng nó gắn liền chính nó trong `{...}` của mệnh đề `if`.
 
-Though some seem to believe so, block scope should not be taken as an outright replacement of `var` function scope. Both functionalities co-exist, and developers can and should use both function-scope and block-scope techniques where respectively appropriate to produce better, more readable/maintainable code.
+Mặc dù vậy, block scope cũng không nên được thực hiện như là thay thế hoàn toàn cho `var` trong phạm vi hàm. Cả hai đều có thể cùng tồn tại, và người lập trình có thể sử dụng cả kỹ thuật function-scope và block-scope để phù hợp với việc bảo trì, đọc code.
 
-[^note-leastprivilege]: [Principle of Least Privilege](http://en.wikipedia.org/wiki/Principle_of_least_privilege)
+#### Xem thêm
+[Principle of Least Privilege](http://en.wikipedia.org/wiki/Principle_of_least_privilege)
