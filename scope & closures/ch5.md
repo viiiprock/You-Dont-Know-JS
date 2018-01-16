@@ -1,33 +1,33 @@
 # You Don't Know JS: Scope & Closures
 # Chương 5: Scope closures (phạm vi bao đóng/đóng kín)
 
-Tới chương này thì ta đã nắm rõ scope hoạt động như thế nào.
+Tới chương này thì ta đã nắm rõ scope hoạt động như thế nào rồi.
 
-We turn our attention to an incredibly important, but persistently elusive, *almost mythological*, part of the language: **closure**. If you have followed our discussion of lexical scope thus far, the payoff is that closure is going to be, largely, anti-climatic, almost self-obvious. *There's a man behind the wizard's curtain, and we're about to see him*. No, his name is not Crockford!
+Giờ chúng ta chuyển qua chú ý đến một vấn đề vô cùng quan trọng, nhưng cũng rất khó nắm bắt, là một phần của ngôn ngữ và *gần như là truyền thuyết*: **closure**. Theo như những gì ta tìm hiểu về lexical scope cho đến nay, thì lợi ích của closure là hiển nhiên. Nhưng *có một người đằng sau bức màn bí mật, chúng ta sẽ phải tìm anh ta*. Không, anh ta không phải Crockford (cha đẻ JS - người dịch)!
 
-If however you have nagging questions about lexical scope, now would be a good time to go back and review Chapter 2 before proceeding.
+Tuy nhiên, nếu bạn còn thắc mắc về lexical scope, tốt nhất là nên quay về Chương 2 trước khi tiếp tục.
 
-## Enlightenment
+## Khai sáng
 
-For those who are somewhat experienced in JavaScript, but have perhaps never fully grasped the concept of closures, *understanding closure* can seem like a special nirvana that one must strive and sacrifice to attain.
+Với những người có kinh nghiệm với JavaScript, nhưng có lẽ chưa bao giờ nắm bắt đầy đủ khái niệm của closure, việc *hiểu closure* có thể coi như là đạt cảnh giới niết bàn cần phải có sự phấn đấu và hy sinh mới đạt được.
 
-I recall years back when I had a firm grasp on JavaScript, but had no idea what closure was. The hint that there was *this other side* to the language, one which promised even more capability than I already possessed, teased and taunted me. I remember reading through the source code of early frameworks trying to understand how it actually worked. I remember the first time something of the "module pattern" began to emerge in my mind. I remember the *a-ha!* moments quite vividly.
+Tôi nhớ vài năm trước, khi tôi đã nắm vững JavaScript, nhưng vẫn không hiểu closure là gì. Có một gợi ý rằng ở *phía bên kia* của ngôn ngữ, có nhiều hứa hẹn hơn những gì tôi có. Tôi nhớ tôi đã đọc hết source code của một framework và cố gắng hiểu nó hoạt động ra sao. Tôi nhớ lần đầu tiên cái gì đó như "module pattern" đã gợi lên trong tâm trí. Tôi nhớ những khoảnh khắc *a-ha!*.
 
-What I didn't know back then, what took me years to understand, and what I hope to impart to you presently, is this secret: **closure is all around you in JavaScript, you just have to recognize and embrace it.** Closures are not a special opt-in tool that you must learn new syntax and patterns for. No, closures are not even a weapon that you must learn to wield and master as Luke trained in The Force.
+Những gì tôi đã không biết sau đó, cái gì đã khiến tôi cả năm để hiểu, và những gì tôi hy vọng truyền đặt được cho bạn là bí mất: **closure luôn ở xung quanh JavaScript, bạn phải nhận ra và nắm bắt lấy nó.** Closure không phải công cụ đặc biệt mà bạn phải học thêm về cú pháp và pattern. Không, closure thậm chí cũng không phải vũ khí mà bạn phải học cách làm chủ như Luke đã luyện trong The Force (xem Star wars - người dịch).
 
-Closures happen as a result of writing code that relies on lexical scope. They just happen. You do not even really have to intentionally create closures to take advantage of them. Closures are created and used for you all over your code. What you are *missing* is the proper mental context to recognize, embrace, and leverage closures for your own will.
+Closure xảy ra như là kết quả của viết code dựa trên lexical scope. Đôi khi là nó chỉ xảy ra. Thậm chí bạn còn không thực sự có ý định tạo closure để tận dụng lợi thế của chúng. Closure được tạo ra suốt quá trình code. Những gì bạn *đang thiếu* là bối cảnh để nhận ra, nắm bắt và dùng như đòn bẩy cho ý riêng.
 
-The enlightenment moment should be: **oh, closures are already occurring all over my code, I can finally *see* them now.** Understanding closures is like when Neo sees the Matrix for the first time.
+Giây phút khai sáng hẳn là: **oh, closure thực sự xuất hiện suốt trong code của mình, giờ mình có thể thấy chúng** Hiểu closure giống như Neo thấy Ma trận lần đầu.
 
-## Nitty Gritty
+## Thực chất của vấn đề
 
-OK, enough hyperbole and shameless movie references.
+OK, tán phét đủ rồi.
 
-Here's a down-n-dirty definition of what you need to know to understand and recognize closures:
+Giờ là những gì bạn cần để biết, hiểu, nắm bắt closure:
 
-> Closure is when a function is able to remember and access its lexical scope even when that function is executing outside its lexical scope.
+> Closure là khi một hàm có khả năng nhớ và truy cập lexical scope của nó ngay cả khi hàm đó được thực thi bên ngoài lexical scope của nó.
 
-Let's jump into some code to illustrate that definition.
+Hãy xem vài đoạn code minh họa.
 
 ```js
 function foo() {
@@ -43,7 +43,10 @@ function foo() {
 foo();
 ```
 
-This code should look familiar from our discussions of Nested Scope. Function `bar()` has *access* to the variable `a` in the outer enclosing scope because of lexical scope look-up rules (in this case, it's an RHS reference look-up).
+Đoạn code này nhìn tương tự như trong phần Nested Scope (phạm vi lồng nhau). Hàm `bar()` *truy cập* đến biến `a`
+ở phạm vi bên ngoài vì
+
+to the variable `a` in the outer enclosing scope because of lexical scope look-up rules (in this case, it's an RHS reference look-up).
 
 Is this "closure"?
 
