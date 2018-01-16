@@ -1,7 +1,7 @@
 # You Don't Know JS: Scope & Closures
-# Chương 5: Scope closures
+# Chương 5: Scope closures (phạm vi bao đóng/đóng kín)
 
-We arrive at this point with hopefully a very healthy, solid understanding of how scope works.
+Tới chương này thì ta đã nắm rõ scope hoạt động như thế nào.
 
 We turn our attention to an incredibly important, but persistently elusive, *almost mythological*, part of the language: **closure**. If you have followed our discussion of lexical scope thus far, the payoff is that closure is going to be, largely, anti-climatic, almost self-obvious. *There's a man behind the wizard's curtain, and we're about to see him*. No, his name is not Crockford!
 
