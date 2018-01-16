@@ -195,8 +195,7 @@ function foo() {
 
 Mặc dù có vẻ nó không có gì thú vị hơn về mặt học thuật, nhưng nó làm nổi bật sự trùng lặp trong cùng một scope và là một ý tồi dẫn đến kết quả khó hiểu.
 
-Khai báo hàm thường xuất hiện trong block thông thường
-Function declarations that appear inside of normal blocks typically hoist to the enclosing scope, rather than being conditional as this code implies:
+Khai báo hàm xuất hiện trong block bình thường thường đưa lên trên scope bao nó hơn là trong điều kiện như đoạn code dưới.
 
 ```js
 foo(); // "b"
@@ -209,15 +208,14 @@ else {
    function foo() { console.log( "b" ); }
 }
 ```
+Tuy nhiên, cũng quan trọng để chú ý rằng hành vi này không tin cậy và có thể thay đổi trong phiên bản tiếp theo của JavaScript, vì vậy tốt nhất là tránh khia báo chức năng trong khối.
 
-However, it's important to note that this behavior is not reliable and is subject to change in future versions of JavaScript, so it's probably best to avoid declaring functions in blocks.
+## Ôn tập (TL;DR)
 
-## Review (TL;DR)
+Chúng ta có thể thấy `var a = 2;` là một câu lệnh nhưng JavaScript *Engine* lại không. Nó thấy `var a` và `a = 2` như là hai câu lệnh riêng biệt, cái đầu là ở giai đoạn biên dịch và cái thứ hai là giai đoạn thực thi.
 
-We can be tempted to look at `var a = 2;` as one statement, but the JavaScript *Engine* does not see it that way. It sees `var a` and `a = 2` as two separate statements, the first one a compiler-phase task, and the second one an execution-phase task.
+Điều này dẫn đến tất cả các khai báo trong scope dù nó ở đâu, cũng được xử lý trước khi đoạn code được thực thi. Bạn có thể hình dung được điều này khi các khai báo (biến và hàm) đừa "dời" lên đầu của phạm vi tương ứng, gọi là "hoisting".
 
-What this leads to is that all declarations in a scope, regardless of where they appear, are processed *first* before the code itself is executed. You can visualize this as declarations (variables and functions) being "moved" to the top of their respective scopes, which we call "hoisting".
+Bản thân khai báo đã được hoist, nhưng phép gán, kể cả gán biểu thức hàm, thì không được hoist.
 
-Declarations themselves are hoisted, but assignments, even assignments of function expressions, are *not* hoisted.
-
-Be careful about duplicate declarations, especially mixed between normal var declarations and function declarations -- peril awaits if you do!
+Cần cẩn thận cho khai báo trùng lặp, đặc biệt là sự pha trộn giữa khai báo var thông thường và khai báo hàm,nguy hiểm luôn rình rập.
