@@ -44,19 +44,17 @@ foo();
 ```
 
 Đoạn code này nhìn tương tự như trong phần Nested Scope (phạm vi lồng nhau). Hàm `bar()` *truy cập* đến biến `a`
-ở phạm vi bên ngoài vì
+ở trong phạm vi bao ngoài vì quy tắc tìm kiếm lexical scope (trường hợp này là một tìm kiếm RHS)
 
-to the variable `a` in the outer enclosing scope because of lexical scope look-up rules (in this case, it's an RHS reference look-up).
+Đây phải "closure" không?
 
-Is this "closure"?
+Chà, về kỹ thuật thì... *có lẽ*. Nhưng những gì bạn cần biết như ở trên thì...*không chính xác*. Tôi nghĩ cách chính xác nhất để giải thích `bar()` tham chiếu `a` thông qua quy tắc tìm kiếm lexical scope, và các quy tắc đó *chỉ* (quan trọng!) là **một phần** của closure.
 
-Well, technically... *perhaps*. But by our what-you-need-to-know definition above... *not exactly*. I think the most accurate way to explain `bar()` referencing `a` is via lexical scope look-up rules, and those rules are *only* (an important!) **part** of what closure is.
+Từ góc độ hàn lâm thuần túy, hàm `bar()` ở trên được giải thích là nó có *closure* trong phạm vi của `foo()` (và thậm chí thực ra là trong phần con lại của scope nó có quyền truy cập đến, phạm vi toàn cục chẳng hạn). Còn nói hơi khác thì `bar()` đóng kín trong phạm vi của `foo()`. Vì sao? Vì `bar()` xuất hiện lồng bên trong `foo()`, đơn giản thẳng đuột ruột ngựa.
 
-From a purely academic perspective, what is said of the above snippet is that the function `bar()` has a *closure* over the scope of `foo()` (and indeed, even over the rest of the scopes it has access to, such as the global scope in our case). Put slightly differently, it's said that `bar()` closes over the scope of `foo()`. Why? Because `bar()` appears nested inside of `foo()`. Plain and simple.
+Nhưng, xác định closure theo cách này không trực tiếp *observable (quan sát được)*, và chúng ta cũng không thấy closure *thể hiện* gì trong đoạn code trên. Ta thấy rõ lexical scope, nhưng closure vẫn là gì đó ẩn sâu bên trong.
 
-But, closure defined in this way is not directly *observable*, nor do we see closure *exercised* in that snippet. We clearly see lexical scope, but closure remains sort of a mysterious shifting shadow behind the code.
-
-Let us then consider code which brings closure into full light:
+Hãy xem đoạn code mang closure ra ngoài ánh sáng:
 
 ```js
 function foo() {
@@ -66,19 +64,19 @@ function foo() {
 		console.log( a );
 	}
 
-	return bar;
+	return bar; // lấy hàm bar như một giá trị và trả về cho hàm foo
 }
 
 var baz = foo();
 
-baz(); // 2 -- Whoa, closure was just observed, man.
+baz(); // 2 -- Whoa, thấy closure rồi nha các mẹ.
 ```
 
-The function `bar()` has lexical scope access to the inner scope of `foo()`. But then, we take `bar()`, the function itself, and pass it *as* a value. In this case, we `return` the function object itself that `bar` references.
+Hàm `bar()` có lexical scope truy cập vào scope của `foo()`. Nhưng sau đó, ta lấy chính bản thân hàm `bar()`, và truyền nó đi như một giá trị. Trường hợp này, ta `return` chính hàm `bar` như một tham chiếu.
 
-After we execute `foo()`, we assign the value it returned (our inner `bar()` function) to a variable called `baz`, and then we actually invoke `baz()`, which of course is invoking our inner function `bar()`, just by a different identifier reference.
+Sau khi thực thi `foo()`, chúng ta gán giá trị trả về (hàm `bar()` bên trong) cho một biến gọi là `baz`, sau đó chúng ta gọi `baz()`, và dĩ nhiên nó gọi hàm bên trong `bar()`, chẳng qua là theo cách nhận diện tham chiếu khác mà thôi.
 
-`bar()` is executed, for sure. But in this case, it's executed *outside* of its declared lexical scope.
+Chắc chắn `bar()` được thực thi is executed. Nhưng trong trường hợp này, nó lại thực thi *bên ngoài* lexical scope mà nó đã khai báo.
 
 After `foo()` executed, normally we would expect that the entirety of the inner scope of `foo()` would go away, because we know that the *Engine* employs a *Garbage Collector* that comes along and frees up memory once it's no longer in use. Since it would appear that the contents of `foo()` are no longer in use, it would seem natural that they should be considered *gone*.
 
