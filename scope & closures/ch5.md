@@ -76,21 +76,21 @@ Hàm `bar()` có lexical scope truy cập vào scope của `foo()`. Nhưng sau �
 
 Sau khi thực thi `foo()`, chúng ta gán giá trị trả về (hàm `bar()` bên trong) cho một biến gọi là `baz`, sau đó chúng ta gọi `baz()`, và dĩ nhiên nó gọi hàm bên trong `bar()`, chẳng qua là theo cách nhận diện tham chiếu khác mà thôi.
 
-Chắc chắn `bar()` được thực thi is executed. Nhưng trong trường hợp này, nó lại thực thi *bên ngoài* lexical scope mà nó đã khai báo.
+Chắc chắn `bar()` được thực thi. Nhưng trong trường hợp này, nó lại thực thi *bên ngoài* lexical scope mà nó đã khai báo.
 
-After `foo()` executed, normally we would expect that the entirety of the inner scope of `foo()` would go away, because we know that the *Engine* employs a *Garbage Collector* that comes along and frees up memory once it's no longer in use. Since it would appear that the contents of `foo()` are no longer in use, it would seem natural that they should be considered *gone*.
+Sau khi `foo()` thực thi, thông thường chúng ta cho rằng toàn bộ scope bên trong của `foo()` sẽ ra đi, vì *Engine* sử dụng công cụ *Gom rác* đi kèm và giải phóng bộ nhớ khi nó không còn sử dụng. Vì dường như nội dung của `foo()` đã không còn sử dụng, nó có thể coi là *mất*.
 
-But the "magic" of closures does not let this happen. That inner scope is in fact *still* "in use", and thus does not go away. Who's using it? **The function `bar()` itself**.
+Nhưng "điều kỳ diệu" của closusre không để điều này xảy ra. Nghĩa là phần bên trong scope vẫn đang "sử dụng", không đi đâu hết. Ai dùng nó? **Chính hàm `bar()`**.
 
-By virtue of where it was declared, `bar()` has a lexical scope closure over that inner scope of `foo()`, which keeps that scope alive for `bar()` to reference at any later time.
+Vì `bar()` đã được khai báo nên nó có lexical scope closure qua phạm vi bên trong của `foo()`, việc này đã giúp cho `bar()` tồn tại trong việc tham chiếu về sau.
 
-**`bar()` still has a reference to that scope, and that reference is called closure.**
+**`bar()` vẫn có một tham chiếu đến phạm vi, và điều này được gọi là closure.**
 
-So, a few microseconds later, when the variable `baz` is invoked (invoking the inner function we initially labeled `bar`), it duly has *access* to author-time lexical scope, so it can access the variable `a` just as we'd expect.
+Vì vậy, vài microseconds sau đó, khi biến `baz` được gọi (gọi hàm `bar` bên trong), nó có guyền truy cập đến author-time của lexical scope, nên nó có thể tiếp cận biến `a` như ta mong muốn.
 
-The function is being invoked well outside of its author-time lexical scope. **Closure** lets the function continue to access the lexical scope it was defined in at author-time.
+Hàm được gọi ngon lành cành đào từ bên ngoài của author-time lexical scope. **Closure** cho phép hàm tiếp tục truy cập lexical scope đã xác định tại author-time.
 
-Of course, any of the various ways that functions can be *passed around* as values, and indeed invoked in other locations, are all examples of observing/exercising closure.
+Tất nhiên bất kỳ cách nào khác mà hàm có thể *truyền đi xung quanh* như một giá trị, và được viện dẫn ở chỗ khác, điều là mô tả của việc quan sát/thực hiện closure.
 
 ```js
 function foo() {
@@ -104,7 +104,7 @@ function foo() {
 }
 
 function bar(fn) {
-	fn(); // look ma, I saw closure!
+	fn(); // cha mạ ơi, tui thấy closure !
 }
 ```
 
