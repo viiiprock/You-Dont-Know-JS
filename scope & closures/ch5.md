@@ -86,11 +86,11 @@ Vì `bar()` đã được khai báo nên nó có lexical scope closure qua phạ
 
 **`bar()` vẫn có một tham chiếu đến phạm vi, và điều này được gọi là closure.**
 
-Vì vậy, vài microseconds sau đó, khi biến `baz` được gọi (gọi hàm `bar` bên trong), nó có guyền truy cập đến author-time của lexical scope, nên nó có thể tiếp cận biến `a` như ta mong muốn.
+Vì vậy, vài microseconds sau đó, khi biến `baz` được gọi (gọi hàm `bar` bên trong), nó có quyền truy cập đến author-time của lexical scope, nên nó có thể tiếp cận biến `a` như ta mong muốn.
 
 Hàm được gọi ngon lành cành đào từ bên ngoài của author-time lexical scope. **Closure** cho phép hàm tiếp tục truy cập lexical scope đã xác định tại author-time.
 
-Tất nhiên bất kỳ cách nào khác mà hàm có thể *truyền đi xung quanh* như một giá trị, và được viện dẫn ở chỗ khác, điều là mô tả của việc quan sát/thực hiện closure.
+Tất nhiên bất kỳ phương cách nào mà hàm có thể *truyền đi xung quanh* như một giá trị, và được viện dẫn ở chỗ khác, đều là mô tả của việc observe/thực hiện closure.
 
 ```js
 function foo() {
@@ -108,9 +108,9 @@ function bar(fn) {
 }
 ```
 
-We pass the inner function `baz` over to `bar`, and call that inner function (labeled `fn` now), and when we do, its closure over the inner scope of `foo()` is observed, by accessing `a`.
+Ta truyền hàm `baz` bên trong cho `bar`, và gọi hàm đó (tức là `fn`), và như vậy closure của nó qua phạm vi bên trong `foo()` được observe bằng cách truy cập `a`.
 
-These passings-around of functions can be indirect, too.
+Cách truyền hàm như vậy có thể theo cách gián tiếp.
 
 ```js
 var fn;
@@ -122,11 +122,11 @@ function foo() {
 		console.log( a );
 	}
 
-	fn = baz; // assign `baz` to global variable
+	fn = baz; // gán `baz` cho biến toàn cục
 }
 
 function bar() {
-	fn(); // look ma, I saw closure!
+	fn(); // closure đây nè!
 }
 
 foo();
@@ -134,11 +134,11 @@ foo();
 bar(); // 2
 ```
 
-Whatever facility we use to *transport* an inner function outside of its lexical scope, it will maintain a scope reference to where it was originally declared, and wherever we execute it, that closure will be exercised.
+Dù chúng ta sử dụng phương tiện gì để *vận chuyển* hàm bên trong ra ngoài lexical scope, nó vẫn giữ một tham chiếu phạm vi tại nơi nó được khai báo, và dù ta thực thi nó ở đâu, closure sẽ được thực hiện.
 
-## Now I Can See
+## Giờ tôi đã thấy
 
-The previous code snippets are somewhat academic and artificially constructed to illustrate *using closure*. But I promised you something more than just a cool new toy. I promised that closure was something all around you in your existing code. Let us now *see* that truth.
+Các đoạn code ở trên cũng chỉ để minh họa cấu trúc của việc sử dụng closure. Nhưng tôi hứa là nó còn hơn cả đồ chơi mới. Tôi hứa là closure nó luôn hiện hữu xung quanh code. Hãy xem đoạn code sau:
 
 ```js
 function wait(message) {
@@ -152,11 +152,11 @@ function wait(message) {
 wait( "Hello, closure!" );
 ```
 
-We take an inner function (named `timer`) and pass it to `setTimeout(..)`. But `timer` has a scope closure over the scope of `wait(..)`, indeed keeping and using a reference to the variable `message`.
+Ta lấy hàm bên trong (`timer`) và truyền nó vào `setTimeout(..)`. Nhưng `timer` có một phạm vi closure qua `wait()`, và giữ một tham chiếu đến biến `message`.
 
-A thousand milliseconds after we have executed `wait(..)`, and its inner scope should otherwise be long gone, that inner function `timer` still has closure over that scope.
+Một ngàn mili giây sau khi ta thực thi `wait()`, scope bên trong nó sẽ thay vì mất đi, nhưng hàm bên trong `timer` vẫn có closure trong phạm vi.
 
-Deep down in the guts of the *Engine*, the built-in utility `setTimeout(..)` has reference to some parameter, probably called `fn` or `func` or something like that. *Engine* goes to invoke that function, which is invoking our inner `timer` function, and the lexical scope reference is still intact.
+Đi sâu vào mấu chốt của *Engine*, tiện ích có sẵn `setTimeout(..)` has reference to some parameter, probably called `fn` or `func` or something like that. *Engine* goes to invoke that function, which is invoking our inner `timer` function, and the lexical scope reference is still intact.
 
 **Closure.**
 
