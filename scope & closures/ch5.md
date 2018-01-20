@@ -156,12 +156,11 @@ Ta lấy hàm bên trong (`timer`) và truyền nó vào `setTimeout(..)`. Nhưn
 
 Một ngàn mili giây sau khi ta thực thi `wait()`, scope bên trong nó sẽ thay vì mất đi, nhưng hàm bên trong `timer` vẫn có closure trong phạm vi.
 
-Đi sâu vào mấu chốt của *Engine*, tiện ích có sẵn `setTimeout(..)` has reference to some parameter, probably called `fn` or `func` or something like that. *Engine* goes to invoke that function, which is invoking our inner `timer` function, and the lexical scope reference is still intact.
+Đi sâu vào mấu chốt của *Engine*, hàm tiện ích dựng sẵn `setTimeout(..)` tham chiếu đến vài tham số, tạm gọi là `fn` hay `func` hay đại loại tương tự vậy. *Engine* sẽ gọi hàm đó, nghĩa là hàm `timer` bên trong được gọi, và tham chiếu lexical scope vẫn nguyên vẹn.
 
 **Closure.**
 
-Or, if you're of the jQuery persuasion (or any JS framework, for that matter):
-
+Nếu bạn đã dùng jQuery (hay bất kỳ JS framework nào):
 ```js
 function setupBot(name,selector) {
 	$( selector ).click( function activator(){
@@ -173,11 +172,11 @@ setupBot( "Closure Bot 1", "#bot_1" );
 setupBot( "Closure Bot 2", "#bot_2" );
 ```
 
-I am not sure what kind of code you write, but I regularly write code which is responsible for controlling an entire global drone army of closure bots, so this is totally realistic!
+Tôi không chắc bạn viết code kiểu nào, còn tôi thì thường viết code có trách nhiệm điều khiển toàn bộ "trang bị vũ trang" của closure, nên ví dụ trên là thực tiễn!
 
-(Some) joking aside, essentially *whenever* and *wherever* you treat functions (which access their own respective lexical scopes) as first-class values and pass them around, you are likely to see those functions exercising closure. Be that timers, event handlers, Ajax requests, cross-window messaging, web workers, or any of the other asynchronous (or synchronous!) tasks, when you pass in a *callback function*, get ready to sling some closure around!
+Về cơ bản, bất kỳ *khi nào* và *tại đâu* bạn xử lý hàm (hàm truy vập vào lexical scope riêng của chúng) như một giá trị hạng nhất và truyền chúng đâu đó, bạn có thể thấy hàm đó thực hiện closure. Là timers, event handler, gọi Ajax, web worker, cửa sổ thông báo, hay bất kỳ nhiệm vụ động bộ, bất đồng bộ, khi bạn truyền trong một hàm *callback*, tức là đã dùng closure.
 
-**Note:** Chapter 3 introduced the IIFE pattern. While it is often said that IIFE (alone) is an example of observed closure, I would somewhat disagree, by our definition above.
+**Ghi chú:** Chương 3 đã giới thiệu mẫu IIFE. Có người thường hay bảo bản thân IIFE là một ví dụ cho thực hiện closure, dựa theo xác định ở trên thì tôi có ý kiến không đồng ý lắm.
 
 ```js
 var a = 2;
@@ -187,21 +186,20 @@ var a = 2;
 })();
 ```
 
-This code "works", but it's not strictly an observation of closure. Why? Because the function (which we named "IIFE" here) is not executed outside its lexical scope. It's still invoked right there in the same scope as it was declared (the enclosing/global scope that also holds `a`). `a` is found via normal lexical scope look-up, not really via closure.
+Code này hoạt động, nhưng nó hoàn toàn không phải là một observation của closure. Vì sao? bởi vì hàm `IIFE` không được thực thi bên ngoài lexical scope. Nó vẫn gọi ngay trong cùng một scope mà nó đã được khai báo (scope bên ngoài có biến `a`). `a` được tìm thế theo cách tra cứu lexical scope thông thường, không phải là qua closure.
 
-While closure might technically be happening at declaration time, it is *not* strictly observable, and so, as they say, *it's a tree falling in the forest with no one around to hear it.*
+Về mặt kỹ thuật, trong khi closure xảy ra ở thời điểm khai báo, IIFE không phải như vậy.
 
-Though an IIFE is not *itself* an example of closure, it absolutely creates scope, and it's one of the most common tools we use to create scope which can be closed over. So IIFEs are indeed heavily related to closure, even if not exercising closure themselves.
+Mặc dù bản thân IIFE không phải là ví dụ của closure, nó lại tạo ra scope, và nó là một trong những công cụ thông thường nhất để ta tạo ra scope. Vì vậy IIFE có mỗi liên hệ mật thiết với closure, mặc dù bản thân nó không thực hiện closure.
 
-Put this book down right now, dear reader. I have a task for you. Go open up some of your recent JavaScript code. Look for your functions-as-values and identify where you are already using closure and maybe didn't even know it before.
+Và giờ thì dừng đọc đi mấy bạn, tôi có nhiệm vụ cho bạn đây. Giờ bạn mở code của bạn lên, coi coi có hàm nào là closure hay giá trị là hàm không.
 
-I'll wait.
 
-Now... you see!
+Giờ thì rõ rồi nhé!
 
-## Loops + Closure
+## Vòng lặp + Closure
 
-The most common canonical example used to illustrate closure involves the humble for-loop.
+Ví dụ điển hình để minh họa closure là vòng lặp for.
 
 ```js
 for (var i=1; i<=5; i++) {
@@ -211,7 +209,10 @@ for (var i=1; i<=5; i++) {
 }
 ```
 
-**Note:** Linters often complain when you put functions inside of loops, because the mistakes of not understanding closure are **so common among developers**. We explain how to do so properly here, leveraging the full power of closure. But that subtlety is often lost on linters and they will complain regardless, assuming you don't *actually* know what you're doing.
+**Ghi chú:** Linter (trình dò lỗi JavaScript - người dịch) thường cảnh báo khi bạn đưa hàm vào trong vòng lặp do nhiều lập trình viên chưa nắm được closure. Tôi sẽ giải thích làm thế nào tận dụng toàn bộ sức mạnh của closure ở đây.
+
+
+  Linters often complain when you put functions inside of loops, because the mistakes of not understanding closure are **so common among developers**. We explain how to do so properly here, leveraging the full power of closure. But that subtlety is often lost on linters and they will complain regardless, assuming you don't *actually* know what you're doing.
 
 The spirit of this code snippet is that we would normally *expect* for the behavior to be that the numbers "1", "2", .. "5" would be printed out, one at a time, one per second, respectively.
 
