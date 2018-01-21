@@ -211,15 +211,13 @@ for (var i=1; i<=5; i++) {
 
 **Ghi chú:** Linter (trình dò lỗi JavaScript - người dịch) thường cảnh báo khi bạn đưa hàm vào trong vòng lặp do nhiều lập trình viên chưa nắm được closure. Tôi sẽ giải thích làm thế nào tận dụng toàn bộ sức mạnh của closure ở đây.
 
+Linh hồn của đoạn code trên là điều chúng ta *mong muốn* là các số "1", "2", .. "5" sẽ được in ra cùng một lúc, sau mỗi giây tương ứng.
 
-  Linters often complain when you put functions inside of loops, because the mistakes of not understanding closure are **so common among developers**. We explain how to do so properly here, leveraging the full power of closure. But that subtlety is often lost on linters and they will complain regardless, assuming you don't *actually* know what you're doing.
+Khi bạn chạy đoạn code này, bạn sẽ có "6" kết quả được in ra 5 lần theo mỗi giây.
 
-The spirit of this code snippet is that we would normally *expect* for the behavior to be that the numbers "1", "2", .. "5" would be printed out, one at a time, one per second, respectively.
+**Hả?**
 
-In fact, if you run this code, you get "6" printed out 5 times, at the one-second intervals.
-
-**Huh?**
-
+Trước tiên, tôi sẽ giải thích `6` ở đâu ra.
 Firstly, let's explain where `6` comes from. The terminating condition of the loop is when `i` is *not* `<=5`. The first time that's the case is when `i` is 6. So, the output is reflecting the final value of the `i` after the loop terminates.
 
 This actually seems obvious on second glance. The timeout function callbacks are all running well after the completion of the loop. In fact, as timers go, even if it was `setTimeout(.., 0)` on each iteration, all those function callbacks would still run strictly after the completion of the loop, and thus print `6` each time.
