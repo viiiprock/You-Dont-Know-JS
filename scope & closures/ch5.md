@@ -306,7 +306,7 @@ for (let i=1; i<=5; i++) {
 
 Block scoping và closure đã tay trong tay hoạt động cùng nhau, giải quyết mọi thứ trên thế giới. Tôi không biết bạn sao chớ nó làm cho tôi vui với JavaScript.
 
-## Mô-dun
+## Mô-dun (module)
 
 Có những mẫu code sử dụng sức mạnh của closure nhưng không xuất hiện trên bề mặt mà thường là callback. Hãy kiểm tra một trong những kiểu mạnh nhất trong đó: *mô-đun*.
 
@@ -325,9 +325,7 @@ function foo() {
 }
 ```
 
-As this code stands right now, there's no observable closure going on. We simply have some private data variables `something` and `another`, and a couple of inner functions `doSomething()` and `doAnother()`, which both have lexical scope (and thus closure!) over the inner scope of `foo()`.
-
-But now consider:
+Hiện tại, đoạn code trên chưa có observable closure. Chúng ta chỉ có biến riêng `something`, `another`, và hàm `doSomething()` và `doAnother()` bên trong, cả biến và hàm đều có lexical scope bên trong phạm vi của `foo()`.
 
 ```js
 function CoolModule() {
@@ -354,27 +352,27 @@ foo.doSomething(); // cool
 foo.doAnother(); // 1 ! 2 ! 3
 ```
 
-This is the pattern in JavaScript we call *module*. The most common way of implementing the module pattern is often called "Revealing Module", and it's the variation we present here.
+Đây là mẫu trong JavaScript gọi là *module*. Cách thông thường nhất để viết một mẫu module thường gọi là "Revealing Module", cách viết như ở trên.
 
-Let's examine some things about this code.
+Hãy kiểm xem có gì trong đoạn code trên.
 
-Firstly, `CoolModule()` is just a function, but it *has to be invoked* for there to be a module instance created. Without the execution of the outer function, the creation of the inner scope and the closures would not occur.
+Trước hết, `CoolModule()` chỉ là một hàm, nhưng nó phải được gọi để khởi tạo một module. Nếu không thực thi hàm bên ngoài, việc tạo scope bên trong và closure sẽ không xảy ra.
 
-Secondly, the `CoolModule()` function returns an object, denoted by the object-literal syntax `{ key: value, ... }`. The object we return has references on it to our inner functions, but *not* to our inner data variables. We keep those hidden and private. It's appropriate to think of this object return value as essentially a **public API for our module**.
+Tiếp theo, hàm `CoolModule()` trả về một object, biểu thị bởi cú pháp object-literal `{ key: value, ... }`. Object mà ta trả có tham chiếu trong nó đến các hàm phía trong, giữ cho chúng ẩn và riêng biệt. Bạn nên nghĩ object này trả giá trị như một **API công khai của module**.
 
-This object return value is ultimately assigned to the outer variable `foo`, and then we can access those property methods on the API, like `foo.doSomething()`.
+Việc trả giá trị cho object cuối cùng gán cho biến bên ngoài `foo`, sau đó ta có thể truy cập những phương thức theo API, ví dụ `foo.doSomething()`.
 
-**Note:** It is not required that we return an actual object (literal) from our module. We could just return back an inner function directly. jQuery is actually a good example of this. The `jQuery` and `$` identifiers are the public API for the jQuery "module", but they are, themselves, just a function (which can itself have properties, since all functions are objects).
+**Ghi chú:** Không nhất thiết là ta phải trả một object (literal) thực tế từ module. Ta chỉ cần trả trực tiếp hàm bên trong. jQuery là một ví dụ, dấu `$` là một API công khai của jQuery module, nhưng bản thân nó cũng là một hàm (có thuộc tính, và các hàm đều là object).
 
-The `doSomething()` and `doAnother()` functions have closure over the inner scope of the module "instance" (arrived at by actually invoking `CoolModule()`). When we transport those functions outside of the lexical scope, by way of property references on the object we return, we have now set up a condition by which closure can be observed and exercised.
+Hàm `doSomething()` và `doAnother()` có closure thông qua scope bên trong của module (có được nhờ gọi `CoolModule()`). Khi ta chuyển hàm trong lexical scope ra ngoài, ta thiếu lập một điều kiện rằng closure nào có thể được observe và thực hiện bằng cách tham chiếu vào object chúng ta trả.
 
-To state it more simply, there are two "requirements" for the module pattern to be exercised:
+Mô tả đơn giản hơn, có hai yêu cầu cho một module pattern thực hiện:
 
-1. There must be an outer enclosing function, and it must be invoked at least once (each time creates a new module instance).
+1. Nó phải là hàm bao quanh bên ngoài, và phải được gọi ít nhất một lần (mỗi lần gọi tạo nên một module tức thì).
 
-2. The enclosing function must return back at least one inner function, so that this inner function has closure over the private scope, and can access and/or modify that private state.
+2. Hàm bên ngoài phải trả ít nhất một hàm bên trong, nhờ vậy hàm bên trong có closure thông qua scope riêng biệt, và có thể truy cập để thay đổi trạng thái riêng biệt đó.
 
-An object with a function property on it alone is not *really* a module. An object which is returned from a function invocation which only has data properties on it and no closured functions is not *really* a module, in the observable sense.
+Bản thân một object với thuộc tính hàm bên trong nó không thực sự là một module. Trong bối cảnh observable, một object được trả từ một hàm chỉ có các thuộc tính dữ liệu bên trong nó và không có hàm closure nào thì *không thực sự* là một module.
 
 The code snippet above shows a standalone module creator called `CoolModule()` which can be invoked any number of times, each time creating a new module instance. A slight variation on this pattern is when you only care to have one instance, a "singleton" of sorts:
 
