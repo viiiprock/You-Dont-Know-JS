@@ -245,12 +245,10 @@ for (var i=1; i<=5; i++) {
 
 Nó có chạy không?
 
-**Không.** Nhưng tại sao? Rõ ràng là có thê lexical scope. Mỗi hàm timeout callback
-But why? We now obviously have more lexical scope. Each timeout function callback is indeed closing over its own per-iteration scope created respectively by each IIFE.
+**Không.** Nhưng tại sao? Rõ ràng là có thê lexical scope. Mỗi hàm timeout callback đóng qua mỗi lần lặp scope của riêng nó được tạo bởi IIFE tương ứng.
 
-It's not enough to have a scope to close over **if that scope is empty**. Look closely. Our IIFE is just an empty do-nothing scope. It needs *something* in it to be useful to us.
+Bởi vì hàm IIFE của ta là một scope rỗng chẳng làm gì cả. Nó cần có gì đó hữu dụng hơn, tức nó cần một biến riêng, là bản sao của giá trị `i` sau mỗi lần lặp.
 
-It needs its own variable, with a copy of the `i` value at each iteration.
 
 ```js
 for (var i=1; i<=5; i++) {
@@ -263,9 +261,9 @@ for (var i=1; i<=5; i++) {
 }
 ```
 
-**Eureka! It works!**
+**Eureka! Đã chạy!**
 
-A slight variation some prefer is:
+Phiên bản được ưa thích là:
 
 ```js
 for (var i=1; i<=5; i++) {
@@ -277,28 +275,26 @@ for (var i=1; i<=5; i++) {
 }
 ```
 
-Of course, since these IIFEs are just functions, we can pass in `i`, and we can call it `j` if we prefer, or we can even call it `i` again. Either way, the code works now.
+Cách dùng IIFE trong mỗi lần lặp tạo ra một scope mới cho mỗi lần lặp, cho phép hàm timeout call back cơ hội đóng thông qua scope mới cho mỗi lần lặp, và nó có biến trong mỗi lần lặp giúp ta try cập.
 
-The use of an IIFE inside each iteration created a new scope for each iteration, which gave our timeout function callbacks the opportunity to close over a new scope for each iteration, one which had a variable with the right per-iteration value in it for us to access.
+Vấn đề được giải quyết!
 
-Problem solved!
+### Gặp lại block scoping
 
-### Block Scoping Revisited
+Xem xét cẩn thận các phân tích ở giải pháp trên. Chúng ta sử dụng IIFE để tạo ra scope cho mỗi lần lặp. Nói cách khác, chúng ta cần *block-scope* của mỗi mỗi lần lặp. Chương 3 cho ta thấy khai báo `let` trấn một block và khai báo một biến tại đó.
 
-Look carefully at our analysis of the previous solution. We used an IIFE to create new scope per-iteration. In other words, we actually *needed* a per-iteration **block scope**. Chapter 3 showed us the `let` declaration, which hijacks a block and declares a variable right there in the block.
-
-**It essentially turns a block into a scope that we can close over.** So, the following awesome code "just works":
+**Cơ bản nó tạo một block trong scope để chúng ta có thể đóng nó.** Vì vậy đoạn code dưới đây chạy ngon:
 
 ```js
 for (var i=1; i<=5; i++) {
-	let j = i; // yay, block-scope for closure!
+	let j = i; // yay, block-scope cho closure!
 	setTimeout( function timer(){
 		console.log( j );
 	}, j*1000 );
 }
 ```
 
-*But, that's not all!* (in my best Bob Barker voice). There's a special behavior defined for `let` declarations used in the head of a for-loop. This behavior says that the variable will be declared not just once for the loop, **but each iteration**. And, it will, helpfully, be initialized at each subsequent iteration with the value from the end of the previous iteration.
+*Nhưng chưa hết!* Nó có một hành vi đặc biệt được xác định cho khai báo `let` được sử dụng trên đầu của vòng lặp for. Hành vi này cho biết rằng biến sẽ được khai báo không chỉ một lần cho vòng lặp, **mà còn là mỗi lần lặp**. Và nó được khởi tạo tại mỗi  lần lặp với giá trị từ cuối cho đến lần lặp trước. (mới thấy `var` và `let` khác biệt rõ rệt nhé - người dịch)
 
 ```js
 for (let i=1; i<=5; i++) {
@@ -308,11 +304,11 @@ for (let i=1; i<=5; i++) {
 }
 ```
 
-How cool is that? Block scoping and closure working hand-in-hand, solving all the world's problems. I don't know about you, but that makes me a happy JavaScripter.
+Block scoping và closure đã tay trong tay hoạt động cùng nhau, giải quyết mọi thứ trên thế giới. Tôi không biết bạn sao chớ nó làm cho tôi vui với JavaScript.
 
-## Modules
+## Mô-dun
 
-There are other code patterns which leverage the power of closure but which do not on the surface appear to be about callbacks. Let's examine the most powerful of them: *the module*.
+Có những mẫu code sử dụng sức mạnh của closure nhưng không xuất hiện trên bề mặt mà thường là callback. Hãy kiểm tra một trong những kiểu mạnh nhất trong đó: *mô-đun*.
 
 ```js
 function foo() {
