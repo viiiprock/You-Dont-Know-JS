@@ -211,28 +211,27 @@ for (var i=1; i<=5; i++) {
 
 **Ghi chú:** Linter (trình dò lỗi JavaScript - người dịch) thường cảnh báo khi bạn đưa hàm vào trong vòng lặp do nhiều lập trình viên chưa nắm được closure. Tôi sẽ giải thích làm thế nào tận dụng toàn bộ sức mạnh của closure ở đây.
 
-Linh hồn của đoạn code trên là điều chúng ta *mong muốn* là các số "1", "2", .. "5" sẽ được in ra cùng một lúc, sau mỗi giây tương ứng.
+Linh hồn của đoạn code trên là điều chúng ta *mong muốn* là các số "1", "2", .. "5" sẽ được in ra sau mỗi giây tương ứng.
 
-Khi bạn chạy đoạn code này, bạn sẽ có "6" kết quả được in ra 5 lần theo mỗi giây.
+Khi bạn chạy đoạn code này, bạn sẽ có kết quả là "6" được in ra 5 lần theo mỗi giây.
 
 **Hả?**
 
-Trước tiên, tôi sẽ giải thích `6` ở đâu ra.
-Firstly, let's explain where `6` comes from. The terminating condition of the loop is when `i` is *not* `<=5`. The first time that's the case is when `i` is 6. So, the output is reflecting the final value of the `i` after the loop terminates.
+Trước tiên, tôi sẽ giải thích `6` ở đâu ra. Điều kiện chấm dứt vòng lặp khi `i` *không* `<=5`. Trường hợp đầu tiên của việc này là `i` bằng 6. Vì vậy đầu ra phản ánh giá trị cuối cùng của `i` sau khi vòng lặp kết thúc.
 
-This actually seems obvious on second glance. The timeout function callbacks are all running well after the completion of the loop. In fact, as timers go, even if it was `setTimeout(.., 0)` on each iteration, all those function callbacks would still run strictly after the completion of the loop, and thus print `6` each time.
+Điều này có vẻ rõ ràng, hàm timeout callback đều chạy ngon sau khi hoàn thành vòng lặp. Trong thực tế, khi bộ đếm thực hiện, kể cả nếu `setTimeout(.., 0)` cho mỗi lần lặp, tất cả các hàm callback đó đều chạy đúng sau khi hoàn thành vòng lặp, do đó nó in `6` cho mỗi lần.
 
-But there's a deeper question at play here. What's *missing* from our code to actually have it behave as we semantically have implied?
+Đi vào sâu hơn, code của ta thiếu cái gì mà đáng lẽ nó phải thực hiện đúng như ta muốn?
 
-What's missing is that we are trying to *imply* that each iteration of the loop "captures" its own copy of `i`, at the time of the iteration. But, the way scope works, all 5 of those functions, though they are defined separately in each loop iteration, all **are closed over the same shared global scope**, which has, in fact, only one `i` in it.
+Cái thiếu là cái chúng ta đang cố thực hiện rằng mỗi vòng lặp bắt 1 bản sao của `i` tại thời điểm lặp. Nhưng theo cách hoạt động của scope, thì ta có 5 hàm được xác định riêng biệt theo mỗi lần lặp, tất cả đều được **đóng kín bởi cùng một scope toàn cục**, và chỉ có một `i` trong nó.
 
-Put that way, *of course* all functions share a reference to the same `i`. Something about the loop structure tends to confuse us into thinking there's something else more sophisticated at work. There is not. There's no difference than if each of the 5 timeout callbacks were just declared one right after the other, with no loop at all.
+Theo cách này, tất nhiên tất cả các hàm đều có chung một tham chiếu đến cùng một `i`. Có gì đó về cấu trúc vòng lặp làm ta bối rối và nghĩ rằng có gì đó phức tạp, nhưng không phải vậy, chẳng có gì khác biệt với việc khai báo các hàm callback đó 5 lần tuần tự cái này tiếp cái kia mà không dùng vòng lặp.
 
-OK, so, back to our burning question. What's missing? We need more ~~cowbell~~ closured scope. Specifically, we need a new closured scope for each iteration of the loop.
+Ok, vậy, quay lại câu hỏi của chúng ta. Cái gì thiếu? Ta cần thêm closure scope. Đặc biệt là chúng cần một closure scope mới cho mỗi lần lặp.
 
-We learned in Chapter 3 that the IIFE creates scope by declaring a function and immediately executing it.
+Chúng ta đã học trong Chương 3 rằng IIFE tạo scope bằng cách khai báo một hàm và thực thi nó ngay lập tức.
 
-Let's try:
+Thử xem:
 
 ```js
 for (var i=1; i<=5; i++) {
@@ -244,9 +243,10 @@ for (var i=1; i<=5; i++) {
 }
 ```
 
-Does that work? Try it. Again, I'll wait.
+Nó có chạy không?
 
-I'll end the suspense for you. **Nope.** But why? We now obviously have more lexical scope. Each timeout function callback is indeed closing over its own per-iteration scope created respectively by each IIFE.
+**Không.** Nhưng tại sao? Rõ ràng là có thê lexical scope. Mỗi hàm timeout callback
+But why? We now obviously have more lexical scope. Each timeout function callback is indeed closing over its own per-iteration scope created respectively by each IIFE.
 
 It's not enough to have a scope to close over **if that scope is empty**. Look closely. Our IIFE is just an empty do-nothing scope. It needs *something* in it to be useful to us.
 
