@@ -374,7 +374,7 @@ Mô tả đơn giản hơn, có hai yêu cầu cho một module pattern thực h
 
 Bản thân một object với thuộc tính hàm bên trong nó không thực sự là một module. Trong bối cảnh observable, một object được trả từ một hàm chỉ có các thuộc tính dữ liệu bên trong nó và không có hàm closure nào thì *không thực sự* là một module.
 
-The code snippet above shows a standalone module creator called `CoolModule()` which can be invoked any number of times, each time creating a new module instance. A slight variation on this pattern is when you only care to have one instance, a "singleton" of sorts:
+Đoạn code ở trên cho thấy một trình tạo module độc lập gọi là `CoolModule()`, có thể gọi bao nhiêu lần cũng được, mỗi lần gọi thì nó tạo một module tức thì. Một thay đổi nhỏ với mẫu này là khi bạn chỉ quan tâm đến một lần tạo, là một dạng "sigleton":
 
 ```js
 var foo = (function CoolModule() {
