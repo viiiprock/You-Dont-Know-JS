@@ -368,13 +368,13 @@ Hàm `doSomething()` và `doAnother()` có closure thông qua scope bên trong c
 
 Mô tả đơn giản hơn, có hai yêu cầu cho một module pattern thực hiện:
 
-1. Nó phải là hàm bao quanh bên ngoài, và phải được gọi ít nhất một lần (mỗi lần gọi tạo nên một module tức thì).
+1. Nó phải là hàm bao quanh bên ngoài, và phải được gọi ít nhất một lần (mỗi lần gọi tạo nên một module instance).
 
 2. Hàm bên ngoài phải trả ít nhất một hàm bên trong, nhờ vậy hàm bên trong có closure thông qua scope riêng biệt, và có thể truy cập để thay đổi trạng thái riêng biệt đó.
 
 Bản thân một object với thuộc tính hàm bên trong nó không thực sự là một module. Trong bối cảnh observable, một object được trả từ một hàm chỉ có các thuộc tính dữ liệu bên trong nó và không có hàm closure nào thì *không thực sự* là một module.
 
-Đoạn code ở trên cho thấy một trình tạo module độc lập gọi là `CoolModule()`, có thể gọi bao nhiêu lần cũng được, mỗi lần gọi thì nó tạo một module tức thì. Một thay đổi nhỏ với mẫu này là khi bạn chỉ quan tâm đến một lần tạo, là một dạng "sigleton":
+Đoạn code ở trên cho thấy một trình tạo module độc lập gọi là `CoolModule()`, có thể gọi bao nhiêu lần cũng được, mỗi lần gọi thì nó tạo một module tức thì. Một thay đổi nhỏ với mẫu này là khi bạn quan tâm đến việc chỉ có một lần tạo, đây là một dạng "sigleton":
 
 ```js
 var foo = (function CoolModule() {
@@ -399,9 +399,7 @@ foo.doSomething(); // cool
 foo.doAnother(); // 1 ! 2 ! 3
 ```
 
-Here, we turned our module function into an IIFE (see Chapter 3), and we *immediately* invoked it and assigned its return value directly to our single module instance identifier `foo`.
-
-Modules are just functions, so they can receive parameters:
+Chúng ta đã chuyển hàm module thành IIFE và gọi nó ngay lập tức và gán giá trị trả lại của nó trực tiếp vào module instance đơn `foo`.
 
 ```js
 function CoolModule(id) {
@@ -421,12 +419,12 @@ foo1.identify(); // "foo 1"
 foo2.identify(); // "foo 2"
 ```
 
-Another slight but powerful variation on the module pattern is to name the object you are returning as your public API:
+Một biến thể mạnh mẽ của module pattern là đặt tên object và bạn trả lại như một API công khai:
 
 ```js
 var foo = (function CoolModule(id) {
 	function change() {
-		// modifying the public API
+		// sửa đổi API công khai
 		publicAPI.identify = identify2;
 	}
 
@@ -451,9 +449,9 @@ foo.change();
 foo.identify(); // FOO MODULE
 ```
 
-By retaining an inner reference to the public API object inside your module instance, you can modify that module instance **from the inside**, including adding and removing methods, properties, *and* changing their values.
+Bằng cách giữ lại tham chiếu bên trong object API công khai bên trong module instance, bạn có thể sửa đổi module instance đó **từ phía trong**, bao gồm phương thức thêm và bớt thuộc tính, và thay đổi giá trị.
 
-### Modern Modules
+### Module hiện đại
 
 Various module dependency loaders/managers essentially wrap up this pattern of module definition into a friendly API. Rather than examine any one particular library, let me present a *very simple* proof of concept **for illustration purposes (only)**:
 
