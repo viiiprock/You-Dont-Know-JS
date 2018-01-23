@@ -453,14 +453,14 @@ Bằng cách giữ lại tham chiếu bên trong object API công khai bên tron
 
 ### Module hiện đại
 
-Various module dependency loaders/managers essentially wrap up this pattern of module definition into a friendly API. Rather than examine any one particular library, let me present a *very simple* proof of concept **for illustration purposes (only)**:
+Vài trình tải/quản lý module phụ thuộc bao lấy mẫu module thành một API gần gũi hơn. Thay vì kiểm tra bất kỳ một thư viện cụ thể, tôi sẽ giới thiệu một chứng minh đơn giản cho khái niệm này **nhằm mục đích minh họa**:
 
 ```js
 var MyModules = (function Manager() {
 	var modules = {};
 
 	function define(name, deps, impl) {
-		for (var i=0; i<deps.length; i++) {
+		for (var i = 0; i < deps.length; i++) {
 			deps[i] = modules[deps[i]];
 		}
 		modules[name] = impl.apply( impl, deps );
@@ -477,9 +477,9 @@ var MyModules = (function Manager() {
 })();
 ```
 
-The key part of this code is `modules[name] = impl.apply(impl, deps)`. This is invoking the definition wrapper function for a module (passing in any dependencies), and storing the return value, the module's API, into an internal list of modules tracked by name.
+Mấu chốt của đoạn code trên là `modules[name] = impl.apply(impl, deps)`. Nó sẽ chạy hàm xác định bên ngoài để tạo module, và lưu giá trị trả lại (API của module) thành một danh sách các module được theo dõi theo tên.
 
-And here's how I might use it to define some modules:
+Và đây là cách tôi có thể sử dụng để tạo module:
 
 ```js
 MyModules.define( "bar", [], function(){
@@ -514,8 +514,9 @@ console.log(
 foo.awesome(); // LET ME INTRODUCE: HIPPO
 ```
 
-Both the "foo" and "bar" modules are defined with a function that returns a public API. "foo" even receives the instance of "bar" as a dependency parameter, and can use it accordingly.
+Cả module "foo" và "bar" đều được xác định bằng một hàm trả một API công khai. "foo" thậm chí nhận được instance của "bar" như một tham số phụ thuộc, và có thể sử dụng nó tùy ý.
 
+Bạn hãy dành thời gian để kiểm tra đoạn code trên cho đến khi hiểu hoàn toàn sức mạnh của closure để phục vụ cho mục đích của mình.
 Spend some time examining these code snippets to fully understand the power of closures put to use for our own good purposes. The key take-away is that there's not really any particular "magic" to module managers. They fulfill both characteristics of the module pattern I listed above: invoking a function definition wrapper, and keeping its return value as the API for that module.
 
 In other words, modules are just modules, even if you put a friendly wrapper tool on top of them.
