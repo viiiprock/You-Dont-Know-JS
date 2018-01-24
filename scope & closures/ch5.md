@@ -525,14 +525,13 @@ Nói cách khác, module là module, kể cả khi bạn tạo một công cụ 
 
 ES6 bổ sung cú pháp cao cấp cho khái niệm module. Khi được tải bởi hệ thống module, ES6 xử lý một file như một module riêng lẻ. Mỗi module có thể vừa nhập các module khác hoặc thành viên API cụ thể, đồng thời xuất các thành viên API công khai của chính nó.
 
-**Ghi chú:** Module nền hàm không phải là nhận dạng mẫu tĩnh (cái mà trình biên dịch hiểu rõ), vì vậy
-Function-based modules aren't a statically recognized pattern (something the compiler knows about), so their API semantics aren't considered until run-time. That is, you can actually modify a module's API during the run-time (see earlier `publicAPI` discussion).
+**Ghi chú:** Module nền hàm không phải là nhận dạng mẫu tĩnh (cái mà trình biên dịch hiểu rõ), vì vậy API của nó sẽ không được nhận thấy cho đến run-time. Vì thế, bạn có thể thay đổi một API của module trong quá trình run-time (xem thảo luận về `publicAPI` ở trên).
 
-By contrast, ES6 Module APIs are static (the APIs don't change at run-time). Since the compiler knows *that*, it can (and does!) check during (file loading and) compilation that a reference to a member of an imported module's API *actually exists*. If the API reference doesn't exist, the compiler throws an "early" error at compile-time, rather than waiting for traditional dynamic run-time resolution (and errors, if any).
+Ngược lại, ES6 API của module là tĩnh (API không thay đổi tại run-time). Do đó, trình biên dịch kiểm tra trong quá trình tải và biên dịch có một tham chiếu đến thành của một API module đã nhập có *thực sự tồn tại*. Nếu tham chiếu API không tồn tại, trình biên dịch báo lỗi "trước" trong thời gian biên dịch (compiler-time) thay vì chờ cho run-time (báo lỗi, nếu có) theo thông thường.
 
-ES6 modules **do not** have an "inline" format, they must be defined in separate files (one per module). The browsers/engines have a default "module loader" (which is overridable, but that's well-beyond our discussion here) which synchronously loads a module file when it's imported.
+ES6 module không có định dạng "trực tiếp", nó cần được xác định theo các file riêng lẻ (với mỗi module). Trình duyệt/engine có một trình tải module mặc định (có thể ghi đè, không thuộc vấn đề nói tới ở đây) đồng bộ tải module file khi nó được nhập (import).
 
-Consider:
+Ví dụ:
 
 **bar.js**
 ```js
@@ -545,7 +544,7 @@ export hello;
 
 **foo.js**
 ```js
-// import only `hello()` from the "bar" module
+// nhập mình `hello()` từ module "bar"
 import hello from "bar";
 
 var hungry = "hippo";
@@ -560,7 +559,7 @@ export awesome;
 ```
 
 ```js
-// import the entire "foo" and "bar" modules
+// nhập toàn bộ "foo" và "bar"
 module foo from "foo";
 module bar from "bar";
 
@@ -571,20 +570,22 @@ console.log(
 foo.awesome(); // LET ME INTRODUCE: HIPPO
 ```
 
-**Note:** Separate files **"foo.js"** and **"bar.js"** would need to be created, with the contents as shown in the first two snippets, respectively. Then, your program would load/import those modules to use them, as shown in the third snippet.
+**Ghi chú:** Các file riêng lẻ **"foo.js"** và **"bar.js"** cần được tạo, với nội dung như hai đoạn code trên. Sau đó chương trình của bạn có thể tải/nhập các module đó để sử dụng chúng như đã trình bày ở đoạn code thứ ba.
 
-`import` imports one or more members from a module's API into the current scope, each to a bound variable (`hello` in our case). `module` imports an entire module API to a bound variable (`foo`, `bar` in our case). `export` exports an identifier (variable, function) to the public API for the current module. These operators can be used as many times in a module's definition as is necessary.
+`import` một hay nhiều thành viên từ API của module trong phạm vi gần nhất, mỗi cái là một biến (`hello` trong trường hợp của ta). `module` nhập toàn bộ API module thành các biến (`foo`, `bar` trong trường hợp ví dụ). `export` xuất một định danh (biến, hàm) thành API công khai cho module gần nhất. Các biểu thức này có thể sử dụng nhiều lần trong việc xác định module nếu cần thiết.
 
-The contents inside the *module file* are treated as if enclosed in a scope closure, just like with the function-closure modules seen earlier.
+Nội dung bên trong *file module* được xử lý như một scope closure bên ngoài, cũng như hàm closure đã xem ở trên.
 
-## Review (TL;DR)
+## Ôn tập (TL;DR)
 
-Closure seems to the un-enlightened like a mystical world set apart inside of JavaScript which only the few bravest souls can reach. But it's actually just a standard and almost obvious fact of how we write code in a lexically scoped environment, where functions are values and can be passed around at will.
+Closure được xem như sự giác ngộ về thế giới bí ẩn bên trong JavaScript. Nhưng nó lại là một tiêu chuẩn và rõ ràng khi chúng ta viết code trong môi trường lexical scope, hàm và giá trị có thể truyền xung quanh theo ý muốn.
 
-**Closure is when a function can remember and access its lexical scope even when it's invoked outside its lexical scope.**
+**Khi một hàm có thể ghi nhớ và truy cập lexical scope của nó kể cả khi nó được gọi ngoài lexical scope được gọi là closure.**
 
-Closures can trip us up, for instance with loops, if we're not careful to recognize them and how they work. But they are also an immensely powerful tool, enabling patterns like *modules* in their various forms.
+Closure có thể làm chúng ta sai sót, ví dụ với loop, nếu ta không cẩn thận khi nhận biết chúng và cách chúng hoạt động. Nhưng nó cũng là một công cụ mạnh mẽ vô hạn, cho phép triển khai các mẫu (pattern) như *module* theo nhiều dạng khác nhau.
 
-Modules require two key characteristics: 1) an outer wrapping function being invoked, to create the enclosing scope 2) the return value of the wrapping function must include reference to at least one inner function that then has closure over the private inner scope of the wrapper.
+Module đòi hỏi hai đặc điểm chính:
+* 1) Hàm bao ngoài được gọi để tạo scope bao ngoài.
+* 2) Giá trị trả về của hàm bao ngoài phải bao gồm tham chiếu đến ít nhất một hàm bên trong để sau đó nó có closure thông qua phạm vi riêng (private) bên trong của hàm đó.
 
-Now we can see closures all around our existing code, and we have the ability to recognize and leverage them to our own benefit!
+Và ta cũng thấy closure xuất hiện liên tục ở trong code của mình, đây là khả năng để nhận biết và tận dụng chúng cho mục đích!
