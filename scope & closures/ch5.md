@@ -459,6 +459,7 @@ Vài trình tải/quản lý module phụ thuộc bao lấy mẫu module thành 
 var MyModules = (function Manager() {
 	var modules = {};
 
+	// Cái này gọi là hàm tải/quản lý (loaders/managers) - người dịch
 	function define(name, deps, impl) {
 		for (var i = 0; i < deps.length; i++) {
 			deps[i] = modules[deps[i]];
@@ -516,16 +517,16 @@ foo.awesome(); // LET ME INTRODUCE: HIPPO
 
 Cả module "foo" và "bar" đều được xác định bằng một hàm trả một API công khai. "foo" thậm chí nhận được instance của "bar" như một tham số phụ thuộc, và có thể sử dụng nó tùy ý.
 
-Bạn hãy dành thời gian để kiểm tra đoạn code trên cho đến khi hiểu hoàn toàn sức mạnh của closure để phục vụ cho mục đích của mình.
-Spend some time examining these code snippets to fully understand the power of closures put to use for our own good purposes. The key take-away is that there's not really any particular "magic" to module managers. They fulfill both characteristics of the module pattern I listed above: invoking a function definition wrapper, and keeping its return value as the API for that module.
+Bạn hãy dành thời gian để kiểm tra đoạn code trên cho đến khi hiểu hoàn toàn sức mạnh của closure để phục vụ cho mục đích của mình. Không có "ma thuật" nào trong trình quản lý module, nó đáp ứng hai đặc tính của module pattern mà tôi đã liệt kê ở trên: gọi một hàm xác định bao ngoài, và trả giá trị như là API của module đó.
 
-In other words, modules are just modules, even if you put a friendly wrapper tool on top of them.
+Nói cách khác, module là module, kể cả khi bạn tạo một công cụ trên nó.
 
-### Future Modules
+### Module tương lai
 
-ES6 adds first-class syntax support for the concept of modules. When loaded via the module system, ES6 treats a file as a separate module. Each module can both import other modules or specific API members, as well export their own public API members.
+ES6 bổ sung cú pháp cao cấp cho khái niệm module. Khi được tải bởi hệ thống module, ES6 xử lý một file như một module riêng lẻ. Mỗi module có thể vừa nhập các module khác hoặc thành viên API cụ thể, đồng thời xuất các thành viên API công khai của chính nó.
 
-**Note:** Function-based modules aren't a statically recognized pattern (something the compiler knows about), so their API semantics aren't considered until run-time. That is, you can actually modify a module's API during the run-time (see earlier `publicAPI` discussion).
+**Ghi chú:** Module nền hàm không phải là nhận dạng mẫu tĩnh (cái mà trình biên dịch hiểu rõ), vì vậy
+Function-based modules aren't a statically recognized pattern (something the compiler knows about), so their API semantics aren't considered until run-time. That is, you can actually modify a module's API during the run-time (see earlier `publicAPI` discussion).
 
 By contrast, ES6 Module APIs are static (the APIs don't change at run-time). Since the compiler knows *that*, it can (and does!) check during (file loading and) compilation that a reference to a member of an imported module's API *actually exists*. If the API reference doesn't exist, the compiler throws an "early" error at compile-time, rather than waiting for traditional dynamic run-time resolution (and errors, if any).
 

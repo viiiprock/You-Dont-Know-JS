@@ -5,10 +5,7 @@ Một trong những cơ chế hãi hùng nhất của JavaScript là từ khoá 
 
 > Công nghệ *tiên tiến* với phép thuật không phân biệt được. -- Arthur C. Clarke
 
-Cơ chế của `this` không hẳn ghê gớm như vậy, nhưng các lập trình viên thường diễn giải trong tâm trí bằng cách thêm từ "phức tạp" hoặc "mơ hồ", và không có câu hỏi nào ngoài việc hiểu rõ ràng, `this` có thể xem là sự huyền diệu trong sự hoang mang của bạn.
-
-**Ghi chú** Từ `this` là một đại từ trong đàm luận chung. Vì vậy, nó có thể rất khó, đặc biệt là bằng lời nói, để xác định chúng ta sử dụng `this` như một đại từ hoặc sử dụng nó để diễn đạt đến từ khoá xác định. Để rõ ràng, tôi sẽ sử dụng `this` như là một từ khoá đặc biệt "this" hay *this* hoặc nếu không thì this -- (nd: chưa hiểu)
-
+Cơ chế của `this` không hẳn ghê gớm như vậy, nhưng các lập trình viên thường diễn giải trong tâm trí bằng cách thêm từ "phức tạp" hoặc "mơ hồ", `this` có thể xem là sự huyền diệu trong sự hoang mang của bạn.
 
 ## Tại sao lại là `this`?
 
