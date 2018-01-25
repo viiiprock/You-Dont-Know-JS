@@ -34,11 +34,11 @@ Whoa! Code nhìn xấu vãi cả dị. Ta thấy `try/catch` xuất hiện để
 
 Đúng vậy, mệnh đề `catch` có block-scoping của nó, nghĩa là nó có thể sử dụng như một polyfill cho block scope trong môi trường tiền ES6.
 
-"Nhưng...chẳng ai muốn viết code xấu vậy!" Đúng vậy, cũng giống việc chẳng ai viết code theo phong cách code được biên dịch từ CoffeeScript cả. Nhưng đây không phải vấn đề.
+"Nhưng...chẳng ai muốn viết code xấu vậy!" Đúng vậy, cũng giống việc chẳng ai viết code theo phong cách code được phiên dịch  từ CoffeeScript cả. Nhưng đây không phải vấn đề.
 
 Vấn đề là công cụ này có thể chuyển code ES6 có thể làm việc với môi trường tiền ES6. Bạn có thể viết code theo block-scoping với những ích lợi từ nó, rồi để cho công cụ ở bước built lo phần chuyển đổi giúp code có thể làm việc ngon lành khi triển khai.
 
-E hèm, đây là lối đi ưa thích cho mọi người trong việc chuyển đổi ES6: sử dụng một trình biên dịch code để chuyển code ES6 thành code tương thích ES5 trong quá trình (các trình duyệt - người dịch) hoán chuyển từ tiền ES6 sang ES6.
+E hèm, đây là lối đi ưa thích cho mọi người trong việc chuyển đổi ES6: sử dụng một trình phiên dịch code để chuyển code ES6 thành code tương thích ES5 trong quá trình (các trình duyệt - người dịch) hoán chuyển từ tiền ES6 sang ES6.
 
 ## Traceur
 
@@ -93,10 +93,9 @@ console.log( a ); // ReferenceError
 
 Nhưng các công cụ tồn tại để giải quyết vấn đề của chúng ta. Vì vậy lựa chọn khác là viết các khối lệnh let rõ ràng và để công cụ chuyển chúng thành code hợp lệ.
 
-Vì vậy tôi đã xây dụng một công cụ gọi là [let-er](https://github.com/getify/let-er) để xử lý vấn đề này. *let-er* là một trình thông dịch code ở bước build, nhiệm vụ duy nhất của nó là tìm dạng lệnh let và thông dịch, những dạng code khác nó vẫn để nguyên, kể cả khai báo let. Bạn có thể sử dụng *let-er* như
-is a build-step code transpiler, but its only task is to find let-statement forms and transpile them. It will leave alone any of the rest of your code, including any let-declarations. You can safely use *let-er* as the first ES6 transpiler step, and then pass your code through something like Traceur if necessary.
+Vì vậy tôi đã xây dụng một công cụ gọi là [let-er](https://github.com/getify/let-er) để xử lý vấn đề này. *let-er* là một trình phiên dịch  code ở bước build, nhiệm vụ duy nhất của nó là tìm dạng lệnh let và phiên dịch , những dạng code khác nó vẫn để nguyên, kể cả khai báo let. Bạn có thể sử dụng *let-er* một cách an toàn như là bước phiên dịch  ES6 ban đầu, sau đó chuyển code của bạn qua gì đó như Traceur nếu cần thiết.
 
-Moreover, *let-er* has a configuration flag `--es6`, which when turned on (off by default), changes the kind of code produced. Instead of the `try/catch` ES3 polyfill hack, *let-er* would take our snippet and produce the fully ES6-compliant, non-hacky:
+Hơn nữa, *let-er* có một cờ cấu hình (configuration flag) `--es6`, có thể bật (mặc định là tắt), thay đổi kiểu code được tạo. Thay vì dùng `try/catch`, *let-er* sẽ chuyển đoạn code tuân thủ ES6 đầy đủ mà không phải hack gì cả:
 
 ```js
 {
@@ -107,16 +106,14 @@ Moreover, *let-er* has a configuration flag `--es6`, which when turned on (off b
 console.log( a ); // ReferenceError
 ```
 
-So, you can start using *let-er* right away, and target all pre-ES6 environments, and when you only care about ES6, you can add the flag and instantly target only ES6.
+Bạn có thể dùng *let-er* ngay bây giờ và quan trọng nhất, **bạn có thể sử dụng dạng lệnh let một cách thích hợp và rõ ràng** mặc dù nó không (chưa) phải là phần chính thức của ES.
 
-And most importantly, **you can use the more preferable and more explicit let-statement form** even though it is not an official part of any ES version (yet).
+## Hiệu suất
 
-## Performance
+Tôi nêu nhanh về hiệu suất `try/catch` một chút để giải thích câu hỏi "tại sao sử dụng IIFE để tạo scope?"
 
-Let me add one last quick note on the performance of `try/catch`, and/or to address the question, "why not just use an IIFE to create the scope?"
+Trước tiên, hiệu suất của `try/catch` chậm hơn nhưng lại không có một giả định hợp lý rằng phải dùng cách này, hay nó vốn phải vậy. Từ khi TC39 chính thức chấp nhận trình phiên dịch ES6 sử dụng `try/catch`, nhóm Traceur đã yêu cầu Crome cải thiện hiệu suất của `try/catch`, và rõ ràng là họ có động cơ để đòi hỏi.
 
-Firstly, the performance of `try/catch` *is* slower, but there's no reasonable assumption that it *has* to be that way, or even that it *always will be* that way. Since the official TC39-approved ES6 transpiler uses `try/catch`, the Traceur team has asked Chrome to improve the performance of `try/catch`, and they are obviously motivated to do so.
+Tiếp đến, IIFE không phải là cách so sánh ngang bằng với `try/catch`, vì bất kỳ đoạn code nào được bao bởi hàm đều thay đổi ý nghĩa bên trong code, ý nghĩa của `this`, `return`, `break`, và `continue`. IIFE không phải là một thay thế phù hợp. Nó chỉ có thể dùng thủ công tùy trường hợp.
 
-Secondly, IIFE is not a fair apples-to-apples comparison with `try/catch`, because a function wrapped around any arbitrary code changes the meaning, inside of that code, of `this`, `return`, `break`, and `continue`. IIFE is not a suitable general substitute. It could only be used manually in certain cases.
-
-The question really becomes: do you want block-scoping, or not. If you do, these tools provide you that option. If not, keep using `var` and go on about your coding!
+Câu hỏi cụ thể là: bạn có thực sự muốn block-scoping hay không? Nếu có thì công cụ cho bạn một phương án. Nếu không, hãy cứ dùng `var` và tiếp tục code thôi.
