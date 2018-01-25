@@ -1,13 +1,13 @@
 # You Don't Know JS: Scope & Closures
 # Phụ lục A: Scope động (dynamic scope)
 
-Trong chương 2, we talked about "Dynamic Scope" as a contrast to the "Lexical Scope" model, which is how scope works in JavaScript (and in fact, most other languages).
+Trong chương 2, ta đã nói về "Dynamic Scope" là tương phản của "Lexical Scope", đó là cách phạm vi hoạt động trong JavaScript (thực tế là nhiều ngôn ngữ khác cũng vậy).
 
-We will briefly examine dynamic scope, to hammer home the contrast. But, more importantly, dynamic scope actually is a near cousin to another mechanism (`this`) in JavaScript, which we covered in the "*this & Object Prototypes*" title of this book series.
+Chúng ta sẽ xem xét một chút nhẹ dynamic scope để coi tương phản đó ra sao. Nhưng quan trọng hơn là dynamic scope thực tế là con cô con cậu của cơ chế khác (`this`) trong JavaScript, ta sẽ coi nó trong phần "*this & Nguyên mẫu đối tượng*".
 
-As we saw in Chapter 2, lexical scope is the set of rules about how the *Engine* can look-up a variable and where it will find it. The key characteristic of lexical scope is that it is defined at author-time, when the code is written (assuming you don't cheat with `eval()` or `with`).
+Như ta đã biết trong Chương 2, lexical scope là một tập hợp các quy tắc về cách tìm kiếm biến như thế nào và ở đâu của *Engine*. Đặc điểm chính của lexical scope là nó được xác định tại author-time khi code được viết ra (giả định bạn không dùng `eval()` hoặc `with` để đánh lừa).
 
-Dynamic scope seems to imply, and for good reason, that there's a model whereby scope can be determined dynamically at runtime, rather than statically at author-time. That is in fact the case. Let's illustrate via code:
+Dynamic scope dường như là ngụ ý rằng có một mô hình mà theo đó phạm vi có thể được mô tả linh hoạt tại runtime hơn là thụ động tại author-time. Xem ví dụ minh họa:
 
 ```js
 function foo() {
@@ -24,15 +24,15 @@ var a = 2;
 bar();
 ```
 
-Lexical scope holds that the RHS reference to `a` in `foo()` will be resolved to the global variable `a`, which will result in value `2` being output.
+Lexical scope giữ tham chiếu RHS đến `a` trong `foo()` sẽ được xử lý thành biến toàn cục `a`, và sẽ có kết quả xuất ra là `2`.
 
-Dynamic scope, by contrast, doesn't concern itself with how and where functions and scopes are declared, but rather **where they are called from**. In other words, the scope chain is based on the call-stack, not the nesting of scopes in code.
+Ngược lại, dynamic scope không quan tâm đến việc khi nào, ở đâu hàm và scope được khai báo, mà đúng hơn là **chúng được gọi từ đâu**. Nói cách khác, chuỗi phạm vi dựa trên call-stack, không phải scope lồng nhau trong code.
 
-So, if JavaScript had dynamic scope, when `foo()` is executed, **theoretically** the code below would instead result in `3` as the output.
+Vì vậy, nếu JS có dynamic scope, khi `foo()` được thực thi, **về mặt lý thuyết** thì đoạn code dưới đây sẽ ra kết quả là `3`.
 
 ```js
 function foo() {
-	console.log( a ); // 3  (not 2!)
+	console.log( a ); // 3  (không phải 2!)
 }
 
 function bar() {
@@ -45,14 +45,14 @@ var a = 2;
 bar();
 ```
 
-How can this be? Because when `foo()` cannot resolve the variable reference for `a`, instead of stepping up the nested (lexical) scope chain, it walks up the call-stack, to find where `foo()` was *called from*. Since `foo()` was called from `bar()`, it checks the variables in scope for `bar()`, and finds an `a` there with value `3`.
+Sao lại vậy? Bởi vì khi `foo()` không thể xử lý tham chiếu biến cho `a`, thay vì nó đi tiếp lên trên đến chuỗi scope được lồng (lexical) tiếp theo, nó đi tiếp tới call-stack để tìm xem `foo()` được gọi gọi từ đâu. Khi `foo()` được gọi từ `bar()`, nó kiểm tra biến trong scope của `bar()` và tìm thấy `a` có giá trị bằng `3`.
 
-Strange? You're probably thinking so, at the moment.
+Trong giây phút thì có thể bạn nghĩ rằng nó kỳ lạ.
 
-But that's just because you've probably only ever worked on (or at least deeply considered) code which is lexically scoped. So dynamic scoping seems foreign. If you had only ever written code in a dynamically scoped language, it would seem natural, and lexical scope would be the odd-ball.
+Thực ra là bởi bạn chỉ mới làm việc với (ít nhất là tìm hiểu sâu) code được lexical scope, nên dynamic scope thấy có vẻ xa lạ. Nếu bạn đã từng viết code ở ngôn ngữ dynamic scope, thì đây là bình thường, còn lexical scope mới là xa lạ.
 
-To be clear, JavaScript **does not, in fact, have dynamic scope**. It has lexical scope. Plain and simple. But the `this` mechanism is kind of like dynamic scope.
+Nói thẳng đuột, JavaScript **không có dynamic scope** mà chỉ có lexical scope. Nhưng mà cơ chế `this` lại là một kiểu dynamic scope.
 
-The key contrast: **lexical scope is write-time, whereas dynamic scope (and `this`!) are runtime**. Lexical scope cares *where a function was declared*, but dynamic scope cares where a function was *called from*.
+Mâu thuẫn then chốt: **lexical scope là write-time/author-time trong khi dynamic scope (và `this`!) là runtime**. Lexical scope quan tâm *hàm được khai báo ở đâu*, nhưng dynamic scope quan tâm hàm được *gọi từ đâu*.
 
-Finally: `this` cares *how a function was called*, which shows how closely related the `this` mechanism is to the idea of dynamic scoping. To dig more into `this`, read the title "*this & Object Prototypes*".
+Còn `this` thì lại quan tâm việc *hàm được gọi như thế nào*, đây là mối liên hệ của cơ chế `this` với ý tưởng dynamic scope.
