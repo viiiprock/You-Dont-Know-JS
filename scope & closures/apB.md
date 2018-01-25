@@ -1,13 +1,13 @@
 # You Don't Know JS: Scope & Closures
-# Appendix B: Polyfilling Block Scope
+# Phục lục B: Polyfilling Phạm Vi Block
 
-In Chapter 3, we explored Block Scope. We saw that `with` and the `catch` clause are both tiny examples of block scope that have existed in JavaScript since at least the introduction of ES3.
+Trong Chương 3, chúng ta khám phá Block Scope. Ta thấy rằng mệnh đề `with` và `catch` đều là hai ví dụ nhỏ của block scopetồn tồn tại trong JS từ ES3.
 
-But it's ES6's introduction of `let` that finally gives full, unfettered block-scoping capability to our code. There are many exciting things, both functionally and code-stylistically, that block scope will enable.
+Khi ES6 giới thiệu `let` cuối cùng cũng cung cấp đầy đủ khả năng mở rộng của block-scoping cho code của chúng ta. Có rất nhiều điều hấp dẫn, cả hàm và phong cách code mà block scope sẽ cho phép.
 
-But what if we wanted to use block scope in pre-ES6 environments?
+Nhưng nếu như chúng ta sử dụng block scope trong môi trường trước ES6.
 
-Consider this code:
+Xem đoạn code sau:
 
 ```js
 {
@@ -18,31 +18,33 @@ Consider this code:
 console.log( a ); // ReferenceError
 ```
 
-This will work great in ES6 environments. But can we do so pre-ES6? `catch` is the answer.
+Với môi trường ES6 thì đoạn này chơi ngon, nhưng với bản trước ES6 `catch` sẽ là câu trả lời.
 
 ```js
-try{throw 2}catch(a){
+try {
+	throw 2
+} catch(a) {
 	console.log( a ); // 2
 }
 
 console.log( a ); // ReferenceError
 ```
 
-Whoa! That's some ugly, weird looking code. We see a `try/catch` that appears to forcibly throw an error, but the "error" it throws is just a value `2`, and then the variable declaration that receives it is in the `catch(a)` clause. Mind: blown.
+Whoa! Code nhìn xấu vãi cả dị. Ta thấy `try/catch` xuất hiện để ép việc ném ra lỗi, nhưng "error" chỉ quăng ra giá trị `2`, và sau đó khai báo biến sẽ nhận giá trị bên trong mệnh đề `catch(a)`. Bể não.
 
-That's right, the `catch` clause has block-scoping to it, which means it can be used as a polyfill for block scope in pre-ES6 environments.
+Đúng vậy, mệnh đề `catch` có block-scoping của nó, nghĩa là nó có thể sử dụng như một polyfill cho block scope trong môi trường tiền ES6.
 
-"But...", you say. "...no one wants to write ugly code like that!" That's true. No one writes (some of) the code output by the CoffeeScript compiler, either. That's not the point.
+"Nhưng...chẳng ai muốn viết code xấu vậy!" Đúng vậy, cũng giống việc chẳng ai viết code theo phong cách code được biên dịch từ CoffeeScript cả. Nhưng đây không phải vấn đề.
 
-The point is that tools can transpile ES6 code to work in pre-ES6 environments. You can write code using block-scoping, and benefit from such functionality, and let a build-step tool take care of producing code that will actually *work* when deployed.
+Vấn đề là công cụ này có thể chuyển code ES6 có thể làm việc với môi trường tiền ES6. Bạn có thể viết code theo block-scoping với những ích lợi từ nó, rồi để cho công cụ ở bước built lo phần chuyển đổi giúp code có thể làm việc ngon lành khi triển khai.
 
-This is actually the preferred migration path for all (ahem, most) of ES6: to use a code transpiler to take ES6 code and produce ES5-compatible code during the transition from pre-ES6 to ES6.
+E hèm, đây là lối đi ưa thích cho mọi người trong việc chuyển đổi ES6: sử dụng một trình biên dịch code để chuyển code ES6 thành code tương thích ES5 trong quá trình (các trình duyệt - người dịch) hoán chuyển từ tiền ES6 sang ES6.
 
 ## Traceur
 
-Google maintains a project called "Traceur" [^note-traceur], which is exactly tasked with transpiling ES6 features into pre-ES6 (mostly ES5, but not all!) for general usage. The TC39 committee relies on this tool (and others) to test out the semantics of the features they specify.
+Google bảo trì một dự án tên là "Traceur" [Google Traceur](http://traceur-compiler.googlecode.com/git/demo/repl.html), với nhiệm vụ chính xác là chuyển các tính năng ES6 sang tiền ES6 (hầu hết là ES5, nhưng không phải tất cả!) để sử dụng chung. Ủy ban TC39 dựa vào công cụ này (và các công cụ khác) để kiểm tra ngữ nghĩa của các tính năng họ chỉ định.
 
-What does Traceur produce from our snippet? You guessed it!
+Traceur tạo gì trong đoạn code của ta? Bạn đoán rồi đó!
 
 ```js
 {
@@ -57,13 +59,13 @@ What does Traceur produce from our snippet? You guessed it!
 console.log( a );
 ```
 
-So, with the use of such tools, we can start taking advantage of block scope regardless of if we are targeting ES6 or not, because `try/catch` has been around (and worked this way) from ES3 days.
+Với việc sử dụng các công cụ như vậy, chúng ta bắt đầu khai thác lợi thế của block scope bất kể ta có nhắm đến ES6 hay không, bởi vì `try/catch` đã tồn tại và làm việc theo cách này từ hồi ES3.
 
-## Implicit vs. Explicit Blocks
+## Khối ngầm vs. minh bạch
 
-In Chapter 3, we identified some potential pitfalls to code maintainability/refactorability when we introduce block-scoping. Is there another way to take advantage of block scope but to reduce this downside?
+Trong Chương 3, chúng ta nhận diện vài cạm bẫy tiềm tàng với tính bảo trì/refactor của code khi giới thiệu về block-scoping. Có cách nào khác để tận dụng lợi thế của block scope mà giảm thiểu nhược điểm này?
 
-Consider this alternate form of `let`, called the "let block" or "let statement" (contrasted with "let declarations" from before).
+Xem xét hình thức thay thế của `let`, gọi là "let block" hay "câu lệnh let" (tương phản với "khai báo let").
 
 ```js
 let (a = 2) {
@@ -73,13 +75,13 @@ let (a = 2) {
 console.log( a ); // ReferenceError
 ```
 
-Instead of implicitly hijacking an existing block, the let-statement creates an explicit block for its scope binding. Not only does the explicit block stand out more, and perhaps fare more robustly in code refactoring, it produces somewhat cleaner code by, grammatically, forcing all the declarations to the top of the block. This makes it easier to look at any block and know what's scoped to it and not.
+Thay vì ngầm chiếm lấy block hiện hữu, lệnh let tạo một block rõ ràng cho ràng buộc scope của nó. Không chỉ làm nổi bật các block minh bạch hơn, mà có lẽ thiết thực hơn trong việc refactor code, nó tạo ra gì đó sạch hơn về mặt ngữ pháp, buộc tất cả các khai báo lên trên đầu block. Nó làm cho bấy kỳ block nào cũng dễ thấy và scope gì của nó hay không.
 
-As a pattern, it mirrors the approach many people take in function-scoping when they manually move/hoist all their `var` declarations to the top of the function. The let-statement puts them there at the top of the block by intent, and if you don't use `let` declarations strewn throughout, your block-scoping declarations are somewhat easier to identify and maintain.
+Là một khuôn mẫu, nó phản ánh cách tiếp cận của nhiều người trong việc scope hóa hàm khi họ tự dời/hoist tất cả khai báo `var` lên trên đầu hàm. Lệnh let đặt chúng lên đầu block theo ý định, và nếu bạn không sử dụng khai báo `let` rải rác, khai báo block scoping của bạn sẽ dễ dàng nhận diện để bảo trì hơn.
 
-But, there's a problem. The let-statement form is not included in ES6. Neither does the official Traceur compiler accept that form of code.
+Nhưng lại có một vấn đề, dạng lệnh let không có trong ES6. Và cả Traceur cũng không chấp nhận dạng code này.
 
-We have two options. We can format using ES6-valid syntax and a little sprinkle of code discipline:
+Ta có hai lựa chọn. Ta có thể bắng bằng cách sử dụng cú pháp ES6 hợp lệ và một chút khuôn phép:
 
 ```js
 /*let*/ { let a = 2;
@@ -89,9 +91,10 @@ We have two options. We can format using ES6-valid syntax and a little sprinkle 
 console.log( a ); // ReferenceError
 ```
 
-But, tools are meant to solve our problems. So the other option is to write explicit let statement blocks, and let a tool convert them to valid, working code.
+Nhưng các công cụ tồn tại để giải quyết vấn đề của chúng ta. Vì vậy lựa chọn khác là viết các khối lệnh let rõ ràng và để công cụ chuyển chúng thành code hợp lệ.
 
-So, I built a tool called "let-er" [^note-let_er] to address just this issue. *let-er* is a build-step code transpiler, but its only task is to find let-statement forms and transpile them. It will leave alone any of the rest of your code, including any let-declarations. You can safely use *let-er* as the first ES6 transpiler step, and then pass your code through something like Traceur if necessary.
+Vì vậy tôi đã xây dụng một công cụ gọi là [let-er](https://github.com/getify/let-er) để xử lý vấn đề này. *let-er* là một trình thông dịch code ở bước build, nhiệm vụ duy nhất của nó là tìm dạng lệnh let và thông dịch, những dạng code khác nó vẫn để nguyên, kể cả khai báo let. Bạn có thể sử dụng *let-er* như
+is a build-step code transpiler, but its only task is to find let-statement forms and transpile them. It will leave alone any of the rest of your code, including any let-declarations. You can safely use *let-er* as the first ES6 transpiler step, and then pass your code through something like Traceur if necessary.
 
 Moreover, *let-er* has a configuration flag `--es6`, which when turned on (off by default), changes the kind of code produced. Instead of the `try/catch` ES3 polyfill hack, *let-er* would take our snippet and produce the fully ES6-compliant, non-hacky:
 
@@ -117,7 +120,3 @@ Firstly, the performance of `try/catch` *is* slower, but there's no reasonable a
 Secondly, IIFE is not a fair apples-to-apples comparison with `try/catch`, because a function wrapped around any arbitrary code changes the meaning, inside of that code, of `this`, `return`, `break`, and `continue`. IIFE is not a suitable general substitute. It could only be used manually in certain cases.
 
 The question really becomes: do you want block-scoping, or not. If you do, these tools provide you that option. If not, keep using `var` and go on about your coding!
-
-[^note-traceur]: [Google Traceur](http://traceur-compiler.googlecode.com/git/demo/repl.html)
-
-[^note-let_er]: [let-er](https://github.com/getify/let-er)
