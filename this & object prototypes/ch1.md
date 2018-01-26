@@ -5,11 +5,11 @@ Một trong những cơ chế hãi hùng nhất của JavaScript là từ khoá 
 
 > Công nghệ *tiên tiến* với phép thuật không phân biệt được. -- Arthur C. Clarke
 
-Cơ chế của `this` không hẳn ghê gớm như vậy, nhưng các lập trình viên thường diễn giải trong tâm trí bằng cách thêm từ "phức tạp" hoặc "mơ hồ", `this` có thể xem là sự huyền diệu trong sự hoang mang của bạn.
+Cơ chế của `this` không hẳn ghê gớm như vậy, nhưng các lập trình viên thường diễn giải trong tâm trí bằng cách thêm từ "phức tạp" hoặc "mơ hồ", `this` có thể xem là sự huyền diệu trong sự hoang mang.
 
 ## Tại sao lại là `this`?
 
-Nếu cơ chế `this` quá hoang mang, ngay cả đối với lập trình viên JavaScript dày dạn, người ta có thể thắc mắc tại sao nó lại hữu dụng? Nó có rắc rối hơn hay chính đáng? Trước khi tìm hiểu *như thế nào*, chúng ta nên xác định *vì sao*
+Nếu cơ chế `this` quá chua, ngay cả đối với lập trình viên JavaScript dày dạn, người ta có thể thắc mắc tại sao nó lại hữu dụng? Hay nó chỉ đem lại rắc rối? Trước khi tìm hiểu *như thế nào*, chúng ta nên xác định *vì sao*
 
 Hãy thử minh hoạ động lực và tiện ích của `this`:
 
@@ -38,9 +38,9 @@ speak.call( me ); // Hello, I'm KYLE
 speak.call( you ); // Hello, I'm READER
 ```
 
-Nếu *như thế nào* của đoạn code này vẫn còn làm bạn hoang mang, đừng lo! Chúng ta sẽ tìm hiểu nó cụ thể ngay. Chỉ cần đặt câu hỏi này qua một bên, như vậy chúng ta có thể nhìn rõ *tại sao* hơn.
+Nếu *như thế nào* của đoạn code này vẫn còn làm bạn bối rối, đừng lo! Chúng ta sẽ tìm hiểu nó cụ thể ngay đây. Chỉ cần đặt câu hỏi này qua một bên, như vậy ta có thể nhìn rõ *tại sao* hơn.
 
-Đoạn trích này cho phép function `identify()` và `speak()` được tái sử dụng cho object nhiều *ngữ cảnh* (`me` và `you`) thay vì sử dụng nhiều phiên bản function khác nhau cho mỗi object.
+Đoạn trích này cho phép hàm `identify()` và `speak()` được tái sử dụng cho object nhiều *ngữ cảnh* (`me` và `you`) thay vì sử dụng nhiều phiên bản khác nhau của hàm cho mỗi object.
 
 Thay vì sử dụng `this`, bạn có thể thông qua một cách rõ ràng trong một object ngữ cảnh cho cả `identify()` và `speak()`.
 
