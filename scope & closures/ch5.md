@@ -588,4 +588,4 @@ Module đòi hỏi hai đặc điểm chính:
 * 1) Hàm bao ngoài được gọi để tạo scope bao ngoài.
 * 2) Giá trị trả về của hàm bao ngoài phải bao gồm tham chiếu đến ít nhất một hàm bên trong để sau đó nó có closure thông qua phạm vi riêng (private) bên trong của hàm đó.
 
-Và ta cũng thấy closure xuất hiện liên tục ở trong code của mình, đây là khả năng để nhận biết và tận dụng chúng cho mục đích!
+Và ta cũng thấy closure xuất hiện liên tục ở trong code của mình, đây là khả năng để nhận biết và tận dụng chúng cho mục đích của mình!
