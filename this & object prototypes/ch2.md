@@ -1,10 +1,11 @@
 # You Don't Know JS: *this* & Object Prototypes
-# Chương 2: `this` Giờ mọi thứ đều hợp lý!
+# Chương 2: Giờ mọi thứ đều hợp lý với `this` !
 
-In Chapter 1, we discarded various misconceptions about `this` and learned instead that `this` is a binding made for each function invocation, based entirely on its **call-site** (how the function is called).
+Trong Chương 1, chúng ta bỏ qua những quan niệm sai lầm về `this` và đã học được rằng `this` là ràng buộc được thực hiện cho mỗi lần gọi hàm và được dựa hoàn toàn vào **call-site** (cách gọi hàm) của nó.
 
 ## Call-site
 
+Để hiểu ràng buộc `this`, chúng ta phải hiểu call-site: vị trí của code
 To understand `this` binding, we have to understand the call-site: the location in code where a function is called (**not where it's declared**). We must inspect the call-site to answer the question: what's *this* `this` a reference to?
 
 Finding the call-site is generally: "go locate where a function is called from", but it's not always that easy, as certain coding patterns can obscure the *true* call-site.
