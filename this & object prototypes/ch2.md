@@ -5,8 +5,7 @@ Trong Chương 1, chúng ta bỏ qua những quan niệm sai lầm về `this` v
 
 ## Call-site
 
-Để hiểu ràng buộc `this`, chúng ta phải hiểu call-site: vị trí hàm được gọi trong code (**không phải nơi nó được khai báo**).
-To understand `this` binding, we have to understand the call-site: the location in code where a function is called (**not where it's declared**). We must inspect the call-site to answer the question: what's *this* `this` a reference to?
+Để hiểu ràng buộc `this`, chúng ta phải hiểu call-site: vị trí hàm được gọi trong code (**không phải nơi nó được khai báo**). Chúng ta cần quan sát call-site để trả lời câu hỏi: `this` này tham chiếu vào cái gì?
 
 Finding the call-site is generally: "go locate where a function is called from", but it's not always that easy, as certain coding patterns can obscure the *true* call-site.
 
