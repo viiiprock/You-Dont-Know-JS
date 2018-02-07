@@ -175,8 +175,7 @@ var a = "oops, global"; // `a` also property on global object
 bar(); // "oops, global"
 ```
 
-Mặc dù `bar` hiện diện là một tham chiếu đến `obj.foo`, thực ra thì nó chỉ là một tham chiếu khác đến bản thân `foo`. Hơn nữa, call-site mới là vấn đề,
- it's really just another reference to `foo` itself. Moreover, the call-site is what matters, and the call-site is `bar()`, which is a plain, un-decorated call and thus the *default binding* applies.
+Mặc dù `bar` hiện diện là một tham chiếu đến `obj.foo`, thực ra thì nó chỉ là một tham chiếu khác đến bản thân `foo`. Hơn nữa, call-site mới là quan trọng, `bar()` là call-site theo cách rõ rệt, nên ràng buộc mặc định được áp dụng.
 
 The more subtle, more common, and more unexpected way this occurs is when we consider passing a callback function:
 
