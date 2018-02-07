@@ -44,17 +44,17 @@ Take care when analyzing code to find the actual call-site (from the call-stack)
 
 **Note:** You can visualize a call-stack in your mind by looking at the chain of function calls in order, as we did with the comments in the above snippet. But this is painstaking and error-prone. Another way of seeing the call-stack is using a debugger tool in your browser. Most modern desktop browsers have built-in developer tools, which includes a JS debugger. In the above snippet, you could have set a breakpoint in the tools for the first line of the `foo()` function, or simply inserted the `debugger;` statement on that first line. When you run the page, the debugger will pause at this location, and will show you a list of the functions that have been called to get to that line, which will be your call stack. So, if you're trying to diagnose `this` binding, use the developer tools to get the call-stack, then find the second item from the top, and that will show you the real call-site.
 
-## Nothing But Rules
+## Không có gì ngoài quy tắc
 
 We turn our attention now to *how* the call-site determines where `this` will point during the execution of a function.
 
 You must inspect the call-site and determine which of 4 rules applies. We will first explain each of these 4 rules independently, and then we will illustrate their order of precedence, if multiple rules *could* apply to the call-site.
 
-### Default Binding
+### Ràng buộc mặc định
 
-The first rule we will examine comes from the most common case of function calls: standalone function invocation. Think of *this* `this` rule as the default catch-all rule when none of the other rules apply.
+Quy tắc đầu tiên ta mà chúng ta xem xét đều có trong hầu hết trường hợp gọi hàm thông thường: Gọi hàm độc lập. Quy tắc này được xem là quy tắc mặc định khi không có quy tắc nào khác áp dụng.
 
-Consider this code:
+Xem đoạn code sau:
 
 ```js
 function foo() {
@@ -66,13 +66,13 @@ var a = 2;
 foo(); // 2
 ```
 
-The first thing to note, if you were not already aware, is that variables declared in the global scope, as `var a = 2` is, are synonymous with global-object properties of the same name. They're not copies of each other, they *are* each other. Think of it as two sides of the same coin.
+Nếu bạn không chú ý thì trước hết phải nhắc rằng biến `var a = 2` được khai báo ở toàn cục, đồng nghĩa là thuộc tính object toàn cục chung một tên. They're not copies of each other, they *are* each other. Think of it as two sides of the same coin.
 
-Secondly, we see that when `foo()` is called, `this.a` resolves to our global variable `a`. Why? Because in this case, the *default binding* for `this` applies to the function call, and so points `this` at the global object.
+Tiếp theo, ta thấy khi `foo()` được gọi, `this.a` xử lý biến toàn cục `a`. Vì sao? Vì trong trường hợp này *ràng buộc mặc định* của `this` áp dụng vào việc gọi hàm và trỏ `this` tại object toàn cục.
 
 How do we know that the *default binding* rule applies here? We examine the call-site to see how `foo()` is called. In our snippet, `foo()` is called with a plain, un-decorated function reference. None of the other rules we will demonstrate will apply here, so the *default binding* applies instead.
 
-If `strict mode` is in effect, the global object is not eligible for the *default binding*, so the `this` is instead set to `undefined`.
+Nếu để chế độ `strict mode`, object toàn cục không được phép thực hiện *ràng buộc mặc định*, vì vậy `this` sẽ là `undefined`.
 
 ```js
 function foo() {
@@ -83,7 +83,7 @@ function foo() {
 
 var a = 2;
 
-foo(); // TypeError: `this` is `undefined`
+foo(); // TypeError: `this` bị `undefined`
 ```
 
 A subtle but important detail is: even though the overall `this` binding rules are entirely based on the call-site, the global object is **only** eligible for the *default binding* if the **contents** of `foo()` are **not** running in `strict mode`; the `strict mode` state of the call-site of `foo()` is irrelevant.
@@ -104,9 +104,9 @@ var a = 2;
 
 **Note:** Intentionally mixing `strict mode` and non-`strict mode` together in your own code is generally frowned upon. Your entire program should probably either be **Strict** or **non-Strict**. However, sometimes you include a third-party library that has different **Strict**'ness than your own code, so care must be taken over these subtle compatibility details.
 
-### Implicit Binding
+### Ngầm ràng buộc
 
-Another rule to consider is: does the call-site have a context object, also referred to as an owning or containing object, though *these* alternate terms could be slightly misleading.
+Quy tắc khác là: call-site có một context object, also referred to as an owning or containing object, though *these* alternate terms could be slightly misleading.
 
 Consider:
 
@@ -123,15 +123,16 @@ var obj = {
 obj.foo(); // 2
 ```
 
+Trước tiên, chú ý cách thức `foo()` được khai báo và sau đó thêm vào
 Firstly, notice the manner in which `foo()` is declared and then later added as a reference property onto `obj`. Regardless of whether `foo()` is initially declared *on* `obj`, or is added as a reference later (as this snippet shows), in neither case is the **function** really "owned" or "contained" by the `obj` object.
 
-However, the call-site *uses* the `obj` context to **reference** the function, so you *could* say that the `obj` object "owns" or "contains" the **function reference** at the time the function is called.
+Tuy nhiên, call-site sử dụng `obj` context để **tham chiếu** hàm, vì vậy bạn có thể nói rằng `obj` "sở hữu" hay "chứa" **tham chiếu hàm** tại thời điểm hàm được gọi.
 
 Whatever you choose to call this pattern, at the point that `foo()` is called, it's preceded by an object reference to `obj`. When there is a context object for a function reference, the *implicit binding* rule says that it's *that* object which should be used for the function call's `this` binding.
 
-Because `obj` is the `this` for the `foo()` call, `this.a` is synonymous with `obj.a`.
+Vì `obj` là `this` của `foo()`, `this.a` đồng nghĩa với `obj.a`.
 
-Only the top/last level of an object property reference chain matters to the call-site. For instance:
+Chỉ có cấp cuối cùng của thuộc tính tham chiếu object là mắt xích của call-site. Ví dụ:
 
 ```js
 function foo() {
@@ -151,9 +152,9 @@ var obj1 = {
 obj1.obj2.foo(); // 42
 ```
 
-#### Implicitly Lost
+#### Mất tính ngầm
 
-One of the most common frustrations that `this` binding creates is when an *implicitly bound* function loses that binding, which usually means it falls back to the *default binding*, of either the global object or `undefined`, depending on `strict mode`.
+Một trong những thất vọng thông thường do ràng buộc `this` tạo ra là khi một hàm *implicitly bound* mất ràng buộc, thường dẫn đến kết quả *ràng buộc mặc định*, hoặc `undefined` tùy vào `strict mode`.
 
 Consider:
 
@@ -174,7 +175,8 @@ var a = "oops, global"; // `a` also property on global object
 bar(); // "oops, global"
 ```
 
-Even though `bar` appears to be a reference to `obj.foo`, in fact, it's really just another reference to `foo` itself. Moreover, the call-site is what matters, and the call-site is `bar()`, which is a plain, un-decorated call and thus the *default binding* applies.
+Mặc dù `bar` hiện diện là một tham chiếu đến `obj.foo`, thực ra thì nó chỉ là một tham chiếu khác đến bản thân `foo`. Hơn nữa, call-site mới là vấn đề,
+ it's really just another reference to `foo` itself. Moreover, the call-site is what matters, and the call-site is `bar()`, which is a plain, un-decorated call and thus the *default binding* applies.
 
 The more subtle, more common, and more unexpected way this occurs is when we consider passing a callback function:
 
@@ -184,7 +186,7 @@ function foo() {
 }
 
 function doFoo(fn) {
-	// `fn` is just another reference to `foo`
+	// `fn` chỉ là một tham chiếu khác đến `foo`
 
 	fn(); // <-- call-site!
 }
