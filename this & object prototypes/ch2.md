@@ -43,14 +43,13 @@ baz(); // <-- call-site cho `baz`
 
 Cẩn trọng khi phân tích code để tìm call-site thực sự (từ call-stack), bởi vì nó là thứ duy nhất ảnh hưởng đến ràng buộc `this`.
 
-**Ghi chú:** Bạn có thể hình dung call-stack trong đầu bằng cách nhìn vào việc gọi hàm theo trình tự giống như ta đã làm với đoạn code ở trên. Nhưng cách này cần sự cần mẫn và dễ sai. Cách khác để biết call-stack là sử dụng công cụ debugger của trình duyệt. Hầu hết các trình duyệt ngày nay đều tích hợp công cụ hỗ trợ lập trình, bao gồm JS debugger. Trong đoạn code trên bạn có thể đặt một breakpoint trong công cụ cho dòng đầu của hàm `foo()`, hoặc đơn giản chèn lệnh `debugger;` vào dòng đầu đó. Khi bạn chạy trang, debugger sẽ tạm dừng tại điểm này và nó sẽ hiện một danh sách hàm được gọi để đi đến dòng đó, tức đó là call-stact. Vì vậy, nếu bạn muo
-So, if you're trying to diagnose `this` binding, use the developer tools to get the call-stack, then find the second item from the top, and that will show you the real call-site.
+**Ghi chú:** Bạn có thể hình dung call-stack trong đầu bằng cách nhìn vào việc gọi hàm theo trình tự giống như ta đã làm với đoạn code ở trên. Nhưng cách này cần sự cần mẫn và dễ sai. Cách khác để biết call-stack là sử dụng công cụ debugger của trình duyệt. Hầu hết các trình duyệt ngày nay đều tích hợp công cụ hỗ trợ lập trình, bao gồm JS debugger. Trong đoạn code trên bạn có thể đặt một breakpoint trong công cụ cho dòng đầu của hàm `foo()`, hoặc đơn giản chèn lệnh `debugger;` vào dòng đầu đó. Khi bạn chạy trang, debugger sẽ tạm dừng tại điểm này và nó sẽ hiện một danh sách hàm được gọi để đi đến dòng đó, tức đó là call-stact. Vì vậy, nếu bạn muốn xác định đúng ràng buộc `this`, sử dụng công cụ hỗ trợ (developer tools) để lấy call-stack, sau đó tìm mục thứ hai từ trên xuống, nó sẽ cho bạn thấy call-site thực.
 
 ## Không có gì ngoài quy tắc
 
-We turn our attention now to _how_ the call-site determines where `this` will point during the execution of a function.
+Giờ chúng ta chuyển sự chú ý đến việc call-site xác định nơi `this` sẽ trỏ đến suốt quá trình thực thi của một hàm _như thế nào_.
 
-You must inspect the call-site and determine which of 4 rules applies. We will first explain each of these 4 rules independently, and then we will illustrate their order of precedence, if multiple rules _could_ apply to the call-site.
+Bạn phải kiểm tra call-site và xác định cái nào trong 4 quy tắc được áp dụng. Trước tiên chúng ta sẽ giải thích tường điều trong 4 quy tắc một cách độc lập, và sau đó ta sẽ minh họa thứ tự ưu tiên của chúng nếu nhiều quy tắc _được_ áp dụng ở call-site.
 
 ### Ràng buộc mặc định
 
@@ -68,18 +67,17 @@ var a = 2;
 foo(); // 2
 ```
 
-Nếu bạn không chú ý thì trước hết phải nhắc rằng biến `var a = 2` được khai báo ở toàn cục, đồng nghĩa là thuộc tính object toàn cục chung một tên. They're not copies of each other, they _are_ each other. Think of it as two sides of the same coin.
+Nếu bạn không chú ý thì trước hết phải nhắc rằng biến `var a = 2` được khai báo ở toàn cục, đồng nghĩa với thuộc tính object toàn cục chung một tên. Chúng không sao chép lẫn nhau, mà là riêng biệt, kiểu như hai mặt của một đồng xu.
 
 Tiếp theo, ta thấy khi `foo()` được gọi, `this.a` xử lý biến toàn cục `a`. Vì sao? Vì trong trường hợp này _ràng buộc mặc định_ của `this` áp dụng vào việc gọi hàm và trỏ `this` tại object toàn cục.
 
-How do we know that the _default binding_ rule applies here? We examine the call-site to see how `foo()` is called. In our snippet, `foo()` is called with a plain, un-decorated function reference. None of the other rules we will demonstrate will apply here, so the _default binding_ applies instead.
+Làm sao ta biết rằng quy tắc _ràng buộc mặc định_ được xác định ở đây? Ta kiểm call-site để thấy `foo()` được gọi như thế nào. Trong đoạn code, `foo()` được gọi với một tham chiếu hàm đơn giản, Không có nguyên tắc nào được áp dụng, vì vậy _ràng buộc mặc định_ được áp dụng.
 
 Nếu để chế độ `strict mode`, object toàn cục không được phép thực hiện _ràng buộc mặc định_, vì vậy `this` sẽ là `undefined`.
 
 ```js
 function foo() {
   "use strict";
-
   console.log(this.a);
 }
 
@@ -88,7 +86,7 @@ var a = 2;
 foo(); // TypeError: `this` bị `undefined`
 ```
 
-A subtle but important detail is: even though the overall `this` binding rules are entirely based on the call-site, the global object is **only** eligible for the _default binding_ if the **contents** of `foo()` are **not** running in `strict mode`; the `strict mode` state of the call-site of `foo()` is irrelevant.
+Một chi tiết nhỏ quan trọng là: mặc dù toàn bộ các nguyên tắc ràng buộc `this` hoàn toàn dựa trên call-site, object toàn cục **chỉ** đủ điều kiện cho _ràng buộc mặc định_ nếu **nội dung** của `foo()` không chạy ở `strict mode`; trạng thái `strict mode` của call-site của `foo()` không thích hợp.
 
 ```js
 function foo() {
@@ -99,18 +97,17 @@ var a = 2;
 
 (function() {
   "use strict";
-
   foo(); // 2
 })();
 ```
 
-**Note:** Intentionally mixing `strict mode` and non-`strict mode` together in your own code is generally frowned upon. Your entire program should probably either be **Strict** or **non-Strict**. However, sometimes you include a third-party library that has different **Strict**'ness than your own code, so care must be taken over these subtle compatibility details.
+**Ghi chú:** Cố ý pha trộn `strict mode` và không `strict mode` với nhau sẽ rất lộn xộn. Chương trình của bạn có thể là **Nghiêm ngặt** hoặc **không Nghiêm ngặt**. Nhưng đôi khi bạn nhúng thư viện bên thứ ba vào mà nó có chế độ khác với code của bạn, vì vậy cần phải chú ý những chi tiết tương thích tinh vi này.
 
 ### Ngầm ràng buộc
 
-Quy tắc khác là: call-site có một context object, also referred to as an owning or containing object, though _these_ alternate terms could be slightly misleading.
+Quy tắc khác là: call-site có một context object, đồng thời được coi là chủ hoặc chứa đối tượng, mặc dù các thuật ngữ thay thế có thể gây hiểu nhầm.
 
-Consider:
+Ví dụ:
 
 ```js
 function foo() {
