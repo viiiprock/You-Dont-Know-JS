@@ -122,12 +122,11 @@ var obj = {
 obj.foo(); // 2
 ```
 
-Trước tiên, chú ý cách thức `foo()` được khai báo và sau đó thêm vào
-Firstly, notice the manner in which `foo()` is declared and then later added as a reference property onto `obj`. Regardless of whether `foo()` is initially declared _on_ `obj`, or is added as a reference later (as this snippet shows), in neither case is the **function** really "owned" or "contained" by the `obj` object.
+Trước tiên, chú ý cách thức `foo()` được khai báo và sau đó được thêm vào như một thuộc tính tham chiếu vào `obj`. Bất kể `foo()` được khai báo ban đầu _trong_ `obj`, hoặc được thêm vào dưới dạng một tham chiếu sau đó (như đoạn code ở trên), trong cả hai trường hợp là **hàm** thực sự "sở hữu" hoặc "chứa" bởi object `obj`.
 
 Tuy nhiên, call-site sử dụng `obj` context để **tham chiếu** hàm, vì vậy bạn có thể nói rằng `obj` "sở hữu" hay "chứa" **tham chiếu hàm** tại thời điểm hàm được gọi.
 
-Whatever you choose to call this pattern, at the point that `foo()` is called, it's preceded by an object reference to `obj`. When there is a context object for a function reference, the _implicit binding_ rule says that it's _that_ object which should be used for the function call's `this` binding.
+Dù bạn gọi mẫu này bằng cách nào, tại điểm `foo()` được gọi, nó đến trước bằng một tham chiếu đối tượng đến `obj`. Khi có một context object cho tham chiếm hàm, nguyên tắc _ngầm ràng buộc_ sẽ chỉ ra rằng object _đó_ chính là cái cần được dùng cho ràng buộc `this` của việc gọi hàm.
 
 Vì `obj` là `this` của `foo()`, `this.a` đồng nghĩa với `obj.a`.
 
@@ -153,7 +152,7 @@ obj1.obj2.foo(); // 42
 
 #### Mất tính ngầm
 
-Một trong những thất vọng thông thường do ràng buộc `this` tạo ra là khi một hàm _implicitly bound_ mất ràng buộc, thường dẫn đến kết quả _ràng buộc mặc định_, hoặc `undefined` tùy vào `strict mode`.
+Một trong những thất vọng thông thường do ràng buộc `this` tạo ra là khi một hàm _bị ràng buộc ngầm_ mất ràng buộc, thường dẫn đến kết quả _ràng buộc mặc định_, hoặc `undefined` tùy vào `strict mode`.
 
 Consider:
 
@@ -169,7 +168,7 @@ var obj = {
 
 var bar = obj.foo; // function reference/alias!
 
-var a = "oops, global"; // `a` also property on global object
+var a = "oops, global"; // `a` cũng là thuộc tính của object toàn cục
 
 bar(); // "oops, global"
 ```
