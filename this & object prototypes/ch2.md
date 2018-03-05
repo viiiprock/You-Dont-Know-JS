@@ -43,7 +43,8 @@ baz(); // <-- call-site cho `baz`
 
 Cẩn trọng khi phân tích code để tìm call-site thực sự (từ call-stack), bởi vì nó là thứ duy nhất ảnh hưởng đến ràng buộc `this`.
 
-**Ghi chú:** You can visualize a call-stack in your mind by looking at the chain of function calls in order, as we did with the comments in the above snippet. But this is painstaking and error-prone. Another way of seeing the call-stack is using a debugger tool in your browser. Most modern desktop browsers have built-in developer tools, which includes a JS debugger. In the above snippet, you could have set a breakpoint in the tools for the first line of the `foo()` function, or simply inserted the `debugger;` statement on that first line. When you run the page, the debugger will pause at this location, and will show you a list of the functions that have been called to get to that line, which will be your call stack. So, if you're trying to diagnose `this` binding, use the developer tools to get the call-stack, then find the second item from the top, and that will show you the real call-site.
+**Ghi chú:** Bạn có thể hình dung call-stack trong đầu bằng cách nhìn vào việc gọi hàm theo trình tự giống như ta đã làm với đoạn code ở trên. Nhưng cách này cần sự cần mẫn và dễ sai. Cách khác để biết call-stack là sử dụng công cụ debugger của trình duyệt. Hầu hết các trình duyệt ngày nay đều tích hợp công cụ hỗ trợ lập trình, bao gồm JS debugger. Trong đoạn code trên bạn có thể đặt một breakpoint trong công cụ cho dòng đầu của hàm `foo()`, hoặc đơn giản chèn lệnh `debugger;` vào dòng đầu đó. Khi bạn chạy trang, debugger sẽ tạm dừng tại điểm này và nó sẽ hiện một danh sách hàm được gọi để đi đến dòng đó, tức đó là call-stact. Vì vậy, nếu bạn muo
+So, if you're trying to diagnose `this` binding, use the developer tools to get the call-stack, then find the second item from the top, and that will show you the real call-site.
 
 ## Không có gì ngoài quy tắc
 
