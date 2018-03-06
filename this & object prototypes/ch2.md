@@ -225,13 +225,13 @@ function setTimeout(fn, delay) {
 }
 ```
 
-Như chúng ta thấy, việc rất bình thường rằng hàm callback _mất_ tính ràng buộc `this`.
+Như chúng ta vừa thấy, việc hàm callback _mất_ tính ràng buộc `this` là rất bình thường. Nhưng cách khác mà `this` có thể làm ta bất ngờ là khi chúng ta đã truyền hàm qua callback để cố ý làm thay đổi `this` khi gọi. Trình xử lý sự kiện trong các thư viện JavaScript phổ biến thường buộc callback của bạn có một `this`
 
 It's quite common that our function callbacks _lose_ their `this` binding, as we've just seen. But another way that `this` can surprise us is when the function we've passed our callback to intentionally changes the `this` for the call. Event handlers in popular JavaScript libraries are quite fond of forcing your callback to have a `this` which points to, for instance, the DOM element that triggered the event. While that may sometimes be useful, other times it can be downright infuriating. Unfortunately, these tools rarely let you choose.
 
 Either way the `this` is changed unexpectedly, you are not really in control of how your callback function reference will be executed, so you have no way (yet) of controlling the call-site to give your intended binding. We'll see shortly a way of "fixing" that problem by _fixing_ the `this`.
 
-### Explicit Binding
+### Ràng buộc rõ ràng
 
 With _implicit binding_ as we just saw, we had to mutate the object in question to include a reference on itself to the function, and use this property function reference to indirectly (implicitly) bind `this` to the object.
 
