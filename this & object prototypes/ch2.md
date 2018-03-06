@@ -166,7 +166,7 @@ var obj = {
   foo: foo
 };
 
-var bar = obj.foo; // function reference/alias!
+var bar = obj.foo; // tham chiếu hàm!
 
 var a = "oops, global"; // `a` cũng là thuộc tính của object toàn cục
 
@@ -175,7 +175,7 @@ bar(); // "oops, global"
 
 Mặc dù `bar` hiện diện là một tham chiếu đến `obj.foo`, thực ra thì nó chỉ là một tham chiếu khác đến bản thân `foo`. Hơn nữa, call-site mới là quan trọng, `bar()` là call-site theo cách rõ rệt, nên ràng buộc mặc định được áp dụng.
 
-The more subtle, more common, and more unexpected way this occurs is when we consider passing a callback function:
+Khi chúng ta xác định truyền một hàm callback thì lại càng tinh tế, rất phổ biến và khác thường xảy ra:
 
 ```js
 function foo() {
@@ -184,7 +184,6 @@ function foo() {
 
 function doFoo(fn) {
   // `fn` chỉ là một tham chiếu khác đến `foo`
-
   fn(); // <-- call-site!
 }
 
@@ -193,14 +192,14 @@ var obj = {
   foo: foo
 };
 
-var a = "oops, global"; // `a` also property on global object
+var a = "oops, global"; // `a` cũng là thuộc tính của object toàn cục
 
 doFoo(obj.foo); // "oops, global"
 ```
 
-Parameter passing is just an implicit assignment, and since we're passing a function, it's an implicit reference assignment, so the end result is the same as the previous snippet.
+Tham số truyền vào chỉ là phép gán ngầm. Khi ta đang truyền một hàm, nó ngầm gán nên kết quả cuối cùng cũng giống đoạn code trước.
 
-What if the function you're passing your callback to is not your own, but built-in to the language? No difference, same outcome.
+Điều gì xảy ra nếu hàm bạn truyền vào hàm callback lại không phải do bạn viết mà là một hàm định sẵn? Không có gì khác, kết quả y chang.
 
 ```js
 function foo() {
@@ -212,19 +211,21 @@ var obj = {
   foo: foo
 };
 
-var a = "oops, global"; // `a` also property on global object
+var a = "oops, global"; // `a` cũng là thuộc tính của object toàn cục
 
 setTimeout(obj.foo, 100); // "oops, global"
 ```
 
-Think about this crude theoretical pseudo-implementation of `setTimeout()` provided as a built-in from the JavaScript environment:
+Hãy giả sử rằng hàm định sẵn `setTimeout()` của JavaScript theo cách mộc mạc nhất như sau:
 
 ```js
 function setTimeout(fn, delay) {
-  // wait (somehow) for `delay` milliseconds
+  // chờ `delay` theo milli giây
   fn(); // <-- call-site!
 }
 ```
+
+Như chúng ta thấy, việc rất bình thường rằng hàm callback _mất_ tính ràng buộc `this`.
 
 It's quite common that our function callbacks _lose_ their `this` binding, as we've just seen. But another way that `this` can surprise us is when the function we've passed our callback to intentionally changes the `this` for the call. Event handlers in popular JavaScript libraries are quite fond of forcing your callback to have a `this` which points to, for instance, the DOM element that triggered the event. While that may sometimes be useful, other times it can be downright infuriating. Unfortunately, these tools rarely let you choose.
 
