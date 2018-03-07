@@ -231,17 +231,17 @@ It's quite common that our function callbacks _lose_ their `this` binding, as we
 
 Either way the `this` is changed unexpectedly, you are not really in control of how your callback function reference will be executed, so you have no way (yet) of controlling the call-site to give your intended binding. We'll see shortly a way of "fixing" that problem by _fixing_ the `this`.
 
-### Ràng buộc rõ ràng
+### Ràng buộc minh bạch
 
-With _implicit binding_ as we just saw, we had to mutate the object in question to include a reference on itself to the function, and use this property function reference to indirectly (implicitly) bind `this` to the object.
+Với _ngầm ràng buộc_ như ta đã thấy, chúng ta phải thay đổi object để bao gồm một tham chiếu vào chính nó đến một hàm, và sử dụng tham chiếu thuộc tính hàm để chuyển (ngầm) ràng buộc `this` vào object.
 
-But, what if you want to force a function call to use a particular object for the `this` binding, without putting a property function reference on the object?
+Nhưng, nếu bạn muốn buộc một thực thi hàm để sử dụng một object riêng biệt cho ràng buộc `this` mà không đặt một thuộc tính tham chiếu vào object?
 
-"All" functions in the language have some utilities available to them (via their `[[Prototype]]` -- more on that later) which can be useful for this task. Specifically, functions have `call(..)` and `apply(..)` methods. Technically, JavaScript host environments sometimes provide functions which are special enough (a kind way of putting it!) that they do not have such functionality. But those are few. The vast majority of functions provided, and certainly all functions you will create, do have access to `call(..)` and `apply(..)`.
+"Toàn bộ" các hàm có vài tiện ích trong ngôn ngữ của chúng (thông qua `[[Prototype]]` -- càng ngày sẽ càng nhiều hơn) có thể hữu dụng trong trường hợp này. Đặc biệt, hàm có phương thức `call(..)` và `apply(...)`. Về mặt kỹ thuật, môi trường chủ của JavaScript đôi khi cung cấp các hàm đặc biệt mà nó không mang tính chất hàm, nhưng cũng ít thôi. Phần lớn các hàm được cung cấp và chắc chắn là hàm bạn sẽ tạo ra có thể truy cập được `call(..)` và `apply(..)`.
 
-How do these utilities work? They both take, as their first parameter, an object to use for the `this`, and then invoke the function with that `this` specified. Since you are directly stating what you want the `this` to be, we call it _explicit binding_.
+Cách nó hoạt động là lấy một object để dùng cho `this` làm tham số đầu tiên cho nó, và sau đó gọi hàm với `this` cụ thể đó. Vì bạn trực tiếp chỉ ra `this` như bạn muốn nên ta gọi là _ràng buộc minh bạch_.
 
-Consider:
+Xem ví dụ:
 
 ```js
 function foo() {
@@ -259,9 +259,10 @@ Invoking `foo` with _explicit binding_ by `foo.call(..)` allows us to force its 
 
 If you pass a simple primitive value (of type `string`, `boolean`, or `number`) as the `this` binding, the primitive value is wrapped in its object-form (`new String(..)`, `new Boolean(..)`, or `new Number(..)`, respectively). This is often referred to as "boxing".
 
-**Note:** With respect to `this` binding, `call(..)` and `apply(..)` are identical. They _do_ behave differently with their additional parameters, but that's not something we care about presently.
+**Ghi chú:** `call(..)` và `apply(...)` giống nhau trong việc chú trọng vào ràng buộc `this`. Nó có hành vi khác nhau với tham số đưa vào, nhưng không phải là cái ta quan tâm bây giờ.
 
-Unfortunately, _explicit binding_ alone still doesn't offer any solution to the issue mentioned previously, of a function "losing" its intended `this` binding, or just having it paved over by a framework, etc.
+Không may, bản thân _ràng buộc minh bạch_ vẫn không đưa ra giải pháp nào cho vấn đề đã nêu từ trước về việc một hàm "mất" ràng buộc `this` chủ định,
+alone still doesn't offer any solution to the issue mentioned previously, of a function "losing" its intended `this` binding, or just having it paved over by a framework, etc.
 
 #### Hard Binding
 
@@ -586,7 +587,7 @@ var baz = new bar("p2");
 baz.val; // p1p2
 ```
 
-### Determining `this`
+### Mô tả `this`
 
 Now, we can summarize the rules for determining `this` from a function call's call-site, in their order of precedence. Ask these questions in this order, and stop when the first rule applies.
 
