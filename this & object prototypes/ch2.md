@@ -266,7 +266,7 @@ alone still doesn't offer any solution to the issue mentioned previously, of a f
 
 #### Hard Binding
 
-But a variation pattern around _explicit binding_ actually does the trick. Consider:
+Nhưng thực ra có một mẫu biến thể chung quanh _ràng buộc minh bạch_ có thể làm được:
 
 ```js
 function foo() {
@@ -289,6 +289,7 @@ setTimeout(bar, 100); // 2
 bar.call(window); // 2
 ```
 
+Hãy kiểm tra xem biến thể này hoạt động ra sao. Ta tạo một hàm `bar()`
 Let's examine how this variation works. We create a function `bar()` which, internally, manually calls `foo.call(obj)`, thereby forcibly invoking `foo` with `obj` binding for `this`. No matter how you later invoke the function `bar`, it will always manually invoke `foo` with `obj`. This binding is both explicit and strong, so we call it _hard binding_.
 
 The most typical way to wrap a function with a _hard binding_ creates a pass-thru of any arguments passed and any return value received:
