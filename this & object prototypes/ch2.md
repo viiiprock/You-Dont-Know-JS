@@ -388,11 +388,9 @@ something = new MyClass(..);
 
 JavaScript có lệnh `new`, và mẫu code dùng nó cơ bản trông giống như những ngôn ngữ hướng class; hầu hết các lập trình viên giả định cơ chế JavaScript làm gì đó tương tự. Tuy nhiên, thực ra là cách dùng `new` _không có mối quan hệ_ nào với hàm định hướng class trong JS.
 
-Trước tiên, hãy xác định lại "constructor" trong JavaScript là gì. Trong JS, constructor **chỉ là những hàm** xảy ra để được gọi với lệnh `new` phía trước chúng.
+Trước tiên, hãy xác định lại "constructor" trong JavaScript là gì. Trong JS, constructor **chỉ là những hàm** xảy ra để được gọi với lệnh `new` phía trước chúng. Nó không được gắn liền với class hay tạo ra một class. Chúng cũng không phải là hàm đặc biệt nào cả. Về bản chất, nó chỉ là những hàm thông thường, hijacked by the use of `new` in their invocation.
 
-First, let's re-define what a "constructor" in JavaScript is. In JS, constructors are **just functions** that happen to be called with the `new` operator in front of them. They are not attached to classes, nor are they instantiating a class. They are not even special types of functions. They're just regular functions that are, in essence, hijacked by the use of `new` in their invocation.
-
-For example, the `Number(..)` function acting as a constructor, quoting from the ES5.1 spec:
+Ví dụ, hàm `Number(..)` (được trích dẫn từ hồi ES5.1) hoạt động như một constructor:
 
 > 15.7.2 The Number Constructor
 >
@@ -400,10 +398,10 @@ For example, the `Number(..)` function acting as a constructor, quoting from the
 
 So, pretty much any ol' function, including the built-in object functions like `Number(..)` (see Chapter 3) can be called with `new` in front of it, and that makes that function call a _constructor call_. This is an important but subtle distinction: there's really no such thing as "constructor functions", but rather construction calls _of_ functions.
 
-When a function is invoked with `new` in front of it, otherwise known as a constructor call, the following things are done automatically:
+Khi một hàm được thực thi bằng `new` trước nó, nếu không phải là contructor call, những điều sau sẽ tự động xảy ra:
 
-1.  a brand new object is created (aka, constructed) out of thin air
-2.  _the newly constructed object is `[[Prototype]]`-linked_
+1.  một object mới tinh được tạo ra (hay còn gọi là constructed)
+2.  _một constructed object mới là `[[Prototype]]`-được liên kết_
 3.  the newly constructed object is set as the `this` binding for that function call
 4.  unless the function returns its own alternate **object**, the `new`-invoked function call will _automatically_ return the newly constructed object.
 
@@ -422,7 +420,7 @@ console.log(bar.a); // 2
 
 By calling `foo(..)` with `new` in front of it, we've constructed a new object and set that new object as the `this` for the call of `foo(..)`. **So `new` is the final way that a function call's `this` can be bound.** We'll call this _new binding_.
 
-## Everything In Order
+## Mọi thứ đều theo trình tự
 
 So, now we've uncovered the 4 rules for binding `this` in function calls. _All_ you need to do is find the call-site and inspect it to see which rule applies. But, what if the call-site has multiple eligible rules? There must be an order of precedence to these rules, and so we will next demonstrate what order to apply the rules.
 
@@ -478,9 +476,9 @@ console.log(obj1.a); // 2
 console.log(bar.a); // 4
 ```
 
-OK, _new binding_ is more precedent than _implicit binding_. But do you think _new binding_ is more or less precedent than _explicit binding_?
+OK, _new binding_ được ưu tiên hơn _implicit binding_. Nhưng bạn có nghĩ _new binding_ ít ưu tiên hơn _explicit binding_ không?
 
-**Note:** `new` and `call`/`apply` cannot be used together, so `new foo.call(obj1)` is not allowed, to test _new binding_ directly against _explicit binding_. But we can still use a _hard binding_ to test the precedence of the two rules.
+**Ghi chú:** `new` và `call`/`apply` không thể dùng cùng nhau, so `new foo.call(obj1)` is not allowed, to test _new binding_ directly against _explicit binding_. But we can still use a _hard binding_ to test the precedence of the two rules.
 
 Before we explore that in a code listing, think back to how _hard binding_ physically works, which is that `Function.prototype.bind(..)` creates a new wrapper function that is hard-coded to ignore its own `this` binding (whatever it may be), and use a manual one we provide.
 
@@ -590,7 +588,7 @@ baz.val; // p1p2
 
 Now, we can summarize the rules for determining `this` from a function call's call-site, in their order of precedence. Ask these questions in this order, and stop when the first rule applies.
 
-1.  Is the function called with `new` (**new binding**)? If so, `this` is the newly constructed object.
+1.  Hàm có được gọi với `new` (**new binding**) không? Nếu có, `this` là constructed object mới.
 
     `var bar = new foo()`
 
