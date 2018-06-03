@@ -8,11 +8,11 @@ We'll see that these concepts don't really map very naturally to the object mech
 
 **Note:** This chapter spends quite a bit of time (the first half!) on heavy "objected oriented programming" theory. We eventually relate these ideas to real concrete JavaScript code in the second half, when we talk about "Mixins". But there's a lot of concept and pseudo-code to wade through first, so don't get lost -- just stick with it!
 
-## Class Theory
+## Thuyết Class
 
-"Class/Inheritance" describes a certain form of code organization and architecture -- a way of modeling real world problem domains in our software.
+"Class/Inheritance" mô tả một dạng của tổ chức và kiến trúc code -- một cách để mô hình hóa các vấn đề thực tế trong phần mềm.
 
-OO or class oriented programming stresses that data intrinsically has associated behavior (of course, different depending on the type and nature of the data!) that operates on it, so proper design is to package up (aka, encapsulate) the data and the behavior together. This is sometimes called "data structures" in formal computer science.
+OO hay lập trình định hướng class nhấn mạnh rằng dữ liệu thực chất có hành vi liên quan (tất nhiên, sự khác nhau phụ thuộc vào kiểu và loại tính chất của dữ liệu!) hoạt động trên đó, vì vậy thiết kế phù hợp là đóng gói các dữ liệu và hành vi cùng nhau. Đây đôi khi cũng gọi là "cấu trúc dữ liệu" trong khoa học máy tính chính thống.
 
 For example, a series of characters that represents a word or phrase is usually called a "string". The characters are the data. But you almost never just care about the data, you usually want to _do things_ with the data, so the behaviors that can apply _to_ that data (calculating its length, appending data, searching, etc.) are all designed as methods of a `String` class.
 
@@ -24,7 +24,7 @@ Let's explore this classification process by looking at a commonly cited example
 
 We model this relationship in software with classes by defining a `Vehicle` class and a `Car` class.
 
-The definition of `Vehicle` might include things like propulsion (engines, etc.), the ability to carry people, etc., which would all be the behaviors. What we define in `Vehicle` is all the stuff that is common to all (or most of) the different types of vehicles (the "planes, trains, and automobiles").
+Định nghĩa về `Vehicle` có thể bao gồm things like propulsion (engines, etc.), the ability to carry people, etc., which would all be the behaviors. What we define in `Vehicle` is all the stuff that is common to all (or most of) the different types of vehicles (the "planes, trains, and automobiles").
 
 It might not make sense in our software to re-define the basic essence of "ability to carry people" over and over again for each different type of vehicle. Instead, we define that capability once in `Vehicle`, and then when we define `Car`, we simply indicate that it "inherits" (or "extends") the base definition from `Vehicle`. The definition of `Car` is said to specialize the general `Vehicle` definition.
 
@@ -48,15 +48,15 @@ Some languages (like Java) don't give you the choice, so it's not very _optional
 
 ### JavaScript "Classes"
 
-Where does JavaScript fall in this regard? JS has had _some_ class-like syntactic elements (like `new` and `instanceof`) for quite awhile, and more recently in ES6, some additions, like the `class` keyword (see Appendix A).
+Where does JavaScript fall in this regard? JS has had _vài_ nhân tố cú pháp giống class (like `new` and `instanceof`) for quite awhile, and more recently in ES6, some additions, like the `class` keyword (see Appendix A).
 
-But does that mean JavaScript actually _has_ classes? Plain and simple: **No.**
+Nhưng điều đó có thực sự nghĩa là JavaScript _có_ classes? Đơn giản như cái phản: **Không.**
 
-Since classes are a design pattern, you _can_, with quite a bit of effort (as we'll see throughout the rest of this chapter), implement approximations for much of classical class functionality. JS tries to satisfy the extremely pervasive _desire_ to design with classes by providing seemingly class-like syntax.
+Since classes are a design pattern, you _can_, with quite a bit of effort (as we'll see throughout the rest of this chapter), implement approximations for much of classical class functionality. JS cố gắng thỏa mãn ham muốn cực kỳ phổ biến với class để cung cấp những cú pháp na ná như cú pháp class.
 
 While we may have a syntax that looks like classes, it's as if JavaScript mechanics are fighting against you using the _class design pattern_, because behind the curtain, the mechanisms that you build on are operating quite differently. Syntactic sugar and (extremely widely used) JS "Class" libraries go a long way toward hiding this reality from you, but sooner or later you will face the fact that the _classes_ you have in other languages are not like the "classes" you're faking in JS.
 
-What this boils down to is that classes are an optional pattern in software design, and you have the choice to use them in JavaScript or not. Since many developers have a strong affinity to class oriented software design, we'll spend the rest of this chapter exploring what it takes to maintain the illusion of classes with what JS provides, and the pain points we experience.
+Điều này dẫn đến to is that classes are an optional pattern in software design, and you have the choice to use them in JavaScript or not. Since many developers have a strong affinity to class oriented software design, we'll spend the rest of this chapter exploring what it takes to maintain the illusion of classes with what JS provides, and the pain points we experience.
 
 ## Class Mechanics
 
@@ -124,7 +124,7 @@ _Obviously, jumping rope makes Joe a pretty cool guy._
 
 The constructor of a class _belongs_ to the class, almost universally with the same name as the class. Also, constructors pretty much always need to be called with `new` to let the language engine know you want to construct a _new_ class instance.
 
-## Class Inheritance
+## Kế thừa Class
 
 In class-oriented languages, not only can you define a class which can be instantiated itself, but you can define another class that **inherits** from the first class.
 
@@ -237,9 +237,9 @@ These complications go even much deeper than this quick glance. We address them 
 
 JavaScript is simpler: it does not provide a native mechanism for "multiple inheritance". Many see this is a good thing, because the complexity savings more than make up for the "reduced" functionality. But this doesn't stop developers from trying to fake it in various ways, as we'll see next.
 
-## Mixins
+## Pha trộn
 
-JavaScript's object mechanism does not _automatically_ perform copy behavior when you "inherit" or "instantiate". Plainly, there are no "classes" in JavaScript to instantiate, only objects. And objects don't get copied to other objects, they get _linked together_ (more on that in Chapter 5).
+JavaScript's object mechanism does not _automatically_ perform copy behavior when you "inherit" or "instantiate". Plainly, không có "classes" trong JavaScript để khởi tạo, chỉ có objects. Và object này không bị copy qua object khác, chúng được _liên kết với nhau_ (more on that in Chapter 5).
 
 Since observed class behaviors in other languages imply copies, let's examine how JS developers **fake** the _missing_ copy behavior of classes in JavaScript: mixins. We'll look at two types of "mixin": **explicit** and **implicit**.
 
@@ -376,7 +376,7 @@ Take care only to use explicit mixins where it actually helps make more readable
 
 **If it starts to get _harder_ to properly use mixins than before you used them**, you should probably stop using mixins. In fact, if you have to use a complex library/utility to work out all these details, it might be a sign that you're going about it the harder way, perhaps unnecessarily. In Chapter 6, we'll try to distill a simpler way that accomplishes the desired outcomes without all the fuss.
 
-#### Parasitic Inheritance
+#### Thừa kế ký sinh
 
 A variation on this explicit mixin pattern, which is both in some ways explicit and in other ways implicit, is called "parasitic inheritance", popularized mainly by Douglas Crockford.
 

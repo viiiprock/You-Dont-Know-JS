@@ -1,19 +1,19 @@
 # You Don't Know JS: Bất đồng bộ & hiệu suất
 # Chương 1: Bất đồng bộ: Now & later
 
-Một trong những sai lầm quan trọng và thường xuyên nhất trong lập trình với một ngôn ngữ như JavaScript là: làm thế nào để diễn đạt và vận dụng xử lý của chương trình trải dài suốt quá trình. 
+Một trong những sai lầm quan trọng và thường xuyên nhất trong lập trình với một ngôn ngữ như JavaScript là: làm thế nào để diễn đạt và vận dụng xử lý của chương trình trải dài suốt quá trình.
 
 Nó không chỉ xảy ra khi bắt đầu của vòng lặp `for` hay kết thúc vòng lặp `for`, cái mà sẽ chiếm một khoảng thời gian (micro giây hay mili giây) để hoàn thành. Mà nó còn là những gì xảy ra khi chương trình của bạn chạy ngay *now*, tiếp đó một số phần của chương trình sẽ chạy *later* -- khoảng trống giữa *now* và *later* là nơi chương trình của bạn không chủ động thực thi.
 
-Trên thực tế thì không có chương trình nào (đặc biệt là JS) được viết để quản lý khoảng trống này, nó có thể là chờ dữ liệu đầu vào của người dùng, gọi dữ liệu từ database hoặc là file hệ thống, gửi dữ liệu qua lại mạng và chờ phản hồi, hoặc xử lý một nhiệm vụ lặp lại trong một thời gian tăng dần đều cố định (chẳng hạn như animation). Trong vài hương như vậy, chương trình của bạn phải quản lý state xuyên suốt khoảng trống của thời gian thực hiện. Như một câu nói phổ biến trong ga điện ngầm: "chú ý khoảng trống"
+Trên thực tế thì không có chương trình nào (đặc biệt là JS) được viết để quản lý khoảng trống này, nó có thể là chờ dữ liệu đầu vào của người dùng, gọi dữ liệu từ database hoặc là file hệ thống, gửi dữ liệu qua lại mạng và chờ phản hồi, hoặc xử lý một nhiệm vụ lặp lại trong một thời gian tăng dần đều cố định (chẳng hạn như animation). Trong vài chương như vậy, chương trình của bạn phải quản lý state xuyên suốt khoảng trống của thời gian thực hiện. Như một câu nói phổ biến trong ga điện ngầm: "chú ý khoảng trống"
 
-Mối quan hệ giữa *now* và *later* trong chương trình của bạn là trái tim của chương trình xử lý bất đồng bộ. 
+Mối quan hệ giữa *now* và *later* trong chương trình của bạn là trái tim của chương trình xử lý bất đồng bộ.
 
-Xử lý bất động bộ đã xuất hiện từ thuở khai sinh ra JS. Nhưng hầu hết các lập trình viên JS chưa bao giờ thực sự thận trọng trong việc xác định chính xác như thế nào và tại sao nó được cắt xén, hoặc khám phá vài cách khác nhau để xử lý nó trong chương trình của họ. Việc tiếp cận *đủ tốt* luôn chỉ là một hàm callback khiêm tốn. Ngày nay, vẫn còn nhiều người cho rằng callback là quá đủ rồi. 
+Xử lý bất động bộ đã xuất hiện từ thuở khai sinh ra JS. Nhưng hầu hết các lập trình viên JS chưa bao giờ thực sự thận trọng trong việc xác định chính xác như thế nào và tại sao nó được cắt xén, hoặc khám phá vài cách khác nhau để xử lý nó trong chương trình của họ. Việc tiếp cận *đủ tốt* luôn chỉ là một hàm callback khiêm tốn. Ngày nay, vẫn còn nhiều người cho rằng callback là quá đủ rồi.
 
-Nhưng khi JS tiếp tục phát triển cả trong phạm vi của nó và sự phức hợp, sự đáp ứng nhu cầu ngày càng mở rộng của ngôn ngữ lập trình hạng nhất chạy trên browser và server và tất cả thiết bị nằm giữa có thể tưởng tượng ra khiến nỗi đau khi chúng ta quản lý bất đồng bộ cũng tăng lên ngày càng lớn, do đó cần có một cách tiếp cận hợp lý hơn. 
+Nhưng khi JS tiếp tục phát triển cả trong phạm vi của nó và sự phức hợp, sự đáp ứng nhu cầu ngày càng mở rộng của ngôn ngữ lập trình hạng nhất chạy trên browser và server và tất cả thiết bị nằm giữa có thể tưởng tượng ra khiến nỗi đau khi chúng ta quản lý bất đồng bộ cũng tăng lên ngày càng lớn, do đó cần có một cách tiếp cận hợp lý hơn.
 
-Giờ đây khi tất những điều này xem chừng có vẻ trừu tượng, tôi chắc chắn với bạn chúng ta sẽ giải quyết nó hoàn toàn và cụ thể thông qua cuốn sách này. Chúng ta sẽ khám phá nhiều kỹ thuật trong lập trình bất đồng bộ JavaScript trong các chương tiếp theo. 
+Giờ đây khi tất những điều này xem chừng có vẻ trừu tượng, tôi chắc chắn với bạn chúng ta sẽ giải quyết nó hoàn toàn và cụ thể thông qua cuốn sách này. Chúng ta sẽ khám phá nhiều kỹ thuật trong lập trình bất đồng bộ JavaScript trong các chương tiếp theo.
 
 Nhưng trước khi chúng ta đến đó, chúng ta cần hiểu sâu hơn bất đồng bộ là gì và cách nó hoạt động trong JS.
 
@@ -49,7 +49,7 @@ ajax( "http://some.url.1", function myCallbackFunction(data){
 } );
 ```
 
-**Chú ý:** Bạn có thể tử nghe rằng có cách để thực hiện đồng bộ Ajax request. Mặc dù là kỹ thuật đó có, bạn cũng không bao giờ, đừng bao giờ làm chuyện đó trong mọi hoàn cảnh, bởi vì nó khoá UI trình duyệt (buttons, menus, scrolling,...) và chặn mọi tương tác người dùng. Đó là một ý tưởng tệ lậu vô cũng, và luôn phải tránh. 
+**Chú ý:** Bạn có thể tử nghe rằng có cách để thực hiện đồng bộ Ajax request. Mặc dù là kỹ thuật đó có, bạn cũng không bao giờ, đừng bao giờ làm chuyện đó trong mọi hoàn cảnh, bởi vì nó khoá UI trình duyệt (buttons, menus, scrolling,...) và chặn mọi tương tác người dùng. Đó là một ý tưởng tệ lậu vô cũng, và luôn phải tránh.
 
 Trước khi bạn phản đối không đồng ý, à không, bạn mong muốn né tránh cái đống callback không biện minh cho việc chặn Ajax đồng bộ.
 
@@ -70,7 +70,7 @@ var answer = now();
 setTimeout( later, 1000 ); // Meaning of life: 42
 ```
 
-Có 2 phần trong chương trình này: đoạn chạy *now*, và đoạn sẽ chạy *later*. Nó rõ ràng là 2 khối rồi nhưng rõ ràng hơn nữa thì: 
+Có 2 phần trong chương trình này: đoạn chạy *now*, và đoạn sẽ chạy *later*. Nó rõ ràng là 2 khối rồi nhưng rõ ràng hơn nữa thì:
 
 Now:
 ```js

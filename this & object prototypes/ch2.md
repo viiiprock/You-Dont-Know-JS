@@ -355,7 +355,7 @@ console.log(b); // 5
 
 **Ghi chú:** Theo ES6, hàm ràng buộc cứng được tạo bởi `bind(...)` có một thuộc tính `.name` xuất phát từ _hàm mục tiêu_ gốc. Ví dụ: `bar = foo.bind(..)` sẽ có một `bar.name` giá trị `"bound foo"`, đây là tên gọi hàm sẽ hiển thị trong stack trace.
 
-#### API gọi "Ngữ cảnh"
+#### API gọi "Ngữ cảnh" (context)
 
 Nhiều thư viện hàm, và thực tế nhiều hàm dựng sẵn của JavaScript và môi trường chủ cung cấp một tham số tùy chọn, thường được gọi là "ngữ cảnh", nó được thiết kế như là một hàm phụ trợ để bạn không cần thiết phải dùng `bind(...)` để đảm bảo hàm callback sử dụng một `this` cụ thể nào đó.
 

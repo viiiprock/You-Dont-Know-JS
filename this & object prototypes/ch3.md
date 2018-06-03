@@ -39,9 +39,9 @@ Objects are the general building block upon which much of JS is built. They are 
 * `undefined`
 * `object`
 
-Note that the _simple primitives_ (`string`, `number`, `boolean`, `null`, and `undefined`) are **not** themselves `objects`. `null` is sometimes referred to as an object type, but this misconception stems from a bug in the language which causes `typeof null` to return the string `"object"` incorrectly (and confusingly). In fact, `null` is its own primitive type.
+Lưu ý là _simple primitives_ (`string`, `number`, `boolean`, `null`, và `undefined`) are **not** themselves `objects`. `null` đôi khi được coi là một kiểu object, but this misconception stems from a bug in the language which causes `typeof null` to return the string `"object"` incorrectly (and confusingly). In fact, `null` chính là một kiểu nguyên thủy.
 
-**It's a common mis-statement that "everything in JavaScript is an object". This is clearly not true.**
+**It's a common mis-statement that "everything in JavaScript is an object". Điều này không đúng.**
 
 By contrast, there _are_ a few special object sub-types, which we can refer to as _complex primitives_.
 
@@ -51,7 +51,7 @@ Arrays are also a form of objects, with extra behavior. The organization of cont
 
 ### Built-in Objects
 
-There are several other object sub-types, usually referred to as built-in objects. For some of them, their names seem to imply they are directly related to their simple primitives counter-parts, but in fact, their relationship is more complicated, which we'll explore shortly.
+Có một vài kiểu phụ đối tượng, thường gọi là đối tượng dựng sẵn. For some of them, their names seem to imply they are directly related to their simple primitives counter-parts, but in fact, their relationship is more complicated, which we'll explore shortly.
 
 * `String`
 * `Number`
@@ -82,9 +82,9 @@ Object.prototype.toString.call(strObject); // [object String]
 
 We'll see in detail in a later chapter exactly how the `Object.prototype.toString...` bit works, but briefly, we can inspect the internal sub-type by borrowing the base default `toString()` method, and you can see it reveals that `strObject` is an object that was in fact created by the `String` constructor.
 
-The primitive value `"I am a string"` is not an object, it's a primitive literal and immutable value. To perform operations on it, such as checking its length, accessing its individual character contents, etc, a `String` object is required.
+The primitive value `"I am a string"` không phải là một object, nó là một giá trị nguyên thủy thuần tuý và bất biến. To perform operations on it, such as checking its length, accessing its individual character contents, etc, a `String` object is required.
 
-Luckily, the language automatically coerces a `"string"` primitive to a `String` object when necessary, which means you almost never need to explicitly create the Object form. It is **strongly preferred** by the majority of the JS community to use the literal form for a value, where possible, rather than the constructed object form.
+Luckily, the language tự động buộc một `"string"` nguyên thủy sang `String` object khi cần thiết, which means you almost never need to explicitly create the Object form. It is **strongly preferred** by the majority of the JS community to use the literal form for a value, where possible, rather than the constructed object form.
 
 Consider:
 
@@ -100,17 +100,17 @@ In both cases, we call a property or method on a string primitive, and the engin
 
 The same sort of coercion happens between the number literal primitive `42` and the `new Number(42)` object wrapper, when using methods like `42.359.toFixed(2)`. Likewise for `Boolean` objects from `"boolean"` primitives.
 
-`null` and `undefined` have no object wrapper form, only their primitive values. By contrast, `Date` values can _only_ be created with their constructed object form, as they have no literal form counter-part.
+`null` and `undefined` chỉ có dạng nguyên thủy, have no object wrapper form. By contrast, `Date` values can _only_ be created with their constructed object form, as they have no literal form counter-part.
 
-`Object`s, `Array`s, `Function`s, and `RegExp`s (regular expressions) are all objects regardless of whether the literal or constructed form is used. The constructed form does offer, in some cases, more options in creation than the literal form counterpart. Since objects are created either way, the simpler literal form is almost universally preferred. **Only use the constructed form if you need the extra options.**
+`Object`s, `Array`s, `Function`s, and `RegExp`s (biểu thức chính quy) đều là object bất kể dạng thuần hay dạng constructed được dùng. Trong một số trường hợp, The constructed form does offer, more options in creation than the literal form counterpart. Since objects are created either way, the simpler literal form is almost universally preferred. **Only use the constructed form if you need the extra options.**
 
 `Error` objects are rarely created explicitly in code, but usually created automatically when exceptions are thrown. They can be created with the constructed form `new Error(..)`, but it's often unnecessary.
 
 ## Contents
 
-As mentioned earlier, the contents of an object consist of values (any type) stored at specifically named _locations_, which we call properties.
+As mentioned earlier, the contents của một object bao gồm các giá trị (any type) stored at specifically named _locations_, mà ta gọi là properties.
 
-It's important to note that while we say "contents" which implies that these values are _actually_ stored inside the object, that's merely an appearance. The engine stores values in implementation-dependent ways, and may very well not store them _in_ some object container. What _is_ stored in the container are these property names, which act as pointers (technically, _references_) to where the values are stored.
+It's important to note that khi ta dùng từ "contents" tức là ám chỉ các giá trị đó đã _thực sự_ lưu trữ bên trong object, that's merely an appearance. The engine stores values in implementation-dependent ways, and may very well not store them _in_ some object container. What _is_ stored in the container are these property names, which act as pointers (technically, _references_) to where the values are stored.
 
 Consider:
 
@@ -147,7 +147,7 @@ if (wantA) {
 console.log(myObject[idx]); // 2
 ```
 
-In objects, property names are **always** strings. If you use any other value besides a `string` (primitive) as the property, it will first be converted to a string. This even includes numbers, which are commonly used as array indexes, so be careful not to confuse the use of numbers between objects and arrays.
+In objects, property names **luôn** là strings. If you use any other value besides a `string` (primitive) as the property, it will first be converted to a string. This even includes numbers, which are commonly used as array indexes, so be careful not to confuse the use of numbers between objects and arrays.
 
 ```js
 var myObject = {};
@@ -161,7 +161,7 @@ myObject["3"]; // "bar"
 myObject["[object Object]"]; // "baz"
 ```
 
-### Computed Property Names
+### Phép tính với Property Names
 
 The `myObject[..]` property access syntax we just described is useful if you need to use a computed expression value _as_ the key name, like `myObject[prefix + name]`. But that's not really helpful when declaring objects using the object-literal syntax.
 
@@ -193,9 +193,9 @@ Some developers like to make a distinction when talking about a property access 
 
 **The specification makes this same distinction**, interestingly.
 
-Technically, functions never "belong" to objects, so saying that a function that just happens to be accessed on an object reference is automatically a "method" seems a bit of a stretch of semantics.
+Về mặt kỹ thuật, hàm không bao giờ thuộc về object, vậy nên nói rằng một hàm chỉ xảy ra để truy cập trên một tham chiếu object sẽ mặc nhiên là một "phương thức" được coi là phức tạp về mặt ngữ nghĩa.
 
-It _is_ true that some functions have `this` references in them, and that _sometimes_ these `this` references refer to the object reference at the call-site. But this usage really does not make that function any more a "method" than any other function, as `this` is dynamically bound at run-time, at the call-site, and thus its relationship to the object is indirect, at best.
+Đúng là có một số hàm có `this` references in them, and that _sometimes_ these `this` references refer to the object reference at the call-site. But this usage really does not make that function any more a "method" than any other function, as `this` is dynamically bound at run-time, at the call-site, and thus its relationship to the object is indirect, at best.
 
 Every time you access a property on an object, that is a **property access**, regardless of the type of value you get back. If you _happen_ to get a function from that property access, it's not magically a "method" at that point. There's nothing special (outside of possible implicit `this` binding as explained earlier) about a function that comes from a property access.
 
@@ -219,11 +219,11 @@ someFoo; // function foo(){..}
 myObject.someFoo; // function foo(){..}
 ```
 
-`someFoo` and `myObject.someFoo` are just two separate references to the same function, and neither implies anything about the function being special or "owned" by any other object. If `foo()` above was defined to have a `this` reference inside it, that `myObject.someFoo` _implicit binding_ would be the **only** observable difference between the two references. Neither reference really makes sense to be called a "method".
+`someFoo` and `myObject.someFoo` chỉ là hai tham chiếu đến cùng một hàm, and neither implies anything about the function being special or "owned" by any other object. If `foo()` above was defined to have a `this` reference inside it, that `myObject.someFoo` _implicit binding_ would be the **only** observable difference between the two references. Neither reference really makes sense to be called a "method".
 
 **Perhaps one could argue** that a function _becomes a method_, not at definition time, but during run-time just for that invocation, depending on how it's called at its call-site (with an object reference context or not -- see Chapter 2 for more details). Even this interpretation is a bit of a stretch.
 
-The safest conclusion is probably that "function" and "method" are interchangeable in JavaScript.
+Kết luận an toàn nhất là "function" và "method" có thể hoán đổi với nhau trong JavaScript.
 
 **Note:** ES6 adds a `super` reference, which is typically going to be used with `class` (see Appendix A). The way `super` behaves (static binding rather than late binding as `this`) gives further weight to the idea that a function which is `super` bound somewhere is more a "method" than "function". But again, these are just subtle semantic (and mechanical) nuances.
 
@@ -273,7 +273,7 @@ myArray.baz; // "baz"
 
 Notice that adding named properties (regardless of `.` or `[ ]` operator syntax) does not change the reported `length` of the array.
 
-You _could_ use an array as a plain key/value object, and never add any numeric indices, but this is a bad idea because arrays have behavior and optimizations specific to their intended use, and likewise with plain objects. Use objects to store key/value pairs, and arrays to store values at numeric indices.
+Bạn _có thể_ sử dụng một array như một key/value object bình thuường, and never add any numeric indices, but this is a bad idea because arrays have behavior and optimizations specific to their intended use, and likewise with plain objects. Use objects to store key/value pairs, and arrays to store values at numeric indices.
 
 **Be careful:** If you try to add a property to an array, but the property name _looks_ like a number, it will end up instead as a numeric index (thus modifying the array contents):
 
@@ -287,7 +287,7 @@ myArray.length; // 4
 myArray[3]; // "baz"
 ```
 
-### Duplicating Objects
+### Bản sao object
 
 One of the most commonly requested features when developers newly take up the JavaScript language is how to duplicate an object. It would seem like there should just be a built-in `copy()` method, right? It turns out that it's a little more complicated than that, because it's not fully clear what, by default, should be the algorithm for the duplication.
 
@@ -314,9 +314,9 @@ var myObject = {
 anotherArray.push(anotherObject, myObject);
 ```
 
-What exactly should be the representation of a _copy_ of `myObject`?
+Chính xác cái gì sẽ diễn tả _bản sao_ của `myObject`?
 
-Firstly, we should answer if it should be a _shallow_ or _deep_ copy? A _shallow copy_ would end up with `a` on the new object as a copy of the value `2`, but `b`, `c`, and `d` properties as just references to the same places as the references in the original object. A _deep copy_ would duplicate not only `myObject`, but `anotherObject` and `anotherArray`. But then we have issues that `anotherArray` has references to `anotherObject` and `myObject` in it, so _those_ should also be duplicated rather than reference-preserved. Now we have an infinite circular duplication problem because of the circular reference.
+Firstly, we should answer if it should be a _nông_ or _sâu_ copy? A _shallow copy_ would end up with `a` on the new object as a copy of the value `2`, but `b`, `c`, and `d` properties as just references to the same places as the references in the original object. A _deep copy_ would duplicate not only `myObject`, but `anotherObject` and `anotherArray`. But then we have issues that `anotherArray` has references to `anotherObject` and `myObject` in it, so _those_ should also be duplicated rather than reference-preserved. Và chúng ta có một vòng luẩn quản vô định bởi cách tham chiếu này.
 
 Should we detect a circular reference and just break the circular traversal (leaving the deep element not fully duplicated)? Should we error out completely? Something in between?
 
@@ -332,7 +332,7 @@ var newObj = JSON.parse(JSON.stringify(someObj));
 
 Of course, that requires you to ensure your object is JSON safe. For some situations, that's trivial. For others, it's insufficient.
 
-At the same time, a shallow copy is fairly understandable and has far less issues, so ES6 has now defined `Object.assign(..)` for this task. `Object.assign(..)` takes a _target_ object as its first parameter, and one or more _source_ objects as its subsequent parameters. It iterates over all the _enumerable_ (see below), _owned keys_ (**immediately present**) on the _source_ object(s) and copies them (via `=` assignment only) to _target_. It also, helpfully, returns _target_, as you can see below:
+At the same time, a shallow copy is fairly understandable and has far less issues, ES6 đã có `Object.assign(..)` cho nhiệm vụ này. `Object.assign(..)` lấy một object _đích_ như là tham số đầu tiên của nó, and one or more _source_ objects as its các tham số tiếp theo. It iterates over all the _enumerable_ (see below), _owned keys_ (**immediately present**) on the _source_ object(s) and copies them (via `=` assignment only) to _target_. It also, helpfully, returns _target_, as you can see below:
 
 ```js
 var newObj = Object.assign({}, myObject);
@@ -428,7 +428,7 @@ myObject.a = 3; // TypeError
 
 The `TypeError` tells us we cannot change a non-writable property.
 
-**Note:** We will discuss getters/setters shortly, but briefly, you can observe that `writable:false` means a value cannot be changed, which is somewhat equivalent to if you defined a no-op setter. Actually, your no-op setter would need to throw a `TypeError` when called, to be truly conformant to `writable:false`.
+**Ghi chú:** Chúng ta sẽ thảo luận về getters/setters sớm, nhưng tóm lại, you can observe that `writable:false` means a giá trị không thể thay đổi, which is somewhat equivalent to if you defined a no-op setter. Actually, your no-op setter would need to throw a `TypeError` when called, to be truly conformant to `writable:false`.
 
 #### Configurable
 
@@ -461,11 +461,11 @@ Object.defineProperty(myObject, "a", {
 }); // TypeError
 ```
 
-The final `defineProperty(..)` call results in a TypeError, regardless of `strict mode`, if you attempt to change the descriptor definition of a non-configurable property. Be careful: as you can see, changing `configurable` to `false` is a **one-way action, and cannot be undone!**
+The final `defineProperty(..)` call results in a TypeError, regardless of `strict mode`, if you attempt to change the descriptor definition of a non-configurable property. Be careful: as you can see, đổi `configurable` thành `false` là **hành động một chiều, không thể gỡ bỏ!**
 
-**Note:** There's a nuanced exception to be aware of: even if the property is already `configurable:false`, `writable` can always be changed from `true` to `false` without error, but not back to `true` if already `false`.
+**Ghi chú:** There's a nuanced exception to be aware of: even if the property is already `configurable:false`, `writable` vẫn luôn có thể thay đổi từ `true` sang `false` mà không bị lỗi, nhưng không thể quay lại `true` nếu đã `false`.
 
-Another thing `configurable:false` prevents is the ability to use the `delete` operator to remove an existing property.
+Vấn đề khác nữa là `configurable:false` ngăn khả năng sử dụng lệnh `delete` để xóa bỏ existing property.
 
 ```js
 var myObject = {
@@ -490,7 +490,7 @@ myObject.a; // 2
 
 As you can see, the last `delete` call failed (silently) because we made the `a` property non-configurable.
 
-`delete` is only used to remove object properties (which can be removed) directly from the object in question. If an object property is the last remaining _reference_ to some object/function, and you `delete` it, that removes the reference and now that unreferenced object/function can be garbage collected. But, it is **not** proper to think of `delete` as a tool to free up allocated memory as it does in other languages (like C/C++). `delete` is just an object property removal operation -- nothing more.
+`delete` is only used to remove object properties (which can be removed) directly from the object in question. If an object property is the last remaining _reference_ to some object/function, and you `delete` it, that removes the reference and now that unreferenced object/function can be garbage collected. Nhưng, nghĩ rằng `delete` là một công cụ để giải phóng bộ nhớ như các ngôn ngữ khác (như C/C++) là không đúng. `delete` is just an object property removal operation -- nothing more.
 
 #### Enumerable
 
@@ -502,7 +502,7 @@ All normal user-defined properties are defaulted to `enumerable`, as this is mos
 
 We'll demonstrate enumerability in much more detail shortly, so keep a mental bookmark on this topic.
 
-### Immutability
+### Sự bất biến
 
 It is sometimes desired to make properties or objects that cannot be changed (either by accident or intentionally). ES5 adds support for handling that in a variety of different nuanced ways.
 
@@ -520,7 +520,7 @@ We assume in this snippet that `myImmutableObject` is already created and protec
 
 #### Object Constant
 
-By combining `writable:false` and `configurable:false`, you can essentially create a _constant_ (cannot be changed, redefined or deleted) as an object property, like:
+By combining `writable:false` and `configurable:false`, you can essentially create a _hằng số_ (cannot be changed, redefined or deleted) as an object property, like:
 
 ```js
 var myObject = {};
@@ -803,9 +803,9 @@ There's (currently) no built-in way to get a list of **all properties** which is
 
 ## Iteration
 
-The `for..in` loop iterates over the list of enumerable properties on an object (including its `[[Prototype]]` chain). But what if you instead want to iterate over the values?
+Vòng lặp `for..in` lặp qua danh sách của enumerable properties trong object (bao gồm cả `[[Prototype]]` chain). Nhưng nếu bạn chỉ muốn lặp qua các giá trị?
 
-With numerically-indexed arrays, iterating over the values is typically done with a standard `for` loop, like:
+Với các array được lập chỉ mục bằng số, việc lặp qua các giá trị thường được thực hiện với vòng lặp `for` chuẩn:
 
 ```js
 var myArray = [1, 2, 3];
@@ -816,19 +816,19 @@ for (var i = 0; i < myArray.length; i++) {
 // 1 2 3
 ```
 
-This isn't iterating over the values, though, but iterating over the indices, where you then use the index to reference the value, as `myArray[i]`.
+Tuy nhiên vì nó không lặp qua các giá trị mà là qua chỉ mục nên ta sử dụng chỉ mục để tham chiếu giá trị, như là `myArray[i]`.
 
 ES5 also added several iteration helpers for arrays, including `forEach(..)`, `every(..)`, and `some(..)`. Each of these helpers accepts a function callback to apply to each element in the array, differing only in they respectively respond to a return value from the callback.
 
-`forEach(..)` will iterate over all values in the array, and ignores any callback return values. `every(..)` keeps going until the end _or_ the callback returns a `false` (or "falsy") value, whereas `some(..)` keeps going until the end _or_ the callback returns a `true` (or "truthy") value.
+`forEach(..)` will iterate over all values in the array, và bỏ qua bất kỳ giá trị trả về của callback. `every(..)` keeps going until the end _or_ the callback returns a `false` (or "falsy") value, whereas `some(..)` keeps going until the end _or_ the callback returns a `true` (or "truthy") value.
 
 These special return values inside `every(..)` and `some(..)` act somewhat like a `break` statement inside a normal `for` loop, in that they stop the iteration early before it reaches the end.
 
-If you iterate on an object with a `for..in` loop, you're also only getting at the values indirectly, because it's actually iterating only over the enumerable properties of the object, leaving you to access the properties manually to get the values.
+Nếu ta lặp một object với vòng lặp `for..in`, ta cũng chỉ lấy được các giá trị gián tiếp, bởi vì nó thực sự chỉ lặp qua các thuộc tính đếm được của object, ta có thể truy cập thủ công để lấy giá trị.
 
 **Note:** As contrasted with iterating over an array's indices in a numerically ordered way (`for` loop or other iterators), the order of iteration over an object's properties is **not guaranteed** and may vary between different JS engines. **Do not rely** on any observed ordering for anything that requires consistency among environments, as any observed agreement is unreliable.
 
-But what if you want to iterate over the values directly instead of the array indices (or object properties)? Helpfully, ES6 adds a `for..of` loop syntax for iterating over arrays (and objects, if the object defines its own custom iterator):
+Nhưng nếu bạn muốn lặp qua các trị trực tiếp thay vì chỉ mục array (hoặc properties của object)? May thay, ES6 thêm cú pháp lặp `for..of` for iterating over arrays (and objects, if the object defines its own custom iterator):
 
 ```js
 var myArray = [1, 2, 3];
